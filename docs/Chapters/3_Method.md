@@ -404,14 +404,14 @@ The following figure illustrates both parts of this joint update: the mask forms
 modality-specific discrepancies, while the transpose of the full endpoint Jacobian
 propagates them across state and action coordinates.
 
-| Block-Jacobian propagation | Dynamic feedback loop |
-|:--:|:--:|
-| ![Block-Jacobian propagation of the joint discrepancy.](../../material/mask/parallel_0_cropped.png) | ![Dynamic state-mask activation during joint generation.](../../material/mask/parallel_1_cropped.png) |
+![Block-Jacobian propagation of the joint discrepancy.](../../material/mask/parallel_0_cropped.png)
 
-*Masked FBFM guidance for a joint-generation WAM: left, the block-diagonal
+![Dynamic state-mask activation during joint generation.](../../material/mask/parallel_1_cropped.png)
+
+*Masked FBFM guidance for a joint-generation WAM: top, the block-diagonal
 feedback mask forms separate state and action discrepancies, but the full
 endpoint-Jacobian transpose maps both into the corrections of both modalities;
-right, each newly encoded observation activates its aligned state-mask entry
+bottom, each newly encoded observation activates its aligned state-mask entry
 during the ongoing joint Flow-Matching loop; through the cross-modal Jacobian
 blocks, the resulting correction can directly affect the action coordinates. The
 action-overlap mask remains fixed.*
