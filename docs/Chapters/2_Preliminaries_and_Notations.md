@@ -83,19 +83,27 @@ whereas
 
 \[
 \mathbf{A}_t
-= [a_t,a_{t+1},\ldots,a_{t+H-1}]
-\in\mathbb{R}^{H\times d_a}
+= [a_t^{\mathsf T},a_{t+1}^{\mathsf T},\ldots,
+a_{t+H-1}^{\mathsf T}]^{\mathsf T}
+\in\mathbb{R}^{D_A},
+\qquad D_A=H d_a,
 \]
 
-is an action chunk of horizon \(H\). Similarly, \(z_t\in\mathcal{Z}\) denotes the
-single-step latent state defined above, while
+is the time-stacked action vector of horizon \(H\). Similarly,
+\(z_t\in\mathcal{Z}\subseteq\mathbb R^{d_z}\) denotes the single-step latent state
+defined above, while
 
 \[
 \mathbf{Z}_t
-= [z_{t+1},z_{t+2},\ldots,z_{t+H}]
+= [z_{t+1}^{\mathsf T},z_{t+2}^{\mathsf T},\ldots,
+z_{t+H}^{\mathsf T}]^{\mathsf T}
+\in\mathbb R^{D_Z},
+\qquad D_Z=H d_z,
 \]
 
-denotes a future latent-state chunk aligned with the action horizon. We use
+denotes the time-stacked future latent-state vector aligned with the action horizon.
+Bold uppercase symbols therefore denote chunk-level vectors throughout the paper.
+We use
 lowercase \(x\) for a generic single-step variable and uppercase
 \(\mathbf{X}\) for its chunk-level counterpart. Thus,
 \((x,\mathbf{X})=(a,\mathbf{A})\) for action generation and
@@ -105,10 +113,21 @@ concatenation,
 
 \[
 \mathbf{X}_t
-= \operatorname{concat}
-\!\left(\operatorname{vec}(\mathbf{Z}_t),
-        \operatorname{vec}(\mathbf{A}_t)\right).
+=
+\begin{bmatrix}
+\mathbf Z_t\\
+\mathbf A_t
+\end{bmatrix}
+\in\mathbb R^{D_X},
+\qquad D_X=D_Z+D_A.
 \]
+
+For bold vectors \(\mathbf x\in\mathbb R^{d_x}\) and
+\(\mathbf y\in\mathbb R^{d_y}\), all derivatives use the numerator-layout
+Jacobian convention,
+\(\partial\mathbf y/\partial\mathbf x\in\mathbb R^{d_y\times d_x}\).
+When \(\mathbf X\) denotes a generic generation vector, \(D\) denotes its
+corresponding dimension.
 
 This generic notation does not imply a particular WAM factorization. A joint WAM
 transports the concatenated \(\mathbf{X}_t\) with one flow, whereas a stage-wise WAM
@@ -121,7 +140,7 @@ Flow Matching learns a time-dependent vector field that transports samples from 
 simple source distribution to the conditional data distribution. Let
 \(\tau\in[0,1]\) denote continuous flow time, distinct from the environment index
 \(t\). Given a target chunk \(\mathbf{X}_t\) and Gaussian noise
-\(\boldsymbol{\epsilon}\sim\mathcal{N}(\mathbf{0},\mathbf{I})\) of the same shape,
+\(\boldsymbol{\epsilon}\sim\mathcal{N}(\mathbf{0},\mathbf{I})\) of the same dimension,
 we use the linear conditional probability path
 
 \[
@@ -143,7 +162,7 @@ Its conditional target velocity is constant along the path:
 
 Conditioned on the interaction history \(\mathcal{H}_t\), a Flow-Matching model
 \(v_\theta\) takes the current noisy chunk and flow time as inputs and predicts a
-velocity with the same shape as \(\mathbf{X}_t\). It is trained using
+velocity with the same dimension as \(\mathbf{X}_t\). It is trained using
 
 \[
 \mathcal{L}_{\mathrm{FM}}(\theta)
@@ -237,12 +256,14 @@ For Flow Matching, the predicted clean endpoint at flow time \(\tau\) is
 +(1-\tau)v_\theta(\mathbf{X}_t^\tau,\tau;\mathcal{H}_t).
 \]
 
-Given an element-wise feedback mask \(\mathbf{W}_t\), pseudoinverse inpainting
-forms the lifted discrepancy and propagates it through the endpoint predictor:
+Given mask weights \(\mathbf w_t\in[0,1]^D\), let
+\(\mathbf W_t=\operatorname{Diag}(\mathbf w_t)\in\mathbb R^{D\times D}\) be the
+corresponding feedback-weighting operator. Pseudoinverse inpainting forms the lifted
+discrepancy and propagates it through the endpoint predictor:
 
 \[
 \mathbf{e}_t^\tau
-=\mathbf{W}_t\odot
+=\mathbf{W}_t
 \left[
 h^\dagger(\mathbf{Y}_t)
 -h^\dagger\!\left(h(\hat{\mathbf{X}}_t^1)\right)
@@ -277,12 +298,12 @@ in aligned coordinates and denoted by \(\mathbf{Y}_t\), the error reduces to
 
 \[
 \mathbf{e}_t^\tau
-=\mathbf{W}_t\odot
+=\mathbf{W}_t
 \left(\mathbf{Y}_t-\hat{\mathbf{X}}_t^1\right).
 \]
 
-Here, \(\mathbf{W}_t\in\{0,1\}^D\) gives exact masked inpainting, while
-\(\mathbf{W}_t\in[0,1]^D\) gives a confidence-weighted relaxation. The same notation
+Here, \(\mathbf w_t\in\{0,1\}^D\) gives exact masked inpainting, while
+\(\mathbf w_t\in[0,1]^D\) gives a confidence-weighted relaxation. The same notation
 applies when \(\mathbf{X}\) is an action chunk \(\mathbf{A}\), a latent-state chunk
 \(\mathbf{Z}\), or their joint representation. The construction of
 \(\mathbf{Y}_t\), the asynchronous update of \(\mathbf{W}_t\), and the joint versus
@@ -300,22 +321,21 @@ formulations are listed immediately afterward.
 | \(\mathcal{M},\mathcal{S},\mathcal{A},P\) | The controlled Markov process, environment state space, action space, and transition kernel. |
 | \(t,i,s_t\) | Environment time, an offset within a chunk, and the physical environment state. |
 | \(\mathcal{O},E,\mathcal{H}_t,\pi\) | Sensor mapping, perceptual encoder, interaction history at time \(t\), and the action-selection process. |
-| \(H,d_a,D\) | Prediction horizon, dimension of one action, and flattened dimension of the generated chunk or mask. |
-| \(a_t,\mathbf{A}_t\) | A single-step action and the action chunk \([a_t,\ldots,a_{t+H-1}]\). |
-| \(z_t,\mathbf{Z}_t,\mathcal{Z}\) | An encoded single-step latent state, the future latent-state chunk \([z_{t+1},\ldots,z_{t+H}]\), and the latent space. |
+| \(H,d_a,d_z,D_A,D_Z,D_X,D\) | Prediction horizon; dimensions of one action and one latent state; time-stacked action, state, and joint chunk dimensions, where \(D_A=Hd_a\), \(D_Z=Hd_z\), and \(D_X=D_Z+D_A\); and a generic generation-space dimension. |
+| \(a_t,\mathbf{A}_t\) | A single-step action and its time-stacked action chunk vector. |
+| \(z_t,\mathbf{Z}_t,\mathcal{Z}\) | An encoded single-step latent state, its time-stacked future latent-state chunk vector, and the latent space. |
 | \(x,\mathbf{X}_t\) | A generic single-step variable and its chunk-level representation; instantiated as \(a/\mathbf A\), \(z/\mathbf Z\), or a joint state-action chunk. |
 | \(\hat{\cdot},p_\theta,\theta\) | A predicted or estimated quantity, the conditional WAM distribution, and its model parameters. |
 | \(\tau,k,\tau_k,\Delta\tau_k,\sigma\) | Continuous flow time, solver-step index, the corresponding flow-time point and integration step, and the remaining noise level \(\sigma=1-\tau\). |
-| \(\boldsymbol{\epsilon},\mathbf{0},\mathbf{I},\mathbf{X}_t^\tau\) | Gaussian source noise, zero vector, identity matrix, and the intermediate chunk on the probability path. |
+| \(\boldsymbol{\epsilon},\mathbf{0},\mathbf{I},\mathbf{X}_t^\tau\) | Gaussian source noise, zero vector, identity matrix, and the intermediate chunk vector on the probability path. |
 | \(\mathbf{u},v_\theta,\tilde v_\theta\) | Conditional target velocity, learned Flow-Matching vector field, and its noise-level parameterization \(\tilde v_\theta=-v_\theta\). |
 | \(\mathcal{D},p(\tau),\mathcal{L}_{\mathrm{FM}}\) | Training distribution, flow-time sampling distribution, and Flow-Matching objective. |
 | \(\hat{\mathbf{X}}_t,\hat{\mathbf{X}}_t^1,f_\theta^\tau\) | Generated chunk, predicted clean endpoint, and the endpoint predictor evaluated at flow time \(\tau\). |
 | \(\mathbf{Y}_t,\mathcal{X},\mathcal{Y},h,h^\dagger\) | Feedback measurement, generation and measurement spaces, feedback encoder, and generalized lifting decoder. |
 | \(\boldsymbol{\eta},\sigma_y\) | Measurement noise and its standard deviation. |
-| \(\mathbf{W}_t,\odot\) | Element-wise feedback mask or confidence weights and the Hadamard product. |
+| \(\mathbf w_t,\mathbf W_t\) | Element-wise feedback mask or confidence weights and the corresponding diagonal weighting operator \(\mathbf W_t=\operatorname{Diag}(\mathbf w_t)\). |
 | \(\mathbf{e}_t^\tau,\mathbf{g}_t^\tau\) | Masked lifted discrepancy and its vector--Jacobian product with respect to the current flow variable. |
 | \(v_{\mathrm{PG}},\lambda_\tau\) | Pseudoinverse-guided velocity field and its time-dependent guidance strength. |
-| \(\operatorname{vec},\operatorname{concat}\) | Flattening and concatenation operators used to construct a joint chunk. |
 
 Method-specific extensions:
 
@@ -323,7 +343,6 @@ Method-specific extensions:
 |---|---|
 | \(\mathcal I_t^A,a_{t+i}^{\mathrm{prev}}\) | The action-slot overlap between the preceding and new chunks, and the preceding chunk's action aligned to an overlap slot. |
 | \(\mathcal F_{t,k}\) | Dynamic set of encoded real-state feedback available before solver evaluation \(k\), kept separate from the solver-start history \(\mathcal H_t\). |
-| \(d_z,D_Z,D_A,D_X\) | Dimension of one flattened latent-state slot; flattened state, action, and joint chunk dimensions, with \(D_Z=Hd_z\) and \(D_X=D_Z+D_A\). |
 | \(\theta_Z,\theta_A,v_{\theta_Z}^Z,v_{\theta_A}^A\) | Frozen parameters and separate state/action vector fields of a stage-wise WAM. |
 | \(\tau_k^Z,\tau_k^A,f_{\theta_Z}^{Z,\tau_k^Z},f_{\theta_A}^{A,\tau_k^A}\) | State/action flow times and their clean-endpoint predictors at solver evaluation \(k\). |
 | \(\mathbf Y_{t,k}^Z,\mathbf W_{t,k}^Z,w_{t,i}^{Z,k}\) | Aligned dynamic state-feedback target, its block mask/weighting operator, and the weight for state slot \(i\). |

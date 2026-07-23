@@ -74,10 +74,13 @@ orthonormal and
 \mathbf M_t^\dagger=\mathbf M_t^{\mathsf T}.
 \]
 
-Define the full-space binary mask \(\mathbf W_t\) by
+Define the full-space binary mask weights \(\mathbf w_t\in\{0,1\}^D\) and their
+diagonal operator \(\mathbf W_t\) by
 
 \[
-\operatorname{Diag}(\mathbf W_t)
+\mathbf W_t
+=
+\operatorname{Diag}(\mathbf w_t)
 =
 \mathbf M_t^{\mathsf T}\mathbf M_t
 \]
@@ -96,12 +99,7 @@ and the zero-filled observation by
 -
 \mathbf M_t^{\mathsf T}\mathbf M_t\hat{\mathbf X}_t^1\\
 &=
-\operatorname{Diag}(\mathbf W_t)
-\left(
-\bar{\mathbf Y}_t-\hat{\mathbf X}_t^1
-\right)\\
-&=
-\mathbf W_t\odot
+\mathbf W_t
 \left(
 \bar{\mathbf Y}_t-\hat{\mathbf X}_t^1
 \right).
@@ -109,9 +107,10 @@ and the zero-filled observation by
 \]
 
 Hence, binary coordinate inpainting is exactly a Moore--Penrose projection.
-Replacing \(\mathbf W_t\in\{0,1\}^D\) with
-\(\mathbf W_t\in[0,1]^D\) yields a confidence-weighted relaxation; the resulting
-operator is generally no longer an orthogonal projector.
+Replacing \(\mathbf w_t\in\{0,1\}^D\) with
+\(\mathbf w_t\in[0,1]^D\), while retaining
+\(\mathbf W_t=\operatorname{Diag}(\mathbf w_t)\), yields a confidence-weighted
+relaxation; the resulting operator is generally no longer an orthogonal projector.
 
 ## Aligned-Coordinate Approximation
 
@@ -120,7 +119,7 @@ The exact lifted discrepancy used by pseudoinverse guidance is
 \[
 \mathbf e_{\mathrm{exact}}
 =
-\mathbf W_t\odot
+\mathbf W_t
 \left[
 h^\dagger(\mathbf Y_t)
 -
@@ -133,7 +132,7 @@ FBFM uses the aligned-coordinate approximation
 \[
 \mathbf e_{\mathrm{approx}}
 =
-\mathbf W_t\odot
+\mathbf W_t
 \left[
 h^\dagger(\mathbf Y_t)
 -
@@ -146,7 +145,7 @@ Define the masked encoder--decoder reconstruction error
 \[
 \boldsymbol\delta_t
 =
-\mathbf W_t\odot
+\mathbf W_t
 \left[
 h^\dagger\!\left(h(\hat{\mathbf X}_t^1)\right)
 -
@@ -217,4 +216,3 @@ r_\tau^2
 where \(\beta\) clips the weight for numerical stability (Black et al., 2025).
 Reverse-mode automatic differentiation evaluates the VJP through
 \(f_\theta^\tau\); differentiability of \(h\) and \(h^\dagger\) is not required.
-

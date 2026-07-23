@@ -102,14 +102,15 @@ v_{\theta_Z}^Z
 \]
 
 We encode \(\mathcal F_{t,k}\) as an aligned state-feedback target
-\(\mathbf Y_{t,k}^Z\) and a block-diagonal mask
+\(\mathbf Y_{t,k}^Z\in\mathbb R^{D_Z}\) and a block-diagonal mask
 
 \[
 \mathbf W_{t,k}^Z
 =
 \operatorname{Diag}
 \!\left(w_{t,1}^{Z,k},\ldots,w_{t,H}^{Z,k}\right)
-\otimes\mathbf I_{d_z},
+\otimes\mathbf I_{d_z}
+\in\mathbb R^{D_Z\times D_Z},
 \qquad
 w_{t,i}^{Z,k}>0
 \Longleftrightarrow
@@ -128,18 +129,18 @@ VJP are
 =
 \mathbf W_{t,k}^Z
 \left[
-\operatorname{vec}(\mathbf Y_{t,k}^Z)
+\mathbf Y_{t,k}^Z
 -
-\operatorname{vec}(\hat{\mathbf Z}_{t,k}^1)
+\hat{\mathbf Z}_{t,k}^1
 \right],
 \]
 
 \[
-\operatorname{vec}(\mathbf g_{t,k}^Z)
+\mathbf g_{t,k}^Z
 =
 \left(
-\frac{\partial\operatorname{vec}(\hat{\mathbf Z}_{t,k}^1)}
-     {\partial\operatorname{vec}(\mathbf Z_t^{\tau_k^Z})}
+\frac{\partial\hat{\mathbf Z}_{t,k}^1}
+     {\partial\mathbf Z_t^{\tau_k^Z}}
 \right)^{\mathsf T}
 \mathbf e_{t,k}^Z.
 \]
@@ -169,13 +170,13 @@ action-solver evaluation \(k\), we reuse \(\mathbf Y_{t,k}^Z\) and
 and form the corrected state representation by
 
 \[
-\operatorname{vec}(\check{\mathbf Z}_{t,k})
+\check{\mathbf Z}_{t,k}
 =
-\left(\mathbf I-\mathbf W_{t,k}^Z\right)
-\operatorname{vec}(\hat{\mathbf Z}_t)
+\left(\mathbf I_{D_Z}-\mathbf W_{t,k}^Z\right)
+\hat{\mathbf Z}_t
 +
 \mathbf W_{t,k}^Z
-\operatorname{vec}(\mathbf Y_{t,k}^Z),
+\mathbf Y_{t,k}^Z,
 \]
 
 and expose it to the action generator through an abstract state context
@@ -195,9 +196,10 @@ of FBFM.
 
 #### Previous-Action Consistency
 
-Let \(\mathbf Y_t^A\) contain the actions \(a_{t+i}^{\mathrm{prev}}\) aligned to the
-new action horizon, with arbitrary values outside \(\mathcal I_t^A\). We represent the
-general previous-action constraint by a nonnegative weighting operator
+Let \(\mathbf Y_t^A\in\mathbb R^{D_A}\) contain the actions
+\(a_{t+i}^{\mathrm{prev}}\) aligned to the new action horizon, with arbitrary values
+outside \(\mathcal I_t^A\). We represent the general previous-action constraint by a
+nonnegative weighting operator
 
 \[
 \mathbf W_t^A\in[0,1]^{D_A\times D_A},
@@ -246,18 +248,18 @@ The action correction is then
 =
 \mathbf W_t^A
 \left[
-\operatorname{vec}(\mathbf Y_t^A)
+\mathbf Y_t^A
 -
-\operatorname{vec}(\hat{\mathbf A}_{t,k}^1)
+\hat{\mathbf A}_{t,k}^1
 \right],
 \]
 
 \[
-\operatorname{vec}(\mathbf g_{t,k}^A)
+\mathbf g_{t,k}^A
 =
 \left(
-\frac{\partial\operatorname{vec}(\hat{\mathbf A}_{t,k}^1)}
-     {\partial\operatorname{vec}(\mathbf A_t^{\tau_k^A})}
+\frac{\partial\hat{\mathbf A}_{t,k}^1}
+     {\partial\mathbf A_t^{\tau_k^A}}
 \right)^{\mathsf T}
 \mathbf e_{t,k}^A,
 \qquad
@@ -284,11 +286,10 @@ p_\theta(\mathbf X_t\mid\mathcal H_t),
 \qquad
 \mathbf X_t
 =
-\operatorname{concat}
-\!\left(
-\operatorname{vec}(\mathbf Z_t),
-\operatorname{vec}(\mathbf A_t)
-\right).
+\begin{bmatrix}
+\mathbf Z_t\\
+\mathbf A_t
+\end{bmatrix}.
 \]
 
 Unlike a stage-wise WAM, it transports both modalities with one vector field
@@ -329,11 +330,10 @@ previous-action target, we define
 \[
 \mathbf Y_{t,k}^X
 =
-\operatorname{concat}
-\!\left(
-\operatorname{vec}(\mathbf Y_{t,k}^Z),
-\operatorname{vec}(\mathbf Y_t^A)
-\right),
+\begin{bmatrix}
+\mathbf Y_{t,k}^Z\\
+\mathbf Y_t^A
+\end{bmatrix},
 \]
 
 \[
@@ -361,16 +361,16 @@ cross-chunk overlap. The joint discrepancy and VJP are
 \left[
 \mathbf Y_{t,k}^X
 -
-\operatorname{vec}(\hat{\mathbf X}_{t,k}^1)
+\hat{\mathbf X}_{t,k}^1
 \right],
 \]
 
 \[
-\operatorname{vec}(\mathbf g_{t,k}^X)
+\mathbf g_{t,k}^X
 =
 \left(
-\frac{\partial\operatorname{vec}(\hat{\mathbf X}_{t,k}^1)}
-     {\partial\operatorname{vec}(\mathbf X_t^{\tau_k^X})}
+\frac{\partial\hat{\mathbf X}_{t,k}^1}
+     {\partial\mathbf X_t^{\tau_k^X}}
 \right)^{\mathsf T}
 \mathbf e_{t,k}^X,
 \qquad
@@ -392,16 +392,8 @@ The direct coupling becomes explicit by partitioning the clean-endpoint Jacobian
 \[
 \mathbf J_{t,k}^X
 :=
-\frac{\partial
-\begin{bmatrix}
-\operatorname{vec}(\hat{\mathbf Z}_{t,k}^1)\\
-\operatorname{vec}(\hat{\mathbf A}_{t,k}^1)
-\end{bmatrix}}
-{\partial
-\begin{bmatrix}
-\operatorname{vec}(\mathbf Z_t^{\tau_k^X})\\
-\operatorname{vec}(\mathbf A_t^{\tau_k^X})
-\end{bmatrix}}
+\frac{\partial\hat{\mathbf X}_{t,k}^1}
+     {\partial\mathbf X_t^{\tau_k^X}}
 =
 \begin{bmatrix}
 \mathbf J_{ZZ} & \mathbf J_{ZA}\\
@@ -414,8 +406,8 @@ where, for \(Q,R\in\{Z,A\}\),
 \[
 \mathbf J_{QR}
 =
-\frac{\partial\operatorname{vec}(\hat{\mathbf Q}_{t,k}^1)}
-     {\partial\operatorname{vec}(\mathbf R_t^{\tau_k^X})}.
+\frac{\partial\hat{\mathbf Q}_{t,k}^1}
+     {\partial\mathbf R_t^{\tau_k^X}}.
 \]
 
 Partitioning
@@ -424,8 +416,8 @@ Partitioning
 
 \[
 \begin{bmatrix}
-\operatorname{vec}(\mathbf g_{t,k}^Z)\\
-\operatorname{vec}(\mathbf g_{t,k}^A)
+\mathbf g_{t,k}^Z\\
+\mathbf g_{t,k}^A
 \end{bmatrix}
 =
 \begin{bmatrix}
@@ -442,13 +434,13 @@ In particular, consider state feedback alone, for which
 \(\mathbf e_{t,k}^A=\mathbf 0\). The action component of the correction becomes
 
 \[
-\operatorname{vec}(\mathbf g_{t,k}^A)
+\mathbf g_{t,k}^A
 =
 \mathbf J_{ZA}^{\mathsf T}\mathbf e_{t,k}^Z
 =
 \left(
-\frac{\partial\operatorname{vec}(\hat{\mathbf Z}_{t,k}^1)}
-     {\partial\operatorname{vec}(\mathbf A_t^{\tau_k^X})}
+\frac{\partial\hat{\mathbf Z}_{t,k}^1}
+     {\partial\mathbf A_t^{\tau_k^X}}
 \right)^{\mathsf T}
 \mathbf e_{t,k}^Z.
 \]

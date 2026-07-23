@@ -60,9 +60,12 @@ orthonormal and
 \begin{equation}
     \mathbf M_t^\dagger=\mathbf M_t^{\mathsf T}.
 \end{equation}
-Define the full-space binary mask $\mathbf W_t$ by
+Define the full-space binary mask weights $\mathbf w_t\in\{0,1\}^D$ and their
+diagonal operator $\mathbf W_t$ by
 \begin{equation}
-    \operatorname{Diag}(\mathbf W_t)
+    \mathbf W_t
+    =
+    \operatorname{Diag}(\mathbf w_t)
     =
     \mathbf M_t^{\mathsf T}\mathbf M_t
 \end{equation}
@@ -78,20 +81,16 @@ $\bar{\mathbf Y}_t=\mathbf M_t^{\mathsf T}\mathbf Y_t$. Then
     -
     \mathbf M_t^{\mathsf T}\mathbf M_t\hat{\mathbf X}_t^1\\
     &=
-    \operatorname{Diag}(\mathbf W_t)
-    \left(
-        \bar{\mathbf Y}_t-\hat{\mathbf X}_t^1
-    \right)\\
-    &=
-    \mathbf W_t\odot
+    \mathbf W_t
     \left(
         \bar{\mathbf Y}_t-\hat{\mathbf X}_t^1
     \right).
 \end{align}
 Hence, binary coordinate inpainting is exactly a Moore--Penrose projection.
-Replacing $\mathbf W_t\in\{0,1\}^D$ with
-$\mathbf W_t\in[0,1]^D$ yields a confidence-weighted relaxation; the resulting
-operator is generally no longer an orthogonal projector.
+Replacing $\mathbf w_t\in\{0,1\}^D$ with
+$\mathbf w_t\in[0,1]^D$, while retaining
+$\mathbf W_t=\operatorname{Diag}(\mathbf w_t)$, yields a confidence-weighted
+relaxation; the resulting operator is generally no longer an orthogonal projector.
 
 \subsection{Aligned-Coordinate Approximation}
 
@@ -99,7 +98,7 @@ The exact lifted discrepancy used by pseudoinverse guidance is
 \begin{equation}
     \mathbf e_{\mathrm{exact}}
     =
-    \mathbf W_t\odot
+    \mathbf W_t
     \left[
         h^\dagger(\mathbf Y_t)
         -
@@ -110,7 +109,7 @@ FBFM uses the aligned-coordinate approximation
 \begin{equation}
     \mathbf e_{\mathrm{approx}}
     =
-    \mathbf W_t\odot
+    \mathbf W_t
     \left[
         h^\dagger(\mathbf Y_t)
         -
@@ -121,7 +120,7 @@ Define the masked encoder--decoder reconstruction error
 \begin{equation}
     \boldsymbol\delta_t
     =
-    \mathbf W_t\odot
+    \mathbf W_t
     \left[
         h^\dagger\!\left(h(\hat{\mathbf X}_t^1)\right)
         -
@@ -183,4 +182,3 @@ A practical weight schedule for few-step Flow-Matching solvers is
 where $\beta$ clips the weight for numerical stability
 \cite{black2025realtime}. Reverse-mode automatic differentiation evaluates the VJP
 through $f_\theta^\tau$; differentiability of $h$ and $h^\dagger$ is not required.
-
