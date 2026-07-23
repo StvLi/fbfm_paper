@@ -56,8 +56,8 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 
 ## Notation Audit
 
-- [ ] Before freezing Preliminaries, verify that every mathematical symbol used in Sections 1.1--1.3 appears in Section 1.4 with a consistent definition, and remove entries that are not used.
-- [ ] After Method is finalized, extend Section 1.4 with all method-specific symbols and repeat the whole-paper notation consistency audit.
+- [ ] Before freezing Preliminaries, verify that every mathematical symbol used there appears in Appendix A with a consistent definition, and remove entries that are not used.
+- [ ] After Method is finalized, extend the Appendix A notation index with all method-specific symbols and repeat the whole-paper notation consistency audit.
 
 ## Introduction and Related Works Audit
 
@@ -128,8 +128,8 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 ## Theory and Limitations
 
 - [ ] State in Conclusion and Limitations that the implementation approximates \(h^\dagger(h(\hat{\mathbf{X}}))\) by \(\hat{\mathbf{X}}\) on the mask-selected feedback subspace; this is not guaranteed for arbitrary nonlinear encoder--decoder pairs.
-- [x] Move the detailed pseudoinverse, mask-projection, and approximation-error derivations into `docs/Chapters/8_Appendix_1`.
-- [ ] Validate and finalize the Appendix 1 analysis of the masked reconstruction error \(\|\mathbf{W}[h^\dagger(h(\hat{\mathbf{X}}))-\hat{\mathbf{X}}]\|\) after the implementation is frozen.
+- [x] Move the detailed pseudoinverse, mask-projection, and approximation-error derivations into `docs/Chapters/9_Appendix_2` (Appendix B).
+- [ ] Validate and finalize the Appendix B analysis of the masked reconstruction error \(\|\mathbf{W}[h^\dagger(h(\hat{\mathbf{X}}))-\hat{\mathbf{X}}]\|\) after the implementation is frozen.
 - [ ] Consider an ablation comparing the explicit encoder--decoder residual with the aligned-coordinate approximation if the full \(h/h^\dagger\) path is implemented.
 
 ## Final Whole-Paper Consistency Pass
