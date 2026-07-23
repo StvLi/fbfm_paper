@@ -59,6 +59,25 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 - [ ] Before freezing Preliminaries, verify that every mathematical symbol used in Sections 1.1--1.3 appears in Section 1.4 with a consistent definition, and remove entries that are not used.
 - [ ] After Method is finalized, extend Section 1.4 with all method-specific symbols and repeat the whole-paper notation consistency audit.
 
+## Introduction and Related Works Audit
+
+### Introduction scope and claims
+
+- [ ] Keep the Introduction-level FBFM description consistent with Method: feedback arriving during generation must update the target and mask before subsequent evaluations of the active solver, rather than being described as a fixed pre-inference snapshot for the next call.
+- [ ] Present latent-state feedback and previous-action consistency as the two symmetric components of complete FBFM, while making the increment over RTC precise: RTC constrains overlapping action coordinates, whereas FBFM additionally treats newly observed latent states as time-aligned measurements of the generated WAM future.
+- [ ] Describe both stage-wise-generation and joint-generation instantiations at the architecture level. Keep model-specific buffers, VAE streams, cache handling, and runtime plumbing out of Introduction; place general mechanisms in Method and realized configurations in Experiments.
+- [ ] Keep the Introduction focused on the WAM-specific temporal-granularity gap. Move detailed comparisons, implementation differences, and judgments about prior methods to Related Works.
+- [ ] Remove or qualify broad architectural claims such as `dominant`, `exclusive conditioning`, or universal KV-cache replacement unless the cited models directly support them.
+
+### Literature-specific checks
+
+- [ ] **RTC / Real-Time Chunking (Black et al., 2025):** verify the hard-prefix and soft-overlap masks, inference-delay assumptions, pseudoinverse-guided VJP, and training-free scope; use it as the action-overlap baseline without attributing latent-state feedback to RTC.
+- [ ] **Fast-WAM:** locate and verify the exact paper, its training-time video-co-training result, and whether the inference-time-imagination comparison is necessary in Introduction or belongs only in Related Works.
+- [ ] **Feedback World Model (FWM):** verify the auxiliary feedback-state definition, prediction--observation residual, update timing, frozen-model claim, and one-step/task-specific scope before contrasting it with slot-aligned WAM future feedback.
+- [ ] **RA-DP:** verify its environment-interleaved denoising schedule, action-space feedback/cost mechanism, heterogeneous-noise training requirement, and applicability boundary before using it as a contrast.
+- [ ] **Lingbot-VA and DreamZero:** verify the exact generation factorization, conditioning interfaces, and history/cache update behavior of each cited implementation; use them as examples of stage-wise generation and joint generation without generalizing model-specific behavior to all WAMs.
+- [ ] **Pseudoinverse-Guided Diffusion and Flow-Matching inpainting:** keep Song et al. as the source of pseudoinverse guidance, distinguish established inverse-problem background from the FBFM adaptation, and ensure the RTC lineage is cited accurately.
+
 ## Experiment and Result: Engineering Checklist
 
 ### Reproducibility boundary
@@ -111,3 +130,7 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 - [x] Move the detailed pseudoinverse, mask-projection, and approximation-error derivations into `docs/Chapters/8_Appendix_1`.
 - [ ] Validate and finalize the Appendix 1 analysis of the masked reconstruction error \(\|\mathbf{W}\odot[h^\dagger(h(\hat{\mathbf{X}}))-\hat{\mathbf{X}}]\|\) after the implementation is frozen.
 - [ ] Consider an ablation comparing the explicit encoder--decoder residual with the aligned-coordinate approximation if the full \(h/h^\dagger\) path is implemented.
+
+## Final Whole-Paper Consistency Pass
+
+- [ ] As the final editing pass, audit the exact wording, capitalization, hyphenation, and abbreviation of every professional concept across the title, Abstract, all sections, figures, captions, tables, appendix, and references. In particular, use `stage-wise generation` and `joint generation` consistently and eliminate competing labels such as `serial`, `parallel`, `cascaded dual-stream`, and `unified joint-prediction` unless they are explicitly introduced as informal explanations.
