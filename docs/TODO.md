@@ -71,10 +71,16 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 
 ### Literature-specific checks
 
+- [ ] Build the final Related Works bibliography from `docs/Related_Works_Literature_Map.md`: verify author order, title, venue/year, arXiv version, and a stable BibTeX key for every retained citation; do not promote metadata-only notes into strong claims without checking the paper text.
+- [ ] Organize Related Works as three internal thematic blocks without necessarily exposing subsection headings: generative modeling/world models; diffusion and Flow-Matching robot policies; inference-time guidance/asynchronous feedback. Ensure each citation supports a sentence in this argument rather than appearing as an isolated literature list.
+- [ ] Apply a contribution-first comparison style to close prior work: state what the method enables before delimiting its feedback target, temporal granularity, training requirement, or architectural scope; audit unsupported absolute terms including `first`, `only`, `all`, `dominant`, `hard constraint`, and `guarantee`.
 - [ ] **RTC / Real-Time Chunking (Black et al., 2025):** verify the hard-prefix and soft-overlap masks, inference-delay assumptions, pseudoinverse-guided VJP, and training-free scope; use it as the action-overlap baseline without attributing latent-state feedback to RTC.
+- [ ] **BID / Bidirectional Decoding:** read the latest arXiv revision in addition to the version cited by RTC; verify the guided test-time sampling/rejection mechanism and avoid relying on the older subtitle alone.
 - [ ] **Fast-WAM:** locate and verify the exact paper, its training-time video-co-training result, and whether the inference-time-imagination comparison is necessary in Introduction or belongs only in Related Works.
 - [ ] **Feedback World Model (FWM):** verify the auxiliary feedback-state definition, prediction--observation residual, update timing, frozen-model claim, and one-step/task-specific scope before contrasting it with slot-aligned WAM future feedback.
 - [ ] **RA-DP:** verify its environment-interleaved denoising schedule, action-space feedback/cost mechanism, heterogeneous-noise training requirement, and applicability boundary before using it as a contrast.
+- [ ] **DynaGuide, AsyncVLA, TIDAL, and DCDP:** audit their external-model requirements, asynchronous schedules, dynamic-correction interfaces, and exact training-free boundaries before comparing them with inference-time FBFM.
+- [ ] **WA-LQR / Steering Robustness into WAMs (Hong et al., 2026):** read the full paper and assess its activation-steering and reduced-order optimal-control formulation, its reported LingBot-VA steerability result, and its novelty overlap with training-free WAM feedback.
 - [ ] **Lingbot-VA and DreamZero:** verify the exact generation factorization, conditioning interfaces, and history/cache update behavior of each cited implementation; use them as examples of stage-wise generation and joint generation without generalizing model-specific behavior to all WAMs.
 - [ ] **Pseudoinverse-Guided Diffusion and Flow-Matching inpainting:** keep Song et al. as the source of pseudoinverse guidance, distinguish established inverse-problem background from the FBFM adaptation, and ensure the RTC lineage is cited accurately.
 
