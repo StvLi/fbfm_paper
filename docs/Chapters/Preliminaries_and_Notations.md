@@ -1,0 +1,338 @@
+# Preliminaries and Notations
+
+> Status: section scaffold. The technical content will be written and reviewed subsection by subsection.
+
+## Problem Formulation: Agent-Environment Interaction
+
+We consider an embodied agent interacting with an environment over a family of tasks
+\(\mathcal{T}\). The interaction is modeled as a controlled Markov process
+
+\[
+\mathcal{M} = (\mathcal{S}, \mathcal{A}, P),
+\]
+
+where \(\mathcal{S}\) and \(\mathcal{A}\) denote the environment state space and the
+action space, respectively, and \(P(s_{t+1}\mid s_t,a_t)\) is the environment
+transition kernel. Each task \(T\in\mathcal{T}\) may specify an initial-state
+distribution \(\rho_T\) and a task condition \(c_T\), such as a language instruction
+or a goal specification. We assume that the tasks share the same state space, action
+space, and physical dynamics. At environment time step \(t\), the environment is in
+state \(s_t\in\mathcal{S}\), the agent applies an action \(a_t\in\mathcal{A}\), and
+the next state evolves according to
+
+\[
+s_0\sim\rho_T, \qquad s_{t+1}\sim P(\cdot\mid s_t,a_t).
+\]
+
+The physical state \(s_t\) is not necessarily exposed directly to the agent. Let
+\(\mathcal{O}\) denote the sensing process and \(E\) a perceptual encoder. We define
+the latent state available to the world-action model (WAM) as
+
+\[
+z_t = E\!\left(\mathcal{O}(s_t)\right),
+\]
+
+where \(z_t\in\mathcal{Z}\) summarizes the sensory observation of \(s_t\). This
+distinction allows the environment dynamics to remain Markovian in \(s_t\), while
+the agent may act from encoded and potentially partial observations. We denote the
+interaction history available at time \(t\) by
+
+\[
+\mathcal{H}_t = (c_T,z_0,a_0,z_1,a_1,\ldots,a_{t-1},z_t),
+\]
+
+and write the action-selection process generally as
+\(a_t\sim\pi(\cdot\mid\mathcal{H}_t)\). This notation does not require \(z_t\) itself
+to be a sufficient Markov state.
+
+Rather than selecting only a single action, a WAM predicts future latent states and
+actions over a horizon \(H\). Starting at time \(t\), we denote its predicted latent
+and action chunks by
+
+\[
+\hat{\mathbf{Z}}_{t,H}
+= (\hat z_{t+1},\ldots,\hat z_{t+H}),
+\qquad
+\hat{\mathbf{A}}_{t,H}
+= (\hat a_t,\ldots,\hat a_{t+H-1}),
+\]
+
+with the generic predictive model
+
+\[
+(\hat{\mathbf{Z}}_{t,H},\hat{\mathbf{A}}_{t,H})
+\sim p_\theta(\cdot\mid\mathcal{H}_t).
+\]
+
+This expression does not prescribe how the two chunks are generated: a WAM may
+model them with a joint generative process or factorize generation into successive
+latent-state and action stages. During execution, realized transitions and external
+disturbances can cause the newly encoded latent \(z_{t+1}\) to deviate from its
+prediction \(\hat z_{t+1}\). Our objective is therefore not to learn a
+reward-maximizing policy, but to incorporate such newly available state feedback,
+together with previously generated action constraints, into the inference process of
+a pretrained WAM. Accordingly, rewards, returns, and value functions are not part of
+our formulation.
+
+## Flow Matching
+
+We distinguish an individual variable at one environment step from a chunk spanning
+multiple steps. An action
+\(a_t\in\mathbb{R}^{d_a}\) is a single control command at environment time \(t\),
+whereas
+
+\[
+\mathbf{A}_t
+= [a_t,a_{t+1},\ldots,a_{t+H-1}]
+\in\mathbb{R}^{H\times d_a}
+\]
+
+is an action chunk of horizon \(H\). Similarly, \(z_t\in\mathcal{Z}\) denotes the
+single-step latent state defined above, while
+
+\[
+\mathbf{Z}_t
+= [z_{t+1},z_{t+2},\ldots,z_{t+H}]
+\]
+
+denotes a future latent-state chunk aligned with the action horizon. We use
+lowercase \(x\) for a generic single-step variable and uppercase
+\(\mathbf{X}\) for its chunk-level counterpart. Thus,
+\((x,\mathbf{X})=(a,\mathbf{A})\) for action generation and
+\((x,\mathbf{X})=(z,\mathbf{Z})\) for latent-state generation. For a WAM that
+generates both modalities jointly, \(\mathbf{X}_t\) may instead denote their
+concatenation,
+
+\[
+\mathbf{X}_t
+= \operatorname{concat}
+\!\left(\operatorname{vec}(\mathbf{Z}_t),
+        \operatorname{vec}(\mathbf{A}_t)\right).
+\]
+
+This generic notation does not imply a particular WAM factorization. A joint WAM
+transports the concatenated \(\mathbf{X}_t\) with one flow, whereas a stage-wise WAM
+applies separate flows to \(\mathbf{Z}_t\) and \(\mathbf{A}_t\). In either case, the
+elements of a generated chunk remain aligned with individual environment steps; this
+alignment will later allow FBFM to constrain selected \(z_{t+i}\) and
+\(a_{t+i}\), rather than treating the chunk as an indivisible unit.
+
+Flow Matching learns a time-dependent vector field that transports samples from a
+simple source distribution to the conditional data distribution. Let
+\(\tau\in[0,1]\) denote continuous flow time, distinct from the environment index
+\(t\). Given a target chunk \(\mathbf{X}_t\) and Gaussian noise
+\(\boldsymbol{\epsilon}\sim\mathcal{N}(\mathbf{0},\mathbf{I})\) of the same shape,
+we use the linear conditional probability path
+
+\[
+\mathbf{X}_t^\tau
+= (1-\tau)\boldsymbol{\epsilon}+\tau\mathbf{X}_t,
+\qquad
+\mathbf{X}_t^0=\boldsymbol{\epsilon},
+\quad
+\mathbf{X}_t^1=\mathbf{X}_t.
+\]
+
+Its conditional target velocity is constant along the path:
+
+\[
+\mathbf{u}(\mathbf{X}_t^\tau\mid\mathbf{X}_t)
+= \frac{\mathrm{d}\mathbf{X}_t^\tau}{\mathrm{d}\tau}
+= \mathbf{X}_t-\boldsymbol{\epsilon}.
+\]
+
+Conditioned on the interaction history \(\mathcal{H}_t\), a Flow-Matching model
+\(v_\theta\) takes the current noisy chunk and flow time as inputs and predicts a
+velocity with the same shape as \(\mathbf{X}_t\). It is trained using
+
+\[
+\mathcal{L}_{\mathrm{FM}}(\theta)
+=
+\mathbb{E}_{\substack{
+(\mathcal{H}_t,\mathbf{X}_t)\sim\mathcal{D},\,
+\boldsymbol{\epsilon}\sim\mathcal{N}(\mathbf{0},\mathbf{I}),\,
+\tau\sim p(\tau)}}
+\left[
+\left\|
+v_\theta(\mathbf{X}_t^\tau,\tau;\mathcal{H}_t)
+-
+(\mathbf{X}_t-\boldsymbol{\epsilon})
+\right\|_2^2
+\right],
+\]
+
+where \(p(\tau)\) is a chosen flow-time sampling distribution. Uniform sampling is
+the standard choice, while non-uniform schedules may emphasize particular noise
+levels.
+
+At inference time, generation starts from
+\(\mathbf{X}_t^0\sim\mathcal{N}(\mathbf{0},\mathbf{I})\) and solves the conditional
+ordinary differential equation
+
+\[
+\frac{\mathrm{d}\mathbf{X}_t^\tau}{\mathrm{d}\tau}
+= v_\theta(\mathbf{X}_t^\tau,\tau;\mathcal{H}_t),
+\qquad
+\hat{\mathbf{X}}_t
+= \mathbf{X}_t^0
++ \int_0^1
+v_\theta(\mathbf{X}_t^\tau,\tau;\mathcal{H}_t)\,
+\mathrm{d}\tau.
+\]
+
+For example, a forward Euler solver uses
+
+\[
+\mathbf{X}_t^{\tau_{k+1}}
+=
+\mathbf{X}_t^{\tau_k}
++ \Delta\tau_k\,
+v_\theta(\mathbf{X}_t^{\tau_k},\tau_k;\mathcal{H}_t).
+\]
+
+Some implementations parameterize the same path by the remaining noise level
+\(\sigma=1-\tau\), which is integrated from \(1\) to \(0\). Defining the
+corresponding field as
+\(\tilde v_\theta=-v_\theta\), the clean endpoint estimate under the linear path is
+
+\[
+\hat{\mathbf{X}}_t^1
+=
+\mathbf{X}_t^\sigma
+-\sigma\,
+\tilde v_\theta(\mathbf{X}_t^\sigma,\sigma;\mathcal{H}_t).
+\]
+
+We use superscripts exclusively for flow time or noise level and subscripts for
+environment time. This separation is important for FBFM, which modifies the
+inference-time vector field while preserving the pretrained Flow-Matching model.
+
+## Pseudoinverse-Guided Inpainting
+
+Pseudoinverse guidance conditions a pretrained generative model on an inverse
+problem without task-specific retraining (Song et al., 2023). Let the clean endpoint
+\(\mathbf{X}_t^1\) produce a measurement
+
+\[
+\mathbf{Y}_t=h(\mathbf{X}_t^1)+\boldsymbol{\eta},
+\qquad
+\boldsymbol{\eta}\sim\mathcal{N}(\mathbf{0},\sigma_y^2\mathbf{I}),
+\]
+
+where \(h:\mathcal{X}\rightarrow\mathcal{Y}\) is the measurement operator. Song
+et al. extend the linear Moore--Penrose pseudoinverse to a generalized inverse
+\(h^\dagger:\mathcal{Y}\rightarrow\mathcal{X}\), satisfying
+\(h(h^\dagger(h(\mathbf{X})))=h(\mathbf{X})\). We interpret \(h\) and
+\(h^\dagger\) as a feedback encoder--decoder pair: \(h\) maps a generated
+state-action object to the feedback space, while \(h^\dagger\) lifts feedback back
+to the generation space. The precise consistency assumptions and their local
+Moore--Penrose interpretation are provided in Appendix 1.
+
+For Flow Matching, the predicted clean endpoint at flow time \(\tau\) is
+
+\[
+\hat{\mathbf{X}}_t^1
+=f_\theta^\tau(\mathbf{X}_t^\tau)
+:=\mathbf{X}_t^\tau
++(1-\tau)v_\theta(\mathbf{X}_t^\tau,\tau;\mathcal{H}_t).
+\]
+
+Given an element-wise feedback mask \(\mathbf{W}_t\), pseudoinverse inpainting
+forms the lifted discrepancy and propagates it through the endpoint predictor:
+
+\[
+\mathbf{e}_t^\tau
+=\mathbf{W}_t\odot
+\left[
+h^\dagger(\mathbf{Y}_t)
+-h^\dagger\!\left(h(\hat{\mathbf{X}}_t^1)\right)
+\right],
+\qquad
+\mathbf{g}_t^\tau
+=
+\left(
+\frac{\partial f_\theta^\tau(\mathbf{X}_t^\tau)}
+     {\partial\mathbf{X}_t^\tau}
+\right)^{\mathsf T}
+\mathbf{e}_t^\tau.
+\]
+
+The VJP \(\mathbf{g}_t^\tau\) is added to the pretrained velocity field,
+
+\[
+v_{\mathrm{PG}}
+=v_\theta+\lambda_\tau\mathbf{g}_t^\tau,
+\]
+
+where \(\lambda_\tau\) controls the guidance strength. This Flow-Matching
+specialization follows the inference-time inpainting construction of Black et al.
+(2025).
+
+In FBFM, observed latent states and previous actions are already encoded and aligned
+with the corresponding generation coordinates. We therefore use the practical
+approximation
+\(h^\dagger(h(\hat{\mathbf{X}}_t^1))\approx\hat{\mathbf{X}}_t^1\) on the
+mask-selected feedback subspace. When \(h^\dagger(\mathbf{Y}_t)\) is likewise stored
+in aligned coordinates and denoted by \(\mathbf{Y}_t\), the error reduces to
+
+\[
+\mathbf{e}_t^\tau
+=\mathbf{W}_t\odot
+\left(\mathbf{Y}_t-\hat{\mathbf{X}}_t^1\right).
+\]
+
+Here, \(\mathbf{W}_t\in\{0,1\}^D\) gives exact masked inpainting, while
+\(\mathbf{W}_t\in[0,1]^D\) gives a confidence-weighted relaxation. The same notation
+applies when \(\mathbf{X}\) is an action chunk \(\mathbf{A}\), a latent-state chunk
+\(\mathbf{Z}\), or their joint representation. The construction of
+\(\mathbf{Y}_t\), the asynchronous update of \(\mathbf{W}_t\), and the joint versus
+stage-wise implementations are deferred to the method section.
+
+## Notation Summary
+
+The following table summarizes the notation introduced in the preceding subsections.
+Method-specific extensions used by the stage-wise and joint-generation FBFM
+formulations are listed immediately afterward.
+
+| Symbol | Definition |
+|---|---|
+| \(T,\mathcal{T},c_T,\rho_T\) | A task, the task family, the condition associated with task \(T\), and its initial-state distribution. |
+| \(\mathcal{M},\mathcal{S},\mathcal{A},P\) | The controlled Markov process, environment state space, action space, and transition kernel. |
+| \(t,i,s_t\) | Environment time, an offset within a chunk, and the physical environment state. |
+| \(\mathcal{O},E,\mathcal{H}_t,\pi\) | Sensor mapping, perceptual encoder, interaction history at time \(t\), and the action-selection process. |
+| \(H,d_a,D\) | Prediction horizon, dimension of one action, and flattened dimension of the generated chunk or mask. |
+| \(a_t,\mathbf{A}_t\) | A single-step action and the action chunk \([a_t,\ldots,a_{t+H-1}]\). |
+| \(z_t,\mathbf{Z}_t,\mathcal{Z}\) | An encoded single-step latent state, the future latent-state chunk \([z_{t+1},\ldots,z_{t+H}]\), and the latent space. |
+| \(x,\mathbf{X}_t\) | A generic single-step variable and its chunk-level representation; instantiated as \(a/\mathbf A\), \(z/\mathbf Z\), or a joint state-action chunk. |
+| \(\hat{\cdot},p_\theta,\theta\) | A predicted or estimated quantity, the conditional WAM distribution, and its model parameters. |
+| \(\tau,k,\tau_k,\Delta\tau_k,\sigma\) | Continuous flow time, solver-step index, the corresponding flow-time point and integration step, and the remaining noise level \(\sigma=1-\tau\). |
+| \(\boldsymbol{\epsilon},\mathbf{0},\mathbf{I},\mathbf{X}_t^\tau\) | Gaussian source noise, zero vector, identity matrix, and the intermediate chunk on the probability path. |
+| \(\mathbf{u},v_\theta,\tilde v_\theta\) | Conditional target velocity, learned Flow-Matching vector field, and its noise-level parameterization \(\tilde v_\theta=-v_\theta\). |
+| \(\mathcal{D},p(\tau),\mathcal{L}_{\mathrm{FM}}\) | Training distribution, flow-time sampling distribution, and Flow-Matching objective. |
+| \(\hat{\mathbf{X}}_t,\hat{\mathbf{X}}_t^1,f_\theta^\tau\) | Generated chunk, predicted clean endpoint, and the endpoint predictor evaluated at flow time \(\tau\). |
+| \(\mathbf{Y}_t,\mathcal{X},\mathcal{Y},h,h^\dagger\) | Feedback measurement, generation and measurement spaces, feedback encoder, and generalized lifting decoder. |
+| \(\boldsymbol{\eta},\sigma_y\) | Measurement noise and its standard deviation. |
+| \(\mathbf{W}_t,\odot\) | Element-wise feedback mask or confidence weights and the Hadamard product. |
+| \(\mathbf{e}_t^\tau,\mathbf{g}_t^\tau\) | Masked lifted discrepancy and its vector--Jacobian product with respect to the current flow variable. |
+| \(v_{\mathrm{PG}},\lambda_\tau\) | Pseudoinverse-guided velocity field and its time-dependent guidance strength. |
+| \(\operatorname{vec},\operatorname{concat}\) | Flattening and concatenation operators used to construct a joint chunk. |
+
+Method-specific extensions:
+
+| Symbol | Definition |
+|---|---|
+| \(\mathcal I_t^A,a_{t+i}^{\mathrm{prev}}\) | The action-slot overlap between the preceding and new chunks, and the preceding chunk's action aligned to an overlap slot. |
+| \(\mathcal F_{t,k}\) | Dynamic set of encoded real-state feedback available before solver evaluation \(k\), kept separate from the solver-start history \(\mathcal H_t\). |
+| \(d_z,D_Z,D_A,D_X\) | Dimension of one flattened latent-state slot; flattened state, action, and joint chunk dimensions, with \(D_Z=Hd_z\) and \(D_X=D_Z+D_A\). |
+| \(\theta_Z,\theta_A,v_{\theta_Z}^Z,v_{\theta_A}^A\) | Frozen parameters and separate state/action vector fields of a stage-wise WAM. |
+| \(\tau_k^Z,\tau_k^A,f_{\theta_Z}^{Z,\tau_k^Z},f_{\theta_A}^{A,\tau_k^A}\) | State/action flow times and their clean-endpoint predictors at solver evaluation \(k\). |
+| \(\mathbf Y_{t,k}^Z,\mathbf W_{t,k}^Z,w_{t,i}^{Z,k}\) | Aligned dynamic state-feedback target, its block mask/weighting operator, and the weight for state slot \(i\). |
+| \(\mathbf Y_t^A,\mathbf W_t^A\) | Aligned committed-action target and the general previous-action weighting operator over the cross-chunk overlap. |
+| \(\hat{\mathbf Z}_t,\check{\mathbf Z}_{t,k},\Phi_Z,\mathcal C_{t,k}^Z\) | Generated state endpoint, its latest feedback-refreshed representation, the native state-context constructor, and the context supplied to the action flow. |
+| \(\mathbf e_{t,k}^Z,\mathbf e_{t,k}^A,\mathbf g_{t,k}^Z,\mathbf g_{t,k}^A\) | State/action discrepancies and their corresponding VJPs. |
+| \(v_{\mathrm{FBFM}}^Z,v_{\mathrm{FBFM}}^A,\lambda_{\tau_k^Z}^Z,\lambda_{\tau_k^A}^A\) | State/action FBFM-guided vector fields and their guidance strengths. |
+| \(\tau_k^X,v_\theta^X,f_\theta^{X,\tau_k^X}\) | Joint flow time, vector field, and clean-endpoint predictor at solver evaluation \(k\). |
+| \(\mathbf Y_{t,k}^X,\mathbf W_{t,k}^X,\mathbf e_{t,k}^X,\mathbf g_{t,k}^X\) | Joint feedback target, block weighting operator, discrepancy, and VJP correction. |
+| \(v_{\mathrm{FBFM}}^X,\lambda_{\tau_k^X}^X\) | FBFM-guided joint vector field and its guidance strength. |
+| \(\mathbf J_{t,k}^X,\mathbf J_{QR}\) | Joint clean-endpoint Jacobian and its output-modality/input-modality block, where \(Q,R\in\{Z,A\}\). |
+| \(\otimes,\mathbb 1[\cdot]\) | Kronecker product and indicator function. |

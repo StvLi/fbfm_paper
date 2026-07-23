@@ -1,0 +1,9 @@
+{
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.latex.outDir": "%DIR%/build",
+  "latex-workshop.latex.recipe.default": "latexmk",
+  "latex-workshop.linting.chktex.enabled": true,
+  "latex-workshop.linting.chktex.exec.path": "/usr/bin/chktex",
+  "latex-workshop.linting.run": "onSave",
+  "latex-workshop.view.pdf.viewer": "tab"
+}
