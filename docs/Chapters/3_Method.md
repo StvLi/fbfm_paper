@@ -83,6 +83,21 @@ constrained by the committed actions in the cross-chunk overlap. State feedback
 that arrives after the state flow has terminated refreshes the context used by the
 ongoing action flow rather than restarting state generation.
 
+The following figure makes the resulting separation explicit: the two stages use
+distinct endpoint Jacobians and distinct masks, even though feedback collected
+during execution connects them temporally.
+
+![Independent masked state and action corrections in a stage-wise WAM.](../../material/mask/serial_0_cropped.png)
+
+![Dynamic state feedback followed by fixed action-overlap guidance in a stage-wise WAM.](../../material/mask/serial_1_cropped.png)
+
+*Masked FBFM guidance for a stage-wise WAM: top, the state and action endpoints
+are predicted by separate flows, so each discrepancy is propagated through its
+corresponding within-modality endpoint Jacobian; bottom, real observations
+progressively activate state-mask entries during the latent-state (frame) flow,
+whereas the subsequent action flow uses the fixed mask induced by the aligned
+cross-chunk action overlap.*
+
 ### State Flow: Dynamic State-Feedback Guidance
 
 Let \(\tau_k^Z\) be the flow time at the \(k\)-th state-solver evaluation. The
@@ -384,6 +399,22 @@ v_\theta^X
 Thus, one guidance evaluation simultaneously enforces the observed state slots and
 the committed action overlap while leaving all unobserved and unconstrained
 coordinates to the pretrained joint model.
+
+The following figure illustrates both parts of this joint update: the mask forms
+modality-specific discrepancies, while the transpose of the full endpoint Jacobian
+propagates them across state and action coordinates.
+
+| Block-Jacobian propagation | Dynamic feedback loop |
+|:--:|:--:|
+| ![Block-Jacobian propagation of the joint discrepancy.](../../material/mask/parallel_0_cropped.png) | ![Dynamic state-mask activation during joint generation.](../../material/mask/parallel_1_cropped.png) |
+
+*Masked FBFM guidance for a joint-generation WAM: left, the block-diagonal
+feedback mask forms separate state and action discrepancies, but the full
+endpoint-Jacobian transpose maps both into the corrections of both modalities;
+right, each newly encoded observation activates its aligned state-mask entry
+during the ongoing joint Flow-Matching loop; through the cross-modal Jacobian
+blocks, the resulting correction can directly affect the action coordinates. The
+action-overlap mask remains fixed.*
 
 ### Direct State-to-Action Correction
 

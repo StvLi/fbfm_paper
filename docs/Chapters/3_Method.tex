@@ -89,6 +89,25 @@ constrained by the committed actions in the cross-chunk overlap. State feedback
 that arrives after the state flow has terminated refreshes the context used by the
 ongoing action flow rather than restarting state generation.
 
+Figure~\ref{fig:stage-wise-masked-guidance} makes the resulting separation
+explicit: the two stages use distinct endpoint Jacobians and distinct masks, even
+though feedback collected during execution connects them temporally.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.98\textwidth]{../material/mask/serial_0_cropped.png}
+    \vspace{0.3em}
+
+    \includegraphics[width=0.98\textwidth]{../material/mask/serial_1_cropped.png}
+    \caption{Masked FBFM guidance for a stage-wise WAM: \emph{top,} the state and
+    action endpoints are predicted by separate flows, so each discrepancy is
+    propagated through its corresponding within-modality endpoint Jacobian;
+    \emph{bottom,} real observations progressively activate state-mask entries
+    during the latent-state (frame) flow, whereas the subsequent action flow uses
+    the fixed mask induced by the aligned cross-chunk action overlap.}
+    \label{fig:stage-wise-masked-guidance}
+\end{figure*}
+
 \subsubsection{State Flow: Dynamic State-Feedback Guidance}
 
 Let $\tau_k^Z$ be the flow time at the $k$-th state-solver evaluation. The
@@ -382,6 +401,25 @@ cross-chunk overlap. The joint discrepancy and VJP are
 Thus, one guidance evaluation simultaneously enforces the observed state slots and
 the committed action overlap while leaving all unobserved and unconstrained
 coordinates to the pretrained joint model.
+
+Figure~\ref{fig:joint-masked-guidance} illustrates both parts of this joint
+update: the mask forms modality-specific discrepancies, while the transpose of the
+full endpoint Jacobian propagates them across state and action coordinates.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.49\textwidth]{../material/mask/parallel_0_cropped.png}
+    \hfill
+    \includegraphics[width=0.46\textwidth]{../material/mask/parallel_1_cropped.png}
+    \caption{Masked FBFM guidance for a joint-generation WAM: \emph{left,} the
+    block-diagonal feedback mask forms separate state and action discrepancies,
+    but the full endpoint-Jacobian transpose maps both into the corrections of
+    both modalities; \emph{right,} each newly encoded observation activates its
+    aligned state-mask entry during the ongoing joint Flow-Matching loop; through
+    the cross-modal Jacobian blocks, the resulting correction can directly affect
+    the action coordinates. The action-overlap mask remains fixed.}
+    \label{fig:joint-masked-guidance}
+\end{figure*}
 
 \subsubsection{Direct State-to-Action Correction}
 
