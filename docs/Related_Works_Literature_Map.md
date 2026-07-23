@@ -2,6 +2,8 @@
 
 本文档为 Related Works 的检索与写作底稿，不是最终正文。检索更新时间为 2026-07-24。候选文献按三条论证链组织，每篇文献必须承担明确作用；Related Works 预计保留约 30--45 篇不重复的核心引用，并使全篇参考文献达到约 45--60 篇，而不是把本表全部写入正文。
 
+第一主题的逐篇精读、筛选结果和工作正文见 [Related_Works_Theme_1_Reading.md](Related_Works_Theme_1_Reading.md)。
+
 优先级说明：
 
 - **A / 必引**：直接建立技术来源、问题定义或最近邻差异；
@@ -42,14 +44,14 @@
 | A | Hafner et al., *Learning Latent Dynamics for Planning from Pixels* (PlaNet), 2019 | pixel observation 到 latent dynamics 与 online planning | 元数据已核 |
 | A | Hafner et al., *Dream to Control: Learning Behaviors by Latent Imagination* (Dreamer), 2020 | latent imagination 直接支持策略学习 | 元数据已核 |
 | B | Hafner et al., *Mastering Atari with Discrete World Models* (DreamerV2), 2021 | discrete latent world model 与规模化控制能力 | 元数据已核 |
-| B | Hafner et al., *Mastering Diverse Domains through World Models* (DreamerV3), 2023 | world-model control 跨任务扩展的代表 | 元数据已核 |
+| B | Hafner et al., *Mastering Diverse Control Tasks through World Models* (DreamerV3), Nature 2025; preprint 2023 | world-model control 跨任务扩展的代表 | 原文与出版信息已核 |
 | B | Hansen, Wang, and Su, *Temporal Difference Learning for Model Predictive Control* (TD-MPC), 2022 | learned latent dynamics 与 receding-horizon control 的另一条经典路线 | RTC 书目和元数据已核 |
 | B | Yang et al., *Learning Interactive Real-World Simulators* (UniSim), 2023/2024, arXiv:2310.06114 | 从视频生成走向 action-conditioned interactive simulator | 元数据已核 |
 | B | Bruce et al., *Genie: Generative Interactive Environments*, 2024, arXiv:2402.15391 | 大规模视频生成模型作为可交互 world model 的代表 | 元数据已核 |
 | B | Zhu et al., *IRASim: A Fine-Grained World Model for Robot Manipulation*, 2024, arXiv:2406.14540 | action-frame alignment 和机器人视频 world model | 元数据已核 |
 | B | Zhen et al., *3D-VLA: A 3D Vision-Language-Action Generative World Model*, 2024, arXiv:2403.09631 | VLA 与 generative world modeling 汇合的早期代表 | RTC 书目已核 |
 | B | Cheang et al., *GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation*, 2024, arXiv:2410.06158 | video-language-action 生成式机器人模型背景 | RTC 书目已核 |
-| A | Li et al., *Causal World Modeling for Robot Control* (LingBot-VA), 2026, arXiv:2601.21998 | stage-wise FBFM 实例与闭环/异步 WAM 背景 | 元数据和代码背景已核；正式比较需复查原文 |
+| A | Li et al., *Causal World Modeling for Robot Control* (LingBot-VA), 2026, arXiv:2601.21998 | 论文用于统一 autoregressive video-action WAM 背景；发布代码作为 stage-wise FBFM 实例 | 原文已核；上游代码 commit `7c6ffa9` 已核，二者须分开表述 |
 | A | Ye et al., *World Action Models are Zero-shot Policies* (DreamZero), 2026, arXiv:2602.15922 | joint-generation FBFM 实例，预训练视频 diffusion backbone | 元数据已核；正式比较需复查原文 |
 | A | Yuan et al., *Fast-WAM: Do World Action Models Need Test-time Future Imagination?*, 2026, arXiv:2603.16666 | 建立互补边界：视频协同训练与测试时显式未来生成可以分离 | 元数据已核；全文待精读 |
 

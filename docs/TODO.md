@@ -82,6 +82,7 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 - [ ] **DynaGuide, AsyncVLA, TIDAL, and DCDP:** audit their external-model requirements, asynchronous schedules, dynamic-correction interfaces, and exact training-free boundaries before comparing them with inference-time FBFM.
 - [ ] **WA-LQR / Steering Robustness into WAMs (Hong et al., 2026):** read the full paper and assess its activation-steering and reduced-order optimal-control formulation, its reported LingBot-VA steerability result, and its novelty overlap with training-free WAM feedback.
 - [ ] **Lingbot-VA and DreamZero:** verify the exact generation factorization, conditioning interfaces, and history/cache update behavior of each cited implementation; use them as examples of stage-wise generation and joint generation without generalizing model-specific behavior to all WAMs.
+- [ ] When citing LingBot-VA, keep its paper claim and released-code behavior separate: Related Works may describe the paper's unified autoregressive video-action formulation, while Experiments must report the audited frame-first/action-second inference path in upstream commit `7c6ffa9bfc4b83582cafc860fab4c82cc7deeeeb`.
 - [ ] **Pseudoinverse-Guided Diffusion and Flow-Matching inpainting:** keep Song et al. as the source of pseudoinverse guidance, distinguish established inverse-problem background from the FBFM adaptation, and ensure the RTC lineage is cited accurately.
 
 ## Experiment and Result: Engineering Checklist
