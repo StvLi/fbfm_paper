@@ -75,4 +75,5 @@ This paper makes three contributions:
    combines dynamic latent-state feedback with fixed cross-chunk action
    consistency while keeping the pretrained WAM frozen.
 3. We instantiate FBFM in both stage-wise and joint-generation WAMs and evaluate
-   its effectiveness on selected RoboTwin tasks and in physical robot deployment.
+   its effectiveness on selected LIBERO and RoboTwin tasks and in physical robot
+   deployment.

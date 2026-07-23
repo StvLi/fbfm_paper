@@ -114,12 +114,13 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 
 ### Evaluation and reporting
 
-- [ ] Define all evaluated RoboTwin tasks, number of trials and seeds, initial-state sampling, success/failure criteria, aggregation, uncertainty reporting, and any excluded or retried runs.
+- [ ] Define all evaluated LIBERO and RoboTwin tasks, benchmark suites and versions, number of trials and seeds, initial-state sampling, success/failure criteria, aggregation, uncertainty reporting, and any excluded or retried runs.
 - [ ] Keep baseline comparisons fair by using matched checkpoints, observations, action horizons, solver budgets, and execution schedules. Define the intended Original WAM, RTC/action-overlap-only, and full FBFM variants precisely, and record the RTC implementation provenance and any adaptation from the LeRobot reference.
 - [ ] Include at least state-only, action-only, and state+action ablations; consider overlap length, pseudo-asynchronous step ratio/feedback timing, and guidance strength ablations where they support the main claims.
 - [ ] If the latent-state diagnostic is retained, define the prediction target, encoder/checkpoint, compared post-training levels, latent-state MSE computation, test trajectories, and aggregation; distinguish improved prediction accuracy from faster Flow-Matching convergence.
 - [ ] If the chunk-internal robustness study is retained, define a reproducible disturbance/intervention protocol, its timing within the chunk, the Original WAM/RTC/FBFM comparison, and response or recovery metrics for simulation and/or physical deployment.
 - [ ] Report task success together with the efficiency cost of FBFM, including inference time or throughput, VJP overhead, peak memory, and effective control/update rate.
+- [ ] Validate the locked OpenReview Abstract claim that FBFM improves success rates by more than 5% on the selected LIBERO and RoboTwin tasks; report the per-task values and the exact baseline used for each improvement.
 - [ ] If physical-robot tracking remains an Abstract claim, define the platform, tasks, trial count, baseline, tracking metric, and quantitative result; otherwise remove or weaken that claim before submission.
 - [ ] Track and close both confirmed issues in `docs/handover.md` before freezing the main Lingbot-VA experiments, and keep any newly confirmed code--theory mismatch equally concise there.
 - [ ] Audit Abstract, Introduction, Method, figures, Experiment and Result, Conclusion, and implementation evidence together after both model tracks stabilize; do not let planned or unverified capabilities appear as completed results.
@@ -133,4 +134,4 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 
 ## Final Whole-Paper Consistency Pass
 
-- [ ] As the final editing pass, audit the exact wording, capitalization, hyphenation, and abbreviation of every professional concept across the title, Abstract, all sections, figures, captions, tables, appendix, and references. In particular, use `stage-wise generation` and `joint generation` consistently and eliminate competing labels such as `serial`, `parallel`, `cascaded dual-stream`, and `unified joint-prediction` unless they are explicitly introduced as informal explanations.
+- [ ] As the final editing pass, audit the exact wording, capitalization, hyphenation, and abbreviation of every professional concept across all editable sections, figures, captions, tables, appendix, and references. Treat the OpenReview-aligned title and Abstract as locked text; elsewhere, use `stage-wise generation` and `joint generation` consistently and eliminate competing labels such as `serial`, `parallel`, `cascaded dual-stream`, and `unified joint-prediction` unless they are explicitly introduced as informal explanations.
