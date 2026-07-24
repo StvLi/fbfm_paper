@@ -125,6 +125,7 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 
 ### Evaluation and reporting
 
+- [ ] Obtain the finalized task list from the experiment team and enumerate every evaluated RoboTwin and LIBERO task in Section 4.1; also confirm the corresponding benchmark suite/version and exact LingBot-VA and RLinf DreamZero checkpoint identifiers.
 - [ ] Define all evaluated LIBERO and RoboTwin tasks, benchmark suites and versions, number of trials and seeds, initial-state sampling, success/failure criteria, aggregation, uncertainty reporting, and any excluded or retried runs.
 - [ ] Keep baseline comparisons fair by using matched checkpoints, observations, action horizons, solver budgets, and execution schedules. Define the intended Original WAM, RTC/action-overlap-only, and full FBFM variants precisely, and record the RTC implementation provenance and any adaptation from the LeRobot reference.
 - [ ] Include at least state-only, action-only, and state+action ablations; consider overlap length, pseudo-asynchronous step ratio/feedback timing, and guidance strength ablations where they support the main claims.
