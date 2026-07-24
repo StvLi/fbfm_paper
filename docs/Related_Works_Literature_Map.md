@@ -122,6 +122,7 @@
 | A | Janner et al., *Diffuser*, 2022 | diffusion inpainting 在 sequential decision-making 中用于 state/action constraints | RTC 原文已核 |
 | A | Liu et al., *Bidirectional Decoding: Improving Action Chunking via Guided Test-Time Sampling*, 2024, arXiv:2408.17355 | RTC 明确认定的最接近前驱；其早期版本通过 closed-loop resampling 改善 chunk continuity | RTC 原文已核；BID 最新版本待精读 |
 | A | Black et al., *Real-Time Execution of Action Chunking Flow Policies* (RTC), 2025 | FBFM 的直接思想来源：frozen prefix、soft overlap、free suffix 与 training-free flow inpainting | 本地原文已核 |
+| A | Black et al., *Training-Time Action Conditioning for Efficient Real-Time Chunking*, 2025, arXiv:2512.05964 | RTC 的训练期分支：模拟 inference delay 并学习 action-prefix conditioning，以替代推理期伪逆 guidance | 原文已核；需与 training-free RTC 分开表述 |
 | B | Høeg, Du, and Egeland, *Streaming Diffusion Policy*, 2024, arXiv:2406.04806 | 通过 variable-noise training 实现少步、高频 policy synthesis | RTC 原文已核 |
 | B | Prasad et al., *Consistency Policy: Accelerated Visuomotor Policies via Consistency Distillation*, 2024, arXiv:2405.07503 | 通过 distillation 降低 diffusion policy 采样延迟 | RTC 原文已核 |
 | B | Wang et al., *One-Step Diffusion Policy: Fast Visuomotor Policies via Diffusion Distillation*, 2024, arXiv:2410.21257 | one-step policy 加速方向，与 feedback/inpainting 正交 | 元数据已核；全文待审 |

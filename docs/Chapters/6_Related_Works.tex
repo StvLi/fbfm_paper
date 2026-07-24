@@ -104,14 +104,19 @@ Riemannian state spaces, while related work applied Flow Matching to
 multi-support whole-body imitation and affordance-conditioned manipulation
 \cite{braun2024rfmp,rouxel2024multisupport,zhang2025affordance}. This technical
 route gained much broader visibility through $\pi_0$, which brought Flow
-Matching into a large-scale
-generalist VLA by pairing a pretrained VLM backbone with a smaller
+Matching into a large-scale generalist VLA by pairing a pretrained VLM backbone
+with a smaller
 robotics-specific action expert and combining cross-embodiment pretraining with
-post-training. Its strong performance on high-frequency
-dexterous manipulation helped establish Flow Matching as a practical and
+post-training. Its strong performance on high-frequency dexterous manipulation
+helped establish Flow Matching as a practical and
 scalable route for continuous robot action generation \cite{black2024pi0}.
-$\pi_{0.5}$ retained this
-action-generation design while adding heterogeneous co-training and semantic
+$\pi_{0.5}$ retained this action-generation design while adding heterogeneous
+co-training and semantic
 subtask prediction for open-world, long-horizon manipulation
-\cite{pi2025pi05}. The broad recognition of this model family motivates FBFM's
-focus on making Flow-Matching action generation more responsive during execution.
+\cite{pi2025pi05}. Beyond predictive performance, this conditional Flow-Matching
+action expert exposes an iterative velocity-field interface through which an
+action prefix can constrain a chunk as it is generated. The two RTC formulations
+exploit this interface through training-free pseudoinverse-guided inpainting and
+training-time action-prefix conditioning, respectively
+\cite{black2025realtime,black2025training}. This connection motivates the
+following discussion of asynchronous execution and feedback.

@@ -114,7 +114,7 @@ Related Works 的目标不是证明前人工作“不好”，而是说明每项
 
 ### 4.2 Diffusion and Flow-Matching Policies for Robot Control
 
-从 Diffuser 将 diffusion sampling 用于轨迹规划开始，过渡到 Diffusion Policy 将 action chunk 直接作为条件生成对象，再介绍 RDT 等工作体现的规模扩展。随后明确 diffusion 和 Flow Matching 是相关但不同的连续生成参数化，以专用机器人运动策略简要补全 Flow Matching 的发展背景，最后重点说明 \(\pi_0\) 与 \(\pi_{0.5}\) 如何把 Flow-Matching action expert 扩展到大规模通用 VLA，并以高频灵巧控制和开放世界泛化推动这条路线获得广泛认可。
+从 Diffuser 将 diffusion sampling 用于轨迹规划开始，过渡到 Diffusion Policy 将 action chunk 直接作为条件生成对象，再介绍 RDT 等工作体现的规模扩展。随后明确 diffusion 和 Flow Matching 是相关但不同的连续生成参数化，以专用机器人运动策略简要补全 Flow Matching 的发展背景，最后重点说明 \(\pi_0\) 与 \(\pi_{0.5}\) 如何把 Flow-Matching action expert 扩展到大规模通用 VLA，并以高频灵巧控制和开放世界泛化推动这条路线获得广泛认可。段末还应指出：该 action expert 的迭代速度场接口允许已知 action prefix 在生成过程中施加约束，从而为两版 RTC 的异步执行方法提供直接技术基础。
 
 本部分不必围绕“是否首创”组织论述。更有价值的定位是：\(\pi_0\) 与 \(\pi_{0.5}\) 是将 Flow Matching、action expert 和大规模通用 VLA 结合，并以突出应用性能体现该路线现实价值的代表性工作。早期 Flow-Matching robot policies 用于补全发展脉络，而不是与 \(\pi_0\) 展开优先权比较。
 
