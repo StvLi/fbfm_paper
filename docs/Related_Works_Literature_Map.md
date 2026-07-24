@@ -2,7 +2,7 @@
 
 本文档为 Related Works 的检索与写作底稿，不是最终正文。检索更新时间为 2026-07-24。候选文献按三条论证链组织，每篇文献必须承担明确作用；不预设引用数量目标，也不把本表全部写入正文。经典背景工作可以在说明领域目标和通用方法后合并引用，路线转折工作需要用短分句交代具体增量，而与 FBFM 直接相关的工作应独立说明问题、机制、适用边界和差异。
 
-第一主题的逐篇精读、筛选结果和工作正文见 [Related_Works_Theme_1_Reading.md](Related_Works_Theme_1_Reading.md)。
+第一、第二主题的逐篇精读、筛选结果和工作正文分别见 [Related_Works_Theme_1_Reading.md](Related_Works_Theme_1_Reading.md) 和 [Related_Works_Theme_2_Reading.md](Related_Works_Theme_2_Reading.md)。
 
 优先级说明：
 
@@ -82,16 +82,16 @@
 | B | Ajay et al., *Is Conditional Generative Modeling All You Need for Decision-Making?* (Decision Diffuser), 2022/2023, arXiv:2211.15657 | 条件生成模型用于决策的代表性延伸 | RTC 原文已核 |
 | B | Wang, Hunt, and Zhou, *Diffusion Policies as an Expressive Policy Class for Offline Reinforcement Learning*, 2022/2023, arXiv:2208.06193 | diffusion policy 作为多峰策略分布的决策模型 | RTC 原文已核 |
 | A | Chi et al., *Diffusion Policy: Visuomotor Policy Learning via Action Diffusion*, 2023 | action sequence/chunk 作为条件 diffusion 生成对象的核心工作 | RTC 与 \(\pi_0\) 原文已核 |
-| B | Ze et al., *3D Diffusion Policy: Generalizable Visuomotor Policy Learning via Simple 3D Representations* (DP3), 2024 | Diffusion Policy 向 3D、跨场景泛化扩展 | 书目信息待正式 BibTeX 核验 |
+| B | Ze et al., *3D Diffusion Policy: Generalizable Visuomotor Policy Learning via Simple 3D Representations* (DP3), 2024 | Diffusion Policy 向 3D、跨场景泛化扩展 | 原文摘要、元数据与 RSS 2024 信息已核 |
 | B | Chi et al., *Universal Manipulation Interface: In-the-Wild Robot Teaching Without In-the-Wild Robots*, 2024 | diffusion action policy 在真实数据收集和部署中的扩展 | RTC 原文已核 |
-| A | Liu et al., *RDT-1B: A Diffusion Foundation Model for Bimanual Manipulation*, 2024, arXiv:2410.07864 | diffusion policy 参数量、数据规模和双臂控制能力扩展 | 元数据与 RTC 原文已核 |
+| A | Liu et al., *RDT-1B: A Diffusion Foundation Model for Bimanual Manipulation*, 2025, arXiv:2410.07864 | diffusion policy 参数量、数据规模和双臂控制能力扩展 | 原文摘要、元数据与 RTC 原文已核 |
 | B | Brohan et al., *RT-1: Robotics Transformer for Real-World Control at Scale*, 2022 | 大规模 direct action prediction/VLA 背景 | 经典条目 |
 | B | Brohan et al., *RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control*, 2023 | VLA 利用互联网语义知识进行动作预测 | RTC 原文已核 |
 | B | Octo Model Team et al., *Octo: An Open-Source Generalist Robot Policy*, 2024 | 通用 action-chunk policy 和大规模跨 embodiment 数据背景 | RTC 原文已核 |
 | B | Kim et al., *OpenVLA: An Open-Source Vision-Language-Action Model*, 2024 | autoregressive VLA 的开源代表，与 continuous generative action expert 对照 | RTC 原文已核 |
-| A | Braun et al., *Riemannian Flow Matching Policy for Robot Motion Learning*, 2024, arXiv:2403.10672 | 明确证明 \(\pi_0\) 之前已有机器人 Flow-Matching policy | 元数据与 RTC 原文已核 |
-| B | Rouxel et al., *Flow Matching Imitation Learning for Multi-Support Manipulation*, 2024, arXiv:2407.12381 | Flow Matching 在连续机器人动作模仿中的早期扩展 | 元数据已核；全文待审 |
-| B | Zhang and Gienger, *Affordance-based Robot Manipulation with Flow Matching*, 2024, arXiv:2409.01083 | Flow Matching 与 affordance-conditioned manipulation | 元数据已核；全文待审 |
+| A | Braun et al., *Riemannian Flow Matching Policy for Robot Motion Learning*, 2024, arXiv:2403.10672 | 明确证明 \(\pi_0\) 之前已有机器人 Flow-Matching policy | 原文摘要、元数据与 IROS 2024 信息已核 |
+| B | Rouxel et al., *Flow Matching Imitation Learning for Multi-Support Manipulation*, 2024, arXiv:2407.12381 | Flow Matching 在连续机器人动作模仿中的早期扩展 | 原文摘要、元数据与 Humanoids 2024 信息已核 |
+| B | Zhang and Gienger, *Affordance-based Robot Manipulation with Flow Matching*, 2025, arXiv:2409.01083 | Flow Matching 与 affordance-conditioned manipulation | 原文摘要与元数据已核 |
 | B | Ding et al., *Fast and Robust Visuomotor Riemannian Flow Matching Policy*, 2024/2025, arXiv:2412.10855 | RFMP 从 proof-of-concept 向更强 visuomotor policy 扩展 | 元数据已核；全文待审 |
 | B | Zhang et al., *FlowPolicy: Enabling Fast and Robust 3D Flow-based Policy via Consistency Flow Matching for Robot Manipulation*, 2024/2025, arXiv:2412.04987 | Flow Matching policy 的速度和 3D 泛化方向 | 元数据已核；全文待审 |
 | A | Black et al., *\(\pi_0\): A Vision-Language-Action Flow Model for General Robot Control*, 2024, arXiv:2410.24164 | Flow-Matching action expert、大规模通用 VLA 与灵巧高频 action chunks 的代表性跃迁 | 本地原文已核 |
@@ -102,7 +102,7 @@
 
 ### 2.3 预期写作链
 
-建议使用两段。第一段为 Diffuser → Diffusion Policy → DP3/RDT，说明 diffusion 从 trajectory model 发展为可扩展 action generator。第二段先引用 RFMP 等早期 Flow-Matching robot policies，再定位 \(\pi_0\) 和 \(\pi_0.5\)：它们将 Flow-Matching action chunks 放入大规模 VLA action expert，并以数据和模型规模带来显著的通用性、频率和灵巧性提升。RT-1/RT-2/OpenVLA 只作为 direct/autoregressive VLA 背景，不展开模型细节。
+建议使用三个连续段落。第一段为 Diffuser → Diffusion Policy → DP3/RDT，说明 diffusion 从 trajectory model 发展为可扩展 action generator。第二段用 RT-1/RT-2/Octo/OpenVLA 交代 generalist policy 的数据、cross-embodiment 与 VLM scaling 背景。第三段先引用 RFMP 等早期 Flow-Matching robot policies，再定位 \(\pi_0\) 和 \(\pi_0.5\)：它们将 Flow-Matching action chunks 放入大规模 VLA action expert，并以整合式架构和训练方案带来高频灵巧控制与开放世界泛化。
 
 ## 3. Inference-Time Guidance, Asynchronous Execution, and Feedback
 

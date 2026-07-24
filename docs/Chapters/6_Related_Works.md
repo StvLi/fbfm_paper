@@ -68,3 +68,47 @@ explicit future generation is removed at inference time [Yuan et al., 2026].
 FBFM addresses the complementary regime in which future-state generation is
 retained and asks how its latent state stream can be re-grounded by observations
 arriving during execution.
+
+<!-- Theme 2: Diffusion and Flow-Matching robot policies. -->
+
+Diffusion-based decision methods treat decisions as structured samples rather
+than pointwise regressions. Diffuser denoises complete state-action trajectories and
+reinterprets guidance and inpainting as planning constraints, while Decision
+Diffuser casts offline decision-making as return-, constraint-, or
+skill-conditioned generation [Janner et al., 2022; Ajay et al., 2023]. In
+visuomotor imitation learning, ACT modeled temporally correlated action
+chunks through a generative sequence model, and Diffusion Policy directly modeled
+an observation-conditioned action horizon with iterative denoising and
+receding-horizon execution [Zhao et al., 2023; Chi et al., 2023]. DP3 extended
+this formulation with compact 3D observations, whereas RDT-1B scaled a diffusion
+Transformer to multi-robot pretraining, a unified action representation, and
+billion-parameter capacity [Ze et al., 2024; Liu et al., 2025]. Together, these
+works established chunk-level generative modeling as a scalable interface for
+multimodal continuous robot actions.
+
+In parallel, RT-1, RT-2, Octo, and OpenVLA demonstrated that robot policies
+benefit from larger and more diverse datasets, cross-embodiment training, and
+pretrained vision-language representations, while adopting different action
+readouts [Brohan et al., 2023a; Brohan et al., 2023b; Octo Model Team et al.,
+2024; Kim et al., 2024]. RT-2 and OpenVLA, in particular, express actions through
+discrete tokens so that robot trajectories can share an autoregressive interface
+with language. This scaling trajectory motivates continuous generative action
+heads that retain the semantic priors of a VLM without reducing high-frequency,
+multimodal action chunks to a point estimate or a long sequence of discretized
+outputs.
+
+Flow-Matching policies emerged before and alongside large VLA action experts.
+RFMP transported robot motions on Riemannian state spaces, while related work
+applied Flow Matching to multi-support whole-body imitation and
+affordance-conditioned manipulation [Braun et al., 2024; Rouxel et al., 2024;
+Zhang and Gienger, 2025]. These studies make clear that \(\pi_0\)'s contribution
+is not the first use of Flow Matching for robot motion. Its distinctive step is
+integrative: \(\pi_0\) pairs a pretrained VLM backbone with a smaller
+robotics-specific action expert trained by conditional Flow Matching, and
+combines this architecture with cross-embodiment pretraining and post-training to
+generate continuous high-frequency action chunks for dexterous control [Black et
+al., 2024]. \(\pi_{0.5}\) retains this policy family while adding heterogeneous
+co-training and semantic subtask prediction for open-world, long-horizon
+manipulation [Physical Intelligence et al., 2025]. This line provides the
+action-generation side of FBFM; the next theme considers how such iteratively
+generated chunks can remain responsive during execution.
