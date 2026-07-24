@@ -392,18 +392,12 @@ These studies demonstrate several useful forms of world or dynamics feedback, bu
 they differ in whether the reference is a task objective, an observer residual, a
 routed context, or a learned activation feature.
 
-FBFM connects the action-continuity and WAM-feedback lines through a common
-measurement interface. It retains RTC-style committed actions as a fixed
-cross-chunk constraint, while treating each newly observed latent state as a
-dynamic, time-aligned measurement of the multi-step future that a WAM is still
-generating. Updating the target and mask before subsequent solver evaluations lets
-the measurement affect the active chunk rather than only the next inference call.
-The same formulation applies to stage-wise and joint-generation WAMs; in the joint
-case, cross-modal blocks of the clean-endpoint Jacobian transmit a state residual
-directly to action coordinates. Unlike learned residual heads, offset-conditioned
-policies, external dynamics models, or activation controllers, this correction
-uses the frozen WAM's existing differentiable generation interface and introduces
-no additional training.
+Taken together, action-centric asynchronous methods primarily address cross-chunk
+continuity or action-space responsiveness, whereas recent world- and
+dynamics-feedback methods operate through one-step observers, learned context
+routing, or activation-space control. FBFM studies the intersection of these
+directions by imposing training-free, time-aligned state and action constraints
+during the active generation of a frozen WAM.
 
 ## 7. 中文对照稿 v0.1
 
@@ -450,13 +444,7 @@ block dynamics 所识别的 setpoint，对 robustness-related hidden activations
 的 reference 分别是 task objective、observer residual、routed context 或 learned
 activation feature。
 
-FBFM 通过统一的 measurement interface 连接 action continuity 与 WAM feedback 两条
-路线。它保留 RTC 风格的 committed actions，将其作为固定的跨 chunk 约束；同时，它把
-每个新观测到的 latent state 视为 WAM 仍在生成的 multi-step future 上动态到达且时间
-对齐的 measurement。在后续 solver evaluation 之前更新 target 与 mask，使该测量能够
-影响 active chunk，而不是只能等待下一次 inference call。这一表述同时适用于 stage-wise
-和 joint-generation WAM；在 joint case 中，clean-endpoint Jacobian 的 cross-modal blocks
-会把 state residual 直接传递到 action coordinates。与 learned residual head、
-offset-conditioned policy、external dynamics model 或 activation controller 不同，这一
-校正直接使用冻结 WAM 已有的可微生成接口，不引入任何额外训练。
-
+总体而言，以动作为中心的异步方法主要处理跨 chunk 连续性或 action-space
+responsiveness，而近期 world/dynamics feedback 方法则通过 one-step observer、学习得到的
+context routing 或 activation-space control 发挥作用。FBFM 研究这些方向的交汇点：在冻结
+WAM 的 active generation 过程中，以 training-free 方式施加时间对齐的状态与动作约束。

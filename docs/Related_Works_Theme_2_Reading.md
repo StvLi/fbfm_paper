@@ -36,7 +36,11 @@
 
 Stable RFMP 和 FlowPolicy 暂列备用。它们可在需要补充几何稳定性或 sampling acceleration 时启用，但当前不承担不可替代的论点。
 
-## 3. English Working Draft v0.1
+## 3. English Expanded Draft v0.1
+
+以下版本保留逐步论证，作为文献审阅和引用追溯底稿。最终主文已在不改变三段结构的
+前提下压缩为更高层次的 grouped-citation 版本，以
+`docs/Chapters/6_Related_Works.md` 为准。
 
 Diffusion-based decision methods treat decisions as structured samples rather than pointwise regressions. Diffuser denoises complete state-action trajectories and reinterprets guidance and inpainting as planning constraints, while Decision Diffuser casts offline decision-making as return-, constraint-, or skill-conditioned generation [Janner et al., 2022; Ajay et al., 2023]. In visuomotor imitation learning, ACT modeled temporally correlated action chunks through a generative sequence model, and Diffusion Policy directly modeled an observation-conditioned action horizon with iterative denoising and receding-horizon execution [Zhao et al., 2023; Chi et al., 2023]. DP3 extended this formulation with compact 3D observations, whereas RDT-1B scaled a diffusion Transformer to multi-robot pretraining, a unified action representation, and billion-parameter capacity [Ze et al., 2024; Liu et al., 2025]. Together, these works established chunk-level generative modeling as a scalable interface for multimodal continuous robot actions.
 
@@ -44,7 +48,7 @@ In parallel, RT-1, RT-2, Octo, and OpenVLA demonstrated that robot policies bene
 
 Flow Matching developed into a robot action generator across both specialized motion policies and generalist VLA models. RFMP transported robot motions on Riemannian state spaces, while related work applied Flow Matching to multi-support whole-body imitation and affordance-conditioned manipulation [Braun et al., 2024; Rouxel et al., 2024; Zhang and Gienger, 2025]. This technical route gained much broader visibility through \(\pi_0\), which brought Flow Matching into a large-scale generalist VLA by pairing a pretrained VLM backbone with a smaller robotics-specific action expert and combining cross-embodiment pretraining with post-training. Its strong performance on high-frequency dexterous manipulation helped establish Flow Matching as a practical and scalable route for continuous robot action generation [Black et al., 2024]. \(\pi_{0.5}\) retained this action-generation design while adding heterogeneous co-training and semantic subtask prediction for open-world, long-horizon manipulation [Physical Intelligence et al., 2025]. Beyond predictive performance, this conditional Flow-Matching action expert exposes an iterative velocity-field interface through which an action prefix can constrain a chunk as it is generated. The two RTC formulations exploit this interface through training-free pseudoinverse-guided inpainting and training-time action-prefix conditioning, respectively [Black et al., 2025a; Black et al., 2025b]. This connection motivates the following discussion of asynchronous execution and feedback.
 
-## 4. 中文对照稿 v0.1
+## 4. 中文扩展对照稿 v0.1
 
 Diffusion-based decision methods 将决策视为结构化样本，而不是逐点回归结果。Diffuser 对完整 state-action trajectory 进行去噪，并把 guidance 与 inpainting 重新解释为规划约束；Decision Diffuser 则将 offline decision-making 表述为以 return、constraint 或 skill 为条件的生成问题 [Janner et al., 2022; Ajay et al., 2023]。在 visuomotor imitation learning 中，ACT 使用生成式序列模型建模具有时间相关性的 action chunk，Diffusion Policy 则直接使用迭代去噪建模 observation-conditioned action horizon，并采用 receding-horizon execution [Zhao et al., 2023; Chi et al., 2023]。DP3 使用紧凑 3D observation 扩展这一表述，RDT-1B 则将 diffusion Transformer 扩展到多机器人预训练、统一动作表征和十亿参数规模 [Ze et al., 2024; Liu et al., 2025]。这些工作共同确立了 chunk-level generative modeling 作为多模态连续机器人动作的可扩展接口。
 

@@ -78,7 +78,11 @@ LingBot-VA 论文与其发布代码不能作为同一个架构事实来源：
 
 第四段最后必须限定本文范围：FBFM不主张所有使用视频训练的 policy 都需要 test-time feedback；它只研究推理时仍显式生成 future-state stream 的 WAM。
 
-## 3. English Working Draft v0.2
+## 3. English Expanded Draft v0.2
+
+以下版本保留逐步论证，作为文献审阅和引用追溯底稿。最终主文已在不改变四段结构的
+前提下压缩为更高层次的 grouped-citation 版本，以
+`docs/Chapters/6_Related_Works.md` 为准。
 
 Diffusion models were initially developed as iterative generative processes that recover data by reversing a gradual corruption process [Sohl-Dickstein et al., 2015; Ho et al., 2020]. DDIM and the score-SDE formulation subsequently decoupled the learned denoiser or score from a single stochastic sampler and connected diffusion to continuous-time probability dynamics [Song et al., 2021a; Song et al., 2021b]. Latent diffusion moved this iterative process from pixels into a learned perceptual space, making high-dimensional conditional generation more tractable [Rombach et al., 2022]. Flow Matching provides a related continuous generative view by learning a velocity field along a chosen probability path, while Rectified Flow favors straighter transport trajectories that tolerate coarser numerical integration [Lipman et al., 2023; Liu et al., 2023]. Although these formulations use different objectives and path parameterizations, they all generate structured samples through an iterative transport from a simple source distribution to data.
 
@@ -88,7 +92,7 @@ Classical world models developed along a distinct but complementary line based o
 
 In parallel, generative video models made explicit visual futures increasingly controllable. MCVD used conditional diffusion for video prediction and generation, UniSim formulated an action-in-video-out diffusion simulator, and Genie learned latent actions for interactive environment generation [Voleti et al., 2022; Yang et al., 2024; Bruce et al., 2024]. DIAMOND further placed a diffusion model inside an agent's learned environment, while IRASim introduced frame-level action conditioning for fine-grained robot--object dynamics [Alonso et al., 2024; Zhu et al., 2025]. World-Action Models arise where this explicit visual-generation line meets latent dynamics and action prediction: GR-1 and GR-2 transfer video pretraining into future-image and robot-action prediction, LingBot-VA formulates autoregressive video--action modeling with closed-loop observation refresh, and DreamZero jointly generates future video and actions from a pretrained video diffusion backbone [Wu et al., 2023; Cheang et al., 2024; Li et al., 2026; Ye et al., 2026]. Fast-WAM shows that video co-training can remain useful even when explicit future generation is removed at inference time [Yuan et al., 2026]. FBFM addresses the complementary regime in which future-state generation is retained and asks how its latent state stream can be re-grounded by observations arriving during execution.
 
-## 4. 中文对照稿 v0.2
+## 4. 中文扩展对照稿 v0.2
 
 Diffusion 模型最初被提出为一种迭代生成过程：通过反转逐步破坏数据结构的过程，从噪声中恢复数据 [Sohl-Dickstein et al., 2015; Ho et al., 2020]。DDIM 与 score-SDE 表述进一步使训练得到的 denoiser 或 score 不再绑定于单一随机采样器，并将 diffusion 与连续时间概率动力学联系起来 [Song et al., 2021a; Song et al., 2021b]。Latent Diffusion 将这一迭代过程从像素空间迁移到学习得到的感知潜空间，使高维条件生成更易处理 [Rombach et al., 2022]。Flow Matching 则提供了相关的连续生成视角：它沿指定的概率路径学习速度场；Rectified Flow 进一步倾向于更笔直的输运轨迹，使数值积分能够采用更粗的步长 [Lipman et al., 2023; Liu et al., 2023]。尽管这些方法的训练目标和路径参数化不同，它们都通过从简单源分布到数据的迭代输运来生成结构化样本。
 
