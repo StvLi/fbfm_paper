@@ -2,7 +2,10 @@
 
 本文档为 Related Works 的检索与写作底稿，不是最终正文。检索更新时间为 2026-07-24。候选文献按三条论证链组织，每篇文献必须承担明确作用；不预设引用数量目标，也不把本表全部写入正文。经典背景工作可以在说明领域目标和通用方法后合并引用，路线转折工作需要用短分句交代具体增量，而与 FBFM 直接相关的工作应独立说明问题、机制、适用边界和差异。
 
-第一、第二主题的逐篇精读、筛选结果和工作正文分别见 [Related_Works_Theme_1_Reading.md](Related_Works_Theme_1_Reading.md) 和 [Related_Works_Theme_2_Reading.md](Related_Works_Theme_2_Reading.md)。
+三个主题的逐篇精读、筛选结果和工作正文分别见
+[Related_Works_Theme_1_Reading.md](Related_Works_Theme_1_Reading.md)、
+[Related_Works_Theme_2_Reading.md](Related_Works_Theme_2_Reading.md) 和
+[Related_Works_Theme_3_Reading.md](Related_Works_Theme_3_Reading.md)。
 
 优先级说明：
 
@@ -120,25 +123,31 @@
 | A | Song et al., *Pseudoinverse-Guided Diffusion Models for Inverse Problems*, 2023 | masked pseudoinverse correction 的理论来源 | 本地原文已核 |
 | A | Pokle et al., *Training-Free Linear Image Inverses via Flows*, 2023 | ΠGDM 到 continuous flows 的直接桥梁 | RTC 原文已核 |
 | A | Janner et al., *Diffuser*, 2022 | diffusion inpainting 在 sequential decision-making 中用于 state/action constraints | RTC 原文已核 |
-| A | Liu et al., *Bidirectional Decoding: Improving Action Chunking via Guided Test-Time Sampling*, 2024, arXiv:2408.17355 | RTC 明确认定的最接近前驱；其早期版本通过 closed-loop resampling 改善 chunk continuity | RTC 原文已核；BID 最新版本待精读 |
+| A | Liu et al., *Bidirectional Decoding: Improving Action Chunking via Guided Test-Time Sampling*, ICLR 2025, arXiv:2408.17355v4 | 通过 backward coherence 与 forward contrast 在多候选 chunks 中兼顾历史一致性和 reactivity | 最新原文已核 |
 | A | Black et al., *Real-Time Execution of Action Chunking Flow Policies* (RTC), 2025 | FBFM 的直接思想来源：frozen prefix、soft overlap、free suffix 与 training-free flow inpainting | 本地原文已核 |
 | A | Black et al., *Training-Time Action Conditioning for Efficient Real-Time Chunking*, 2025, arXiv:2512.05964 | RTC 的训练期分支：模拟 inference delay 并学习 action-prefix conditioning，以替代推理期伪逆 guidance | 原文已核；需与 training-free RTC 分开表述 |
+| B | Liu et al., *Learning Native Continuation for Action Chunking Flow Policies* (Legato), RSS 2026, arXiv:2602.12978 | 通过 training-time known-action/noise mixture 学习 policy-native continuation | 摘要与方法边界已核；合并引用 |
+| B | Ho et al., *Start Right, Arrive Right* (PAINT), 2026, arXiv:2606.19774 | 通过 initial-noise inversion 与 repainting 保持 prefix consistency，无需梯度或重训 | 原文已核；合并引用 |
 | B | Høeg, Du, and Egeland, *Streaming Diffusion Policy*, 2024, arXiv:2406.04806 | 通过 variable-noise training 实现少步、高频 policy synthesis | RTC 原文已核 |
 | B | Prasad et al., *Consistency Policy: Accelerated Visuomotor Policies via Consistency Distillation*, 2024, arXiv:2405.07503 | 通过 distillation 降低 diffusion policy 采样延迟 | RTC 原文已核 |
 | B | Wang et al., *One-Step Diffusion Policy: Fast Visuomotor Policies via Diffusion Distillation*, 2024, arXiv:2410.21257 | one-step policy 加速方向，与 feedback/inpainting 正交 | 元数据已核；全文待审 |
-| A | Ye et al., *RA-DP: Rapid Adaptive Diffusion Policy for Training-Free High-frequency Robotics Replanning*, 2025, arXiv:2503.04051 | 环境交互与 denoising 交错、action queue 和外部 guidance 的近邻 | 元数据已核；需全文核实 heterogeneous-noise training 边界 |
+| A | Sendai et al., *Leave No Observation Behind* (A2C2), 2025, arXiv:2509.23224 | 用最新 observation 与 base action 每步预测 residual correction | 原文已核；base policy 冻结但 correction head 需训练 |
+| A | Tang et al., *VLASH*, 2025, arXiv:2512.01031 | 用 committed actions roll forward robot state，并用 temporal-offset augmentation 学习 execution-time conditioning | 原文已核；统一比较中的 LIBERO oracle caveat 已记录 |
+| A | Ye et al., *RA-DP: Rapid Adaptive Diffusion Policy for Training-Free High-frequency Robotics Replanning*, 2025, arXiv:2503.04051 | 环境交互与 denoising 交错、action queue 和外部 guidance 的近邻 | 原文已核；novel guidance 可 training-free，queue model 需 mixed-noise training |
 | B | Xue et al., *Reactive Diffusion Policy: Slow-Fast Visual-Tactile Policy Learning for Contact-Rich Manipulation*, 2025, arXiv:2503.02881 | slow-fast feedback policy 的代表；依赖触觉和专门架构 | 元数据已核；全文待审 |
-| A | Du and Song, *DynaGuide: Steering Diffusion Polices with Active Dynamic Guidance*, 2025, arXiv:2506.13922 | 外部 dynamics model 在 diffusion denoising 中提供 training-free steering | 元数据已核；全文待精读 |
+| A | Du and Song, *DynaGuide: Steering Diffusion Polices with Active Dynamic Guidance*, NeurIPS 2025, arXiv:2506.13922 | 外部 latent dynamics model 将 outcome objective 反传到 diffusion denoising | 原文已核；base policy 可冻结但 dynamics model 需单独训练 |
 | C | *Real-Time Iteration Scheme for Diffusion Policy*, 2025, arXiv:2508.05396 | 另一种实时 diffusion-policy 迭代调度 | 元数据已核；需阅读全文判断是否与 RTC/RA-DP 重复 |
-| A | *AsyncVLA: Asynchronous Flow Matching for Vision-Language-Action Models*, 2025, arXiv:2511.14148 | 非均匀 FM schedule、confidence-based token refinement；需要统一训练，不是 FBFM 式冻结模型反馈 | 元数据已核；全文待精读 |
-| A | *TIDAL: Temporally Interleaved Diffusion and Action Loop for High-Frequency VLA Control*, 2026, arXiv:2601.14945 | 单步 flow integration 与 action execution 交错；采用 stale-intent compensation training | 元数据已核；全文待精读 |
-| A | *Closed-Loop Action Chunks with Dynamic Corrections for Training-Free Diffusion Policy* (DCDP), 2026, arXiv:2603.01953 | training-free、chunk-level dynamic correction 的直接近邻；包含额外 encoder/fusion modules | 元数据已核；必须核查参数来源和真实 training-free 范围 |
+| A | Jiang et al., *AsyncVLA: Asynchronous Flow Matching for Vision-Language-Action Models*, 2025/2026, arXiv:2511.14148 | 非均匀 FM schedule、confidence-based token refinement；需要统一训练和另训 rater | 原文已核 |
+| A | Sun et al., *TIDAL: Temporally Interleaved Diffusion and Action Loop for High-Frequency VLA Control*, 2026, arXiv:2601.14945 | 单步 flow integration 与 action execution 交错；采用 stale-intent compensation training 和 motion predictor | 原文已核 |
+| A | Wu et al., *Closed-Loop Action Chunks with Dynamic Corrections for Training-Free Diffusion Policy* (DCDP), ICRA 2026, arXiv:2603.01953 | observation-history dynamic features 对冻结 Diffusion Policy chunk 作逐步修正 | 原文已核；额外 fast module/action VAE 需 Stage-1 training |
 | C | *ProgressVLA: Progress-Guided Diffusion Policy for Vision-Language Robotic Manipulation*, 2026, arXiv:2603.27670 | world model + progress estimator 对 action tokens 的 differentiable guidance | 元数据已核；与 FBFM 共享 sampling-time guidance，但目标不同 |
-| A | An et al., *Feedback World Model Enables Precise Guidance of Diffusion Policy*, 2026, arXiv:2605.15705 | observer-style latent feedback、单步预测修正和独立 diffusion-policy guidance | 元数据已核；方法已初步核对，正式引用前全文复审 |
+| A | An et al., *Feedback World Model Enables Precise Guidance of Diffusion Policy*, 2026, arXiv:2605.15705 | observer-style latent feedback、单步预测修正和独立 diffusion-policy guidance | 原文与证明已核；收敛对象为 latent observer error |
 | C | *FocalPolicy: Frequency-Optimized Chunking and Locally Anchored Flow Matching for Coherent Visuomotor Policy*, 2026, arXiv:2605.15944 | locally anchored FM 与 chunk coherence 的近期工作 | 元数据已核；需核查与 RTC/FBFM 的真实重叠 |
 | C | *Tube Diffusion Policy: Reactive Visual-Tactile Policy Learning for Contact-rich Manipulation*, 2026, arXiv:2604.23609 | tube-level reactive feedback；主要面向视觉触觉接触任务 | 元数据已核；视篇幅决定 |
 | C | *Open-Loop Planning, Closed-Loop Verification: Speculative Verification for VLA*, 2026, arXiv:2604.02965 | 执行期闭环 verification 的侧向近邻，不直接修改 Flow Matching | 元数据已核；需全文审阅 |
-| A | *Steering Robustness into World Action Models via Mechanistic Interpretability and Optimal Control*, 2026, arXiv:2607.14943 | training-free WAM steering 的最新直接近邻；activation directions 与 reduced-order WA-LQR | 元数据已核；必须全文审阅，尤其其 LingBot-VA 结果 |
+| A | Cai et al., *AHA-WAM*, 2026, arXiv:2606.09811 | latest-observation routing、低频 video context 与高频 action DiT 的异步 WAM 架构 | 原文已核；依赖 joint/offset training，部署时不显式 decode future frame |
+| A | Hong et al., *Steering Robustness into World Action Models via Mechanistic Interpretability and Optimal Control*, 2026, arXiv:2607.14943 | training-free WAM steering 的最新直接近邻；activation directions 与 reduced-order WA-LQR | 原文已核；LingBot-VA steerability 与 architecture dependence 已审阅 |
+| C | Agouzoul, *Understanding Asynchronous Inference Methods for Vision-Language-Action Models*, 2026, arXiv:2605.08168 | 统一比较 IT/TT-RTC、VLASH、A2C2 的 delay sensitivity、成本与实现边界 | 原文已核；仅作二级交叉证据 |
 | B | Yuan et al., *Fast-WAM*, 2026 | 通过取消测试时未来生成解决延迟；与 FBFM 保留并校正未来生成形成互补 | 元数据已核；全文待精读 |
 | B | Xiao et al., *Thinking While Moving: Deep Reinforcement Learning with Concurrent Control*, 2020 | 计算与物理执行并发的控制背景；不作为 FBFM 直接前驱 | RTC 原文已核 |
 | B | Rawlings, Mayne, and Diehl, *Model Predictive Control: Theory, Computation, and Design*, 2017 | receding horizon、warm start 与并行 execution/planning 的经典背景 | RTC 原文已核 |
@@ -149,16 +158,23 @@
 |---|---|---|---|---|
 | BID | action chunk | rejection/resampling | closed-loop resampling | 使用预训练 chunk policy |
 | RTC | committed/overlapping actions | active flow 的 inpainting guidance | 当前 chunk 执行时生成下一 chunk | 对冻结 flow policy 的 inference-time 方法 |
-| RA-DP | action queue + external guidance | denoising/action queue | 每个 denoising step 产出可执行动作 | guidance 可 training-free；queue model 训练边界需明确 |
+| RA-DP | action queue + external guidance | denoising/action queue | 每个 denoising step 产出可执行动作 | guidance 可 training-free；queue model 需 mixed-noise training |
+| A2C2 | latest observation + base action | learned per-step residual | chunk 执行期间逐步修正 | base policy 冻结；correction head 需训练 |
+| VLASH | rolled-forward proprioceptive state | policy conditioning | inference-start state 对齐到 execution time | 需要 temporal-offset fine-tuning |
 | DynaGuide | task objective via external dynamics model | diffusion denoising guidance | inference-time steering | base policy 可冻结，但需要外部 dynamics model |
 | AsyncVLA | low-confidence action tokens | learned asynchronous FM refinement | 非均匀 token schedule | 需要 SFM/AFM unified training |
 | Feedback World Model | one-step latent prediction residual | observer correction，再指导独立 diffusion policy | environment decision 之间更新 feedback state | 无在线参数更新；依赖 world model/observer 结构 |
+| AHA-WAM | latest observation + reusable video context | context routing to action DiT | 低频 planner / 高频 executor | 专门架构与 horizon-offset training |
 | WA-LQR | WAM internal activations | activation steering + reduced-order LQR | feedback optimal control | training-free，但要求可操纵的 activation dynamics |
 | FBFM | time-aligned latent states + committed actions | active WAM Flow-Matching velocity | chunk 内新反馈在后续 solver evaluation 生效 | 冻结 WAM 上的 masked pseudoinverse guidance |
 
 ### 3.4 预期写作链
 
-建议使用两段。第一段从 action chunking latency 开始，依次区分 BID、RTC、RA-DP、AsyncVLA/TIDAL，重点说明它们分别使用 resampling、inpainting、action queue 或专门训练的 asynchronous schedule。第二段转入真实世界反馈：DynaGuide 使用外部 dynamics model，Feedback World Model 使用 observer residual，WA-LQR 操纵内部 activation dynamics。最后用一到两句给出 FBFM 的范围：在冻结 WAM 的 active flow 中，对 time-aligned state and action coordinates 进行统一的 masked pseudoinverse correction。
+正文使用四个连续段落：第一段从 BID 收回两版 RTC 的技术伏笔，并以 Legato/PAINT
+说明 action-continuity 分支；第二段比较 RA-DP、VLASH、A2C2/DCDP、AsyncVLA/TIDAL
+在真实信息来源、执行时序与训练依赖上的差异；第三段转入 DynaGuide、Feedback World
+Model、AHA-WAM 和 WA-LQR 的 dynamics/WAM feedback；第四段以统一 measurement
+interface 定位 FBFM。完整证据与比较矩阵见 `Related_Works_Theme_3_Reading.md`。
 
 ## 4. 检索方向与查询词
 

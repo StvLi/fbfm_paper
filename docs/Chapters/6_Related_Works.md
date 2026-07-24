@@ -119,3 +119,71 @@ formulations exploit this interface through training-free pseudoinverse-guided
 inpainting and training-time action-prefix conditioning, respectively [Black et
 al., 2025a; Black et al., 2025b]. This connection motivates the following
 discussion of asynchronous execution and feedback.
+
+<!-- Theme 3: Inference-time guidance, asynchronous execution, and feedback. -->
+
+Action chunking creates two coupled deployment problems: computation must overlap
+with execution, while independently generated chunks must remain temporally
+coherent. Bidirectional Decoding addresses this trade-off by sampling multiple
+candidate chunks and selecting among them using backward coherence with previous
+decisions and forward contrast between policy checkpoints [Liu et al., 2025].
+Inference-time RTC instead acts inside a single Flow-Matching trajectory: it
+represents actions already committed by the executing chunk as a frozen prefix,
+uses a soft mask over later overlap, and applies pseudoinverse-guided inpainting to
+a frozen policy [Black et al., 2025a]. Its training-time counterpart learns
+prefix-conditioned postfix generation under simulated inference delays, removing
+the sampling-time vector--Jacobian products at the cost of modifying training
+[Black et al., 2025b]. Later approaches place the same continuity prior elsewhere,
+including policy-native continuation learned by Legato and initial-noise selection
+in PAINT [Liu et al., 2026; Ho et al., 2026]. These methods establish a rich design
+space for cross-chunk action consistency; their constrained variables nevertheless
+remain actions inherited from an earlier plan.
+
+Other work targets responsiveness to information that becomes available during
+execution. RA-DP interleaves one denoising update with dequeueing an executable
+action and appending a noisy action, while admitting differentiable guidance from
+dynamic signals [Ye et al., 2025]. Although new guidance objectives can be added
+without retraining, its heterogeneous-noise action queue is itself learned with a
+specialized training schedule. VLASH rolls the robot state forward under committed
+actions and fine-tunes the policy with temporal offsets so that actions are
+conditioned on an estimated execution-time proprioceptive state [Tang et al.,
+2025]. A2C2 and DCDP instead use the latest observations to correct stale actions
+through separately trained residual or dynamics-aware modules while keeping the
+large base policy frozen [Sendai et al., 2025; Wu et al., 2026]. AsyncVLA refines
+low-confidence action tokens before execution through a jointly trained
+synchronous/asynchronous Flow-Matching model, whereas TIDAL combines stale semantic
+intent with current proprioception in a trained micro-controller that interleaves
+single-step flow integration and short action execution [Jiang et al., 2026; Sun et
+al., 2026]. These approaches provide complementary choices among online
+computation, specialized training, and action-space reactivity.
+
+Dynamics-based guidance extends this discussion beyond action continuity.
+DynaGuide backpropagates desired- or undesired-outcome objectives through a
+separately trained latent dynamics model to steer the denoising of an off-the-shelf
+diffusion policy [Du and Song, 2025]. More closely related to our motivation,
+Feedback World Model independently closes the prediction--observation loop at
+inference time: it maintains an auxiliary latent belief, uses the residual to the
+observed state to correct one-step predictions, and converts those predictions
+into action-aware guidance for a separate diffusion policy [An et al., 2026]. Its
+analysis bounds the latent observer error; it does not analyze pseudoinverse
+guidance of a multi-step WAM flow. AHA-WAM learns a different WAM-specific solution,
+routing each current observation into reusable context from a low-frequency video
+planner for a high-frequency action DiT [Cai et al., 2026]. WA-LQR preserves WAM
+weights but steers robustness-related hidden activations toward setpoints identified
+from contrastive rollouts and locally linearized block dynamics [Hong et al., 2026].
+These studies demonstrate several useful forms of world or dynamics feedback, but
+they differ in whether the reference is a task objective, an observer residual, a
+routed context, or a learned activation feature.
+
+FBFM connects the action-continuity and WAM-feedback lines through a common
+measurement interface. It retains RTC-style committed actions as a fixed
+cross-chunk constraint, while treating each newly observed latent state as a
+dynamic, time-aligned measurement of the multi-step future that a WAM is still
+generating. Updating the target and mask before subsequent solver evaluations lets
+the measurement affect the active chunk rather than only the next inference call.
+The same formulation applies to stage-wise and joint-generation WAMs; in the joint
+case, cross-modal blocks of the clean-endpoint Jacobian transmit a state residual
+directly to action coordinates. Unlike learned residual heads, offset-conditioned
+policies, external dynamics models, or activation controllers, this correction
+uses the frozen WAM's existing differentiable generation interface and introduces
+no additional training.
