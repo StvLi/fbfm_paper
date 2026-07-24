@@ -128,6 +128,9 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 ### Evaluation and reporting
 
 - [ ] Keep Section 4.3 blank until the baseline and ablation design is agreed with the experiment team; only then finalize the compared variants, fairness controls, and feasible component ablations.
+- [x] Record the DreamZero base protocol and suite-level results: SFT step 26,000; all 40 tasks across LIBERO-Spatial, LIBERO-Object, LIBERO-Goal, and LIBERO-10; reset IDs 0--19; 618/800 aggregate successes (77.25%).
+- [ ] Run every DreamZero comparison on the same checkpoint and reset IDs as the base evaluation; retain paired episode outcomes, report absolute percentage-point changes with paired uncertainty, and expand the current baseline table only after RTC/FBFM results are complete.
+- [ ] Add a per-task DreamZero comparison table to the experimental-results appendix after matched FBFM data arrive; do not promote a gain driven only by a small subset of low-baseline tasks into a suite-wide claim.
 - [ ] Obtain the finalized task list from the experiment team and enumerate every evaluated RoboTwin and LIBERO task in Section 4.1; also confirm the corresponding benchmark suite/version and exact LingBot-VA and RLinf DreamZero checkpoint identifiers.
 - [ ] Define all evaluated LIBERO and RoboTwin tasks, benchmark suites and versions, number of trials and seeds, initial-state sampling, success/failure criteria, aggregation, uncertainty reporting, and any excluded or retried runs.
 - [ ] Keep baseline comparisons fair by using matched checkpoints, observations, action horizons, solver budgets, and execution schedules. Define the intended Original WAM, RTC/action-overlap-only, and full FBFM variants precisely, and record the RTC implementation provenance and any adaptation from the LeRobot reference.
