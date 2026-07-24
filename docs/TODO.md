@@ -93,15 +93,15 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 
 ### Reproducibility boundary
 
-- [ ] Report the exact experimental code commits, upstream model versions, checkpoints, dependency environment, accelerator hardware, and random seeds for the Lingbot-VA and DreamZero tracks; retain `3604b457a24485cddf326a997e48955b7ca6b548` as the current theory-audit baseline, not automatically as the final experiment commit.
+- [ ] Report the exact experimental code commits, upstream model versions, checkpoints, dependency environment, accelerator hardware, and random seeds for the Lingbot-VA and DreamZero tracks; use `3ecac79bb1730b426f5338afa32a9e77b4bf74cb` as the current LingBot-VA implementation-audit baseline and retain `3604b457a24485cddf326a997e48955b7ca6b548` only as the earlier theory-audit point, not automatically as the final experiment commit.
 - [ ] Separate base-model preparation from the training-free claim: report each WAM checkpoint's pretraining/post-training or task-fine-tuning data and steps, then verify that adding FBFM keeps that checkpoint frozen and introduces no additional training.
 - [ ] Record the model-specific inference configuration needed to reproduce each result: chunk/state/action horizons and shapes, solver and scheduler type, state/action/joint Flow-Matching step counts, CFG scales if used, precision, and batch settings.
 
 ### Architecture-specific integration
 
-- [ ] For Lingbot-VA, document the state-first/action-second inference order, the corrected-state-context handoff to the action stage, and how late state feedback refreshes that context without presenting cache mechanics as part of the general Method.
-- [ ] Enable and validate previous-action feedback in the Lingbot-VA server path; replace the temporary `None` adapter mode so the reported full method contains both state feedback and previous-action constraints.
-- [ ] Make newly encoded state feedback visible to the currently active Lingbot-VA Flow-Matching solver rather than only to a pre-inference snapshot or the next inference call.
+- [x] For Lingbot-VA, document the state-first/action-second inference order and corrected-state-context handoff to the action stage; keep cache mechanics in Appendix C rather than the general Method.
+- [x] Enable and validate previous-action feedback in the Lingbot-VA server path; the audited FBFM mode contains both dynamic state feedback and the same previous-action constraint used by RTC.
+- [x] Make newly encoded state feedback visible to the currently active Lingbot-VA video Flow-Matching solver at subsequent solver boundaries rather than only to a pre-inference snapshot or the next inference call.
 - [ ] For DreamZero, verify and document the joint \(\mathbf X=[\mathbf Z,\mathbf A]\) ordering, joint target/mask construction, and the direct state-to-action correction through the cross-modal endpoint Jacobian.
 - [ ] Keep all model/checkpoint-specific engineering details in Experiment and Result; Method should retain only the general stage-wise and joint-generation interfaces.
 
@@ -111,6 +111,7 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 - [ ] Report chunk horizon, overlap length, inference-delay assumption, global-time alignment between consecutive chunks, chunk handoff rule, and which preceding-chunk actions form the committed target for the new chunk.
 - [ ] State explicitly that the committed action-overlap target includes both executed and not-yet-executed actions and remains fixed during generation; the execution pointer does not shrink the action mask.
 - [ ] Describe RoboTwin explicitly as pseudo-asynchronous: report the controlled ratio of simulation steps to solver steps, inference trigger, feedback-delivery point, and result-handoff schedule. Do not require wall-clock concurrency as validation of the general Method.
+- [ ] Keep the LingBot-VA evidence boundary explicit: the audited schedule forms its first complete feedback latent at the final executed suffix step, so it affects the last numerical video-flow update before action flow begins; it does not experimentally test feedback arriving after action flow has already started.
 - [ ] Document the realized runtime topology at a high level (simulator/environment loop, policy server/client, feedback buffer or queue, and synchronization boundary), including any communication assumptions that affect feedback timing.
 - [ ] If physical-robot results remain in the paper, separately report the real execution/inference concurrency mechanism, sensor-to-action timing, feedback latency, control rate, safety policy, and deployment hardware.
 - [ ] Specify the synchronization or versioning rule by which feedback arriving before solver evaluation \(k\) becomes visible at that evaluation, including how late feedback updates stage-wise action context.
@@ -134,7 +135,7 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 - [ ] Report task success together with the efficiency cost of FBFM, including inference time or throughput, VJP overhead, peak memory, and effective control/update rate.
 - [ ] Validate the locked OpenReview Abstract claim that FBFM improves success rates by more than 5% on the selected LIBERO and RoboTwin tasks; report the per-task values and the exact baseline used for each improvement.
 - [ ] If physical-robot tracking remains an Abstract claim, define the platform, tasks, trial count, baseline, tracking metric, and quantitative result; otherwise remove or weaken that claim before submission.
-- [ ] Track and close both confirmed issues in `docs/handover.md` before freezing the main Lingbot-VA experiments, and keep any newly confirmed code--theory mismatch equally concise there.
+- [x] Track and close both previously confirmed issues in `docs/handover.md` at implementation-audit commit `3ecac79`; re-open the item if either path is absent from the final experiment commit, and keep any newly confirmed code--theory mismatch equally concise there.
 - [ ] Audit Abstract, Introduction, Method, figures, Experiment and Result, Conclusion, and implementation evidence together after both model tracks stabilize; do not let planned or unverified capabilities appear as completed results.
 
 ## Theory and Limitations

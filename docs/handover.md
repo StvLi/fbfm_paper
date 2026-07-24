@@ -1,22 +1,14 @@
 # FBFM Theory-to-Implementation Handover
 
-本文档仅记录在理论整理过程中经确认的代码与理论不一致问题，供负责代码与实验的同学核查。
+本文档仅记录理论整理过程中经确认的问题及其关闭状态，供负责代码与实验的同学核查。
 
-**代码基线：** `3604b457a24485cddf326a997e48955b7ca6b548`
+**当前审计基线：** FBFM `3ecac79bb1730b426f5338afa32a9e77b4bf74cb`；上游 LingBot-VA `7c6ffa9bfc4b83582cafc860fab4c82cc7deeeeb`。
 
-## 1. Previous-Action Constraint 被临时关闭
+## 当前状态
 
-当前 Lingbot-VA 路径将 previous-action constraint 的模式设为 `None`。该设置仅用于临时调试，不属于 FBFM 的设计。
+此前在 `3604b457a24485cddf326a997e48955b7ca6b548` 确认的两项问题已在当前分支代码路径中关闭：
 
-完整 FBFM 应同时包含：
+1. FBFM 模式已同时启用 dynamic state feedback 和 previous-action constraint；其 action target/mask 与 RTC 模式一致。
+2. 新到达的 state feedback 进入队列，并在后续 video-flow solver 边界更新 active chunk 的 target/mask，而非只在推理开始时读取一次快照。
 
-- state feedback；
-- previous-action constraint。
-
-因此，代码与实验需恢复并验证 previous-action constraint，主方法不应以 `None` 模式为准。
-
-## 2. State Feedback 未实时作用于正在运行的 Flow-Matching Chunk
-
-执行当前 action chunk 时，新获得的真实观测经编码得到 \(z_{t+i}\)。该反馈应实时注入**正在进行 Flow Matching 的当前 chunk**，并影响其后续生成过程，从而实现 chunk 内、step 颗粒度的 state feedback。
-
-当前实现只在推理开始时导出一次反馈快照；推理启动后新到达的 \(z_{t+i}\) 不会更新已传入当前 solver 的副本。因此，现有实现尚未满足上述时序要求。
+以上为代码审计结论。正式实验仍需通过 solver-step 日志和消融结果验证这两条路径在最终实验 commit 中保持生效。当前未记录新的、已经确认但尚未关闭的代码与理论不一致问题。
