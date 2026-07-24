@@ -114,9 +114,9 @@ Related Works 的目标不是证明前人工作“不好”，而是说明每项
 
 ### 4.2 Diffusion and Flow-Matching Policies for Robot Control
 
-从 Diffuser 将 diffusion sampling 用于轨迹规划开始，过渡到 Diffusion Policy 将 action chunk 直接作为条件生成对象，再介绍 RDT 等工作体现的规模扩展。随后明确 diffusion 和 Flow Matching 是相关但不同的连续生成参数化，引用早于 \(\pi_0\) 的 Flow-Matching robot policy，最后说明 \(\pi_0\) 如何把 Flow-Matching action expert 扩展到大规模通用 VLA 并带来高频、灵巧控制性能。
+从 Diffuser 将 diffusion sampling 用于轨迹规划开始，过渡到 Diffusion Policy 将 action chunk 直接作为条件生成对象，再介绍 RDT 等工作体现的规模扩展。随后明确 diffusion 和 Flow Matching 是相关但不同的连续生成参数化，以专用机器人运动策略简要补全 Flow Matching 的发展背景，最后重点说明 \(\pi_0\) 与 \(\pi_{0.5}\) 如何把 Flow-Matching action expert 扩展到大规模通用 VLA，并以高频灵巧控制和开放世界泛化推动这条路线获得广泛认可。
 
-本部分应避免声称 \(\pi_0\) 是第一个机器人 Flow-Matching policy。更准确的贡献是：它是早期将 Flow Matching、action expert 和大规模通用 VLA 结合并展示显著性能跃迁的代表性工作。
+本部分不必围绕“是否首创”组织论述。更有价值的定位是：\(\pi_0\) 与 \(\pi_{0.5}\) 是将 Flow Matching、action expert 和大规模通用 VLA 结合，并以突出应用性能体现该路线现实价值的代表性工作。早期 Flow-Matching robot policies 用于补全发展脉络，而不是与 \(\pi_0\) 展开优先权比较。
 
 ### 4.3 Inference-Time Guidance, Asynchronous Execution, and Feedback
 
@@ -150,7 +150,7 @@ Related Works 的目标不是证明前人工作“不好”，而是说明每项
 
 - [ ] 三个主题是否都服务于 FBFM 的问题定位，而不是平行的领域综述？
 - [ ] 是否解释了 diffusion 与 Flow Matching 的联系和区别？
-- [ ] 是否引用了 \(\pi_0\) 之前的 Flow-Matching robot policy？
+- [ ] 是否用代表性的专用 Flow-Matching robot policies 补全发展脉络，同时将 \(\pi_0/\pi_{0.5}\) 的应用影响作为论述重点？
 - [ ] 是否准确区分 RTC 的 frozen prefix、soft overlap 和 free suffix？
 - [ ] 是否区分了 RA-DP 的 training-free guidance 与专门训练的 action queue？
 - [ ] 是否将 Feedback World Model 的证明准确表述为 observer convergence？

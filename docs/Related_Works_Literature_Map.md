@@ -70,8 +70,8 @@
 
 1. 生成模型何时从图像生成进入 trajectory planning 和 visuomotor action generation？
 2. Diffusion Policy、Flow-Matching policy 与 autoregressive VLA 的关系是什么？
-3. 哪些机器人 Flow-Matching policy 早于 \(\pi_0\)，从而避免错误的首创性声明？
-4. \(\pi_0\) 的真正贡献应如何表述：不是最早使用 Flow Matching，而是把 Flow-Matching action expert、通用 VLA 和大规模数据结合并展示性能跃迁。
+3. Flow Matching 如何从专用机器人运动策略发展到大规模通用 VLA action expert？
+4. \(\pi_0\) 与 \(\pi_{0.5}\) 的应用性能和广泛影响，如何体现 Flow Matching 作为连续机器人动作生成路线的现实价值与可扩展性？
 
 ### 2.2 候选文献
 
@@ -89,7 +89,7 @@
 | B | Brohan et al., *RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control*, 2023 | VLA 利用互联网语义知识进行动作预测 | RTC 原文已核 |
 | B | Octo Model Team et al., *Octo: An Open-Source Generalist Robot Policy*, 2024 | 通用 action-chunk policy 和大规模跨 embodiment 数据背景 | RTC 原文已核 |
 | B | Kim et al., *OpenVLA: An Open-Source Vision-Language-Action Model*, 2024 | autoregressive VLA 的开源代表，与 continuous generative action expert 对照 | RTC 原文已核 |
-| A | Braun et al., *Riemannian Flow Matching Policy for Robot Motion Learning*, 2024, arXiv:2403.10672 | 明确证明 \(\pi_0\) 之前已有机器人 Flow-Matching policy | 原文摘要、元数据与 IROS 2024 信息已核 |
+| A | Braun et al., *Riemannian Flow Matching Policy for Robot Motion Learning*, 2024, arXiv:2403.10672 | 补全 Flow Matching 在专用机器人运动策略中的早期发展与几何建模路径 | 原文摘要、元数据与 IROS 2024 信息已核 |
 | B | Rouxel et al., *Flow Matching Imitation Learning for Multi-Support Manipulation*, 2024, arXiv:2407.12381 | Flow Matching 在连续机器人动作模仿中的早期扩展 | 原文摘要、元数据与 Humanoids 2024 信息已核 |
 | B | Zhang and Gienger, *Affordance-based Robot Manipulation with Flow Matching*, 2025, arXiv:2409.01083 | Flow Matching 与 affordance-conditioned manipulation | 原文摘要与元数据已核 |
 | B | Ding et al., *Fast and Robust Visuomotor Riemannian Flow Matching Policy*, 2024/2025, arXiv:2412.10855 | RFMP 从 proof-of-concept 向更强 visuomotor policy 扩展 | 元数据已核；全文待审 |
@@ -102,7 +102,7 @@
 
 ### 2.3 预期写作链
 
-建议使用三个连续段落。第一段为 Diffuser → Diffusion Policy → DP3/RDT，说明 diffusion 从 trajectory model 发展为可扩展 action generator。第二段用 RT-1/RT-2/Octo/OpenVLA 交代 generalist policy 的数据、cross-embodiment 与 VLM scaling 背景。第三段先引用 RFMP 等早期 Flow-Matching robot policies，再定位 \(\pi_0\) 和 \(\pi_0.5\)：它们将 Flow-Matching action chunks 放入大规模 VLA action expert，并以整合式架构和训练方案带来高频灵巧控制与开放世界泛化。
+建议使用三个连续段落。第一段为 Diffuser → Diffusion Policy → DP3/RDT，说明 diffusion 从 trajectory model 发展为可扩展 action generator。第二段用 RT-1/RT-2/Octo/OpenVLA 交代 generalist policy 的数据、cross-embodiment 与 VLM scaling 背景。第三段先以 RFMP 等工作简要补全 Flow Matching 在专用机器人运动策略中的发展，再重点定位 \(\pi_0\) 和 \(\pi_0.5\)：它们将 Flow-Matching action chunks 扩展到大规模通用 VLA，并以高频灵巧控制和开放世界泛化的应用效果推动这条技术路线获得广泛认可。由此自然引出 FBFM 对 Flow-Matching action generation 执行期反馈的关注。
 
 ## 3. Inference-Time Guidance, Asynchronous Execution, and Feedback
 
