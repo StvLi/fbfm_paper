@@ -102,6 +102,7 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 - [x] For Lingbot-VA, document the state-first/action-second inference order and corrected-state-context handoff to the action stage; keep cache mechanics in Appendix C rather than the general Method.
 - [x] Enable and validate previous-action feedback in the Lingbot-VA server path; the audited FBFM mode contains both dynamic state feedback and the same previous-action constraint used by RTC.
 - [x] Make newly encoded state feedback visible to the currently active Lingbot-VA video Flow-Matching solver at subsequent solver boundaries rather than only to a pre-inference snapshot or the next inference call.
+- [ ] Keep the DreamZero part of Section 4.2 blank until the joint-generation FBFM implementation is complete; then audit the final branch before documenting its feedback schedule, joint target/mask construction, cross-modal correction path, and frozen-parameter boundary.
 - [ ] For DreamZero, verify and document the joint \(\mathbf X=[\mathbf Z,\mathbf A]\) ordering, joint target/mask construction, and the direct state-to-action correction through the cross-modal endpoint Jacobian.
 - [ ] Keep all model/checkpoint-specific engineering details in Experiment and Result; Method should retain only the general stage-wise and joint-generation interfaces.
 
@@ -126,6 +127,7 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 
 ### Evaluation and reporting
 
+- [ ] Keep Section 4.3 blank until the baseline and ablation design is agreed with the experiment team; only then finalize the compared variants, fairness controls, and feasible component ablations.
 - [ ] Obtain the finalized task list from the experiment team and enumerate every evaluated RoboTwin and LIBERO task in Section 4.1; also confirm the corresponding benchmark suite/version and exact LingBot-VA and RLinf DreamZero checkpoint identifiers.
 - [ ] Define all evaluated LIBERO and RoboTwin tasks, benchmark suites and versions, number of trials and seeds, initial-state sampling, success/failure criteria, aggregation, uncertainty reporting, and any excluded or retried runs.
 - [ ] Keep baseline comparisons fair by using matched checkpoints, observations, action horizons, solver budgets, and execution schedules. Define the intended Original WAM, RTC/action-overlap-only, and full FBFM variants precisely, and record the RTC implementation provenance and any adaptation from the LeRobot reference.

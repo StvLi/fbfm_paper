@@ -69,9 +69,12 @@ evaluations for every compared method; it does not derive method timing from
 wall-clock latency. Appendix C provides the tensor alignment, cache lifecycle,
 and numerical schedule used by this implementation.
 
-<!-- TODO(experiments): Add the joint-generation DreamZero instantiation after
-its final implementation and schedule have been audited. -->
+<!-- TODO(experiments): Leave the joint-generation DreamZero instantiation blank
+until its FBFM implementation is complete. Audit the final code, feedback
+schedule, joint target/mask construction, and frozen-parameter boundary before
+adding any paper claim. -->
 
 ## Baselines and Ablations
 
-<!-- Content to be developed. -->
+<!-- TODO(experiments): Leave this subsection blank until the baseline and
+ablation design has been agreed with the experiment team. -->
