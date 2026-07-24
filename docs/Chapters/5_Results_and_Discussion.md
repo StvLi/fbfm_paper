@@ -4,15 +4,15 @@
 checkpoint before adding FBFM. The suite-level summary below covers all 800
 base-model episodes.
 The checkpoint succeeds in 618 episodes, corresponding to an aggregate success
-rate of 77.25% and a 95% Wilson interval of \([74.22,80.02]\%\).
+rate of 77.25%.
 
-| Suite | Success / Trials | Success Rate | 95% Wilson CI |
-| --- | ---: | ---: | ---: |
-| LIBERO-Spatial | 181 / 200 | 90.50% | [85.64, 93.83]% |
-| LIBERO-Object | 181 / 200 | 90.50% | [85.64, 93.83]% |
-| LIBERO-Goal | 114 / 200 | 57.00% | [50.07, 63.67]% |
-| LIBERO-10 | 142 / 200 | 71.00% | [64.36, 76.85]% |
-| **Aggregate** | **618 / 800** | **77.25%** | **[74.22, 80.02]%** |
+| Suite | Success / Trials | Success Rate |
+| --- | ---: | ---: |
+| LIBERO-Spatial | 181 / 200 | 90.50% |
+| LIBERO-Object | 181 / 200 | 90.50% |
+| LIBERO-Goal | 114 / 200 | 57.00% |
+| LIBERO-10 | 142 / 200 | 71.00% |
+| **Aggregate** | **618 / 800** | **77.25%** |
 
 The aggregate masks substantial task heterogeneity. Spatial and object
 generalization both reach 90.5%, whereas LIBERO-Goal falls to 57.0%; five of its

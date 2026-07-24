@@ -9,28 +9,27 @@
 We first characterize the frozen DreamZero checkpoint before adding FBFM.
 Table~\ref{tab:dreamzero-libero-base} summarizes all 800 base-model episodes.
 The checkpoint succeeds in 618 episodes, corresponding to an aggregate success
-rate of 77.25\% and a 95\% Wilson interval of $[74.22,80.02]\%$.
+rate of 77.25\%.
 
 \begin{table}[H]
     \centering
     \scriptsize
     \renewcommand{\arraystretch}{1.08}
-    \begin{tabular}{lrrr}
+    \begin{tabular}{lrr}
         \hline
         \textbf{Suite} & \textbf{Success} &
-        \textbf{SR (\%)} & \textbf{95\% CI}\\
+        \textbf{SR (\%)}\\
         \hline
-        Spatial & 181/200 & 90.50 & [85.64, 93.83]\\
-        Object & 181/200 & 90.50 & [85.64, 93.83]\\
-        Goal & 114/200 & 57.00 & [50.07, 63.67]\\
-        LIBERO-10 & 142/200 & 71.00 & [64.36, 76.85]\\
+        Spatial & 181/200 & 90.50\\
+        Object & 181/200 & 90.50\\
+        Goal & 114/200 & 57.00\\
+        LIBERO-10 & 142/200 & 71.00\\
         \hline
         \textbf{Aggregate} & \textbf{618/800} &
-        \textbf{77.25} & \textbf{[74.22, 80.02]}\\
+        \textbf{77.25}\\
         \hline
     \end{tabular}
-    \caption{DreamZero base checkpoint (SFT step 26,000) on LIBERO. Confidence
-    intervals are binomial Wilson intervals.}
+    \caption{DreamZero base checkpoint (SFT step 26,000) on LIBERO.}
     \label{tab:dreamzero-libero-base}
 \end{table}
 
