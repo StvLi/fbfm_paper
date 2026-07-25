@@ -1,4 +1,4 @@
-# LaTeX build output
+# LaTeX build output (all preview builds belong in docs/build/)
 docs/build/
 docs/*.aux
 docs/*.fdb_latexmk
@@ -9,8 +9,17 @@ docs/*.synctex.gz
 docs/*.toc
 docs/*.bbl
 docs/*.blg
+docs/*.bcf
+docs/*.run.xml
+docs/*.nav
+docs/*.snm
+docs/*.vrb
+docs/*.xdv
 docs/preview.pdf
 
 # Editor and OS noise
 *~
+*.swp
+*.swo
 .DS_Store
+Thumbs.db
