@@ -93,7 +93,7 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 
 ### Reproducibility boundary
 
-- [ ] Report the exact experimental code commits, upstream model versions, checkpoints, dependency environment, accelerator hardware, and random seeds for the Lingbot-VA and DreamZero tracks; use `3ecac79bb1730b426f5338afa32a9e77b4bf74cb` as the current LingBot-VA implementation-audit baseline and retain `3604b457a24485cddf326a997e48955b7ca6b548` only as the earlier theory-audit point, not automatically as the final experiment commit.
+- [ ] Freeze and report the exact revisions used for the final tables, together with upstream model versions, checkpoint artifact identifiers, dependency environments, accelerator hardware, and random seeds. The current implementation audits use LingBot-VA/RoboTwin commit `e482dccb6841f3a2bea73128e05b0954371ee9be` and DreamZero/LIBERO commit `a7dcd4a4bbf69709c038fb433bbc1cf42b029f63`; retain `3604b457a24485cddf326a997e48955b7ca6b548` only as the earlier theory-audit point.
 - [ ] Separate base-model preparation from the training-free claim: report each WAM checkpoint's pretraining/post-training or task-fine-tuning data and steps, then verify that adding FBFM keeps that checkpoint frozen and introduces no additional training.
 - [ ] Record the model-specific inference configuration needed to reproduce each result: chunk/state/action horizons and shapes, solver and scheduler type, state/action/joint Flow-Matching step counts, CFG scales if used, precision, and batch settings.
 
@@ -102,27 +102,27 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 - [x] For Lingbot-VA, document the state-first/action-second inference order and corrected-state-context handoff to the action stage; keep cache mechanics in Appendix C rather than the general Method.
 - [x] Enable and validate previous-action feedback in the Lingbot-VA server path; the audited FBFM mode contains both dynamic state feedback and the same previous-action constraint used by RTC.
 - [x] Make newly encoded state feedback visible to the currently active Lingbot-VA video Flow-Matching solver at subsequent solver boundaries rather than only to a pre-inference snapshot or the next inference call.
-- [ ] Keep the DreamZero part of Section 4.2 blank until the joint-generation FBFM implementation is complete; then audit the final branch before documenting its feedback schedule, joint target/mask construction, cross-modal correction path, and frozen-parameter boundary.
-- [ ] For DreamZero, verify and document the joint \(\mathbf X=[\mathbf Z,\mathbf A]\) ordering, joint target/mask construction, and the direct state-to-action correction through the cross-modal endpoint Jacobian.
-- [ ] Keep all model/checkpoint-specific engineering details in Experiment and Result; Method should retain only the general stage-wise and joint-generation interfaces.
+- [x] Audit and document the DreamZero joint-generation FBFM implementation in Section 4.2 and Appendix C, including its feedback schedule, joint target/mask construction, cross-modal correction path, and frozen-parameter boundary.
+- [x] For DreamZero, verify and document the joint \(\mathbf X=[\mathbf Z,\mathbf A]\) ordering, joint target/mask construction, and the direct state-to-action correction through the cross-modal endpoint Jacobian.
+- [x] Keep all model/checkpoint-specific engineering details in Experiment and Appendix C; Method retains only the general stage-wise and joint-generation interfaces.
 
 ### Temporal and data alignment
 
 - [ ] Report action/control frequency, sensor frequency, observation-window construction, encoder/latent temporal downsampling, actions per latent-state slot, and the exact mapping among raw observations, \(z_{t+i}\), feedback slots, and low-level actions.
 - [ ] Report chunk horizon, overlap length, inference-delay assumption, global-time alignment between consecutive chunks, chunk handoff rule, and which preceding-chunk actions form the committed target for the new chunk.
 - [ ] State explicitly that the committed action-overlap target includes both executed and not-yet-executed actions and remains fixed during generation; the execution pointer does not shrink the action mask.
-- [ ] Describe RoboTwin explicitly as pseudo-asynchronous: report the controlled ratio of simulation steps to solver steps, inference trigger, feedback-delivery point, and result-handoff schedule. Do not require wall-clock concurrency as validation of the general Method.
-- [ ] Keep the LingBot-VA evidence boundary explicit: the audited schedule forms its first complete feedback latent at the final executed suffix step, so it affects the last numerical video-flow update before action flow begins; it does not experimentally test feedback arriving after action flow has already started.
-- [ ] Document the realized runtime topology at a high level (simulator/environment loop, policy server/client, feedback buffer or queue, and synchronization boundary), including any communication assumptions that affect feedback timing.
+- [x] Describe RoboTwin explicitly as pseudo-asynchronous: report the controlled ratio of simulation steps to solver steps, inference trigger, feedback-delivery point, and result-handoff schedule. Do not require wall-clock concurrency as validation of the general Method.
+- [x] Keep the LingBot-VA evidence boundary explicit: the audited schedule forms its first complete feedback latent at the final executed suffix step, so it affects the last numerical video-flow update before action flow begins; it does not experimentally test feedback arriving after action flow has already started.
+- [x] Document the realized runtime topology at a high level (simulator/environment loop, policy server/client, feedback buffer or queue, and synchronization boundary), including any communication assumptions that affect feedback timing.
 - [ ] If physical-robot results remain in the paper, separately report the real execution/inference concurrency mechanism, sensor-to-action timing, feedback latency, control rate, safety policy, and deployment hardware.
 - [ ] Specify the synchronization or versioning rule by which feedback arriving before solver evaluation \(k\) becomes visible at that evaluation, including how late feedback updates stage-wise action context.
 
 ### Feedback and guidance implementation
 
-- [ ] Document the observation/sensor and encoder path used to construct latent state feedback, including the implemented interpretation of \(h\) and \(h^\dagger\) and the aligned-coordinate approximation \(h^\dagger(h(\hat{\mathbf X}))\approx\hat{\mathbf X}\).
-- [ ] Report how \(\mathbf Y_{t,k}^Z\) and the dynamic state mask \(\mathbf W_{t,k}^Z\) are initialized, aligned, refreshed, and retained at every solver evaluation.
-- [ ] Report how \(\mathbf Y_t^A\) and \(\mathbf W_t^A\) are constructed from the preceding chunk. State explicitly that the experiments evaluate hard action-prefix masking only, while Method gives the third, generalized weighting formulation.
-- [ ] Report all guidance and numerical settings: \(\lambda_\tau\) schedule, maximum guidance weight/clipping, state/action modality weights, solver-step placement of the VJP, and any stability safeguards.
+- [x] Document the observation/sensor and encoder path used to construct latent state feedback, including the implemented interpretation of \(h\) and \(h^\dagger\) and the aligned-coordinate approximation \(h^\dagger(h(\hat{\mathbf X}))\approx\hat{\mathbf X}\).
+- [x] Report how \(\mathbf Y_{t,k}^Z\) and the dynamic state mask \(\mathbf W_{t,k}^Z\) are initialized, aligned, refreshed, and retained at every solver evaluation.
+- [x] Report how \(\mathbf Y_t^A\) and \(\mathbf W_t^A\) are constructed from the preceding chunk. State explicitly that the current experiments realize hard action-prefix masking, while Method gives the generalized weighting formulation.
+- [x] Report all guidance and numerical settings: \(\lambda_\tau\) schedule, maximum guidance weight/clipping, state/action modality weights, solver-step placement of the VJP, and numerical safeguards.
 - [ ] Log enough internal evidence to verify the claimed mechanism: inference/chunk id, solver-step id, feedback version, activated state/action slots, masks, and state/action correction norms. For the joint model, verify a state-only residual can produce a nonzero action-coordinate correction.
 
 ### Evaluation and reporting
