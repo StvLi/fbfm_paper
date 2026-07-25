@@ -40,59 +40,44 @@ exact artifact identifier for the DreamZero step-26,000 checkpoint. -->
 
 For both tracks, FBFM is inserted only at inference time. We retain the
 checkpoint, native solver and cache schedule, classifier-free guidance, and
-chunk dimensions of each WAM; all pretrained parameters remain frozen. The
-environment and model server are coupled by a deterministic pseudo-asynchronous
-clock: executing one part of the preceding chunk releases a prescribed number
-of solver evaluations for the active chunk. This controls the relative timing
-of feedback across compared modes without conflating the method with
-machine-dependent wall-clock latency.
+chunk dimensions of each WAM, with all pretrained parameters frozen. A
+deterministic pseudo-asynchronous clock couples environment transitions to
+solver evaluations, controlling feedback timing independently of wall-clock
+latency.
 
 **Stage-wise generation: LingBot-VA.** We preserve the released video-first,
-action-second inference order. Each chunk contains two predicted video-latent
-slots and 32 low-level actions, with inference-delay and execution horizons
-\(d=s=16\). While the 16-action suffix of the preceding chunk is executed in
-RoboTwin, observations from the three cameras are encoded by the frozen
-streaming VAE and inserted into time-aligned slots of the active video flow.
-The state target and mask are versioned, and each video-solver evaluation uses
-the latest available version. We use 25 numerical video-flow updates and 50
-numerical action-flow updates, retaining LingBot-VA's final cache-only call in
-each stage.
-
-The corrected video trajectory is then supplied through LingBot-VA's native
-prediction context to the action stage. Independently, the preceding action
-suffix is mapped back to the checkpoint's normalized coordinates and imposed
-as a fixed prefix target on the new action flow. State feedback therefore
-reaches the action prediction through the corrected intermediate state
-context, whereas action continuity is constrained directly in action
-coordinates. No backbone, encoder, or decoder weights are updated.
+action-second inference order. While the preceding action suffix is executed,
+frozen-VAE observations update time-aligned constraints in the active video
+flow. The corrected video context then conditions action generation, while the
+same preceding suffix provides a fixed action-prefix constraint.
 
 **Joint generation: DreamZero.** We retain DreamZero's joint state--action
-solver and apply one endpoint VJP to the concatenated flow variables at each
-native DiT evaluation. The state and action discrepancies are differentiated
-together with respect to both noisy inputs. Consequently, the cross-modal
-blocks of the clean-endpoint Jacobian are preserved, allowing an observed
-state residual to correct action coordinates directly rather than only through
-a subsequent generation stage.
+solver and apply one joint endpoint VJP at each native DiT evaluation. State
+and action residuals are differentiated with respect to both noisy inputs, so
+the cross-modal endpoint Jacobian permits state feedback to correct action
+coordinates directly. Per-action observations causally refresh the first
+future state slot while the preceding actions remain a fixed prefix target.
 
-DreamZero predicts \(H=16\) actions and two future latent slots. We set
-\(d=s=8\), preserve its 16-step UniPC schedule and eight native DiT
-evaluations, and release one DiT evaluation after each executed action. Each
-new observation refreshes a causal target for the first future latent slot;
-incomplete four-frame encoder windows are completed by holding the latest
-observation forward until the full window becomes available. The fixed action
-constraint covers the first \(8\times7=56\) valid action coordinates. We set
-the state-mask weight to \(56/9600\), balancing its aggregate coordinate weight
-with the active action block, and clip the guidance coefficient at
-\(\beta=10\). Appendix C gives the tensor alignment, rolling encoder, cache
-separation, and exact schedules for both instantiations.
+| Setting | LingBot-VA | DreamZero |
+|---|---:|---:|
+| Generation factorization | Stage-wise | Joint |
+| \((H,d,s)\) | \((32,16,16)\) | \((16,8,8)\) |
+| Predicted state slots | 2 | 2 |
+| Numerical solver evaluations | 25 state / 50 action | 8 DiT within 16 UniPC steps |
+| Pseudo-clock release | 26 video calls / 16 actions | 8 DiT calls / 8 actions |
+| State-target refresh | 4 sampled observations / latent | Every executed action |
+| State-mask weight | \(1\) | \(56/9600\) |
+| Guidance clip \(\beta\) | 10 | 10 |
+| Precision | BF16 | BF16 |
+
+*The LingBot-VA pseudo-clock count includes its final cache-only video call.*
 
 The implementation exposes a common mask-controlled path for later controlled
-comparisons: the unguided mode zeros both masks, the action-only mode retains
-only the preceding-action mask, and full FBFM activates both the action and
-dynamic state masks. Within each architecture, these modes share the same
-checkpoint, noise initialization, solver budget, and pseudo-clock. DreamZero's
-native synchronous rollout is recorded separately from this matched
-pseudo-asynchronous unguided control.
+comparisons. Within each architecture, the unguided, action-only, and full FBFM
+modes share the checkpoint, noise, solver budget, and pseudo-clock, differing
+only in their active masks. DreamZero's native synchronous rollout is recorded
+separately. Appendix C provides tensor alignment, cache separation, rolling
+encoding, and exact solver schedules.
 
 ## Baselines and Ablations
 
