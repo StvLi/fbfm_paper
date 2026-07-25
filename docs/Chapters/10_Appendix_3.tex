@@ -6,15 +6,23 @@
 
 \subsection{Audited Boundary and Common Controls}
 
-The implementation described here was audited in the LingBot-VA/RoboTwin
-repository at commit \texttt{e482dcc} and in the DreamZero/LIBERO repository at
-commit \texttt{a7dcd4a}. The exact revisions used to produce the final reported
-tables must match these audited snapshots. Both routes use BF16 inference and
-retain their pretrained transformer, VAE, text encoder,
-classifier-free guidance, scheduler, and cache behavior. FBFM adds no learned
-module. Gradients are enabled only for the current noisy sample while computing
-an endpoint VJP, and every corrected velocity and solver sample is detached
-before the next step.
+The DreamZero integration has two published source snapshots. The canonical
+implementation is on branch \texttt{fix/dreamzero-rolling-feedback} at commit
+\texttt{5300093}; the standalone A6000 deployment used by the ongoing LIBERO
+experiment is on branch \texttt{runnable-dreamzero-fbfm-libero} at commit
+\texttt{a7dcd4a}. The latter is the reference implementation for the DreamZero
+results. The default \texttt{main} branch does not contain the causal rolling
+FBFM path and must not be used to reproduce this track.
+
+The LingBot-VA/RoboTwin implementation was audited from the current experiment
+worktree based on commit \texttt{e482dcc}. Its run-specific launcher and
+task-manifest changes are still under validation and have not yet been frozen
+into a published commit; the final result artifacts must record that eventual
+revision. Both routes use BF16 inference and retain their pretrained
+transformer, VAE, text encoder, classifier-free guidance, scheduler, and cache
+behavior. FBFM adds no learned module. Gradients are enabled only for the
+current noisy sample while computing an endpoint VJP, and every corrected
+velocity and solver sample is detached before the next step.
 
 Each route exposes one solver path with three mask settings. The \texttt{NONE}
 mode zeros the state and action masks, \texttt{RTC} retains only the

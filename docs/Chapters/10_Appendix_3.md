@@ -2,13 +2,23 @@
 
 ## Audited Boundary and Common Controls
 
-The implementation described here was audited in the LingBot-VA/RoboTwin
-repository at commit `e482dccb6841f3a2bea73128e05b0954371ee9be` and in the
-DreamZero/LIBERO repository at commit
-`a7dcd4a4bbf69709c038fb433bbc1cf42b029f63`. The exact revisions used to
-produce the reported tables must match these audited snapshots. Both routes
-use BF16 inference and retain their pretrained transformer, VAE, text encoder,
-classifier-free guidance, scheduler, and cache behavior.
+The DreamZero integration has two published source snapshots. The canonical
+implementation is on branch `fix/dreamzero-rolling-feedback` at commit
+`5300093a85f412c10479a25f7179b8482130b83d`; the standalone A6000 deployment
+used by the ongoing LIBERO experiment is on branch
+`runnable-dreamzero-fbfm-libero` at commit
+`a7dcd4a4bbf69709c038fb433bbc1cf42b029f63`. The latter is the reference
+implementation for the DreamZero results. The default `main` branch does not
+contain the causal rolling FBFM path and must not be used to reproduce this
+track.
+
+The LingBot-VA/RoboTwin implementation was audited from the current experiment
+worktree based on commit `e482dccb6841f3a2bea73128e05b0954371ee9be`. Its
+run-specific launcher and task-manifest changes are still under validation and
+have not yet been frozen into a published commit; the final result artifacts
+must record that eventual revision. Both routes use BF16 inference and retain
+their pretrained transformer, VAE, text encoder, classifier-free guidance,
+scheduler, and cache behavior.
 FBFM adds no learned module. Gradients are enabled only for the current noisy
 sample while computing an endpoint VJP, and every corrected velocity and solver
 sample is detached before the next step.
