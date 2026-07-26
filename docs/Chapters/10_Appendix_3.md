@@ -2,15 +2,14 @@
 
 ## Audited Boundary and Common Controls
 
-The DreamZero integration has two published source snapshots. The canonical
-implementation is on branch `fix/dreamzero-rolling-feedback` at commit
-`5300093a85f412c10479a25f7179b8482130b83d`; the standalone A6000 deployment
-used by the ongoing LIBERO experiment is on branch
-`runnable-dreamzero-fbfm-libero` at commit
-`a7dcd4a4bbf69709c038fb433bbc1cf42b029f63`. The latter is the reference
-implementation for the DreamZero results. The default `main` branch does not
-contain the causal rolling FBFM path and must not be used to reproduce this
-track.
+The corrected DreamZero integration is on branch
+`experiment/dreamzero-l1mass-state-weight`. Its numerical implementation is
+frozen at commit `cb08c9e552730d26cc446885e79a3e270a270d0c`, with the associated
+audit and implementation record at commit
+`0f2cc4f133532af16841b3698e7cc7a036cecdee`. These revisions supersede the
+earlier A6000 snapshot `a7dcd4a4bbf69709c038fb433bbc1cf42b029f63` for all DreamZero
+implementation claims. The default `main` branch does not contain this
+corrected path and must not be used to reproduce the track.
 
 The LingBot-VA/RoboTwin implementation was audited from the current experiment
 worktree based on commit `e482dccb6841f3a2bea73128e05b0954371ee9be`. Its
@@ -115,67 +114,90 @@ contains \(8\times7=56\) scalar coordinates. During the eight-action overlap,
 real observations support the first of the two future latent slots, containing
 \(48\times10\times20=9600\) coordinates.
 
-The hook reconstructs the conditional clean endpoints in DreamZero's
-decreasing-noise convention,
+Let UniPC index \(j\) be served by the most recent native DiT evaluation \(k\),
+which supplies the unguided joint velocity \(\mathbf v_k\) and clean-endpoint
+Jacobian \(\mathbf J_k\). In DreamZero's decreasing-noise convention, the
+runtime computes
 
 \[
-\hat{\mathbf Z}^{1}=\mathbf Z^{\sigma}-\sigma\mathbf v_Z,
+\hat{\mathbf X}_j^1
+=\mathbf X_j^{\sigma_j}-\sigma_j\mathbf v_k,
 \qquad
-\hat{\mathbf A}^{1}=\mathbf A^{\sigma}-\sigma\mathbf v_A.
+\mathbf e_j
+=\mathbf P\mathbf W_j(\mathbf Y_j-\hat{\mathbf X}_j^1),
 \]
-
-It forms the state and action residuals together and requests one VJP with
-respect to both \(\mathbf Z^{\sigma}\) and \(\mathbf A^{\sigma}\). This single
-joint differentiation retains the cross-modal Jacobian blocks: even with an
-action residual of zero, the state residual may produce a nonzero correction
-in action coordinates. The corrected fields are
 
 \[
-(\tilde{\mathbf v}_Z,\tilde{\mathbf v}_A)
-=
-(\mathbf v_Z,\mathbf v_A)-\lambda_\sigma(\mathbf g_Z,\mathbf g_A),
+\mathbf g_j=\mathbf J_k^{\mathsf T}\mathbf e_j,
+\qquad
+\tilde{\mathbf v}_j
+=\mathbf v_k-\lambda(\sigma_j)\mathbf g_j.
 \]
 
-where \(\tau=1-\sigma\),
-\(r^2=\sigma^2/(\tau^2+\sigma^2)\), and
-\(\lambda_\sigma=\min\{\sigma/(\tau r^2),\beta\}\) with \(\beta=10\).
-We multiply every active state-mask coordinate by \(56/9600\), so one observed
-state block and the action block each contribute an aggregate mask weight of
-56 before their data-dependent residuals and Jacobians are applied. Schedule
-scalars are evaluated in at least FP32, corrected fields are checked for finite
-values, and outputs are detached immediately.
+Here \(\mathbf X=[\mathbf Z,\mathbf A]\),
+\(\mathbf J_k=\partial\hat{\mathbf X}_k^1/
+\partial\mathbf X_k^{\sigma_k}\), \(\mathbf W_j\) is the binary state--action
+support mask, and \(\mathbf P\) is a separate block-diagonal modality
+preconditioner. The residual and VJP are formed jointly with respect to the
+state and action samples. This retains the cross-modal Jacobian blocks:
+even with an action residual of zero, a state residual may produce a nonzero
+correction in action coordinates.
+
+At each native DiT evaluation, \(\mathbf v_k\) and \(\mathbf J_k\) are
+refreshed. At skipped DiT indices, only these two native quantities are reused;
+the endpoint, residual, VJP, guidance coefficient, and guided field are
+recomputed from the current sample and \(\sigma_j\). The solver cache therefore
+never stores or recursively propagates \(\tilde{\mathbf v}_j\). We use
+\(\tau=1-\sigma\), \(r^2=\sigma^2/(\tau^2+\sigma^2)\), and
+\(\lambda(\sigma)=\min\{\sigma/(\tau r^2),\beta\}\) with \(\beta=10\).
+
+The action block uses \(P_A=1\). The current experiment uses
+\(P_Z=56/9600=0.0058333333\), which equalizes the L1 mass of the 56 active
+action coordinates and 9,600 state coordinates. This is an engineering
+preconditioner, not a theoretically optimal modality weight. The RMS-balanced
+value \(\sqrt{56/9600}=0.0763763\) and the unbalanced value \(1\) remain
+explicit ablations. Although the implementation applies \(P_Z\) by scaling the
+stored state-mask tensor, \(\mathbf W_j\) and \(\mathbf P\) are conceptually
+distinct. Schedule scalars are evaluated in at least FP32, outputs are checked
+for finite values, and guided fields are detached after the current update.
 
 ### Rolling Causal State Target
 
-DreamZero's causal VAE uses an anchor plus four future image samples to encode
-one future latent. One latent corresponds to eight actions, so complete samples
-occur at action offsets \(2,4,6,8\). Nevertheless, the state target is refreshed
-after every executed action. Until all four samples are observed, the latest
-real image is held forward in the missing positions. For example, the source
-offsets begin as \([0,1,1,1,1]\) and end as the fully observed
-\([0,2,4,6,8]\). The provisional target is causal at every release and equals
-the native complete-window encoding at offset 8. Each refresh increments the
-constraint version and overwrites the first latent slot; the second slot
-remains unmasked because the evaluated overlap provides no real measurements
-for it.
+DreamZero's causal VAE uses an anchor plus four temporally sampled images to
+encode one future latent. The LIBERO checkpoint was trained with a three-action
+video stride. The runtime retains every newly observed image in causal order,
+but refreshes the hard latent target only at offsets aligned with this stride.
+Missing left history is padded with the measured launch anchor; an observed
+image is never copied forward into an unobserved future position. The first two
+windows available during an eight-action overlap are therefore
+\([0,0,0,0,3]\) after action 3 and \([0,0,0,3,6]\) after action 6. Only these
+two offsets refresh the first latent slot in the evaluated wave; the second
+slot remains unmasked because the overlap provides no aligned measurement for
+it.
 
 Rolling feedback history is deliberately separate from the model's causal
 inference history. The latter uses a one-frame warm-up and then the most recent
 four chunk-level inference anchors, padding early history with the oldest
-available frame. Per-action observations update only the active FBFM target and
-do not advance the solver-start causal/KV history.
+available frame. Per-action observations enter only the rolling feedback
+history; a stride-aligned window updates the active FBFM target, and neither
+operation advances the solver-start causal/KV history.
 
 ### Native Solver Schedule and Chunk Handoff
 
 We use \(d=s=8\). DreamZero retains its 16-step UniPC scheduler and released
-DiT cache mask, which evaluates the DiT eight times. The integration hooks only
-these eight native evaluations; cache updates and skipped scheduler positions
-follow the released path unchanged. After each committed action is executed,
-the client submits its new observation and releases one DiT evaluation. The
-solver drains feedback, snapshots the new version, applies joint guidance, and
-signals completion before the next environment transition. After eight
-releases, the generated suffix at positions 8--15 becomes the execution chunk
-for the next wave.
+DiT cache mask, which evaluates the DiT and refreshes the endpoint Jacobian
+eight times. A scheduler callback applies guidance to every UniPC update
+without replacing the native velocities stored in `prev_predictions`. At a
+skipped DiT index, the callback reuses the latest native velocity and Jacobian
+but recomputes the endpoint residual and VJP for the current update.
+
+After each committed action is executed, the client submits its observation
+and releases one native DiT block. One block may cover multiple UniPC indices;
+eight action releases expose all eight DiT/Jacobian refreshes and all 16 guided
+UniPC updates. The observation is retained immediately, while the hard state
+target changes only when its offset reaches the three-action encoder stride.
+After the eight releases, the generated suffix at positions 8--15 becomes the
+execution chunk for the next wave.
 
 The native synchronous DreamZero control is kept distinct from the matched
 pseudo-asynchronous modes: it replans from the latest observation, executes the
@@ -187,7 +209,11 @@ same eight-action overlap protocol and differ only through their masks.
 
 Both routes record the chunk and solver-step identifiers, constraint version,
 active mask sizes, feedback offsets, endpoint errors, state/action correction
-norms, guidance weight, and GPU memory. Solver outputs are rejected if they
-contain non-finite values. These records are used to verify that feedback is
-visible at the claimed evaluation boundary and, for DreamZero, that a
-state-active joint VJP can generate a nonzero action-coordinate correction.
+norms, guidance weight, and GPU memory. DreamZero additionally records the
+UniPC index and whether its endpoint Jacobian was refreshed or reused. Solver
+outputs are rejected if they contain non-finite values. These records are used
+to verify stride-aligned target activation, the native-only velocity-cache
+invariant, and that a state-active joint VJP can generate a nonzero
+action-coordinate correction. Because a reused Jacobian is only a local
+linearization, trust-region, norm-clipping, or native-update fallback safeguards
+remain to be evaluated before the final benchmark.

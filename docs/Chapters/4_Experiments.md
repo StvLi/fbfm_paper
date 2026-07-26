@@ -52,21 +52,25 @@ flow. The corrected video context then conditions action generation, while the
 same preceding suffix provides a fixed action-prefix constraint.
 
 **Joint generation: DreamZero.** We retain DreamZero's joint state--action
-solver and apply one joint endpoint VJP at each native DiT evaluation. State
-and action residuals are differentiated with respect to both noisy inputs, so
-the cross-modal endpoint Jacobian permits state feedback to correct action
-coordinates directly. Per-action observations causally refresh the first
-future state slot while the preceding actions remain a fixed prefix target.
+solver. Guidance is recomputed at all 16 UniPC updates, whereas the native DiT
+velocity and endpoint Jacobian are refreshed at eight DiT evaluations. Skipped
+DiT indices reuse only the latest native velocity and Jacobian; their endpoint,
+residual, VJP, and guided field are evaluated from the current solver sample.
+Joint differentiation preserves the cross-modal Jacobian blocks through which
+state feedback can directly correct action coordinates. Every execution
+observation is retained in causal order, but the hard state target is refreshed
+only at the checkpoint's three-action video stride. The preceding actions
+remain a fixed prefix target throughout the active chunk.
 
 | Setting | LingBot-VA | DreamZero |
 |---|---:|---:|
 | Generation factorization | Stage-wise | Joint |
 | \((H,d,s)\) | \((32,16,16)\) | \((16,8,8)\) |
 | Predicted state slots | 2 | 2 |
-| Numerical solver evaluations | 25 state / 50 action | 8 DiT within 16 UniPC steps |
-| Pseudo-clock release | 26 video calls / 16 actions | 8 DiT calls / 8 actions |
-| State-target refresh | 4 sampled observations / latent | Every executed action |
-| State-mask weight | \(1\) | \(56/9600\) |
+| Guided updates / Jacobian refreshes | 25 state / 50 action | 16 UniPC / 8 DiT--\(J\) |
+| Pseudo-clock release | 26 video calls / 16 actions | 8 DiT blocks / 8 actions |
+| State-target refresh | 4 sampled observations / latent | Every 3 actions (training stride) |
+| State preconditioner | \(1\) | \(P_Z=56/9600\) |
 | Guidance clip \(\beta\) | 10 | 10 |
 | Precision | BF16 | BF16 |
 
