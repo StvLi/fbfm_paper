@@ -1,0 +1,21 @@
+suite,task_id,status,trials,target_trials,successes,failures,success_rate,wilson_low,wilson_high,mean_executed_steps,mean_elapsed_seconds,mean_inference_wave_seconds,task_description,output
+libero_spatial,0,complete,5,5,4,1,0.8,0.37553462976252533,0.9637758913675698,214.2,67.65112881122623,2.3646426681810593,pick up the black bowl between the plate and the ramekin and place it on the plate,tasks/libero_spatial/task_000
+libero_spatial,1,complete,5,5,3,2,0.6,0.2307242812760128,0.882379225767352,288.2,90.58370336000807,2.3939136567508132,pick up the black bowl next to the ramekin and place it on the plate,tasks/libero_spatial/task_001
+libero_spatial,2,complete,5,5,5,0,1.0,0.5655175352168251,1.0,120.6,39.04800299019553,2.300689447328942,pick up the black bowl from table center and place it on the plate,tasks/libero_spatial/task_002
+libero_spatial,3,complete,5,5,3,2,0.6,0.2307242812760128,0.882379225767352,260.6,82.04046220278833,2.3968588549901386,pick up the black bowl on the cookie box and place it on the plate,tasks/libero_spatial/task_003
+libero_spatial,4,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,149.5925121165812,2.4312056870466923,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,tasks/libero_spatial/task_004
+libero_spatial,5,complete,5,5,2,3,0.4,0.11762077423264783,0.769275718723987,419.0,130.84326962861232,2.4181798514749318,pick up the black bowl on the ramekin and place it on the plate,tasks/libero_spatial/task_005
+libero_spatial,6,complete,5,5,4,1,0.8,0.37553462976252533,0.9637758913675698,185.8,58.95756827660371,2.3585206135933294,pick up the black bowl next to the cookie box and place it on the plate,tasks/libero_spatial/task_006
+libero_spatial,7,complete,5,5,4,1,0.8,0.37553462976252533,0.9637758913675698,204.4,64.94840903519653,2.387256427750568,pick up the black bowl on the stove and place it on the plate,tasks/libero_spatial/task_007
+libero_spatial,8,complete,5,5,4,1,0.8,0.37553462976252533,0.9637758913675698,209.0,66.26727327741682,2.38293688135208,pick up the black bowl next to the plate and place it on the plate,tasks/libero_spatial/task_008
+libero_spatial,9,complete,5,5,1,4,0.2,0.03622410863243014,0.6244653702374747,430.2,133.93454115658534,2.4211085550682485,pick up the black bowl on the wooden cabinet and place it on the plate,tasks/libero_spatial/task_009
+libero_object,0,complete,5,5,4,1,0.8,0.37553462976252533,0.9637758913675698,305.2,94.89568376201206,2.3719607704246153,pick up the alphabet soup and place it in the basket,tasks/libero_object/task_000
+libero_object,1,complete,5,5,4,1,0.8,0.37553462976252533,0.9637758913675698,273.2,84.88205552501604,2.3584707198066774,pick up the cream cheese and place it in the basket,tasks/libero_object/task_001
+libero_object,2,complete,5,5,2,3,0.4,0.11762077423264783,0.769275718723987,341.2,105.50019427782391,2.3859578147169085,pick up the salad dressing and place it in the basket,tasks/libero_object/task_002
+libero_object,3,complete,5,5,3,2,0.6,0.2307242812760128,0.882379225767352,331.0,102.3693062301958,2.3801437902697167,pick up the bbq sauce and place it in the basket,tasks/libero_object/task_003
+libero_object,4,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,147.49744810217527,2.3988393278227598,pick up the ketchup and place it in the basket,tasks/libero_object/task_004
+libero_object,5,complete,5,5,4,1,0.8,0.37553462976252533,0.9637758913675698,217.8,68.13460881942883,2.3695006280716076,pick up the tomato sauce and place it in the basket,tasks/libero_object/task_005
+libero_object,6,complete,5,5,1,4,0.2,0.03622410863243014,0.6244653702374747,420.0,129.23229490260127,2.3906949232037027,pick up the butter and place it in the basket,tasks/libero_object/task_006
+libero_object,7,complete,5,5,2,3,0.4,0.11762077423264783,0.769275718723987,373.0,115.06854219480883,2.3853457914178247,pick up the milk and place it in the basket,tasks/libero_object/task_007
+libero_object,8,complete,5,5,4,1,0.8,0.37553462976252533,0.9637758913675698,265.6,82.56957610498648,2.346654934384432,pick up the chocolate pudding and place it in the basket,tasks/libero_object/task_008
+libero_object,9,complete,5,5,5,0,1.0,0.5655175352168251,1.0,182.0,57.16706150039099,2.3484303973285328,pick up the orange juice and place it in the basket,tasks/libero_object/task_009
