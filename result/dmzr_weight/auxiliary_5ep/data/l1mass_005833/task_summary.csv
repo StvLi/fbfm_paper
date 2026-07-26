@@ -16,6 +16,6 @@ libero_object,3,complete,5,5,5,0,1.0,0.5655175352168251,1.0,141.6,44.88604160081
 libero_object,4,complete,5,5,2,3,0.4,0.11762077423264783,0.769275718723987,349.8,108.0497031393461,2.3892850183973287,pick up the ketchup and place it in the basket,tasks/libero_object/task_004
 libero_object,5,complete,5,5,5,0,1.0,0.5655175352168251,1.0,143.4,45.520283313584514,2.33143645187738,pick up the tomato sauce and place it in the basket,tasks/libero_object/task_005
 libero_object,6,complete,5,5,2,3,0.4,0.11762077423264783,0.769275718723987,373.4,115.34347955838311,2.3909372524679813,pick up the butter and place it in the basket,tasks/libero_object/task_006
-libero_object,7,pending,0,5,0,0,,,,,,,pick up the milk and place it in the basket,tasks/libero_object/task_007
-libero_object,8,pending,0,5,0,0,,,,,,,pick up the chocolate pudding and place it in the basket,tasks/libero_object/task_008
-libero_object,9,pending,0,5,0,0,,,,,,,pick up the orange juice and place it in the basket,tasks/libero_object/task_009
+libero_object,7,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,147.5114996621618,2.3991050853019917,pick up the milk and place it in the basket,tasks/libero_object/task_007
+libero_object,8,complete,5,5,4,1,0.8,0.37553462976252533,0.9637758913675698,234.2,73.12486153698993,2.361393297062974,pick up the chocolate pudding and place it in the basket,tasks/libero_object/task_008
+libero_object,9,complete,5,5,4,1,0.8,0.37553462976252533,0.9637758913675698,212.0,66.3584016592009,2.356505260333794,pick up the orange juice and place it in the basket,tasks/libero_object/task_009

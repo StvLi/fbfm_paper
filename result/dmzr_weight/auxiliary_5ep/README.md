@@ -1,6 +1,7 @@
 # DreamZero FBFM Three-Weight Auxiliary Sweep
 
-Status: running on the NVIDIA RTX A6000 workstation.
+Status: complete. The sweep finished at `2026-07-26T22:33:28+08:00` on the
+NVIDIA RTX A6000 workstation and passed the final ledger verification.
 
 This experiment tests whether DreamZero FBFM's state-modality preconditioner
 explains the performance and numerical-stability differences observed on the
@@ -44,14 +45,34 @@ have 20-percentage-point resolution and wide uncertainty, so the analysis must
 emphasize paired patterns, suite aggregates, numerical tails, and follow-up
 candidates rather than treating each cell as a final benchmark estimate.
 
+## Results
+
+| Weight | Overall | Spatial | Object | Mean episode | Action norm max |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `1` | 0/100 (0%) | 0/50 | 0/50 | 148.14 s | 25,453,960.78 |
+| `sqrt(56/9600)` | 59/100 (59%) | 30/50 | 29/50 | 93.56 s | 9,028.95 |
+| `56/9600` | 73/100 (73%) | 40/50 | 33/50 | 75.99 s | 1.608 |
+
+On the 100 paired initial states, L1-mass scaling gains 14 successes over RMS:
+21 pairs change from failure to success and seven change in the opposite
+direction (exact McNemar `p=0.01254095`). Binary scaling fails all 100 episodes
+and produces catastrophic action-norm tails. L1-mass scaling is the strongest
+screening choice in this sweep and is the only tested weight with no executed
+action norm above 10.
+
+This comparison changes only the state preconditioner `P_Z`; `W` remains a
+binary hard-overlap support matrix. The outcome therefore supports conservative
+cross-modal preconditioning in DreamZero, not a fractional or soft-overlap `W`.
+
 ## Recording
 
-The `data/` directory is synchronized from the A6000 every 30 minutes. It keeps
-manifests, task tables, episode ledgers, and monitor history. Large trajectory
-arrays, server logs, and solver audits remain on the workstation; their source
-paths and checksums will be recorded after completion.
+The final compact artifacts are under `data/analysis/`. The per-weight folders
+keep manifests, task tables, and all 300 episode-ledger rows; `data/control/`
+preserves monitor history. Large trajectory arrays, server logs, and solver
+audits remain on the workstation. Their remote paths and SHA-256 checksums are
+recorded without copying them into the paper repository.
 
-The final analysis will report:
+The final analysis reports:
 
 - per-task successes out of five for every weight;
 - suite and overall micro rates, plus task-macro rates;
@@ -59,6 +80,9 @@ The final analysis will report:
 - episode time and completion-time estimates;
 - action/correction tail and server-error checks;
 - a method-level interpretation of binary, RMS, and L1-mass scaling.
+
+See `data/analysis/ANALYSIS.md` for the paper-facing summary and
+`data/analysis/verification.json` for the machine-readable completion check.
 
 ## Source Revision
 
@@ -68,4 +92,3 @@ branch: fix/dreamzero-relinearized-unipc-guidance
 run revision: a37fcf5fc05147d7b9cf6a18beb70c8f991fd52f
 numerical-method revision: 13de791f74139b165cff70ff8165b1cc4538ea64
 ```
-

@@ -1,7 +1,8 @@
 {
   "schema_version": 1,
-  "status": "running",
+  "status": "complete",
   "started_on": "2026-07-26",
+  "completed_at": "2026-07-26T22:33:28+08:00",
   "experiment": "DreamZero FBFM three-weight auxiliary sweep",
   "hardware": "NVIDIA RTX A6000 48 GB",
   "task_selection": {
@@ -83,5 +84,17 @@
     "expected_episodes": 300,
     "completed_task_weight_cells": 57,
     "purpose": "User-requested cloud checkpoint; experiment continued after commit"
+  },
+  "final_result": {
+    "episodes": 300,
+    "completed_task_weight_cells": 60,
+    "successes": {
+      "binary": 0,
+      "rms": 59,
+      "l1_mass": 73
+    },
+    "verification": "data/analysis/verification.json",
+    "analysis": "data/analysis/ANALYSIS.md",
+    "compact_artifact_root": "data/analysis"
   }
 }
