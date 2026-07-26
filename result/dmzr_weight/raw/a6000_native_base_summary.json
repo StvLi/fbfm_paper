@@ -1,0 +1,10 @@
+{
+  "episodes": "/home/deepcybo-lite/peize/DreamZero-FBFM-LIBERO/results/libero_object6_matched_base_10_e04459b/episodes.jsonl",
+  "mode": "NONE",
+  "rollout_protocol": "native_sync",
+  "success_rate": 0.25,
+  "successes": 5,
+  "suite": "libero_object",
+  "task_id": 6,
+  "trials": 20
+}

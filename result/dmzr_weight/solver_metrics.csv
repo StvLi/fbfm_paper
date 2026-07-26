@@ -1,0 +1,3 @@
+method,scheduler_guidance_steps,action_correction_mean,action_correction_max,video_correction_mean,video_correction_max,state_error_max,action_error_max,guided_action_velocity_max,gpu_first200_gib,gpu_last200_gib,gpu_peak_gib,server_errors
+l1_mass_fbfm,15473,0.225902,11.270069,1.803600,138.978821,1.341830,7.972430,68.682228,26.002627,26.094007,27.249373,0
+rms_fbfm,17394,2.466387,11260.607422,45.424438,173854.390625,4150.204590,2408.668213,46455.019531,26.002627,26.077957,27.250113,0

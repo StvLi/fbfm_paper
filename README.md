@@ -14,6 +14,7 @@ This repository contains the editable manuscript and supporting material for:
 - `docs/TODO.md`: paper-wide writing, experiment, and consistency checklist.
 - `docs/handover.md`: confirmed theory-to-implementation handover items.
 - `material/`: source and cropped figures used by the manuscript.
+- `result/`: versioned experiment ledgers, derived tables, and implementation notes.
 
 ## Editing convention
 

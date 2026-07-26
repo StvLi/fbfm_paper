@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "recorded_on": "2026-07-26",
+  "experiment": "DreamZero FBFM state-weight diagnosis",
+  "hardware": "NVIDIA RTX A6000 48 GB",
+  "task": {
+    "suite": "libero_object",
+    "task_id": 6,
+    "description": "pick up the butter and place it in the basket",
+    "official_init_ids": {
+      "start": 0,
+      "end": 19,
+      "count": 20
+    },
+    "environment_seed": 0,
+    "model_seed_rule": "fixed",
+    "model_seed": 0,
+    "max_steps": 480
+  },
+  "checkpoint": "RLinf-DreamZero-WAN2.2-5B-LIBERO-SFT-Step26000",
+  "fbfm_protocol": {
+    "action_horizon": 16,
+    "inference_delay": 8,
+    "executed_suffix": 8,
+    "scheduler_steps": 16,
+    "native_dit_evaluations": 8,
+    "solver_release_policy": "uniform",
+    "feedback_observation_stride": 1,
+    "feedback_vae_sample_interval": 3,
+    "feedback_encoding": "causal_rolling_past",
+    "guidance_beta": 10.0
+  },
+  "source": {
+    "repository": "https://github.com/StvLi/FBFM",
+    "numerical_revision": "13de791f74139b165cff70ff8165b1cc4538ea64",
+    "l1_handoff_branch": "experiment/dreamzero-l1mass-state-weight",
+    "l1_handoff_revision": "cb08c9e552730d26cc446885e79a3e270a270d0c",
+    "unipc_relinearization_revision": "9d69cbc541c5e6c0c52c4875e2e9c42c7d9626b6"
+  },
+  "raw_artifacts": {
+    "l1_mass": [
+      "raw/l1_mass_episodes.jsonl",
+      "raw/l1_mass_summary.json"
+    ],
+    "rms": [
+      "raw/rms_episodes.jsonl",
+      "raw/rms_summary.json"
+    ],
+    "a6000_native_base": [
+      "raw/a6000_native_base_episodes.jsonl",
+      "raw/a6000_native_base_summary.json"
+    ]
+  },
+  "excluded_large_artifacts": {
+    "reason": "Avoid committing trajectories and 51 MB of solver audit JSONL to the paper repository",
+    "a6000_workspace": "/home/deepcybo-lite/peize/DreamZero-FBFM-LIBERO/results",
+    "local_mirror": "/home/oem/tmp_ws/DreamZero-FBFM-LIBERO-vjp/results",
+    "l1_result_directory": "libero_object6_l1mass005833_relinearized_fbfm_20_13de791",
+    "l1_solver_sha256": "1bc5e7e98717a57a80ab18c8c454a1b6c266fa186c014e4fab8f550b062b05ba",
+    "rms_result_directory": "libero_object6_rms00764_fbfm_10_13de791",
+    "rms_solver_sha256": "f96ec13103abf7734f35ef53da6dc965b8896cfd7c6ebd69b01ef86ab5777552",
+    "a6000_native_base_result_directory": "libero_object6_matched_base_10_e04459b"
+  }
+}
