@@ -1,0 +1,8 @@
+order,kp,successes,episodes,success_rate,hardware,role,source
+1,0.001,11,20,0.55,RTX PRO 6000,initial_lower,kp_0p001_screen4
+2,1.0,13,20,0.65,RTX A6000,historical_control,auxiliary_5ep/data/l1mass_005833
+3,100.0,0,20,0.0,RTX PRO 6000,initial_upper,kp_100_screen4
+4,0.03162277660168379,16,20,0.8,RTX PRO 6000,geometric_refinement,kp_0p0316228_screen4
+5,0.1778279410038923,12,20,0.6,RTX PRO 6000,geometric_refinement,kp_0p177828_screen4
+6,0.07498942093324558,14,20,0.7,RTX PRO 6000,geometric_refinement,kp_0p0749894_screen4
+7,0.04869675251658631,16,20,0.8,RTX PRO 6000,geometric_refinement,kp_0p0486968_screen4

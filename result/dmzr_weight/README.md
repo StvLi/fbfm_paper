@@ -3,6 +3,16 @@
 This directory records the controlled A6000 diagnosis of DreamZero FBFM state
 weights on one LIBERO task. The abbreviation `dmzr` means DreamZero.
 
+It also contains the subsequent Pro6000 search that fixes the selected
+L1-mass alignment weight and varies a separate proportional state-feedback gain
+`kp`. See [`kp_search_pro6000/`](kp_search_pro6000/README.md) for the complete
+protocol, valid trial ledgers, exclusion rule, and handoff analysis. After
+excluding LIBERO-90 because the RLinf checkpoint was not trained on that suite,
+the best tested point estimate is `kp=0.04869675251658631` with `64/80 = 80%`
+over eight tasks. The neighboring points obtain `56/80 = 70%` and
+`60/80 = 75%`; these differences are screening evidence, not a statistically
+conclusive superiority claim.
+
 ## Scope
 
 ```text
@@ -116,6 +126,7 @@ A6000 path or run L1/RMS FBFM inside that official evaluator. Record at least:
 | `checksums.sha256` | Versioned ledger hashes and external solver-audit hashes |
 | `DMZR_FBFM_VELOCITY_JACOBIAN.md` | Exact feedback velocity and Jacobian/VJP implementation |
 | `raw/` | Direct episode and summary outputs from the A6000 runner |
+| `kp_search_pro6000/` | Pro6000 logarithmic `kp` search and 240 valid episode records |
 
 ## Code Handoff
 

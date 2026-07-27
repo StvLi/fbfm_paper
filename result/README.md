@@ -6,7 +6,7 @@ raw ledgers, derived tables, source revisions, and known comparability limits.
 
 | Directory | Scope | Status |
 | --- | --- | --- |
-| `dmzr_weight/` | DreamZero FBFM state-weight diagnosis on LIBERO object task 6 | Complete, 20 trials per reported method |
+| `dmzr_weight/` | DreamZero FBFM state-weight diagnosis and proportional-gain search | Complete; includes the 240-episode valid Pro6000 `kp` comparison |
 
 Large trajectories, checkpoints, videos, and full solver audits remain in the
 experiment workspace. Their source paths and checksums are recorded in each
