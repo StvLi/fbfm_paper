@@ -43,4 +43,5 @@ Method-specific extensions:
 | \(\mathbf Y_{t,k}^X,\mathbf W_{t,k}^X,\mathbf e_{t,k}^X,\mathbf g_{t,k}^X\) | Joint feedback target, block weighting operator, discrepancy, and VJP correction. |
 | \(v_{\mathrm{FBFM}}^X,\lambda_{\tau_k^X}^X\) | FBFM-guided joint vector field and its guidance strength. |
 | \(\mathbf J_{t,k}^X,\mathbf J_{QR}\) | Joint clean-endpoint Jacobian and its output-modality/input-modality block, where \(Q,R\in\{Z,A\}\). |
+| \(\mathbf P,P_Z,P_A,k_p\) | Block-diagonal modality preconditioner, its state and action blocks, and the proportional state-feedback gain used after modality-scale balancing. |
 | \(\otimes,\mathbb 1[\cdot]\) | Kronecker product and indicator function. |
