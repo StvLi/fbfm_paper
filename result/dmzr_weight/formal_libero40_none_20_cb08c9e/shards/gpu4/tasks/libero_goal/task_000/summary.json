@@ -1,0 +1,10 @@
+{
+  "episodes": "/mnt/project_eai_hs/zrm2/eval_isolated/dreamzero_none_cb08c9e_20260726/runs/formal_libero40_none_20_cb08c9e/shards/gpu4/tasks/libero_goal/task_000/episodes.jsonl",
+  "mode": "NONE",
+  "rollout_protocol": "pseudo_async_overlap",
+  "success_rate": 0.9,
+  "successes": 18,
+  "suite": "libero_goal",
+  "task_id": 0,
+  "trials": 20
+}

@@ -1,0 +1,6 @@
+suite,task_id,status,trials,target_trials,successes,failures,success_rate,wilson_low,wilson_high,mean_executed_steps,mean_elapsed_seconds,mean_inference_wave_seconds,task_description,output
+libero_spatial,6,complete,20,20,20,0,1.0,0.8388748419471806,1.0,139.85,47.92478731574374,2.3993244762273713,pick up the black bowl next to the cookie box and place it on the plate,tasks/libero_spatial/task_006
+libero_object,4,complete,20,20,12,8,0.6,0.3865815007622531,0.781193467627183,329.05,105.36877351510338,2.3921096989201858,pick up the ketchup and place it in the basket,tasks/libero_object/task_004
+libero_goal,2,complete,20,20,8,12,0.4,0.21880653237281705,0.6134184992377469,331.8,102.94666256619966,2.336382129050063,put the wine bottle on top of the cabinet,tasks/libero_goal/task_002
+libero_10,0,complete,20,20,13,7,0.65,0.43285427668523624,0.818808175898918,376.05,112.00352095844573,2.227581803413437,put both the alphabet soup and the tomato sauce in the basket,tasks/libero_10/task_000
+libero_10,8,complete,20,20,10,10,0.5,0.2992980081982123,0.7007019918017877,452.1,115.05854831504402,1.953636586793821,put both moka pots on the stove,tasks/libero_10/task_008

@@ -1,0 +1,6 @@
+suite,task_id,status,trials,target_trials,successes,failures,success_rate,wilson_low,wilson_high,mean_executed_steps,mean_elapsed_seconds,mean_inference_wave_seconds,task_description,output
+libero_spatial,2,complete,20,20,19,1,0.95,0.763868806553258,0.9911185511992047,127.95,42.64377023719717,2.3237759209055486,pick up the black bowl from table center and place it on the plate,tasks/libero_spatial/task_002
+libero_object,0,complete,20,20,14,6,0.7,0.4810271816464765,0.8545227551323956,320.5,100.51098677339614,2.3317606709500582,pick up the alphabet soup and place it in the basket,tasks/libero_object/task_000
+libero_object,8,complete,20,20,17,3,0.85,0.6395811352592431,0.9476312541037835,278.2,86.38896395195624,2.294610454480421,pick up the chocolate pudding and place it in the basket,tasks/libero_object/task_008
+libero_goal,6,complete,20,20,14,6,0.7,0.4810271816464765,0.8545227551323956,227.2,69.64099033035454,2.2618158071269345,put the cream cheese in the bowl,tasks/libero_goal/task_006
+libero_10,4,complete,20,20,16,4,0.8,0.5839825677481064,0.919342337420202,318.3,89.0863942550146,2.088614580254513,put the white mug on the left plate and put the yellow and white mug on the right plate,tasks/libero_10/task_004

@@ -14,6 +14,7 @@ workspaces.
 | `lbva_rtc/` | LingBot-VA with RTC on RoboTwin `demo_clean`, GPU rendering | 12 complete tasks, 223/240 successes |
 | `dmzr_weight/` | DreamZero FBFM state-weight diagnosis and proportional-gain search | Includes the valid 240-episode Pro6000 `kp` comparison |
 | `dmzr_weight/formal_libero40_fbfm_kp00486968_20_a051933/` | DreamZero FBFM on the four selected LIBERO suites with selected `kp` | Complete; 566/800 (70.75%) |
+| `dmzr_weight/formal_libero40_none_20_cb08c9e/` | DreamZero NONE on the same four selected LIBERO suites | Complete; 561/800 (70.125%) |
 
 The CPU snapshots use only cells satisfying
 `status == complete && trials == 10`. The LingBot-VA GPU packages contain

@@ -1,0 +1,6 @@
+suite,task_id,status,trials,target_trials,successes,failures,success_rate,wilson_low,wilson_high,mean_executed_steps,mean_elapsed_seconds,mean_inference_wave_seconds,task_description,output
+libero_spatial,3,complete,20,20,19,1,0.95,0.763868806553258,0.9911185511992047,169.25,55.472347091307164,2.3450142029044216,pick up the black bowl on the cookie box and place it on the plate,tasks/libero_spatial/task_003
+libero_object,1,complete,20,20,18,2,0.9,0.6989663547715128,0.9721335187862319,209.9,67.42024420711678,2.3334599667063416,pick up the cream cheese and place it in the basket,tasks/libero_object/task_001
+libero_object,9,complete,20,20,18,2,0.9,0.6989663547715128,0.9721335187862319,181.4,58.51045049263048,2.315993518663978,pick up the orange juice and place it in the basket,tasks/libero_object/task_009
+libero_goal,7,complete,20,20,20,0,1.0,0.8388748419471806,1.0,88.5,30.231955966952956,2.2785426231305,turn on the stove,tasks/libero_goal/task_007
+libero_10,5,complete,20,20,17,3,0.85,0.6395811352592431,0.9476312541037835,243.1,74.93439637733972,2.2627648663611315,pick up the book and place it in the back compartment of the caddy,tasks/libero_10/task_005
