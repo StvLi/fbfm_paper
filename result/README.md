@@ -6,7 +6,7 @@ workspace and are not committed to the paper repository.
 
 | Branch | Directory | Experiment | State |
 | --- | --- | --- | --- |
-| `exp/lbva_fbfm_gpurender_result` | `result/lbva_fbfm/` | Lingbot-VA, FBFM, RoboTwin GPU rendering | final |
+| `exp/lbva_fbfm_gpurender_result` | `result/lbva_fbfm_gpu/` | Lingbot-VA, FBFM, RoboTwin GPU rendering | final |
 | `exp/lbva_rtc_gpurender_result` | `result/lbva_rtc/` | Lingbot-VA, RTC, RoboTwin GPU rendering | running |
 
 Each experiment directory contains a README, machine-readable aggregate and trial
