@@ -39,29 +39,33 @@ LIBERO-Spatial, LIBERO-Object, LIBERO-Goal, and LIBERO-10; LIBERO-90 is
 excluded. Both evaluations use the same tasks, 20 official initial states per
 task, 480-step horizon, and delayed pseudo-asynchronous overlap protocol.
 DreamZero's native synchronous rollout is not used as the Base. For concision,
-the main table reports the two suites with positive changes and the total over
-all four evaluated suites. Appendix~\ref{app:detailed-results} reports every
-suite and task.
+the main table reports all four evaluated suites and their pooled total.
+Appendix~\ref{app:detailed-results} reports every task.
 
 \begin{table}[H]
     \centering
     \small
-    \setlength{\tabcolsep}{6pt}
-    \begin{tabular}{lccc}
+    \setlength{\tabcolsep}{4pt}
+    \begin{tabular}{lccccc}
         \toprule
-        Method & LIBERO-Goal & LIBERO-10 & Total \\
+        Method & Spatial & Object & Goal & LIBERO-10 & Total \\
         \midrule
-        DreamZero (Base, NONE) & 68.5 & 60.5 & 70.125 \\
-        DreamZero + FBFM (Ours) & \textbf{71.0} & \textbf{63.0} & \textbf{70.750} \\
+        DreamZero (Base, NONE) & 78.5 & 73.0 & 68.5 & 60.5 & 70.125 \\
+        DreamZero + FBFM (Ours) & 77.0 & 72.0 &
+        \textbf{71.0} $\uparrow$ & \textbf{63.0} $\uparrow$ &
+        \textbf{70.750} $\uparrow$ \\
         \bottomrule
     \end{tabular}
-    \caption{DreamZero success rates (\%). Total pools all four evaluated suites.}
+    \caption{DreamZero success rates (\%). Total pools all four evaluated
+    suites; up-arrows mark improvements over the corresponding Base result.}
     \label{tab:dreamzero-libero-summary}
 \end{table}
 
-FBFM improves both LIBERO-Goal and LIBERO-10 by 2.5 percentage points. Across
-all 800 episodes, its total success rate increases by 0.625 percentage points.
-The heterogeneous suite-level behavior is discussed below.
+FBFM improves both LIBERO-Goal and LIBERO-10 by 2.5 percentage points, while
+LIBERO-Spatial and LIBERO-Object decrease by 1.5 and 1.0 points, respectively.
+Across all 800 episodes, the pooled success rate increases by 0.625 points. We
+therefore interpret the current result as a modest aggregate gain with
+heterogeneous suite-level effects rather than a uniform improvement.
 
 \subsection{State-Feedback Gain and Closed-Loop Stability}
 \label{sec:discussion:state-gain}

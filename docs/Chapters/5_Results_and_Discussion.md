@@ -23,17 +23,21 @@ LIBERO-Spatial, LIBERO-Object, LIBERO-Goal, and LIBERO-10; LIBERO-90 is
 excluded. Both evaluations use the same tasks, 20 official initial states per
 task, 480-step horizon, and delayed pseudo-asynchronous overlap protocol.
 DreamZero's native synchronous rollout is not used as the Base. For concision,
-the main table reports the two suites with positive changes and the total over
-all four evaluated suites. Appendix D reports every suite and task.
+the main table reports all four evaluated suites and their pooled total.
+Appendix D reports every task.
 
-| Method | LIBERO-Goal SR (%) | LIBERO-10 SR (%) | Total SR (%) |
-| --- | ---: | ---: | ---: |
-| DreamZero (Base, NONE) | 68.5 | 60.5 | 70.125 |
-| DreamZero + FBFM (Ours) | **71.0** | **63.0** | **70.750** |
+| Method | Spatial SR (%) | Object SR (%) | Goal SR (%) | LIBERO-10 SR (%) | Total SR (%) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| DreamZero (Base, NONE) | 78.5 | 73.0 | 68.5 | 60.5 | 70.125 |
+| DreamZero + FBFM (Ours) | 77.0 | 72.0 | **71.0 ↑** | **63.0 ↑** | **70.750 ↑** |
 
-FBFM improves both LIBERO-Goal and LIBERO-10 by 2.5 percentage points. Across
-all 800 episodes, its total success rate increases by 0.625 percentage points.
-The heterogeneous suite-level behavior is discussed below.
+*Up-arrows mark improvements over the corresponding Base result.*
+
+FBFM improves both LIBERO-Goal and LIBERO-10 by 2.5 percentage points, while
+LIBERO-Spatial and LIBERO-Object decrease by 1.5 and 1.0 points, respectively.
+Across all 800 episodes, the pooled success rate increases by 0.625 points. We
+therefore interpret the current result as a modest aggregate gain with
+heterogeneous suite-level effects rather than a uniform improvement.
 
 ## State-Feedback Gain and Closed-Loop Stability
 
