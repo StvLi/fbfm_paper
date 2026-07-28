@@ -1,0 +1,132 @@
+{
+  "artifact_count": 25,
+  "artifacts": [
+    {
+      "path": "NUMERIC_MECHANISM_EXPERIMENT.md",
+      "sha256": "0c14714d453f18f13288e73f9fb6cf7e22f26478cf4d78e2fcf81db09963826a",
+      "size_bytes": 10780
+    },
+    {
+      "path": "aggregate/action_denoising_curve.csv",
+      "sha256": "09bb56999666c037a4c6826fbbf0ffc039c858029fbff622d6a32f2ffa6d81a2",
+      "size_bytes": 6841
+    },
+    {
+      "path": "aggregate/action_denoising_probe_raw.csv",
+      "sha256": "57584c371a4a66497696103f7c84240918f4af452be4abee22bddb8524c9270c",
+      "size_bytes": 27521
+    },
+    {
+      "path": "aggregate/action_probe_metrics.csv",
+      "sha256": "b7b2967cb03718672c0058b2594de914afdc53150eb4209da20ac3184234b3eb",
+      "size_bytes": 2050
+    },
+    {
+      "path": "aggregate/action_unit_cluster_means.csv",
+      "sha256": "d66d35bd9cd5dae857775c065ff2525f567d39e8c154e3bffb2c664f9e58eb9b",
+      "size_bytes": 445
+    },
+    {
+      "path": "aggregate/numeric_summary.json",
+      "sha256": "cb105f46d7f271ffceb0ca15dfb45c0e58c36379566cbe8975b389a46fb6e0c2",
+      "size_bytes": 3904
+    },
+    {
+      "path": "aggregate/one_step_latent_by_wave.csv",
+      "sha256": "cd4c2812310ba473cd30b26dd8ff7afe4bd7467855f482560a6541167256cc9f",
+      "size_bytes": 6995
+    },
+    {
+      "path": "aggregate/one_step_latent_wave_summary.csv",
+      "sha256": "79369fa003865229058e1835d0d70ca9c3a2adff7f75ddd851af2b8e024a14ac",
+      "size_bytes": 4210
+    },
+    {
+      "path": "aggregate/paired_next_slot_latent_mse.csv",
+      "sha256": "f0fc2e81f1003ea8c78c92f57d20231f38aff7c60f71819d967204e3100451e7",
+      "size_bytes": 659
+    },
+    {
+      "path": "aggregate/rgb_horizon_summary.csv",
+      "sha256": "b7b507f7379c34452a1cf808c65c7c9b45aa0f95b24d9e3567139c80192f9878",
+      "size_bytes": 665
+    },
+    {
+      "path": "aggregate/rgb_horizon_unit_means.csv",
+      "sha256": "b2f4b5bdd03361c26d0a92708581009ee901b13cbb3b8449b56ff5bc99a805a6",
+      "size_bytes": 1609
+    },
+    {
+      "path": "aggregate/state_integrity.csv",
+      "sha256": "f43f01d4ce79cc833998d7dcff35ddf8043541c9190ca89651a7ee401684fcf1",
+      "size_bytes": 1928
+    },
+    {
+      "path": "aggregate/state_pair_differences.csv",
+      "sha256": "2af4f6b597abe677a48df373ebc4a25914adfb0a07a78fdddba888938697456f",
+      "size_bytes": 815
+    },
+    {
+      "path": "aggregate/state_summary.json",
+      "sha256": "4957df92305d1c9c7e8b71ea3861560d008c8a34fa57dd65161df1a2e8732d19",
+      "size_bytes": 150
+    },
+    {
+      "path": "aggregate/wave0_future_frame_mse.csv",
+      "sha256": "c28ff0669252bd76c0fc8023006a3d0e9155babe8aed45b43ce2e282cb598019",
+      "size_bytes": 8005
+    },
+    {
+      "path": "control/analyze_numeric_mechanism.py",
+      "sha256": "4a1914f9513d753fe0a797dd8f605ee2bb1954f7680ca30dd21f4ced4b00b58a",
+      "size_bytes": 26939
+    },
+    {
+      "path": "control/compute_state_metrics.py",
+      "sha256": "2c3cbf9d3f06dc536a0af77d09b8de9ca7c116af9540e284c5ea08651b0f5a66",
+      "size_bytes": 9919
+    },
+    {
+      "path": "figures/action_denoising_curve.pdf",
+      "sha256": "1bd55308e7c6c1a51996dadd77fea63db4177cf234e49e23cc4e3920c5217bef",
+      "size_bytes": 16688
+    },
+    {
+      "path": "figures/action_denoising_curve.png",
+      "sha256": "387689e8c2f0953d31032bfd684287b4fc2f0b057ef40b7dc08e40bcbed4a0f7",
+      "size_bytes": 78134
+    },
+    {
+      "path": "figures/one_step_latent_trend.pdf",
+      "sha256": "1b89f65fbf71d40bd09d986ab92ce837718cddf995781dc0016c0c4048371646",
+      "size_bytes": 16595
+    },
+    {
+      "path": "figures/one_step_latent_trend.png",
+      "sha256": "d01e95b8e21468c6d96c7e5d839092b13259646af42ebb63d3d0ff6f60b8ca2e",
+      "size_bytes": 110407
+    },
+    {
+      "path": "figures/rgb_frame_horizon_sensitivity.pdf",
+      "sha256": "77707311e727f6b0fd12a232301811e65a55059d0fc1b28c25075d29369557a3",
+      "size_bytes": 15819
+    },
+    {
+      "path": "figures/rgb_frame_horizon_sensitivity.png",
+      "sha256": "d04556e6ea2c0fbc6144f78dce10118a118757b352cd2eda583ccc12ae1dc92d",
+      "size_bytes": 78331
+    },
+    {
+      "path": "figures/state_mse_paired.pdf",
+      "sha256": "12c2da821c05a5fd26042710a804c17d3b242f113337afb36d974b4c43c901ba",
+      "size_bytes": 16386
+    },
+    {
+      "path": "figures/state_mse_paired.png",
+      "sha256": "722aaa4a3f7b08307b2c349331d7135fe9fb59fad3d073de22dc5ed1a553f6e6",
+      "size_bytes": 61159
+    }
+  ],
+  "schema_version": 1,
+  "status": "complete"
+}
