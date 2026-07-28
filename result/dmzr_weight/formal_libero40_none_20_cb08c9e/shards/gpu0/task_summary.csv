@@ -1,0 +1,6 @@
+suite,task_id,status,trials,target_trials,successes,failures,success_rate,wilson_low,wilson_high,mean_executed_steps,mean_elapsed_seconds,mean_inference_wave_seconds,task_description,output
+libero_spatial,0,complete,20,20,19,1,0.95,0.763868806553258,0.9911185511992047,126.25,43.82314835830475,2.3915206837169074,pick up the black bowl between the plate and the ramekin and place it on the plate,tasks/libero_spatial/task_000
+libero_spatial,8,complete,20,20,14,6,0.7,0.4810271816464765,0.8545227551323956,301.1,101.48422274215264,2.5020546643646995,pick up the black bowl next to the plate and place it on the plate,tasks/libero_spatial/task_008
+libero_object,6,complete,20,20,7,13,0.35,0.18119182410108206,0.5671457233147638,388.05,122.30191274051322,2.3801462615600513,pick up the butter and place it in the basket,tasks/libero_object/task_006
+libero_goal,4,complete,20,20,14,6,0.7,0.4810271816464765,0.8545227551323956,254.45,75.96102260420449,2.2125501242415977,put the bowl on top of the cabinet,tasks/libero_goal/task_004
+libero_10,2,complete,20,20,13,7,0.65,0.43285427668523624,0.818808175898918,335.65,92.23104465765064,2.0816597850553187,turn on the stove and put the moka pot on it,tasks/libero_10/task_002

@@ -1,0 +1,6 @@
+suite,task_id,status,trials,target_trials,successes,failures,success_rate,wilson_low,wilson_high,mean_executed_steps,mean_elapsed_seconds,mean_inference_wave_seconds,task_description,output
+libero_spatial,5,complete,20,20,3,17,0.15,0.052368745896216595,0.36041886474075696,458.95,146.0931872946152,2.4124031101665633,pick up the black bowl on the ramekin and place it on the plate,tasks/libero_spatial/task_005
+libero_object,3,complete,20,20,16,4,0.8,0.5839825677481064,0.919342337420202,211.45,66.47449872964644,2.2834512029142995,pick up the bbq sauce and place it in the basket,tasks/libero_object/task_003
+libero_goal,1,complete,20,20,20,0,1.0,0.8388748419471806,1.0,97.65,32.20854077870608,2.2025800879430872,put the bowl on the stove,tasks/libero_goal/task_001
+libero_goal,9,complete,20,20,1,19,0.05,0.008881448800795402,0.23613119344674205,463.85,136.65593128394684,2.249939915658393,put the wine bottle on the rack,tasks/libero_goal/task_009
+libero_10,7,complete,20,20,8,12,0.4,0.21880653237281705,0.6134184992377469,410.05,103.8549882648047,1.9355686134780945,put both the alphabet soup and the cream cheese box in the basket,tasks/libero_10/task_007

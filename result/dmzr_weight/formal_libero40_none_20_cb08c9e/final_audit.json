@@ -1,0 +1,38 @@
+{
+  "audit_status": "passed",
+  "audited_at": "2026-07-27T01:45:44+08:00",
+  "code_commit": "cb08c9e552730d26cc446885e79a3e270a270d0c",
+  "duplicates": 0,
+  "empty_trajectories": 0,
+  "episode_feedback_encoding": [
+    "training_aligned_stride3_prefix"
+  ],
+  "episodes": 800,
+  "failures": 239,
+  "feedback_encoding_note": "Feedback encoding and state weight are inert in NONE mode.",
+  "malformed_json_rows": 0,
+  "manifest_feedback_encoding": [
+    "causal_rolling_past"
+  ],
+  "manifests": 8,
+  "missing_trajectories": 0,
+  "missing_trials": 0,
+  "mode": "NONE",
+  "non_finite_action_rows": 0,
+  "non_none_rows": 0,
+  "non_ok_rows": 0,
+  "run_root": "/mnt/project_eai_hs/zrm2/eval_isolated/dreamzero_none_cb08c9e_20260726/runs/formal_libero40_none_20_cb08c9e",
+  "source_hashes": {
+    "ordered_episode_ledgers_sha256": "38ac76541ed90853322cacd90e10d16084c972e01200822d5e9928f469af8cba",
+    "summary_json_sha256": "5401c593f4ac0946efb37cae9d68c5c8414c3b6094ee28ab3aee6c56246d2b36",
+    "task_summary_csv_sha256": "8bcff9901aa44e815ae47a1979743a545010a7dc7b3319d9f527adda850d08e2",
+    "trials_csv_sha256": "64b3ecf34dab320f287ce3e8355fa09491cb1cc459ba47cfd873dfea8c047e2e"
+  },
+  "success_rate": 0.70125,
+  "successes": 561,
+  "task_assignments": 40,
+  "tasks": 40,
+  "trials_per_task": 20,
+  "unique_task_assignments": 40,
+  "unique_trial_identities": 800
+}

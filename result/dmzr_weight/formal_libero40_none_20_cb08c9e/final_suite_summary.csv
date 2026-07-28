@@ -1,0 +1,5 @@
+suite,tasks,successes,trials,failures,success_rate,success_rate_percent
+libero_spatial,10,157,200,43,0.785000,78.500
+libero_object,10,146,200,54,0.730000,73.000
+libero_goal,10,137,200,63,0.685000,68.500
+libero_10,10,121,200,79,0.605000,60.500
