@@ -1,4 +1,6 @@
-# DreamZero LIBERO Base Step26000 测评结果
+# DreamZero LIBERO Native-Synchronous Base Step26000 测评结果
+
+> 归档说明（2026-07-28）：本文件记录的是 DreamZero 原生同步 rollout，未采用论文主实验预设的有延迟伪异步 overlap 协议。该结果仅保留用于历史审计，不得填入 Appendix D 或 Section 5.2 的 Base/NONE 行；主实验 Base 需要在匹配的伪异步协议下重新测评。
 
 固定协议：4 个标准 suite，每 suite 10 tasks，每 task 使用 reset ID 0–19，共 800 条轨迹。
 

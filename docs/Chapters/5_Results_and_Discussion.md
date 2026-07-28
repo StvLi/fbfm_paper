@@ -1,28 +1,35 @@
 # Results and Discussion
 
-**DreamZero baseline on LIBERO.** We first characterize the frozen DreamZero
-checkpoint before adding FBFM. The suite-level summary below covers all 800
-base-model episodes.
-The checkpoint succeeds in 618 episodes, corresponding to an aggregate success
-rate of 77.25%.
+## LingBot-VA on RoboTwin
 
-| Suite | Success / Trials | Success Rate |
+We compare the frozen LingBot-VA checkpoint with no inference-time feedback
+(Base) against the same checkpoint equipped with FBFM (Ours). The final summary
+uses the same selected 42-task set for both methods and reports only the
+aggregate success rate under RoboTwin's clean and randomized configurations.
+Task-level successes and trial counts are reserved for Appendix D.
+
+| Method | Clean SR (%) | Randomized SR (%) |
 | --- | ---: | ---: |
-| LIBERO-Spatial | 181 / 200 | 90.50% |
-| LIBERO-Object | 181 / 200 | 90.50% |
-| LIBERO-Goal | 114 / 200 | 57.00% |
-| LIBERO-10 | 142 / 200 | 71.00% |
-| **Aggregate** | **618 / 800** | **77.25%** |
+| LingBot-VA (Base, NONE) | -- | -- |
+| LingBot-VA + FBFM (Ours) | -- | -- |
 
-The aggregate masks substantial task heterogeneity. Spatial and object
-generalization both reach 90.5%, whereas LIBERO-Goal falls to 57.0%; five of its
-ten tasks have success rates at or below 30%. LIBERO-10 reaches 71.0%, including
-one task at 10%. The base checkpoint therefore provides both ceiling-limited
-tasks and tasks with considerable room for correction. Subsequent FBFM
-comparisons must use the same checkpoint and reset IDs and report paired
-per-task and per-suite changes; this baseline alone is not evidence for an FBFM
-improvement.
+<!-- TODO(results): Fill only after all 42 tasks have matched Base/FBFM records
+under both configurations. Do not use the non-matched pooled snapshot rates. -->
 
-<!-- TODO(results): Expand this table with the matched RTC and FBFM results.
-Retain per-task paired outcomes in the appendix and report absolute
-percentage-point changes with uncertainty. -->
+## DreamZero on LIBERO
+
+We similarly compare the frozen DreamZero checkpoint with and without FBFM on
+the four standard LIBERO suites used in this study. LIBERO-90 is excluded. The
+two rows will be filled only from matched evaluations using the same checkpoint,
+task set, reset IDs, episode horizon, and delayed pseudo-asynchronous overlap
+protocol. Results from DreamZero's native synchronous rollout are not used in
+this comparison. Full per-task records are maintained in Appendix D.
+
+| Method | Spatial SR (%) | Object SR (%) | Goal SR (%) | LIBERO-10 SR (%) |
+| --- | ---: | ---: | ---: | ---: |
+| DreamZero (Base, NONE) | -- | -- | -- | -- |
+| DreamZero + FBFM (Ours) | -- | -- | -- | -- |
+
+<!-- TODO(results): Fill both rows only after the matched delayed
+pseudo-asynchronous evaluation is complete. Keep native synchronous results and
+preliminary single-task diagnostics out of this table. -->
