@@ -1,0 +1,4 @@
+method,state_weight,rollout_protocol,trials,successes,success_rate,wilson_95_low,wilson_95_high,mean_steps,mean_episode_seconds,mean_wave_seconds,action_count,action_norm_mean,action_norm_p95,action_norm_max,coordinate_abs_max,server_errors
+l1_mass_fbfm,0.005833333333333334,pseudo_async_overlap,20,8,0.4,0.218807,0.613418,378.95,116.504552,2.375992,7579,1.167944,1.408916,1.611753,1.164551,0
+rms_fbfm,0.07637626158259733,pseudo_async_overlap,20,4,0.2,0.080658,0.416017,426.85,131.282122,2.391024,8537,1.292258,1.386803,168.369720,152.812500,0
+a6000_native_base,,native_sync,20,5,0.25,0.111862,0.468701,427.95,64.288146,1.122551,8559,1.160607,1.423029,1.565868,1.149902,0

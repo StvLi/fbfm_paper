@@ -1,0 +1,10 @@
+{
+  "episodes": "/home/deepcybo-lite/peize/DreamZero-FBFM-LIBERO/results/dmzr_weight_aux_5ep/l1mass_005833/tasks/libero_object/task_004/episodes.jsonl",
+  "mode": "FBFM",
+  "rollout_protocol": "pseudo_async_overlap",
+  "success_rate": 0.4,
+  "successes": 2,
+  "suite": "libero_object",
+  "task_id": 4,
+  "trials": 5
+}

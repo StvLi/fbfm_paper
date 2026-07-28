@@ -1,0 +1,4 @@
+weight_a,weight_b,paired_episodes,joint_success,a_only_success,b_only_success,joint_failure,a_rate,b_rate,b_minus_a,exact_mcnemar_p
+binary,rms,100,0,0,59,41,0.0,0.59,0.59,3.469446951953614e-18
+binary,l1_mass,100,0,0,73,27,0.0,0.73,0.73,2.117582368135751e-22
+rms,l1_mass,100,52,7,21,20,0.59,0.73,0.14,0.012540951371192932

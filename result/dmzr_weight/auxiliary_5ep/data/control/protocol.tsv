@@ -1,0 +1,4 @@
+name	state_weight	result_directory
+binary_1	1.0	/home/deepcybo-lite/peize/DreamZero-FBFM-LIBERO/results/dmzr_weight_aux_5ep/binary_1
+rms_0076376	0.07637626158259733	/home/deepcybo-lite/peize/DreamZero-FBFM-LIBERO/results/dmzr_weight_aux_5ep/rms_0076376
+l1mass_005833	0.005833333333333334	/home/deepcybo-lite/peize/DreamZero-FBFM-LIBERO/results/dmzr_weight_aux_5ep/l1mass_005833

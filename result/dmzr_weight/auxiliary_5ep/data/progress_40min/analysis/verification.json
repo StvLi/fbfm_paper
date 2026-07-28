@@ -1,0 +1,10 @@
+{
+  "episodes": 286,
+  "errors": [],
+  "expected_episodes": 300,
+  "require_complete": false,
+  "status": "incomplete",
+  "warnings": [
+    "incomplete sweep: 286/300 episodes"
+  ]
+}
