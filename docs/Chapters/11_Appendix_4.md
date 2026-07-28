@@ -14,10 +14,14 @@ The selected RoboTwin evaluation contains 42 tasks under both `demo_clean` and
 evaluation. The CPU-render snapshot at commit `50a3cc4` supplies 33 completed
 Base cells and 45 completed FBFM cells within this selection. The independently
 validated GPU-render result at commit `fb58706` adds 12 `demo_clean` FBFM cells,
-each with 20 episodes; these entries are marked **GPU** below. Because rendering
-mode and episode sets differ, a GPU-marked FBFM entry and an unmarked CPU-render
-Base entry in the same row do not constitute a matched comparison and must not
-be pooled into the main result.
+each with 20 validated episodes. To keep a common 10-episode denominator in this
+table, each of the 12 new entries is recomputed from the first 10 accepted
+episode records for that task in `trials.csv`; the complete 20-episode records
+remain in the result package. These are the consecutive Clean FBFM entries from
+`place_burger_fries` through `move_pillbottle_pad`. Because rendering mode and
+episode sets differ, these entries and the CPU-render Base entries in the same
+rows do not constitute matched comparisons and must not be pooled into the main
+result.
 
 | Task | Clean Base | Clean FBFM | Randomized Base | Randomized FBFM |
 | --- | ---: | ---: | ---: | ---: |
@@ -35,18 +39,18 @@ be pooled into the main result.
 | `handover_mic` | 7/10 (70%) | 10/10 (100%) | -- | -- |
 | `place_dual_shoes` | 0/10 (0%) | -- | -- | -- |
 | `place_bread_skillet` | 8/10 (80%) | -- | -- | -- |
-| `place_burger_fries` | 10/10 (100%) | **GPU:** 18/20 (90%) | -- | 10/10 (100%) |
-| `place_empty_cup` | -- | **GPU:** 20/20 (100%) | -- | 10/10 (100%) |
-| `place_shoe` | 5/10 (50%) | **GPU:** 11/20 (55%) | -- | 5/10 (50%) |
-| `scan_object` | 9/10 (90%) | **GPU:** 13/20 (65%) | -- | 8/10 (80%) |
-| `adjust_bottle` | -- | **GPU:** 20/20 (100%) | -- | 10/10 (100%) |
-| `beat_block_hammer` | 7/10 (70%) | **GPU:** 15/20 (75%) | 9/10 (90%) | 9/10 (90%) |
-| `click_alarmclock` | -- | **GPU:** 20/20 (100%) | -- | 10/10 (100%) |
-| `click_bell` | -- | **GPU:** 20/20 (100%) | -- | 10/10 (100%) |
-| `grab_roller` | -- | **GPU:** 20/20 (100%) | -- | 10/10 (100%) |
-| `lift_pot` | -- | **GPU:** 20/20 (100%) | -- | 10/10 (100%) |
-| `move_can_pot` | -- | **GPU:** 19/20 (95%) | -- | 9/10 (90%) |
-| `move_pillbottle_pad` | -- | **GPU:** 20/20 (100%) | -- | 9/10 (90%) |
+| `place_burger_fries` | 10/10 (100%) | 9/10 (90%) | -- | 10/10 (100%) |
+| `place_empty_cup` | -- | 10/10 (100%) | -- | 10/10 (100%) |
+| `place_shoe` | 5/10 (50%) | 5/10 (50%) | -- | 5/10 (50%) |
+| `scan_object` | 9/10 (90%) | 7/10 (70%) | -- | 8/10 (80%) |
+| `adjust_bottle` | -- | 10/10 (100%) | -- | 10/10 (100%) |
+| `beat_block_hammer` | 7/10 (70%) | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) |
+| `click_alarmclock` | -- | 10/10 (100%) | -- | 10/10 (100%) |
+| `click_bell` | -- | 10/10 (100%) | -- | 10/10 (100%) |
+| `grab_roller` | -- | 10/10 (100%) | -- | 10/10 (100%) |
+| `lift_pot` | -- | 10/10 (100%) | -- | 10/10 (100%) |
+| `move_can_pot` | -- | 10/10 (100%) | -- | 9/10 (90%) |
+| `move_pillbottle_pad` | -- | 10/10 (100%) | -- | 9/10 (90%) |
 | `move_playingcard_away` | -- | 10/10 (100%) | -- | 10/10 (100%) |
 | `move_stapler_pad` | 2/10 (20%) | 4/10 (40%) | 6/10 (60%) | 6/10 (60%) |
 | `pick_diverse_bottles` | 10/10 (100%) | 10/10 (100%) | 9/10 (90%) | 8/10 (80%) |

@@ -18,10 +18,14 @@ set are excluded from the main evaluation. The CPU-render snapshot at commit
 \texttt{50a3cc4} supplies 33 completed Base cells and 45 completed FBFM cells
 within this selection. The independently validated GPU-render result at commit
 \texttt{fb58706} adds 12 \texttt{demo\_clean} FBFM cells, each with 20
-episodes; superscript G marks these entries below. Because rendering mode and
-episode sets differ, a G-marked FBFM entry and an unmarked CPU-render Base entry
-in the same row do not constitute a matched comparison and must not be pooled
-into the main result.
+validated episodes. To keep a common 10-episode denominator in this table, each
+of the 12 new entries is recomputed from the first 10 accepted episode records
+for that task in \texttt{trials.csv}; the complete 20-episode records remain in
+the result package. These are the consecutive Clean FBFM entries from
+\texttt{place\_burger\_fries} through \texttt{move\_pillbottle\_pad}. Because
+rendering mode and episode sets differ, these entries and the CPU-render Base
+entries in the same rows do not constitute matched comparisons and must not be
+pooled into the main result.
 
 \begin{table}[H]
     \centering
@@ -47,18 +51,18 @@ into the main result.
         \texttt{handover\_mic} & 7/10 (70\%) & 10/10 (100\%) & -- & -- \\
         \texttt{place\_dual\_shoes} & 0/10 (0\%) & -- & -- & -- \\
         \texttt{place\_bread\_skillet} & 8/10 (80\%) & -- & -- & -- \\
-        \texttt{place\_burger\_fries} & 10/10 (100\%) & 18/20 (90\%)\textsuperscript{G} & -- & 10/10 (100\%) \\
-        \texttt{place\_empty\_cup} & -- & 20/20 (100\%)\textsuperscript{G} & -- & 10/10 (100\%) \\
-        \texttt{place\_shoe} & 5/10 (50\%) & 11/20 (55\%)\textsuperscript{G} & -- & 5/10 (50\%) \\
-        \texttt{scan\_object} & 9/10 (90\%) & 13/20 (65\%)\textsuperscript{G} & -- & 8/10 (80\%) \\
-        \texttt{adjust\_bottle} & -- & 20/20 (100\%)\textsuperscript{G} & -- & 10/10 (100\%) \\
-        \texttt{beat\_block\_hammer} & 7/10 (70\%) & 15/20 (75\%)\textsuperscript{G} & 9/10 (90\%) & 9/10 (90\%) \\
-        \texttt{click\_alarmclock} & -- & 20/20 (100\%)\textsuperscript{G} & -- & 10/10 (100\%) \\
-        \texttt{click\_bell} & -- & 20/20 (100\%)\textsuperscript{G} & -- & 10/10 (100\%) \\
-        \texttt{grab\_roller} & -- & 20/20 (100\%)\textsuperscript{G} & -- & 10/10 (100\%) \\
-        \texttt{lift\_pot} & -- & 20/20 (100\%)\textsuperscript{G} & -- & 10/10 (100\%) \\
-        \texttt{move\_can\_pot} & -- & 19/20 (95\%)\textsuperscript{G} & -- & 9/10 (90\%) \\
-        \texttt{move\_pillbottle\_pad} & -- & 20/20 (100\%)\textsuperscript{G} & -- & 9/10 (90\%) \\
+        \texttt{place\_burger\_fries} & 10/10 (100\%) & 9/10 (90\%) & -- & 10/10 (100\%) \\
+        \texttt{place\_empty\_cup} & -- & 10/10 (100\%) & -- & 10/10 (100\%) \\
+        \texttt{place\_shoe} & 5/10 (50\%) & 5/10 (50\%) & -- & 5/10 (50\%) \\
+        \texttt{scan\_object} & 9/10 (90\%) & 7/10 (70\%) & -- & 8/10 (80\%) \\
+        \texttt{adjust\_bottle} & -- & 10/10 (100\%) & -- & 10/10 (100\%) \\
+        \texttt{beat\_block\_hammer} & 7/10 (70\%) & 9/10 (90\%) & 9/10 (90\%) & 9/10 (90\%) \\
+        \texttt{click\_alarmclock} & -- & 10/10 (100\%) & -- & 10/10 (100\%) \\
+        \texttt{click\_bell} & -- & 10/10 (100\%) & -- & 10/10 (100\%) \\
+        \texttt{grab\_roller} & -- & 10/10 (100\%) & -- & 10/10 (100\%) \\
+        \texttt{lift\_pot} & -- & 10/10 (100\%) & -- & 10/10 (100\%) \\
+        \texttt{move\_can\_pot} & -- & 10/10 (100\%) & -- & 9/10 (90\%) \\
+        \texttt{move\_pillbottle\_pad} & -- & 10/10 (100\%) & -- & 9/10 (90\%) \\
         \texttt{move\_playingcard\_away} & -- & 10/10 (100\%) & -- & 10/10 (100\%) \\
         \texttt{move\_stapler\_pad} & 2/10 (20\%) & 4/10 (40\%) & 6/10 (60\%) & 6/10 (60\%) \\
         \texttt{pick\_diverse\_bottles} & 10/10 (100\%) & 10/10 (100\%) & 9/10 (90\%) & 8/10 (80\%) \\
