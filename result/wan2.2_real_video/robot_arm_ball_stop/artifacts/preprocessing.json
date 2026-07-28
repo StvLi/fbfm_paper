@@ -1,0 +1,55 @@
+{
+  "source_bag": "/home/oem/fbfm_ws/Wan2.2/examples/20260729_005218.db3",
+  "color_topic": "/device_0/sensor_1/Color_0/image/data",
+  "source_message_count": 621,
+  "source_duration_seconds": 20.9806339,
+  "source_nominal_fps": 30,
+  "source_fields": {
+    "stamp_sec": 0,
+    "stamp_nanosec": 1500,
+    "frame_id": "Color",
+    "source_width": 1280,
+    "source_height": 720,
+    "encoding": "rgb8",
+    "step": 3840
+  },
+  "preprocessing": {
+    "duration_seconds": 7.0,
+    "output_fps": 24,
+    "output_frame_count": 168,
+    "vertical_crop_source_rows": [
+      8,
+      711
+    ],
+    "output_resolution": [
+      1280,
+      704
+    ],
+    "timestamp_sampling_error_ms_max_abs": 162.7713,
+    "timestamp_sampling_error_ms_mean_abs": 12.06866805952381,
+    "reused_source_frame_count": 7
+  },
+  "context": {
+    "normalized_frame_range_zero_based": [
+      0,
+      47
+    ],
+    "frame_count": 48,
+    "wan_anchor_frame_zero_based": 47
+  },
+  "prediction_reference": {
+    "normalized_frame_range_zero_based": [
+      47,
+      167
+    ],
+    "frame_count_including_anchor": 121,
+    "future_frame_count": 120,
+    "feedback_slots": 30
+  },
+  "outputs": {
+    "normalized": "/home/oem/fbfm_ws/Wan2.2/results/robot_arm_ball_stop/normalized_first_7s_24fps_1280x704.mp4",
+    "context": "/home/oem/fbfm_ws/Wan2.2/results/robot_arm_ball_stop/input_context_2s.mp4",
+    "reference": "/home/oem/fbfm_ws/Wan2.2/results/robot_arm_ball_stop/reference_future_121f.mp4",
+    "anchor": "/home/oem/fbfm_ws/Wan2.2/results/robot_arm_ball_stop/anchor_frame_048.png"
+  }
+}
