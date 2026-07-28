@@ -82,11 +82,27 @@ checkpoint was not trained on that suite.
 | **0.0487** | **\(2.84\times10^{-4}\)** | **64/80** | **80** |
 | 0.0750 | \(4.37\times10^{-4}\) | 60/80 | 75 |
 
-The middle value is the best tested point estimate and is retained as the
-operational candidate. Its paired advantage over the lower value is 10
-percentage points (\(p=0.0768\), exact two-sided McNemar), while its five-point
-advantage over the upper value is not significant (\(p=0.5034\)). Thus the
-sweep demonstrates gain sensitivity and identifies a stable working region; it
-does not establish a universal optimum. Appendix E reports the preconditioner
-ablation, logarithmic search trajectory, task-level outcomes, and integrity
-checks.
+We retain the middle value, which attained the highest tested success rate
+(80%). Its 10-point gain over the lower value was marginal (\(p=0.0768\), exact
+two-sided McNemar), and its five-point gain over the upper value was not
+significant (\(p=0.5034\)). Thus this sweep shows gain sensitivity, not a
+universal optimum; Appendix E gives the full search and task-level results.
+
+## Real-Video State Feedback and Codec Effects
+
+On the auxiliary ball-collision sequence, extending feedback from 10 to 30
+time-aligned slots progressively covers the measured motion. With all 30 slots,
+FBFM reduces table-region MAE from 21.77 to 6.34 and reduces the mean orange-ball
+center error from 173.84 to 3.05 pixels, confirming that the real-state
+constraints affect the generated trajectory. The same outputs nevertheless
+contain colored high-frequency artifacts, particularly after a constrained
+horizon ends. We attribute this behavior primarily to an imperfect transfer of
+image-space pseudoinverse guidance to Wan2.2's temporally compressed video
+latent: its VAE and video post-training do not ensure that independently encoded
+slot measurements remain on the clean-video manifold expected by the denoiser
+and decoder. Separate image- and latent-space MSE diagnostics support this
+model-specific interpretation.
+
+![Real-video state feedback on the auxiliary ball-collision sequence. Columns
+show 0, 0.25, 0.5, 1, 2, 3, 4, and 5 s; rows show the reference, Wan2.2 Base,
+and FBFM with 10, 20, and 30 measured latent slots.](../../material/wan2.2/ball_meet_ball_fiveway.jpg)

@@ -152,6 +152,7 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 - [ ] Report task success together with the efficiency cost of FBFM, including inference time or throughput, VJP overhead, peak memory, and effective control/update rate.
 - [ ] Validate the locked OpenReview Abstract claim that FBFM improves success rates by more than 5% on the selected LIBERO and RoboTwin tasks; report the per-task values and the exact baseline used for each improvement.
 - [ ] If physical-robot tracking remains an Abstract claim, define the platform, tasks, trial count, baseline, tracking metric, and quantitative result; otherwise remove or weaken that claim before submission.
+- [ ] Add the complete image- and latent-space MSE records supporting the Wan2.2 codec/post-training interpretation, and keep the `robot_arm_ball_stop` result labeled as recorded real-world observation prediction rather than closed-loop policy deployment.
 - [x] Track and close both previously confirmed issues in `docs/handover.md` at implementation-audit commit `3ecac79`; re-open the item if either path is absent from the final experiment commit, and keep any newly confirmed code--theory mismatch equally concise there.
 - [ ] Audit Abstract, Introduction, Method, figures, Experiment and Result, Conclusion, and implementation evidence together after both model tracks stabilize; do not let planned or unverified capabilities appear as completed results.
 
