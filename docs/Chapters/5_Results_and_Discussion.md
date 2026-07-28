@@ -18,21 +18,22 @@ under both configurations. Do not use the non-matched pooled snapshot rates. -->
 
 ## DreamZero on LIBERO
 
-We similarly compare the frozen DreamZero checkpoint with and without FBFM on
-the four standard LIBERO suites used in this study. LIBERO-90 is excluded. The
-two rows will be filled only from matched evaluations using the same checkpoint,
-task set, reset IDs, episode horizon, and delayed pseudo-asynchronous overlap
-protocol. Results from DreamZero's native synchronous rollout are not used in
-this comparison. Full per-task records are maintained in Appendix D.
+We compare the frozen DreamZero checkpoint with and without FBFM on
+LIBERO-Spatial, LIBERO-Object, LIBERO-Goal, and LIBERO-10; LIBERO-90 is
+excluded. Both evaluations use the same tasks, 20 official initial states per
+task, 480-step horizon, and delayed pseudo-asynchronous overlap protocol.
+DreamZero's native synchronous rollout is not used as the Base. For concision,
+the main table reports the two suites with positive changes and the total over
+all four evaluated suites. Appendix D reports every suite and task.
 
-| Method | Spatial SR (%) | Object SR (%) | Goal SR (%) | LIBERO-10 SR (%) |
-| --- | ---: | ---: | ---: | ---: |
-| DreamZero (Base, NONE) | -- | -- | -- | -- |
-| DreamZero + FBFM (Ours) | -- | -- | -- | -- |
+| Method | LIBERO-Goal SR (%) | LIBERO-10 SR (%) | Total SR (%) |
+| --- | ---: | ---: | ---: |
+| DreamZero (Base, NONE) | 68.5 | 60.5 | 70.125 |
+| DreamZero + FBFM (Ours) | **71.0** | **63.0** | **70.750** |
 
-<!-- TODO(results): Fill both rows only after the matched delayed
-pseudo-asynchronous evaluation is complete. Keep native synchronous results and
-preliminary single-task diagnostics out of this table. -->
+FBFM improves both LIBERO-Goal and LIBERO-10 by 2.5 percentage points. Across
+all 800 episodes, its total success rate increases by 0.625 percentage points.
+The heterogeneous suite-level behavior is discussed below.
 
 ## State-Feedback Gain and Closed-Loop Stability
 

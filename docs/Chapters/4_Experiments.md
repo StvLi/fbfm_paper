@@ -20,8 +20,8 @@ same training-free feedback principle transfers across distinct WAM
 factorizations rather than comparing the two base models directly.
 
 **Benchmarks and tasks.** We evaluate the LingBot-VA track on RoboTwin and the
-DreamZero track on LIBERO. The planned matched DreamZero comparison covers all
-four standard suites---LIBERO-Spatial, LIBERO-Object, LIBERO-Goal, and
+DreamZero track on LIBERO. The DreamZero comparison covers all four standard
+suites---LIBERO-Spatial, LIBERO-Object, LIBERO-Goal, and
 LIBERO-10---with 10 tasks per suite. Each task is evaluated once at each reset
 ID from 0 to 19, giving 20 episodes per task and 800 episodes per method. Both
 benchmarks provide environment-side, task-specific completion predicates. We use these native
@@ -71,6 +71,7 @@ remain a fixed prefix target throughout the active chunk.
 | Pseudo-clock release | 26 video calls / 16 actions | 8 DiT blocks / 8 actions |
 | State-target refresh | 4 sampled observations / latent | Every 3 actions (training stride) |
 | State preconditioner | \(1\) | \(P_Z=56/9600\) |
+| Proportional state gain | n/a | \(k_p=0.0486968\) |
 | Guidance clip \(\beta\) | 10 | 10 |
 | Precision | BF16 | BF16 |
 
