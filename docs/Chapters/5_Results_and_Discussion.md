@@ -20,14 +20,16 @@ under both configurations. Do not use the non-matched pooled snapshot rates. -->
 
 We similarly compare the frozen DreamZero checkpoint with and without FBFM on
 the four standard LIBERO suites used in this study. LIBERO-90 is excluded. The
-base row is complete; the FBFM row will be filled from evaluations using the
-same checkpoint, task set, reset IDs, and episode horizon. Full per-task records
-are maintained in Appendix D.
+two rows will be filled only from matched evaluations using the same checkpoint,
+task set, reset IDs, episode horizon, and delayed pseudo-asynchronous overlap
+protocol. Results from DreamZero's native synchronous rollout are not used in
+this comparison. Full per-task records are maintained in Appendix D.
 
 | Method | Spatial SR (%) | Object SR (%) | Goal SR (%) | LIBERO-10 SR (%) |
 | --- | ---: | ---: | ---: | ---: |
-| DreamZero (Base, NONE) | 90.50 | 90.50 | 57.00 | 71.00 |
+| DreamZero (Base, NONE) | -- | -- | -- | -- |
 | DreamZero + FBFM (Ours) | -- | -- | -- | -- |
 
-<!-- TODO(results): Fill the FBFM row after the corrected matched evaluation is
-complete. Keep preliminary single-task diagnostics out of this table. -->
+<!-- TODO(results): Fill both rows only after the matched delayed
+pseudo-asynchronous evaluation is complete. Keep native synchronous results and
+preliminary single-task diagnostics out of this table. -->

@@ -36,9 +36,11 @@ Appendix~\ref{app:detailed-results}.
 
 We similarly compare the frozen DreamZero checkpoint with and without FBFM on
 the four standard LIBERO suites used in this study. LIBERO-90 is excluded. The
-base row is complete; the FBFM row will be filled from evaluations using the
-same checkpoint, task set, reset IDs, and episode horizon. Full per-task records
-are maintained in Appendix~\ref{app:detailed-results}.
+two rows will be filled only from matched evaluations using the same checkpoint,
+task set, reset IDs, episode horizon, and delayed pseudo-asynchronous overlap
+protocol. Results from DreamZero's native synchronous rollout are not used in
+this comparison. Full per-task records are maintained in
+Appendix~\ref{app:detailed-results}.
 
 \begin{table}[H]
     \centering
@@ -48,7 +50,7 @@ are maintained in Appendix~\ref{app:detailed-results}.
         \toprule
         Method & Spatial & Object & Goal & LIBERO-10 \\
         \midrule
-        DreamZero (Base, NONE) & 90.50 & 90.50 & 57.00 & 71.00 \\
+        DreamZero (Base, NONE) & -- & -- & -- & -- \\
         DreamZero + FBFM (Ours) & -- & -- & -- & -- \\
         \bottomrule
     \end{tabular}
@@ -56,5 +58,6 @@ are maintained in Appendix~\ref{app:detailed-results}.
     \label{tab:dreamzero-libero-summary}
 \end{table}
 
-% TODO(results): Fill the FBFM row after the corrected matched evaluation is
-% complete. Keep preliminary single-task diagnostics out of this table.
+% TODO(results): Fill both rows only after the matched delayed
+% pseudo-asynchronous evaluation is complete. Keep native synchronous results
+% and preliminary single-task diagnostics out of this table.

@@ -131,8 +131,8 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 ### Evaluation and reporting
 
 - [ ] Keep Section 4.3 blank until the baseline and ablation design is agreed with the experiment team; only then finalize the compared variants, fairness controls, and feasible component ablations.
-- [x] Record the DreamZero base protocol and suite-level results: SFT step 26,000; all 40 tasks across LIBERO-Spatial, LIBERO-Object, LIBERO-Goal, and LIBERO-10; reset IDs 0--19; 618/800 aggregate successes (77.25%).
-- [ ] Run every DreamZero comparison on the same checkpoint and reset IDs as the base evaluation; retain paired episode outcomes, report absolute percentage-point changes with paired uncertainty, and expand the current baseline table only after RTC/FBFM results are complete.
+- [ ] Keep the archived DreamZero native synchronous result separate from the main experiment; it is not the Base/NONE row and must not be copied into Appendix D or Section 5.2.
+- [ ] Run DreamZero Base/NONE and FBFM on the same checkpoint, reset IDs, episode horizon, and delayed pseudo-asynchronous overlap protocol; retain paired episode outcomes and fill Appendix D before computing the four suite-level rates in Section 5.2.
 - [ ] Complete matched `NONE`, `RTC`, and full FBFM comparisons on the same pseudo-asynchronous DreamZero path before attributing changes to state feedback; keep native synchronous DreamZero as a separately labeled control.
 - [ ] Treat the current single-task DreamZero pilots as diagnostics only. Do not promote preliminary success counts or use them to support a benchmark-level improvement claim before the matched protocol and planned episode counts are complete.
 - [ ] Fill Appendix D only from matched final records: all selected 42 RoboTwin tasks under both clean and randomized configurations for LingBot-VA Base/FBFM, and all 40 tasks from LIBERO-Spatial, Object, Goal, and LIBERO-10 for DreamZero Base/FBFM. Keep LIBERO-90 and longer excluded RoboTwin tasks outside the main tables.
