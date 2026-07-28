@@ -5,43 +5,56 @@
 
 % This file mirrors 5_Results_and_Discussion.md. Keep both versions aligned.
 
-\paragraph{DreamZero baseline on LIBERO.}
-We first characterize the frozen DreamZero checkpoint before adding FBFM.
-Table~\ref{tab:dreamzero-libero-base} summarizes all 800 base-model episodes.
-The checkpoint succeeds in 618 episodes, corresponding to an aggregate success
-rate of 77.25\%.
+\subsection{LingBot-VA on RoboTwin}
+
+We compare the frozen LingBot-VA checkpoint with no inference-time feedback
+(Base) against the same checkpoint equipped with FBFM (Ours). The final summary
+uses the same selected 42-task set for both methods and reports only the
+aggregate success rate under RoboTwin's clean and randomized configurations.
+Task-level successes and trial counts are reserved for
+Appendix~\ref{app:detailed-results}.
 
 \begin{table}[H]
     \centering
-    \scriptsize
-    \renewcommand{\arraystretch}{1.08}
-    \begin{tabular}{lrr}
-        \hline
-        \textbf{Suite} & \textbf{Success} &
-        \textbf{SR (\%)}\\
-        \hline
-        Spatial & 181/200 & 90.50\\
-        Object & 181/200 & 90.50\\
-        Goal & 114/200 & 57.00\\
-        LIBERO-10 & 142/200 & 71.00\\
-        \hline
-        \textbf{Aggregate} & \textbf{618/800} &
-        \textbf{77.25}\\
-        \hline
+    \small
+    \begin{tabular}{lcc}
+        \toprule
+        Method & Clean SR (\%) & Randomized SR (\%) \\
+        \midrule
+        LingBot-VA (Base, NONE) & -- & -- \\
+        LingBot-VA + FBFM (Ours) & -- & -- \\
+        \bottomrule
     \end{tabular}
-    \caption{DreamZero base checkpoint (SFT step 26,000) on LIBERO.}
-    \label{tab:dreamzero-libero-base}
+    \caption{Final success rates for LingBot-VA on the selected RoboTwin tasks.}
+    \label{tab:lingbot-robotwin-summary}
 \end{table}
 
-The aggregate masks substantial task heterogeneity. Spatial and object
-generalization both reach 90.5\%, whereas LIBERO-Goal falls to 57.0\%; five of
-its ten tasks have success rates at or below 30\%. LIBERO-10 reaches 71.0\%,
-including one task at 10\%. The base checkpoint therefore provides both
-ceiling-limited tasks and tasks with considerable room for correction.
-Subsequent FBFM comparisons must use the same checkpoint and reset IDs and
-report paired per-task and per-suite changes; this baseline alone is not
-evidence for an FBFM improvement.
+% TODO(results): Fill only after all 42 tasks have matched Base/FBFM records
+% under both configurations. Do not use the non-matched pooled snapshot rates.
 
-% TODO(results): Expand this table with the matched RTC and FBFM results. Retain
-% per-task paired outcomes in the appendix and report absolute percentage-point
-% changes with uncertainty.
+\subsection{DreamZero on LIBERO}
+
+We similarly compare the frozen DreamZero checkpoint with and without FBFM on
+the four standard LIBERO suites used in this study. LIBERO-90 is excluded. The
+base row is complete; the FBFM row will be filled from evaluations using the
+same checkpoint, task set, reset IDs, and episode horizon. Full per-task records
+are maintained in Appendix~\ref{app:detailed-results}.
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{5pt}
+    \begin{tabular}{lcccc}
+        \toprule
+        Method & Spatial & Object & Goal & LIBERO-10 \\
+        \midrule
+        DreamZero (Base, NONE) & 90.50 & 90.50 & 57.00 & 71.00 \\
+        DreamZero + FBFM (Ours) & -- & -- & -- & -- \\
+        \bottomrule
+    \end{tabular}
+    \caption{Final success rates (\%) for DreamZero on LIBERO.}
+    \label{tab:dreamzero-libero-summary}
+\end{table}
+
+% TODO(results): Fill the FBFM row after the corrected matched evaluation is
+% complete. Keep preliminary single-task diagnostics out of this table.

@@ -1,0 +1,140 @@
+% !TEX root = ../preview.tex
+
+\section{Detailed Evaluation Records}
+\label{app:detailed-results}
+
+This appendix is the source-of-record layout for the main success-rate tables.
+Each entry will be filled as \emph{successes/trials (SR)} only after the
+corresponding Base and FBFM evaluations satisfy the same checkpoint, task
+configuration, initialization protocol, and episode horizon. Dashes denote
+pending matched records rather than zero success.
+
+\subsection{LingBot-VA on RoboTwin}
+
+The selected RoboTwin evaluation contains 42 tasks under both
+\texttt{demo\_clean} and \texttt{demo\_randomized}. Longer tasks outside this
+set are excluded from the main evaluation.
+
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \setlength{\tabcolsep}{3pt}
+    \renewcommand{\arraystretch}{0.92}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lcccc}
+        \toprule
+        Task & Clean Base & Clean FBFM & Randomized Base & Randomized FBFM \\
+        \midrule
+        \texttt{handover\_block} & -- & -- & -- & -- \\
+        \texttt{place\_cans\_plasticbox} & -- & -- & -- & -- \\
+        \texttt{stack\_blocks\_two} & -- & -- & -- & -- \\
+        \texttt{open\_laptop} & -- & -- & -- & -- \\
+        \texttt{place\_bread\_basket} & -- & -- & -- & -- \\
+        \texttt{place\_can\_basket} & -- & -- & -- & -- \\
+        \texttt{place\_object\_basket} & -- & -- & -- & -- \\
+        \texttt{put\_object\_cabinet} & -- & -- & -- & -- \\
+        \texttt{shake\_bottle} & -- & -- & -- & -- \\
+        \texttt{shake\_bottle\_horizontally} & -- & -- & -- & -- \\
+        \texttt{dump\_bin\_bigbin} & -- & -- & -- & -- \\
+        \texttt{handover\_mic} & -- & -- & -- & -- \\
+        \texttt{place\_dual\_shoes} & -- & -- & -- & -- \\
+        \texttt{place\_bread\_skillet} & -- & -- & -- & -- \\
+        \texttt{place\_burger\_fries} & -- & -- & -- & -- \\
+        \texttt{place\_empty\_cup} & -- & -- & -- & -- \\
+        \texttt{place\_shoe} & -- & -- & -- & -- \\
+        \texttt{scan\_object} & -- & -- & -- & -- \\
+        \texttt{adjust\_bottle} & -- & -- & -- & -- \\
+        \texttt{beat\_block\_hammer} & -- & -- & -- & -- \\
+        \texttt{click\_alarmclock} & -- & -- & -- & -- \\
+        \texttt{click\_bell} & -- & -- & -- & -- \\
+        \texttt{grab\_roller} & -- & -- & -- & -- \\
+        \texttt{lift\_pot} & -- & -- & -- & -- \\
+        \texttt{move\_can\_pot} & -- & -- & -- & -- \\
+        \texttt{move\_pillbottle\_pad} & -- & -- & -- & -- \\
+        \texttt{move\_playingcard\_away} & -- & -- & -- & -- \\
+        \texttt{move\_stapler\_pad} & -- & -- & -- & -- \\
+        \texttt{pick\_diverse\_bottles} & -- & -- & -- & -- \\
+        \texttt{pick\_dual\_bottles} & -- & -- & -- & -- \\
+        \texttt{place\_a2b\_left} & -- & -- & -- & -- \\
+        \texttt{place\_a2b\_right} & -- & -- & -- & -- \\
+        \texttt{place\_container\_plate} & -- & -- & -- & -- \\
+        \texttt{place\_fan} & -- & -- & -- & -- \\
+        \texttt{place\_mouse\_pad} & -- & -- & -- & -- \\
+        \texttt{place\_object\_scale} & -- & -- & -- & -- \\
+        \texttt{place\_object\_stand} & -- & -- & -- & -- \\
+        \texttt{place\_phone\_stand} & -- & -- & -- & -- \\
+        \texttt{press\_stapler} & -- & -- & -- & -- \\
+        \texttt{rotate\_qrcode} & -- & -- & -- & -- \\
+        \texttt{stamp\_seal} & -- & -- & -- & -- \\
+        \texttt{turn\_switch} & -- & -- & -- & -- \\
+        \bottomrule
+    \end{tabular}}
+    \caption{Detailed LingBot-VA RoboTwin record. Each cell will contain
+    successes/trials and the corresponding success rate.}
+    \label{tab:lingbot-robotwin-detailed}
+\end{table}
+
+\clearpage
+\subsection{DreamZero on LIBERO}
+
+The detailed LIBERO record covers all ten tasks in each of LIBERO-Spatial,
+LIBERO-Object, LIBERO-Goal, and LIBERO-10. LIBERO-90 is not included.
+
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \setlength{\tabcolsep}{8pt}
+    \renewcommand{\arraystretch}{0.92}
+    \begin{tabular}{lccc}
+        \toprule
+        Suite & Task ID & Base & FBFM \\
+        \midrule
+        LIBERO-Spatial & 0 & -- & -- \\
+        LIBERO-Spatial & 1 & -- & -- \\
+        LIBERO-Spatial & 2 & -- & -- \\
+        LIBERO-Spatial & 3 & -- & -- \\
+        LIBERO-Spatial & 4 & -- & -- \\
+        LIBERO-Spatial & 5 & -- & -- \\
+        LIBERO-Spatial & 6 & -- & -- \\
+        LIBERO-Spatial & 7 & -- & -- \\
+        LIBERO-Spatial & 8 & -- & -- \\
+        LIBERO-Spatial & 9 & -- & -- \\
+        \midrule
+        LIBERO-Object & 0 & -- & -- \\
+        LIBERO-Object & 1 & -- & -- \\
+        LIBERO-Object & 2 & -- & -- \\
+        LIBERO-Object & 3 & -- & -- \\
+        LIBERO-Object & 4 & -- & -- \\
+        LIBERO-Object & 5 & -- & -- \\
+        LIBERO-Object & 6 & -- & -- \\
+        LIBERO-Object & 7 & -- & -- \\
+        LIBERO-Object & 8 & -- & -- \\
+        LIBERO-Object & 9 & -- & -- \\
+        \midrule
+        LIBERO-Goal & 0 & -- & -- \\
+        LIBERO-Goal & 1 & -- & -- \\
+        LIBERO-Goal & 2 & -- & -- \\
+        LIBERO-Goal & 3 & -- & -- \\
+        LIBERO-Goal & 4 & -- & -- \\
+        LIBERO-Goal & 5 & -- & -- \\
+        LIBERO-Goal & 6 & -- & -- \\
+        LIBERO-Goal & 7 & -- & -- \\
+        LIBERO-Goal & 8 & -- & -- \\
+        LIBERO-Goal & 9 & -- & -- \\
+        \midrule
+        LIBERO-10 & 0 & -- & -- \\
+        LIBERO-10 & 1 & -- & -- \\
+        LIBERO-10 & 2 & -- & -- \\
+        LIBERO-10 & 3 & -- & -- \\
+        LIBERO-10 & 4 & -- & -- \\
+        LIBERO-10 & 5 & -- & -- \\
+        LIBERO-10 & 6 & -- & -- \\
+        LIBERO-10 & 7 & -- & -- \\
+        LIBERO-10 & 8 & -- & -- \\
+        LIBERO-10 & 9 & -- & -- \\
+        \bottomrule
+    \end{tabular}
+    \caption{Detailed DreamZero LIBERO record. Each cell will contain
+    successes/trials and the corresponding success rate.}
+    \label{tab:dreamzero-libero-detailed}
+\end{table}
