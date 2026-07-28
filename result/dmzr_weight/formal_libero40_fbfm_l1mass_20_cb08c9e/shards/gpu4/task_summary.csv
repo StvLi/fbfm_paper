@@ -1,0 +1,6 @@
+suite,task_id,status,trials,target_trials,successes,failures,success_rate,wilson_low,wilson_high,mean_executed_steps,mean_elapsed_seconds,mean_inference_wave_seconds,task_description,output
+libero_spatial,4,complete,20,20,9,11,0.45,0.2581978582556243,0.6579146575496577,357.45,211.13815414590061,4.540701315228167,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,tasks/libero_spatial/task_004
+libero_object,2,complete,20,20,14,6,0.7,0.4810271816464765,0.8545227551323956,261.6,151.67664230618976,4.392928073946934,pick up the salad dressing and place it in the basket,tasks/libero_object/task_002
+libero_goal,0,complete,20,20,20,0,1.0,0.8388748419471806,1.0,136.25,80.56098072449677,4.258413928865165,open the middle drawer of the cabinet,tasks/libero_goal/task_000
+libero_goal,8,complete,20,20,20,0,1.0,0.8388748419471806,1.0,138.8,82.28170013782218,4.293187132021102,put the bowl on the plate,tasks/libero_goal/task_008
+libero_10,6,complete,20,20,10,10,0.5,0.2992980081982123,0.7007019918017877,367.25,207.8379235831613,4.354877654948116,put the white mug on the plate and put the chocolate pudding to the right of the plate,tasks/libero_10/task_006

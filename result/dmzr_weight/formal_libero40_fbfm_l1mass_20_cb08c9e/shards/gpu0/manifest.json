@@ -1,0 +1,35 @@
+{
+  "benchmark": "LIBERO",
+  "mode": "FBFM",
+  "suites": [
+    "libero_spatial",
+    "libero_object",
+    "libero_goal",
+    "libero_10"
+  ],
+  "tasks": 5,
+  "task_keys": [
+    "libero_spatial:0",
+    "libero_spatial:8",
+    "libero_object:6",
+    "libero_goal:4",
+    "libero_10:2"
+  ],
+  "trials_per_task": 20,
+  "expected_episodes": 100,
+  "max_steps_by_suite": {
+    "libero_spatial": 480,
+    "libero_object": 480,
+    "libero_goal": 480,
+    "libero_10": 480
+  },
+  "horizon_policy": "uniform_480_for_cross_suite_comparison",
+  "environment_seed": 0,
+  "model_seed_rule": "fixed",
+  "solver_release_policy": "uniform",
+  "feedback_observation_stride": 1,
+  "feedback_encoding": "causal_rolling_past",
+  "state_weight": 0.005833333333333334,
+  "code_commit": "cb08c9e552730d26cc446885e79a3e270a270d0c",
+  "created_at": "2026-07-26T15:14:47+08:00"
+}
