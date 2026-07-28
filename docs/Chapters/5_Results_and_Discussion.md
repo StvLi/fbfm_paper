@@ -88,7 +88,25 @@ two-sided McNemar), and its five-point gain over the upper value was not
 significant (\(p=0.5034\)). Thus this sweep shows gain sensitivity, not a
 universal optimum; Appendix E gives the full search and task-level results.
 
-## Real-Video State Feedback and Codec Effects
+## Real-World Robot Observation Prediction and Codec Effects
+
+The following figure reports the recorded physical robot-arm ball-stopping
+experiment described above. Both methods start from the same image at the end
+of a two-second context and predict the same five-second, 121-frame horizon.
+The Base receives no later image, whereas FBFM causally incorporates all 120
+measured future RealSense frames as 30 latent feedback slots. Base preserves a
+coherent robot and tabletop but departs from the recorded ball evolution. FBFM
+moves the full-frame prediction closer to the reference (MAE 9.63 to 9.27 and
+PSNR 20.06 to 23.10 dB), confirming that the real observations affect the
+solve. However, the unscaled state-only setting used here (`kp=1`) produces
+visible high-frequency artifacts from approximately 0.25 s and increases
+temporal-gradient MAE from 2.85 to 5.48. The result is therefore a real-world
+observation-prediction diagnostic, not a closed-loop robot-control deployment.
+
+![Real-world robot-arm ball-stopping observation prediction. The RGB sequence
+was recorded from a physical robot task with a RealSense D435i. Columns show 0,
+0.25, 0.5, 1, 2, 3, 4, and 5 s; rows show the recorded reference, Wan2.2 Base
+without feedback, and FBFM using all 30 measured latent slots.](../../material/wan2.2/robot_arm_ball_stop_keyframes.jpg)
 
 On the auxiliary ball-collision sequence, extending feedback from 10 to 30
 time-aligned slots progressively covers the measured motion. With all 30 slots,
