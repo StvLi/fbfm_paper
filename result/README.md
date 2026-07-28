@@ -10,12 +10,14 @@ workspaces.
 | --- | --- | --- |
 | `lbva_none/` | LingBot-VA without feedback on RoboTwin, CPU rendering | 37 complete 10-episode cells |
 | `lbva_fbfm/` | LingBot-VA with FBFM on RoboTwin, CPU rendering | 45 complete 10-episode cells |
-| `lbva_fbfm_gpu/` | LingBot-VA with FBFM on RoboTwin `demo_clean`, GPU rendering | 12 complete 20-episode tasks |
+| `lbva_fbfm_gpu/` | LingBot-VA with FBFM on RoboTwin `demo_clean`, GPU rendering | 12 complete tasks, 216/240 successes |
+| `lbva_rtc/` | LingBot-VA with RTC on RoboTwin `demo_clean`, GPU rendering | 12 complete tasks, 223/240 successes |
 | `dmzr_weight/` | DreamZero FBFM state-weight diagnosis and proportional-gain search | Includes the valid 240-episode Pro6000 `kp` comparison |
 
 The CPU snapshots use only cells satisfying
-`status == complete && trials == 10`. The LingBot-VA GPU package contains
-episode-level records for 240 strictly validated trials; Appendix D currently
-reports only the first 10 accepted episodes per task. Coverage, rendering mode,
-and episode identities differ across packages, so pooled rates must not be
-treated as matched method comparisons.
+`status == complete && trials == 10`. The LingBot-VA GPU packages contain
+episode-level records for 240 strictly validated trials per method; Appendix D
+currently reports only the first 10 accepted FBFM episodes per task. Coverage,
+rendering mode, and episode identities differ across packages, so pooled rates
+must not be treated as matched method comparisons without checking the package
+protocols and trial identities.
