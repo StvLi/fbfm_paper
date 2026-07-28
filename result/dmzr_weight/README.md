@@ -13,6 +13,14 @@ over eight tasks. The neighboring points obtain `56/80 = 70%` and
 `60/80 = 75%`; these differences are screening evidence, not a statistically
 conclusive superiority claim.
 
+## Formal LIBERO-40 Result In This Branch
+
+[`formal_libero40_fbfm_kp00486968_20_a051933/`](formal_libero40_fbfm_kp00486968_20_a051933/README.md)
+contains the complete DreamZero FBFM evaluation with `kp=0.0486968`: 40 tasks,
+20 trials per task, and `566/800 = 70.75%` overall success. The directory
+includes all compact episode ledgers, per-task summaries, manifests, runtime
+provenance, and recovery records.
+
 ## Scope
 
 ```text

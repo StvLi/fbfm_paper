@@ -1,0 +1,6 @@
+suite,task_id,status,trials,target_trials,successes,failures,success_rate,wilson_low,wilson_high,mean_executed_steps,mean_elapsed_seconds,mean_inference_wave_seconds,task_description,output
+libero_spatial,1,complete,20,20,18,2,0.9,0.6989663547715128,0.9721335187862319,212.2,128.10511154275156,4.503839639043293,pick up the black bowl next to the ramekin and place it on the plate,tasks/libero_spatial/task_001
+libero_spatial,9,complete,20,20,15,5,0.75,0.531299122381256,0.8881382985923343,266.1,159.01161187643885,4.511565907540189,pick up the black bowl on the wooden cabinet and place it on the plate,tasks/libero_spatial/task_009
+libero_object,7,complete,20,20,7,13,0.35,0.18119182410108206,0.5671457233147638,389.3,217.77913308404385,4.317926198918276,pick up the milk and place it in the basket,tasks/libero_object/task_007
+libero_goal,5,complete,20,20,15,5,0.75,0.531299122381256,0.8881382985923343,298.5,166.5721242807631,4.249262742910541,push the plate to the front of the stove,tasks/libero_goal/task_005
+libero_10,3,complete,20,20,12,8,0.6,0.3865815007622531,0.781193467627183,341.55,184.75429379383567,4.148396006259083,put the black bowl in the bottom drawer of the cabinet and close it,tasks/libero_10/task_003

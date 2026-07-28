@@ -1,0 +1,16 @@
+{
+  "status": "complete",
+  "updated_at": "2026-07-28T02:19:19+08:00",
+  "mode": "FBFM",
+  "code_commit": "a051933e2b058d74bb268e94080464569d99ce39",
+  "state_weight": 0.005833333333333334,
+  "state_feedback_kp": 0.0486968,
+  "effective_state_weight": 0.0002840646666666667,
+  "tasks": 40,
+  "complete_tasks": 40,
+  "trials_per_task": 20,
+  "episodes": 800,
+  "expected_episodes": 800,
+  "successes": 566,
+  "success_rate": 0.7075
+}

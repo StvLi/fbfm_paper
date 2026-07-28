@@ -1,0 +1,6 @@
+suite,task_id,status,trials,target_trials,successes,failures,success_rate,wilson_low,wilson_high,mean_executed_steps,mean_elapsed_seconds,mean_inference_wave_seconds,task_description,output
+libero_spatial,7,complete,20,20,19,1,0.95,0.763868806553258,0.9911185511992047,138.55,84.62327995611122,4.383259405822869,pick up the black bowl on the stove and place it on the plate,tasks/libero_spatial/task_007
+libero_object,5,complete,20,20,20,0,1.0,0.8388748419471806,1.0,158.2,92.13450245914865,4.229794965592101,pick up the tomato sauce and place it in the basket,tasks/libero_object/task_005
+libero_goal,3,complete,20,20,9,11,0.45,0.2581978582556243,0.6579146575496577,364.1,208.55257149354438,4.405333040974141,open the top drawer and put the bowl inside,tasks/libero_goal/task_003
+libero_10,1,complete,20,20,12,8,0.6,0.3865815007622531,0.781193467627183,416.45,235.45295663176222,4.353887743124167,put both the cream cheese box and the butter in the basket,tasks/libero_10/task_001
+libero_10,9,complete,20,20,9,11,0.45,0.2581978582556243,0.6579146575496577,420.7,234.19123051740462,4.3056225408231406,put the yellow and white mug in the microwave and close it,tasks/libero_10/task_009
