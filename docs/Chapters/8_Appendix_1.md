@@ -20,11 +20,6 @@ joint-generation FBFM formulations.
 | \(\mathbf{u},v_\theta,\tilde v_\theta\) | Conditional target velocity, learned Flow-Matching vector field, and its noise-level parameterization \(\tilde v_\theta=-v_\theta\). |
 | \(\mathcal{D},p(\tau),\mathcal{L}_{\mathrm{FM}}\) | Training distribution, flow-time sampling distribution, and Flow-Matching objective. |
 | \(\hat{\mathbf{X}}_t,\hat{\mathbf{X}}_t^1,f_\theta^\tau\) | Generated chunk, predicted clean endpoint, and the endpoint predictor evaluated at flow time \(\tau\). |
-| \(\mathbf{Y}_t,\mathcal{X},\mathcal{Y},h,h^\dagger\) | Feedback measurement, generation and measurement spaces, feedback encoder, and generalized lifting decoder. |
-| \(\boldsymbol{\eta},\sigma_y\) | Measurement noise and its standard deviation. |
-| \(\mathbf w_t,\mathbf W_t\) | Element-wise feedback mask or confidence weights and the corresponding diagonal weighting operator \(\mathbf W_t=\operatorname{Diag}(\mathbf w_t)\). |
-| \(\mathbf{e}_t^\tau,\mathbf{g}_t^\tau\) | Masked lifted discrepancy and its vector--Jacobian product with respect to the current flow variable. |
-| \(v_{\mathrm{PG}},\lambda_\tau\) | Pseudoinverse-guided velocity field and its time-dependent guidance strength. |
 
 Method-specific extensions:
 
@@ -32,15 +27,19 @@ Method-specific extensions:
 |---|---|
 | \(\mathcal I_t^A,a_{t+i}^{\mathrm{prev}}\) | The action-slot overlap between the preceding and new chunks, and the preceding chunk's action aligned to an overlap slot. |
 | \(\mathcal F_{t,k}\) | Dynamic set of encoded real-state feedback available before solver evaluation \(k\), kept separate from the solver-start history \(\mathcal H_t\). |
+| \(Q,D_Q,\mathbf Q_t\) | Generic modality index \(Q\in\{Z,A,X\}\), its generation-space dimension, and the corresponding latent-state, action, or joint chunk. |
+| \(\theta_Q,v_{\theta_Q}^Q,\tau_k^Q,\mathcal K_{t,k}^Q\) | Frozen parameters, vector field, flow time, and native conditioning context for modality \(Q\). |
+| \(\mathbf m_{t,k}^Q,h_Q,h_Q^\dagger,\boldsymbol\eta,\sigma_y\) | Feedback-space measurement, feedback encoder and generalized lifting decoder, measurement noise, and its standard deviation. |
+| \(\mathbf Y_{t,k}^Q,\mathbf W_{t,k}^Q\) | Lifted feedback target and its support/confidence weighting operator. |
+| \(\mathbf P^Q,P_Z,P_A\) | Modality preconditioner and the state/action scale factors kept distinct from the support mask. |
+| \(\hat{\mathbf Q}_{t,k}^1,f_{\theta_Q}^{Q,\tau_k^Q},\mathbf e_{t,k}^Q\) | Predicted clean endpoint, its endpoint predictor, and the preconditioned masked discrepancy. |
+| \(\mathbf J_{t,k}^Q,\mathbf g_{t,k}^Q,v_{\mathrm{FBFM}}^Q,\lambda_{\tau_k^Q}^Q\) | Endpoint Jacobian, VJP correction, guided vector field, and flow-time-dependent guidance strength. |
 | \(\theta_Z,\theta_A,v_{\theta_Z}^Z,v_{\theta_A}^A\) | Frozen parameters and separate state/action vector fields of a stage-wise WAM. |
 | \(\tau_k^Z,\tau_k^A,f_{\theta_Z}^{Z,\tau_k^Z},f_{\theta_A}^{A,\tau_k^A}\) | State/action flow times and their clean-endpoint predictors at solver evaluation \(k\). |
 | \(\mathbf Y_{t,k}^Z,\mathbf W_{t,k}^Z,w_{t,i}^{Z,k}\) | Aligned dynamic state-feedback target, its block mask/weighting operator, and the weight for state slot \(i\). |
 | \(\mathbf Y_t^A,\mathbf W_t^A\) | Aligned committed-action target and the general previous-action weighting operator over the cross-chunk overlap. |
 | \(\hat{\mathbf Z}_t,\check{\mathbf Z}_{t,k},\Phi_Z,\mathcal C_{t,k}^Z\) | Generated state endpoint, its latest feedback-refreshed representation, the native state-context constructor, and the context supplied to the action flow. |
-| \(\mathbf e_{t,k}^Z,\mathbf e_{t,k}^A,\mathbf g_{t,k}^Z,\mathbf g_{t,k}^A\) | State/action discrepancies and their corresponding VJPs. |
-| \(v_{\mathrm{FBFM}}^Z,v_{\mathrm{FBFM}}^A,\lambda_{\tau_k^Z}^Z,\lambda_{\tau_k^A}^A\) | State/action FBFM-guided vector fields and their guidance strengths. |
 | \(\tau_k^X,v_\theta^X,f_\theta^{X,\tau_k^X}\) | Joint flow time, vector field, and clean-endpoint predictor at solver evaluation \(k\). |
-| \(\mathbf Y_{t,k}^X,\mathbf W_{t,k}^X,\mathbf e_{t,k}^X,\mathbf g_{t,k}^X\) | Joint feedback target, block weighting operator, discrepancy, and VJP correction. |
-| \(v_{\mathrm{FBFM}}^X,\lambda_{\tau_k^X}^X\) | FBFM-guided joint vector field and its guidance strength. |
+| \(\mathbf Y_{t,k}^X,\mathbf W_{t,k}^X,\mathbf P^X\) | Joint feedback target, block support/confidence operator, and block-diagonal modality preconditioner. |
 | \(\mathbf J_{t,k}^X,\mathbf J_{QR}\) | Joint clean-endpoint Jacobian and its output-modality/input-modality block, where \(Q,R\in\{Z,A\}\). |
 | \(\otimes,\mathbb 1[\cdot]\) | Kronecker product and indicator function. |

@@ -55,6 +55,71 @@ observations progressively constrain the state flow. The latest corrected state
 context conditions the action flow, whose overlap is constrained by the committed
 actions inherited from the preceding chunk.*
 
+## Unified Pseudoinverse-Guided Flow Correction
+
+FBFM adapts pseudoinverse guidance (Song et al., 2023) to the active flow of a
+WAM. Let \(Q\in\{Z,A,X\}\) indicate whether the generated variable
+\(\mathbf Q_t\in\mathbb R^{D_Q}\) is a latent-state chunk, an action chunk, or
+their joint representation. The corresponding frozen vector field, parameters,
+flow time, and native conditioning context are denoted by
+\(v_{\theta_Q}^Q\), \(\theta_Q\), \(\tau_k^Q\), and
+\(\mathcal K_{t,k}^Q\), respectively.
+
+Following the inverse-problem view, a clean variable produces a feedback
+measurement
+
+\[
+\mathbf m_{t,k}^Q
+=h_Q(\mathbf Q_t^1)+\boldsymbol\eta,
+\qquad
+\boldsymbol\eta\sim\mathcal N(\mathbf 0,\sigma_y^2\mathbf I),
+\]
+
+where \(h_Q\) maps the generation space to the feedback space and
+\(h_Q^\dagger\) is its generalized inverse. We interpret them as a
+Moore--Penrose-compatible encoder--decoder pair and store the lifted target as
+\(\mathbf Y_{t,k}^Q:=h_Q^\dagger(\mathbf m_{t,k}^Q)\). Pseudoinverse guidance
+compares this target with
+\(h_Q^\dagger(h_Q(\hat{\mathbf Q}_{t,k}^1))\). Because FBFM feedback and model
+predictions are already represented in aligned latent or action coordinates, we
+use
+\(h_Q^\dagger(h_Q(\hat{\mathbf Q}_{t,k}^1))\approx
+\hat{\mathbf Q}_{t,k}^1\) on the selected subspace. Appendix B states the
+corresponding consistency assumptions.
+
+Let \(\mathbf W_{t,k}^Q\) select or confidence-weight the constrained
+coordinates, and let the separate operator \(\mathbf P^Q\) balance their scale.
+At every solver evaluation, all FBFM instantiations use the same correction
+chain:
+
+\[
+\begin{aligned}
+\hat{\mathbf Q}_{t,k}^1
+&=f_{\theta_Q}^{Q,\tau_k^Q}(\mathbf Q_t^{\tau_k^Q})
+:=\mathbf Q_t^{\tau_k^Q}
++(1-\tau_k^Q)v_{\theta_Q}^Q
+  (\mathbf Q_t^{\tau_k^Q},\tau_k^Q;\mathcal K_{t,k}^Q),\\
+\mathbf e_{t,k}^Q
+&=\mathbf P^Q\mathbf W_{t,k}^Q
+  (\mathbf Y_{t,k}^Q-\hat{\mathbf Q}_{t,k}^1),\\
+\mathbf J_{t,k}^Q
+&:=\frac{\partial\hat{\mathbf Q}_{t,k}^1}
+         {\partial\mathbf Q_t^{\tau_k^Q}},
+\qquad
+\mathbf g_{t,k}^Q=(\mathbf J_{t,k}^Q)^{\mathsf T}\mathbf e_{t,k}^Q,
+\qquad
+v_{\mathrm{FBFM}}^Q
+=v_{\theta_Q}^Q+\lambda_{\tau_k^Q}^Q\mathbf g_{t,k}^Q.
+\end{aligned}
+\]
+
+Here, \(\lambda_{\tau_k^Q}^Q\) is the flow-time-dependent guidance strength.
+This formulation follows the Flow-Matching inpainting construction of Black et
+al. (2025), while making the support mask and modality preconditioner explicit.
+The remainder of this section only specifies the assignments of
+\((\mathbf Q,\theta_Q,\mathcal K,\mathbf Y,\mathbf W,\mathbf P)\) for stage-wise
+and joint-generation WAMs.
+
 ## FBFM for Stage-Wise World-Action Models
 
 A stage-wise WAM factorizes latent-state and action generation as
@@ -100,24 +165,12 @@ cross-chunk action overlap.*
 
 ### State Flow: Dynamic State-Feedback Guidance
 
-Let \(\tau_k^Z\) be the flow time at the \(k\)-th state-solver evaluation. The
-predicted clean latent-state endpoint is
-
-\[
-\hat{\mathbf Z}_{t,k}^1
-=
-f_{\theta_Z}^{Z,\tau_k^Z}(\mathbf Z_t^{\tau_k^Z})
-:=
-\mathbf Z_t^{\tau_k^Z}
-+(1-\tau_k^Z)
-v_{\theta_Z}^Z
-\!\left(
-\mathbf Z_t^{\tau_k^Z},\tau_k^Z;\mathcal H_t
-\right).
-\]
-
-We encode \(\mathcal F_{t,k}\) as an aligned state-feedback target
-\(\mathbf Y_{t,k}^Z\in\mathbb R^{D_Z}\) and a block-diagonal mask
+For the state stage, the unified correction uses
+\(Q=Z\), \(\theta_Q=\theta_Z\),
+\(\mathcal K_{t,k}^Z=\mathcal H_t\), and
+\(\mathbf P^Z=P_Z\mathbf I_{D_Z}\). At state-solver flow time
+\(\tau_k^Z\), we encode \(\mathcal F_{t,k}\) as an aligned state-feedback
+target \(\mathbf Y_{t,k}^Z\in\mathbb R^{D_Z}\) and a block-diagonal mask
 
 \[
 \mathbf W_{t,k}^Z
@@ -134,40 +187,10 @@ w_{t,i}^{Z,k}>0
 
 For an observed slot, the corresponding block of \(\mathbf Y_{t,k}^Z\) is
 \(z_{t+i}\); unobserved blocks may be filled arbitrarily because their weights are
-zero. Binary weights impose hard state inpainting, while weights in \([0,1]\) permit
-confidence-weighted feedback. Using the aligned-coordinate approximation introduced
-in the Pseudoinverse-Guided Inpainting subsection, the state discrepancy and its
-VJP are
-
-\[
-\mathbf e_{t,k}^Z
-=
-\mathbf W_{t,k}^Z
-\left[
-\mathbf Y_{t,k}^Z
--
-\hat{\mathbf Z}_{t,k}^1
-\right],
-\]
-
-\[
-\mathbf g_{t,k}^Z
-=
-\left(
-\frac{\partial\hat{\mathbf Z}_{t,k}^1}
-     {\partial\mathbf Z_t^{\tau_k^Z}}
-\right)^{\mathsf T}
-\mathbf e_{t,k}^Z.
-\]
-
-FBFM updates the state flow with
-
-\[
-v_{\mathrm{FBFM}}^Z
-=
-v_{\theta_Z}^Z
-+\lambda_{\tau_k^Z}^Z\mathbf g_{t,k}^Z.
-\]
+zero. Binary weights impose hard state inpainting, while weights in \([0,1]\)
+permit confidence-weighted feedback. These assignments are substituted directly
+into the unified correction chain above; no separate state-specific guidance rule
+is required.
 
 Before every state-solver evaluation, \(\mathcal F_{t,k}\),
 \(\mathbf Y_{t,k}^Z\), and \(\mathbf W_{t,k}^Z\) are refreshed. Consequently, a
@@ -239,50 +262,15 @@ not the current execution pointer. They therefore remain fixed throughout genera
 of the new chunk, regardless of which committed overlap actions have already been
 executed.
 
-At action flow time \(\tau_k^A\), the latest state context conditions the clean action
-endpoint estimate
-
-\[
-\hat{\mathbf A}_{t,k}^1
-=
-f_{\theta_A}^{A,\tau_k^A}(\mathbf A_t^{\tau_k^A})
-:=
-\mathbf A_t^{\tau_k^A}
-+(1-\tau_k^A)
-v_{\theta_A}^A
-\!\left(
-\mathbf A_t^{\tau_k^A},\tau_k^A;
-\mathcal H_t,\mathcal C_{t,k}^Z
-\right).
-\]
-
-The action correction is then
-
-\[
-\mathbf e_{t,k}^A
-=
-\mathbf W_t^A
-\left[
-\mathbf Y_t^A
--
-\hat{\mathbf A}_{t,k}^1
-\right],
-\]
-
-\[
-\mathbf g_{t,k}^A
-=
-\left(
-\frac{\partial\hat{\mathbf A}_{t,k}^1}
-     {\partial\mathbf A_t^{\tau_k^A}}
-\right)^{\mathsf T}
-\mathbf e_{t,k}^A,
-\qquad
-v_{\mathrm{FBFM}}^A
-=
-v_{\theta_A}^A
-+\lambda_{\tau_k^A}^A\mathbf g_{t,k}^A.
-\]
+For the action stage, the unified correction uses
+\(Q=A\), \(\theta_Q=\theta_A\),
+\(\mathcal K_{t,k}^A=(\mathcal H_t,\mathcal C_{t,k}^Z)\), and
+\(\mathbf P^A=P_A\mathbf I_{D_A}\), with the fixed assignments
+\(\mathbf Y_{t,k}^A=\mathbf Y_t^A\) and
+\(\mathbf W_{t,k}^A=\mathbf W_t^A\). Substituting them into the unified
+correction chain makes the latest refreshed state context condition the endpoint
+predictor while the overlap target directly constrains the action flow; no separate
+action-specific guidance rule is required.
 
 State feedback and previous-action consistency thus have distinct roles in a
 stage-wise WAM. State feedback is asynchronous and progressively updates both the
@@ -322,23 +310,6 @@ Jacobian, state feedback can directly correct the action coordinates of this flo
 
 ### Joint State-Action Guidance
 
-Let \(\tau_k^X\) be the flow time at joint-solver evaluation \(k\). The predicted
-clean endpoint is
-
-\[
-\hat{\mathbf X}_{t,k}^1
-=
-f_\theta^{X,\tau_k^X}(\mathbf X_t^{\tau_k^X})
-:=
-\mathbf X_t^{\tau_k^X}
-+
-(1-\tau_k^X)
-v_\theta^X
-\!\left(
-\mathbf X_t^{\tau_k^X},\tau_k^X;\mathcal H_t
-\right).
-\]
-
 Using the state-feedback quantities from Section 2.2 and the same aligned
 previous-action target, we define
 
@@ -365,36 +336,22 @@ D_X=D_Z+D_A,
 D_Z=H d_z.
 \]
 
+The corresponding modality preconditioner is
+
+\[
+\mathbf P^X
+=
+\operatorname{blkdiag}
+\!\left(P_Z\mathbf I_{D_Z},P_A\mathbf I_{D_A}\right).
+\]
+
 The state block of \(\mathbf W_{t,k}^X\) is refreshed whenever a new
 \(z_{t+i}\) becomes available, whereas its action block remains fixed by the aligned
-cross-chunk overlap. The joint discrepancy and VJP are
-
-\[
-\mathbf e_{t,k}^X
-=
-\mathbf W_{t,k}^X
-\left[
-\mathbf Y_{t,k}^X
--
-\hat{\mathbf X}_{t,k}^1
-\right],
-\]
-
-\[
-\mathbf g_{t,k}^X
-=
-\left(
-\frac{\partial\hat{\mathbf X}_{t,k}^1}
-     {\partial\mathbf X_t^{\tau_k^X}}
-\right)^{\mathsf T}
-\mathbf e_{t,k}^X,
-\qquad
-v_{\mathrm{FBFM}}^X
-=
-v_\theta^X
-+
-\lambda_{\tau_k^X}^X\mathbf g_{t,k}^X.
-\]
+cross-chunk overlap. For joint generation, the remaining unified assignments are
+\(Q=X\), \(\theta_Q=\theta\), and
+\(\mathcal K_{t,k}^X=\mathcal H_t\). Substituting these quantities into the
+unified correction chain gives the complete joint update; no separate joint-specific
+guidance rule is required.
 
 Thus, one guidance evaluation simultaneously enforces the observed state slots and
 the committed action overlap while leaving all unobserved and unconstrained
@@ -418,13 +375,11 @@ action-overlap mask remains fixed.*
 
 ### Direct State-to-Action Correction
 
-The direct coupling becomes explicit by partitioning the clean-endpoint Jacobian:
+The direct coupling becomes explicit by partitioning the clean-endpoint Jacobian
+\(\mathbf J_{t,k}^X\) defined in the unified correction:
 
 \[
 \mathbf J_{t,k}^X
-:=
-\frac{\partial\hat{\mathbf X}_{t,k}^1}
-     {\partial\mathbf X_t^{\tau_k^X}}
 =
 \begin{bmatrix}
 \mathbf J_{ZZ} & \mathbf J_{ZA}\\
