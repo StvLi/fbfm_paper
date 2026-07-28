@@ -78,9 +78,9 @@ checkpoint was not trained on that suite.
 
 | \(k_p\) | Effective state weight \(k_p P_Z\) | Success | SR (%) |
 | ---: | ---: | ---: | ---: |
-| 0.0316228 | 0.000184466 | 56/80 | 70 |
-| **0.0486968** | **0.000284064** | **64/80** | **80** |
-| 0.0749894 | 0.000437438 | 60/80 | 75 |
+| 0.0316 | \(1.84\times10^{-4}\) | 56/80 | 70 |
+| **0.0487** | **\(2.84\times10^{-4}\)** | **64/80** | **80** |
+| 0.0750 | \(4.37\times10^{-4}\) | 60/80 | 75 |
 
 The middle value is the best tested point estimate and is retained as the
 operational candidate. Its paired advantage over the lower value is 10
