@@ -87,12 +87,6 @@ rerun or counted twice.
 | LIBERO-10 | 6 | 8/10 | 7/10 | 6/10 |
 | **Total** | -- | **56/80 (70%)** | **64/80 (80%)** | **60/80 (75%)** |
 
-| \(k_{p,a}\) | \(k_{p,b}\) | \(a\)-only | \(b\)-only | \(b-a\) | Exact McNemar \(p\) |
-| ---: | ---: | ---: | ---: | ---: | ---: |
-| 0.0316228 | 0.0486968 | 4 | 12 | +10 points | 0.0768 |
-| 0.0316228 | 0.0749894 | 9 | 13 | +5 points | 0.5235 |
-| 0.0486968 | 0.0749894 | 12 | 8 | -5 points | 0.5034 |
-
 The middle gain is the best tested point estimate, but neither paired
 comparison establishes statistical superiority at the 0.05 level. It is
 therefore selected as an operational candidate rather than a universal optimum.
