@@ -14,18 +14,22 @@ horizon.
 
 The selected RoboTwin evaluation contains 42 tasks under both
 \texttt{demo\_clean} and \texttt{demo\_randomized}. Longer tasks outside this
-set are excluded from the main evaluation. The CPU-render snapshot at commit
-\texttt{50a3cc4} supplies 33 completed Base cells and 45 completed FBFM cells
-within this selection. The independently validated GPU-render result at commit
-\texttt{fb58706} adds 12 \texttt{demo\_clean} FBFM cells, each with 20
-validated episodes. To keep a common 10-episode denominator in this table, each
-of the 12 new entries is recomputed from the first 10 accepted episode records
-for that task in \texttt{trials.csv}; the complete 20-episode records remain in
-the result package. These are the consecutive Clean FBFM entries from
-\texttt{place\_burger\_fries} through \texttt{move\_pillbottle\_pad}. Because
-rendering mode and episode sets differ, these entries and the CPU-render Base
-entries in the same rows do not constitute matched comparisons and must not be
-pooled into the main result.
+set are excluded from the main evaluation. Within this selection, the CPU-render
+snapshot at commit \texttt{50a3cc4} supplies 26 Clean and 7 Randomized Base
+cells, together with 17 Clean and 28 Randomized FBFM cells. The independently
+validated GPU-render result at commit \texttt{fb58706} adds 12 Clean FBFM cells,
+each with 20 validated episodes. To keep a common 10-episode denominator in this
+table, each of these entries is recomputed from the first 10 accepted episode
+records for that task in \texttt{trials.csv}; the complete 20-episode records
+remain in the result package. These are the consecutive Clean FBFM entries from
+\texttt{place\_burger\_fries} through \texttt{move\_pillbottle\_pad}.
+
+The consolidated table therefore contains 90 of 168 planned task--condition
+cells. Eleven Clean and four Randomized tasks have both Base and FBFM records
+under CPU rendering. No GPU-render Base record is currently available, and the
+CPU snapshots retain task-level counts rather than episode identities. Thus,
+populated cells with different rendering modes or unverifiable episode pairing
+must not be pooled into the main comparison.
 
 \begin{table}[H]
     \centering
@@ -79,6 +83,9 @@ pooled into the main result.
         \texttt{rotate\_qrcode} & 9/10 (90\%) & 9/10 (90\%) & -- & 9/10 (90\%) \\
         \texttt{stamp\_seal} & 10/10 (100\%) & 10/10 (100\%) & -- & 9/10 (90\%) \\
         \texttt{turn\_switch} & -- & 7/10 (70\%) & -- & 5/10 (50\%) \\
+        \midrule
+        \textbf{Available task cells} & \textbf{26/42} & \textbf{29/42} & \textbf{7/42} & \textbf{28/42} \\
+        \textbf{Missing task cells} & \textbf{16/42} & \textbf{13/42} & \textbf{35/42} & \textbf{14/42} \\
         \bottomrule
     \end{tabular}}
     \caption{Detailed LingBot-VA RoboTwin record. Each populated cell reports
@@ -151,6 +158,7 @@ episodes and the corresponding success rate. LIBERO-90 is not included.
         \textbf{LIBERO-10} & \textbf{Subtotal} & \textbf{121/200 (60.5\%)} & \textbf{126/200 (63\%)} \\
         \midrule
         \textbf{All suites} & \textbf{Total} & \textbf{561/800 (70.125\%)} & \textbf{566/800 (70.75\%)} \\
+        \textbf{Coverage} & \textbf{All tasks} & \textbf{40/40 task cells} & \textbf{40/40 task cells} \\
         \bottomrule
     \end{tabular}
     \caption{Detailed DreamZero LIBERO results under the delayed

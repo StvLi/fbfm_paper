@@ -11,17 +11,22 @@ horizon.
 
 The selected RoboTwin evaluation contains 42 tasks under both `demo_clean` and
 `demo_randomized`. Longer tasks outside this set are excluded from the main
-evaluation. The CPU-render snapshot at commit `50a3cc4` supplies 33 completed
-Base cells and 45 completed FBFM cells within this selection. The independently
-validated GPU-render result at commit `fb58706` adds 12 `demo_clean` FBFM cells,
-each with 20 validated episodes. To keep a common 10-episode denominator in this
-table, each of the 12 new entries is recomputed from the first 10 accepted
-episode records for that task in `trials.csv`; the complete 20-episode records
-remain in the result package. These are the consecutive Clean FBFM entries from
-`place_burger_fries` through `move_pillbottle_pad`. Because rendering mode and
-episode sets differ, these entries and the CPU-render Base entries in the same
-rows do not constitute matched comparisons and must not be pooled into the main
-result.
+evaluation. Within this selection, the CPU-render snapshot at commit `50a3cc4`
+supplies 26 Clean and 7 Randomized Base cells, together with 17 Clean and 28
+Randomized FBFM cells. The independently validated GPU-render result at commit
+`fb58706` adds 12 Clean FBFM cells, each with 20 validated episodes. To keep a
+common 10-episode denominator in this table, each of these entries is recomputed
+from the first 10 accepted episode records for that task in `trials.csv`; the
+complete 20-episode records remain in the result package. These are the
+consecutive Clean FBFM entries from `place_burger_fries` through
+`move_pillbottle_pad`.
+
+The consolidated table therefore contains 90 of 168 planned task--condition
+cells. Eleven Clean and four Randomized tasks have both Base and FBFM records
+under CPU rendering. No GPU-render Base record is currently available, and the
+CPU snapshots retain task-level counts rather than episode identities. Thus,
+populated cells with different rendering modes or unverifiable episode pairing
+must not be pooled into the main comparison.
 
 | Task | Clean Base | Clean FBFM | Randomized Base | Randomized FBFM |
 | --- | ---: | ---: | ---: | ---: |
@@ -67,6 +72,8 @@ result.
 | `rotate_qrcode` | 9/10 (90%) | 9/10 (90%) | -- | 9/10 (90%) |
 | `stamp_seal` | 10/10 (100%) | 10/10 (100%) | -- | 9/10 (90%) |
 | `turn_switch` | -- | 7/10 (70%) | -- | 5/10 (50%) |
+| **Available task cells** | **26/42** | **29/42** | **7/42** | **28/42** |
+| **Missing task cells** | **16/42** | **13/42** | **35/42** | **14/42** |
 
 ## DreamZero on LIBERO
 
@@ -122,3 +129,4 @@ included.
 | LIBERO-10 | 9 | 7/20 (35%) | 9/20 (45%) |
 | **LIBERO-10** | **Subtotal** | **121/200 (60.5%)** | **126/200 (63%)** |
 | **All suites** | **Total** | **561/800 (70.125%)** | **566/800 (70.75%)** |
+| **Coverage** | **All tasks** | **40/40 task cells** | **40/40 task cells** |
