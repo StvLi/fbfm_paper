@@ -98,9 +98,9 @@ measured future RealSense frames as 30 latent feedback slots. Base preserves a
 coherent robot and tabletop but departs from the recorded ball evolution. FBFM
 moves the full-frame prediction closer to the reference (MAE 9.63 to 9.27 and
 PSNR 20.06 to 23.10 dB), showing that FBFM can use observations recorded from a
-physical robot task to correct the active visual prediction. The unscaled
-state-only setting used here (\(k_p=1\)) still produces visible high-frequency
-artifacts; Appendix F analyzes the related video-codec behavior.
+physical robot task to correct the active visual prediction. Appendix F
+separately analyzes the behavior observed when state feedback covers only a
+limited prefix of the generated video.
 
 ![Real-world robot-arm ball-stopping observation prediction. The RGB sequence
 was recorded from a physical robot task with a RealSense D435i. Columns show 0,

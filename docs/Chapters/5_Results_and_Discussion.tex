@@ -139,10 +139,9 @@ slots. Base preserves a coherent robot and tabletop but departs from the
 recorded ball evolution. FBFM moves the full-frame prediction closer to the
 reference (MAE 9.63 to 9.27 and PSNR 20.06 to 23.10~dB), showing that FBFM can
 use observations recorded from a physical robot task to correct the active
-visual prediction. The unscaled state-only setting used here ($k_p=1$) still
-produces visible high-frequency artifacts;
-Appendix~\ref{app:wan-video-codec-diagnostic} analyzes the related video-codec
-behavior.
+visual prediction. Appendix~\ref{app:wan-video-codec-diagnostic} separately
+analyzes the behavior observed when state feedback covers only a limited prefix
+of the generated video.
 
 \begin{figure*}[t]
     \centering

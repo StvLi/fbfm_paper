@@ -6,8 +6,8 @@
 To isolate how temporal feedback coverage interacts with the video codec, we
 additionally apply state-only FBFM to the auxiliary ball-meets-ball sequence.
 This diagnostic is separate from the primary robot evaluation and exposes an
-unresolved behavior of pseudoinverse guidance in temporally compressed video
-latent spaces.
+unresolved behavior that appears when feedback measurements cover only a
+finite prefix of a temporally compressed video latent.
 
 \begin{figure*}[p]
     \centering
@@ -22,12 +22,19 @@ Extending feedback from 10 to 30 time-aligned slots progressively covers the
 measured motion. With all 30 slots, FBFM reduces table-region MAE from 21.77 to
 6.34 and reduces the mean orange-ball center error from 173.84 to 3.05 pixels,
 confirming that the state constraints affect the generated trajectory. The
-same outputs nevertheless contain colored high-frequency artifacts,
-particularly after a constrained horizon ends.
+principal failure mode is instead the large-area corruption that develops after
+the finite feedback horizon in the 10- and 20-slot settings. Its onset moves
+later as the measured prefix is extended, while full 30-slot coverage largely
+preserves the scene structure over the evaluated horizon.
 
-We attribute this behavior primarily to an imperfect transfer of image-space
-pseudoinverse guidance to Wan2.2's temporally compressed video latent. Its VAE
-and video post-training do not ensure that independently encoded slot
-measurements remain on the clean-video manifold expected by the denoiser and
-decoder. Separate image- and latent-space MSE diagnostics further examine this
-model-specific interpretation.
+We attribute this behavior primarily to a Wan2.2-specific mismatch between the
+codec and the generative backbone. Pseudoinverse guidance assumes that a
+measurement lifted through the encoder is compatible with the model's clean
+latent-state distribution. Wan2.2's joint video training and subsequent
+post-training may distort the effective VAE-latent distribution used by the
+generator, such that independently encoded observations do not necessarily
+remain semantically meaningful clean-video states under the guided dynamics.
+Once the finite constraint ends, this off-manifold mismatch can amplify and
+decode into large regions without a coherent visual interpretation. Separate
+image- and latent-space MSE diagnostics further examine this model-specific
+hypothesis.
