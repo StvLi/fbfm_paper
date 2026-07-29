@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "recorded_on": "2026-07-27",
+  "experiment": "DreamZero FBFM proportional state-feedback gain search",
+  "parameter": "state_feedback_kp",
+  "state_alignment_weight": 0.005833333333333334,
+  "effective_weight_formula": "state_alignment_weight * state_feedback_kp",
+  "checkpoint": "RLinf-DreamZero-WAN2.2-5B-LIBERO-SFT-Step26000",
+  "hardware": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition",
+  "source": {
+    "repository": "https://github.com/StvLi/FBFM",
+    "branch": "experiment/dreamzero-l1mass-state-weight",
+    "standardized_revision": "a051933e2b058d74bb268e94080464569d99ce39",
+    "expanded_run_manifest_revision": "0f2cc4f-dirty-fc420bc56cf5",
+    "workspace": "/home/oem/fbfm_ws/FBFM-a6000",
+    "result_root": "results/kp_search_pro6000"
+  },
+  "rollout": {
+    "max_steps": 480,
+    "environment_seed": 0,
+    "model_seed_rule": "fixed",
+    "model_seed": 0,
+    "rollout_protocol": "pseudo_async_overlap",
+    "action_horizon": 16,
+    "inference_delay": 8,
+    "execution_horizon": 8,
+    "scheduler_steps": 16,
+    "dit_evaluations": 8,
+    "solver_release_policy": "uniform",
+    "solver_grants_per_environment_step": [1, 1, 1, 1, 1, 1, 1, 1],
+    "feedback_observation_stride": 1,
+    "feedback_vae_sample_interval": 3,
+    "feedback_encoding": "training_aligned_stride3_prefix"
+  },
+  "search": {
+    "lower": 0.001,
+    "upper": 100.0,
+    "scale": "logarithmic",
+    "midpoint": "geometric",
+    "formula": "next_kp=sqrt(lower_kp*upper_kp)",
+    "initial_points": [0.001, 1.0, 100.0],
+    "completed_refinement_points": [
+      0.03162277660168379,
+      0.1778279410038923,
+      0.07498942093324558,
+      0.04869675251658631
+    ],
+    "planned_but_not_run": [0.03924189758484536],
+    "historical_control": {
+      "kp": 1.0,
+      "source": "../auxiliary_5ep/data/l1mass_005833",
+      "hardware": "NVIDIA RTX A6000 48 GB",
+      "comparability": "matching tasks and init IDs; not a Pro6000 rerun"
+    }
+  },
+  "screening": {
+    "task_ids_by_suite": {
+      "libero_spatial": [1, 9],
+      "libero_object": [0, 6]
+    },
+    "official_init_ids": [0, 1, 2, 3, 4],
+    "tasks_per_point": 4,
+    "trials_per_task": 5,
+    "episodes_per_point": 20
+  },
+  "expanded_execution": {
+    "selected_points": [
+      0.03162277660168379,
+      0.04869675251658631,
+      0.07498942093324558
+    ],
+    "executed_task_ids_by_suite": {
+      "libero_spatial": [1, 9],
+      "libero_object": [0, 6],
+      "libero_goal": [0, 6],
+      "libero_10": [0, 6],
+      "libero_90": [0, 6]
+    },
+    "executed_episodes_per_point": 100,
+    "reused_screening_episodes_per_point": 20
+  },
+  "valid_analysis": {
+    "eligibility_basis": "RLinf DreamZero checkpoint training coverage",
+    "task_ids_by_suite": {
+      "libero_spatial": [1, 9],
+      "libero_object": [0, 6],
+      "libero_goal": [0, 6],
+      "libero_10": [0, 6]
+    },
+    "official_init_ids": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "tasks_per_point": 8,
+    "trials_per_task": 10,
+    "episodes_per_point": 80,
+    "total_valid_episodes": 240,
+    "new_valid_episodes_per_point": 60,
+    "excluded_suite": "libero_90",
+    "excluded_tasks": [0, 6],
+    "excluded_episodes_per_point": 20,
+    "total_excluded_episodes": 60,
+    "exclusion_reason": "RLinf DreamZero checkpoint was not trained on LIBERO-90",
+    "selection_candidate": 0.04869675251658631
+  }
+}

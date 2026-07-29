@@ -13,7 +13,7 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 - [ ] Make state, action, observed, predicted, constrained, and unconstrained slots visually distinguishable with one shared legend.
 - [ ] Check that capitalization and hyphenation are consistent: `Flow Matching`, `World-Action Model`, and `Pseudoinverse-Guided`.
 
-### Joint-generation figure (`material/parallel.jpg`)
+### Joint-generation figure (`material/parallel.png`)
 
 - [ ] Rename the displayed paradigm to `Joint Generation` or `Joint Flow Matching`; avoid `parallel` in the paper text.
 - [ ] Explicitly identify the joint flow variable as `X_t^\tau = [Z_t^\tau, A_t^\tau]`.
@@ -132,11 +132,17 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 
 - [ ] Keep Section 4.3 blank until the baseline and ablation design is agreed with the experiment team; only then finalize the compared variants, fairness controls, and feasible component ablations.
 - [ ] Keep the archived DreamZero native synchronous result separate from the main experiment; it is not the Base/NONE row and must not be copied into Appendix D or Section 5.2.
-- [ ] Run DreamZero Base/NONE and FBFM on the same checkpoint, reset IDs, episode horizon, and delayed pseudo-asynchronous overlap protocol; retain paired episode outcomes and fill Appendix D before computing the four suite-level rates in Section 5.2.
+- [x] Run DreamZero Base/NONE and FBFM on the same checkpoint, reset IDs, episode horizon, and delayed pseudo-asynchronous overlap protocol; retain paired episode outcomes and fill Appendix D before computing the suite-level and total rates in Section 5.2.
+- [x] Confirm that the final FBFM evaluation freezes $P_Z=56/9600$ and the selected operational gain $k_p=0.0486967525$ at standardized FBFM revision `a051933e2b058d74bb268e94080464569d99ce39`.
+- [ ] Before final submission, document why the DreamZero NONE record at `cb08c9e` is behaviorally comparable to the gain-aware FBFM record at `a051933`, or rerun NONE at `a051933`; the intervening change adds the $k_p$ interface and protocol validation while the NONE path remains unguided.
 - [ ] Complete matched `NONE`, `RTC`, and full FBFM comparisons on the same pseudo-asynchronous DreamZero path before attributing changes to state feedback; keep native synchronous DreamZero as a separately labeled control.
 - [ ] Treat the current single-task DreamZero pilots as diagnostics only. Do not promote preliminary success counts or use them to support a benchmark-level improvement claim before the matched protocol and planned episode counts are complete.
-- [ ] Fill Appendix D only from matched final records: all selected 42 RoboTwin tasks under both clean and randomized configurations for LingBot-VA Base/FBFM, and all 40 tasks from LIBERO-Spatial, Object, Goal, and LIBERO-10 for DreamZero Base/FBFM. Keep LIBERO-90 and longer excluded RoboTwin tasks outside the main tables.
-- [ ] Populate the two main Results tables only after their detailed Appendix D records are complete. Report only the final clean/randomized success rates for LingBot-VA and the four suite-level success rates for DreamZero; do not substitute non-matched pooled snapshot rates.
+- [ ] Complete Appendix D with matched final records for all selected 42 RoboTwin tasks under both clean and randomized configurations for LingBot-VA Base/FBFM; the Randomized FBFM record for `handover_block` remains unfinished and is shown as pending. Keep the eight longer excluded tasks outside the main tables.
+- [x] Complete Appendix D with 20-episode Base/FBFM records for all 40 DreamZero tasks from LIBERO-Spatial, Object, Goal, and LIBERO-10; keep LIBERO-90 excluded.
+- [ ] Obtain matched GPU-render Base/NONE records for the 12 validated `demo_clean` FBFM tasks recorded by commit `fb58706`, or replace them with a fully matched final protocol. Never compare or pool these GPU-render FBFM entries with the current CPU-render Base snapshot.
+- [ ] Replace the current LingBot-VA Randomized 41-task aggregate with the full 42-task matched aggregate if `handover_block` is completed; until then, exclude that task from both methods and state the exclusion explicitly.
+- [x] Populate the DreamZero main Results table from the completed detailed record, retaining LIBERO-Goal, LIBERO-10, and the total over all four evaluated suites in the main text while preserving every suite and task in Appendix D.
+- [ ] Discuss the limited DreamZero total improvement and heterogeneous suite-level effects without concealing the negative Spatial/Object results; ground any explanation in measured feedback quality, task structure, or solver diagnostics rather than post-hoc speculation.
 - [ ] Obtain the finalized task list from the experiment team and enumerate every evaluated RoboTwin and LIBERO task in Section 4.1; also confirm the corresponding benchmark suite/version and exact LingBot-VA and RLinf DreamZero checkpoint identifiers.
 - [ ] Define all evaluated LIBERO and RoboTwin tasks, benchmark suites and versions, number of trials and seeds, initial-state sampling, success/failure criteria, aggregation, uncertainty reporting, and any excluded or retried runs.
 - [ ] Keep baseline comparisons fair by using matched checkpoints, observations, action horizons, solver budgets, and execution schedules. Define the intended Original WAM, RTC/action-overlap-only, and full FBFM variants precisely, and record the RTC implementation provenance and any adaptation from the LeRobot reference.
@@ -146,6 +152,7 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 - [ ] Report task success together with the efficiency cost of FBFM, including inference time or throughput, VJP overhead, peak memory, and effective control/update rate.
 - [ ] Validate the locked OpenReview Abstract claim that FBFM improves success rates by more than 5% on the selected LIBERO and RoboTwin tasks; report the per-task values and the exact baseline used for each improvement.
 - [ ] If physical-robot tracking remains an Abstract claim, define the platform, tasks, trial count, baseline, tracking metric, and quantitative result; otherwise remove or weaken that claim before submission.
+- [ ] Appendix F now includes the image-space MAE curve and explicitly leaves the Wan2.2 distribution-mismatch mechanism as a hypothesis; preserve that evidential boundary unless controlled latent-space and codec-retraining experiments close the causal chain, and keep the `robot_arm_ball_stop` result labeled as recorded real-world observation prediction rather than closed-loop policy deployment.
 - [x] Track and close both previously confirmed issues in `docs/handover.md` at implementation-audit commit `3ecac79`; re-open the item if either path is absent from the final experiment commit, and keep any newly confirmed code--theory mismatch equally concise there.
 - [ ] Audit Abstract, Introduction, Method, figures, Experiment and Result, Conclusion, and implementation evidence together after both model tracks stabilize; do not let planned or unverified capabilities appear as completed results.
 

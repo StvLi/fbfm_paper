@@ -1,20 +1,26 @@
 # Experiment Results
 
-This directory stores compact, reviewable LingBot-VA CPU-render evaluation
-artifacts. Large videos, checkpoints, simulator caches, and server logs remain in
-the experiment workspace and are not committed to the paper repository.
+This directory stores versioned experiment records for paper review. Each
+result package retains its protocol, compact ledgers, derived summaries, source
+revisions, comparability limits, and integrity metadata when available. Large
+videos, checkpoints, simulator caches, and full logs remain in the experiment
+workspaces.
 
-| Directory | Experiment | Included result state |
+| Directory | Scope | Included result state |
 | --- | --- | --- |
-| `lbva_fbfm/` | LingBot-VA with FBFM on RoboTwin | 45 complete 10-episode cells |
-| `lbva_none/` | LingBot-VA without feedback on RoboTwin | 37 complete 10-episode cells |
+| `lbva_none/` | LingBot-VA without feedback on RoboTwin, CPU rendering | 37 complete 10-episode cells |
+| `lbva_fbfm/` | LingBot-VA with FBFM on RoboTwin, CPU rendering | 45 complete 10-episode cells |
+| `lbva_fbfm_gpu/` | LingBot-VA with FBFM on RoboTwin `demo_clean`, GPU rendering | 12 complete tasks, 216/240 successes |
+| `lbva_rtc/` | LingBot-VA with RTC on RoboTwin `demo_clean`, GPU rendering | 12 complete tasks, 223/240 successes |
+| `dmzr_weight/` | DreamZero FBFM state-weight diagnosis and proportional-gain search | Includes the valid 240-episode Pro6000 `kp` comparison |
+| `dmzr_weight/formal_libero40_fbfm_kp00486968_20_a051933/` | DreamZero FBFM on the four selected LIBERO suites with selected `kp` | Complete; 566/800 (70.75%) |
+| `dmzr_weight/formal_libero40_none_20_cb08c9e/` | DreamZero NONE on the same four selected LIBERO suites | Complete; 561/800 (70.125%) |
+| `wan2.2_real_video/` | Wan2.2 Base versus visual-only FBFM on real videos | RealSense ball-stopping package complete; includes videos, frames, audits, and runtime snapshot |
 
-Each experiment directory contains a human-readable record, a complete-cell
-summary, the full snapshot ledger, a structured aggregate, and SHA-256 hashes.
-Rates use only cells satisfying `status == complete && trials == 10`. Partial,
-running, and pending cells remain visible in the ledgers but are excluded from
-reported rates.
-
-The two snapshots contain different task/config coverage. Their pooled rates are
-therefore descriptive and must not be treated as a matched FBFM-versus-NONE
-treatment comparison.
+The CPU snapshots use only cells satisfying
+`status == complete && trials == 10`. The LingBot-VA GPU packages contain
+episode-level records for 240 strictly validated trials per method; Appendix D
+currently reports only the first 10 accepted FBFM episodes per task. Coverage,
+rendering mode, and episode identities differ across packages, so pooled rates
+must not be treated as matched method comparisons without checking the package
+protocols and trial identities.

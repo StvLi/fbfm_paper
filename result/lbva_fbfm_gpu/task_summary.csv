@@ -1,0 +1,13 @@
+task,status,successes,failures,episodes_completed,episodes_required,success_rate,wilson_95_low,wilson_95_high,source_batches
+adjust_bottle,complete,20,0,20,20,1.0,0.8388748419471806,1.0,stage1_legacy
+beat_block_hammer,complete,15,5,20,20,0.75,0.531299122381256,0.8881382985923343,stage1_legacy
+click_alarmclock,complete,20,0,20,20,1.0,0.8388748419471806,1.0,stage1_legacy
+grab_roller,complete,20,0,20,20,1.0,0.8388748419471806,1.0,stage1_legacy
+click_bell,complete,20,0,20,20,1.0,0.8388748419471806,1.0,stage1+stage2
+lift_pot,complete,20,0,20,20,1.0,0.8388748419471806,1.0,stage1+stage2
+scan_object,complete,13,7,20,20,0.65,0.43285427668523624,0.818808175898918,stage1+stage2
+place_empty_cup,complete,20,0,20,20,1.0,0.8388748419471806,1.0,stage1+stage2
+move_can_pot,complete,19,1,20,20,0.95,0.763868806553258,0.9911185511992047,stage1+stage2
+place_shoe,complete,11,9,20,20,0.55,0.34208534245034233,0.7418021417443759,stage1+stage2
+move_pillbottle_pad,complete,20,0,20,20,1.0,0.8388748419471806,1.0,stage1+stage2
+place_burger_fries,complete,18,2,20,20,0.9,0.6989663547715128,0.9721335187862319,stage1_backfill

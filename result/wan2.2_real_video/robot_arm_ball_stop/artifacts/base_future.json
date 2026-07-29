@@ -1,0 +1,474 @@
+[
+  {
+    "event": "generation_begin",
+    "mode": "DIRECT",
+    "seed": 0,
+    "frame_num": 121,
+    "latent_frame_count": 31,
+    "output_width": 1280,
+    "output_height": 704,
+    "sampling_steps": 50,
+    "feedback_release_steps": [],
+    "beta": 10.0,
+    "state_weight": 1.0,
+    "kp": 1.0,
+    "gradient_checkpointing": true,
+    "deterministic_algorithms": true
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 0,
+    "sigma": 0.9997998476028442,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 1,
+    "sigma": 0.9957323670387268,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 2,
+    "sigma": 0.9915304780006409,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 3,
+    "sigma": 0.987187385559082,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 4,
+    "sigma": 0.9826958179473877,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 5,
+    "sigma": 0.9780480265617371,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 6,
+    "sigma": 0.9732357859611511,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 7,
+    "sigma": 0.9682501554489136,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 8,
+    "sigma": 0.9630816578865051,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 9,
+    "sigma": 0.9577199220657349,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 10,
+    "sigma": 0.9521540403366089,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 11,
+    "sigma": 0.9463720321655273,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 12,
+    "sigma": 0.9403610825538635,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 13,
+    "sigma": 0.9341073036193848,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 14,
+    "sigma": 0.9275957345962524,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 15,
+    "sigma": 0.9208101034164429,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 16,
+    "sigma": 0.913732647895813,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 17,
+    "sigma": 0.9063441753387451,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 18,
+    "sigma": 0.8986237049102783,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 19,
+    "sigma": 0.8905484676361084,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 20,
+    "sigma": 0.8820932507514954,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 21,
+    "sigma": 0.8732306957244873,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 22,
+    "sigma": 0.8639306426048279,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 23,
+    "sigma": 0.8541598320007324,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 24,
+    "sigma": 0.8438816070556641,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 25,
+    "sigma": 0.8330553770065308,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 26,
+    "sigma": 0.8216361403465271,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 27,
+    "sigma": 0.8095738291740417,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 28,
+    "sigma": 0.7968124747276306,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 29,
+    "sigma": 0.7832895517349243,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 30,
+    "sigma": 0.7689347267150879,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 31,
+    "sigma": 0.7536689043045044,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 32,
+    "sigma": 0.7374023795127869,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 33,
+    "sigma": 0.720033586025238,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 34,
+    "sigma": 0.7014464139938354,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 35,
+    "sigma": 0.6815081238746643,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 36,
+    "sigma": 0.6600657105445862,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 37,
+    "sigma": 0.6369423866271973,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 38,
+    "sigma": 0.6119323968887329,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 39,
+    "sigma": 0.5847949981689453,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 40,
+    "sigma": 0.5552467703819275,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 41,
+    "sigma": 0.5229514837265015,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 42,
+    "sigma": 0.48750731348991394,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 43,
+    "sigma": 0.44843021035194397,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 44,
+    "sigma": 0.40513139963150024,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 45,
+    "sigma": 0.35688769817352295,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 46,
+    "sigma": 0.3028006851673126,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 47,
+    "sigma": 0.24174034595489502,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 48,
+    "sigma": 0.17226514220237732,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "solver_guidance",
+    "solver_step": 49,
+    "sigma": 0.09250685572624207,
+    "constraint_version": 0,
+    "feedback_updates": 0,
+    "guided": false,
+    "mask_nonzero": 0
+  },
+  {
+    "event": "generation_end",
+    "constraint_version": 0,
+    "peak_cuda_memory_allocated_bytes": 20663794176,
+    "peak_cuda_memory_reserved_bytes": 22435332096
+  }
+]

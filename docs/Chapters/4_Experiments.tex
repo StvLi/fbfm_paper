@@ -29,8 +29,8 @@ factorizations rather than comparing the two base models directly.
 
 \paragraph{Benchmarks and tasks.}
 We evaluate the LingBot-VA track on RoboTwin~\cite{mu2025robotwin} and the
-DreamZero track on LIBERO~\cite{liu2023libero}. The planned matched DreamZero
-comparison covers all four standard suites---LIBERO-Spatial, LIBERO-Object,
+DreamZero track on LIBERO~\cite{liu2023libero}. The DreamZero comparison covers
+all four standard suites---LIBERO-Spatial, LIBERO-Object,
 LIBERO-Goal, and LIBERO-10---with 10 tasks per suite. Each task is evaluated
 once at each reset ID from 0 to 19, giving 20 episodes per task and 800 episodes
 per method.
@@ -65,6 +65,18 @@ time-aligned constraints in the active video flow. The corrected video context
 then conditions action generation, while the same preceding suffix provides a
 fixed action-prefix constraint.
 
+\paragraph{LingBot-VA mechanism diagnostic.}
+We additionally isolate the two computation-level links induced by this state
+context refresh. The frozen diagnostic uses four paired task--trial units from
+\texttt{adjust\_bottle} and \texttt{pick\_diverse\_bottles} under RoboTwin's
+randomized setting. First, we compare the wave-0 predicted next-state latent
+with the next realized latent under matched RTC~\cite{black2025realtime} and
+FBFM initial conditions. Second, a CacheCut intervention switches only the
+installed RTC versus FBFM cache while holding history, noise, constraints, and
+the solver schedule fixed; repeating the same RTC cache estimates the numerical
+floor. This diagnostic tests state-feedback and cache-to-action influence, not
+task-success differences.
+
 \paragraph{Joint generation: DreamZero.}
 We retain DreamZero's joint state--action solver. Guidance is recomputed at all
 16 UniPC updates, whereas the native DiT velocity and endpoint Jacobian are
@@ -92,6 +104,7 @@ throughout the active chunk.
         Pseudo-clock release & 26 calls / 16 actions & 8 blocks / 8 actions \\
         State-target refresh & 4 obs. / latent & Every 3 actions \\
         State preconditioner & 1 & $P_Z=56/9600$ \\
+        Proportional state gain & n/a & $k_p=0.0486968$ \\
         Guidance clip $\beta$ & 10 & 10 \\
         Precision & BF16 & BF16 \\
         \bottomrule
@@ -113,3 +126,16 @@ separation, rolling encoding, and exact solver schedules.
 
 % TODO(experiments): Leave this subsection blank until the baseline and ablation
 % design has been agreed with the experiment team.
+
+\subsection{Real-World Observation Prediction}
+\label{subsec:real-world-observation-prediction}
+
+Finally, we evaluate state feedback on an RGB sequence captured during a
+physical robot-arm ball-stopping trial. A frozen Wan2.2-TI2V-5B
+model~\cite{wan2025} receives the same image anchor, prompt, seed, and 50-step
+solver in both conditions: the Base performs native video prediction, whereas
+FBFM causally encodes the next 120 RealSense D435i frames into 30 latent
+measurements released across the active solve. This recorded-execution
+diagnostic evaluates real-world visual-state prediction rather than task
+success; full-resolution videos and preprocessing metadata are included in the
+supplementary material.

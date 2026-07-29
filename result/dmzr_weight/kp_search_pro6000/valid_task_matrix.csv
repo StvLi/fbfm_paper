@@ -1,0 +1,9 @@
+suite,task_id,description,kp_0p0316228_successes,kp_0p0486968_successes,kp_0p0749894_successes,episodes_per_kp
+libero_spatial,1,pick up the black bowl next to the ramekin and place it on the plate,8,9,9,10
+libero_spatial,9,pick up the black bowl on the wooden cabinet and place it on the plate,7,8,8,10
+libero_object,0,pick up the alphabet soup and place it in the basket,9,9,8,10
+libero_object,6,pick up the butter and place it in the basket,6,8,7,10
+libero_goal,0,open the middle drawer of the cabinet,8,9,9,10
+libero_goal,6,put the cream cheese in the bowl,6,7,7,10
+libero_10,0,put both the alphabet soup and the tomato sauce in the basket,4,7,6,10
+libero_10,6,put the white mug on the plate and put the chocolate pudding to the right of the plate,8,7,6,10

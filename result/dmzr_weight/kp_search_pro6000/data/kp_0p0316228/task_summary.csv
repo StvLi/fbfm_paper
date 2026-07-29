@@ -1,0 +1,9 @@
+suite,task_id,status,trials,target_trials,successes,failures,success_rate,wilson_low,wilson_high,mean_executed_steps,mean_elapsed_seconds,mean_inference_wave_seconds,task_description,output
+libero_spatial,1,complete,10,10,8,2,0.8,0.49016247153664183,0.9433178485456247,297.4,173.37344800139834,4.461888516295547,pick up the black bowl next to the ramekin and place it on the plate,tasks/libero_spatial/task_001
+libero_spatial,9,complete,10,10,7,3,0.7,0.39677814746114537,0.8922087325936989,289.5,169.47644659450162,4.48850554200904,pick up the black bowl on the wooden cabinet and place it on the plate,tasks/libero_spatial/task_009
+libero_object,0,complete,10,10,9,1,0.9,0.5958499732047615,0.9821237869049271,278.5,159.83790795039675,4.376617233419501,pick up the alphabet soup and place it in the basket,tasks/libero_object/task_000
+libero_object,6,complete,10,10,6,4,0.6,0.31267376973365824,0.8318196702937638,326.9,118.80345321549976,2.7880393500805067,pick up the butter and place it in the basket,tasks/libero_object/task_006
+libero_goal,0,complete,10,10,8,2,0.8,0.49016247153664183,0.9433178485456247,200.5,118.00768852939946,4.403142711996729,open the middle drawer of the cabinet,tasks/libero_goal/task_000
+libero_goal,6,complete,10,10,6,4,0.6,0.31267376973365824,0.8318196702937638,255.3,149.24017418749864,4.4659971221655415,put the cream cheese in the bowl,tasks/libero_goal/task_006
+libero_10,0,complete,10,10,4,6,0.4,0.16818032970623614,0.6873262302663417,412.8,240.30513482829846,4.5121217292068625,put both the alphabet soup and the tomato sauce in the basket,tasks/libero_10/task_000
+libero_10,6,complete,10,10,8,2,0.8,0.49016247153664183,0.9433178485456247,323.4,189.2221868877037,4.492306548829386,put the white mug on the plate and put the chocolate pudding to the right of the plate,tasks/libero_10/task_006

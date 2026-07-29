@@ -1,0 +1,13 @@
+task,status,successes,failures,episodes_completed,episodes_required,success_rate,wilson_95_low,wilson_95_high,stage1_successes,stage1_episodes,stage2_successes,stage2_episodes
+place_burger_fries,complete,20,0,20,20,1.0,0.8388748419471806,1.0,10,10,10,10
+place_empty_cup,complete,20,0,20,20,1.0,0.8388748419471806,1.0,10,10,10,10
+place_shoe,complete,14,6,20,20,0.7,0.4810271816464765,0.8545227551323956,6,10,8,10
+scan_object,complete,15,5,20,20,0.75,0.531299122381256,0.8881382985923343,7,10,8,10
+adjust_bottle,complete,19,1,20,20,0.95,0.763868806553258,0.9911185511992047,10,10,9,10
+beat_block_hammer,complete,15,5,20,20,0.75,0.531299122381256,0.8881382985923343,8,10,7,10
+click_alarmclock,complete,20,0,20,20,1.0,0.8388748419471806,1.0,10,10,10,10
+click_bell,complete,20,0,20,20,1.0,0.8388748419471806,1.0,10,10,10,10
+grab_roller,complete,20,0,20,20,1.0,0.8388748419471806,1.0,10,10,10,10
+lift_pot,complete,20,0,20,20,1.0,0.8388748419471806,1.0,10,10,10,10
+move_can_pot,complete,20,0,20,20,1.0,0.8388748419471806,1.0,10,10,10,10
+move_pillbottle_pad,complete,20,0,20,20,1.0,0.8388748419471806,1.0,10,10,10,10
