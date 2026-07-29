@@ -13,7 +13,7 @@ This file tracks paper-level revisions and consistency checks. Check an item onl
 - [ ] Make state, action, observed, predicted, constrained, and unconstrained slots visually distinguishable with one shared legend.
 - [ ] Check that capitalization and hyphenation are consistent: `Flow Matching`, `World-Action Model`, and `Pseudoinverse-Guided`.
 
-### Joint-generation figure (`material/parallel.jpg`)
+### Joint-generation figure (`material/parallel.png`)
 
 - [ ] Rename the displayed paradigm to `Joint Generation` or `Joint Flow Matching`; avoid `parallel` in the paper text.
 - [ ] Explicitly identify the joint flow variable as `X_t^\tau = [Z_t^\tau, A_t^\tau]`.

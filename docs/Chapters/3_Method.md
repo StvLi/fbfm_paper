@@ -301,7 +301,7 @@ dynamic state feedback and the fixed previous-action target are instead assemble
 into one joint constraint and applied at every evaluation of the same Flow-Matching
 solver.
 
-![FBFM for a joint-generation WAM.](../../material/parallel.jpg)
+![FBFM for a joint-generation WAM.](../../material/parallel.png)
 
 *FBFM for a joint-generation WAM. Encoded transitions observed while the preceding
 chunk is executed and committed actions from the cross-chunk overlap jointly
