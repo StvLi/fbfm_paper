@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export SOURCE_DATE_EPOCH=946684800
+export FORCE_SOURCE_DATE=1
+
 root_dir="$(cd "$(dirname "$0")" && pwd)"
 build_dir="$root_dir/build"
 mkdir -p "$build_dir"
@@ -8,6 +11,7 @@ mkdir -p "$build_dir"
 cd "$root_dir"
 
 latexmk \
+  -g \
   -pdf \
   -interaction=nonstopmode \
   -halt-on-error \

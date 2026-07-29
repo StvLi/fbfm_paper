@@ -18,5 +18,10 @@ The compact slot labels deliberately omit the solver-evaluation index \(k\).
 The full correction formulas retain \(t\), \(k\), and the corresponding flow
 time \(\tau_k^Q\).
 
+The expanded one-line integral uses continuous-time shorthand such as
+\(\mathbf W_t^Q(\tau)\), \(\mathbf Y_t^Q(\tau)\), and
+\(\mathcal K_t^Q(\tau)\). Each denotes the latest discrete snapshot available
+at the solver evaluation corresponding to flow time \(\tau\).
+
 Run build_assets.sh from this directory to rebuild the sheet and all formula
 tiles.

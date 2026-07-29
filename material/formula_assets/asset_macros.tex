@@ -83,10 +83,18 @@
   =
   \mathbf Q_t^0
   +\int_0^1
-  v_{\mathrm{FBFM}}^Q
-  \!\left(
-    \mathbf Q_t^\tau,\tau
-  \right)
+  \left[
+    v_{\theta_Q}^Q
+    \!\left(
+      \mathbf Q_t^\tau,\tau;\mathcal K_t^Q(\tau)
+    \right)
+    +\lambda_\tau^Q
+    \left(\mathbf J_t^Q(\tau)\right)^{\mathsf T}
+    \mathbf P^Q\mathbf W_t^Q(\tau)
+    \left(
+      \mathbf Y_t^Q(\tau)-\hat{\mathbf Q}_t^1(\tau)
+    \right)
+  \right]
   \,\mathrm d\tau,
   \qquad Q\in\{Z,A,X\}}
 
