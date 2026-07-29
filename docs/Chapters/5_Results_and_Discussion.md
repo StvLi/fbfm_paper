@@ -19,6 +19,24 @@ reserved for Appendix D.
 FBFM improves the pooled Clean and Randomized success rates by 2.3 and 1.7
 percentage points, respectively.
 
+## LingBot-VA Mechanism Analysis
+
+The following figure evaluates the two internal links isolated by the
+auxiliary diagnostic. Across all four paired task--trial units, FBFM reduces
+the wave-0 next-state latent MSE, lowering the mean from 0.6828 to 0.6751
+(1.13%). Switching only the installed RTC versus FBFM cache changes the
+normalized fresh action by RMS 0.00890, compared with a same-cache repeat floor
+of 0.001205, a 7.39x ratio. The cache-switch velocity also remains above the
+mean repeat floor at all 51 action-solver steps, with a 2.52x AUC ratio. These
+results support the computation-level path from encoded state feedback through
+the refreshed cache to action generation; with only four independent units,
+they are mechanism evidence rather than a task-success claim.
+
+![LingBot-VA mechanism diagnostic. Panel (a) reports paired wave-0 next-state
+latent MSE; panel (b) compares fresh-action RMS under a same-cache repeat and an
+RTC--FBFM cache switch; panel (c) follows both velocity signals across 51 action
+solver steps.](../../material/lbva_aux_mechanism_main.jpg)
+
 ## DreamZero on LIBERO
 
 We compare the frozen DreamZero checkpoint with and without FBFM on
