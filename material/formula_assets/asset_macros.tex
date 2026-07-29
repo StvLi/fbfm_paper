@@ -1,0 +1,204 @@
+\newcommand{\StateSlotLabels}{%
+  \hat z^{\,1}_{t+1},\quad
+  \hat z^{\,1}_{t+2},\quad
+  \ldots,\quad
+  \hat z^{\,1}_{t+H}}
+
+\newcommand{\ActionSlotLabels}{%
+  \hat a^{\,1}_{t},\quad
+  \hat a^{\,1}_{t+1},\quad
+  \ldots,\quad
+  \hat a^{\,1}_{t+H-1}}
+
+\newcommand{\RealStateSlotLabels}{%
+  s_t,\quad
+  s_{t+1},\quad
+  s_{t+2},\quad
+  \ldots,\quad
+  s_{t+H}}
+
+\newcommand{\EncodedFeedbackSlotLabels}{%
+  z_{t+1},\quad
+  z_{t+2},\quad
+  \ldots,\quad
+  z_{t+H}}
+
+\newcommand{\CommittedActionSlotLabels}{%
+  a_t^{\mathrm{prev}},\quad
+  a_{t+1}^{\mathrm{prev}},\quad
+  \ldots,\quad
+  a_{t+H-1}^{\mathrm{prev}}}
+
+\newcommand{\ExecutionTransition}{%
+  \begin{aligned}
+    s_{t+i}
+    &\sim P\!\left(\,\cdot\mid
+      s_{t+i-1},a_{t+i-1}^{\mathrm{prev}}\right),\\
+    z_{t+i}
+    &=E\!\left(\mathcal O(s_{t+i})\right),
+    \qquad (i,z_{t+i})\in\mathcal F_{t,k}
+  \end{aligned}}
+
+\newcommand{\OverlapLabels}{%
+  i\in\mathcal I_t^A,
+  \qquad a_{t+i}^{\mathrm{prev}},
+  \qquad i=0,\ldots,H-1}
+
+\newcommand{\MeasurementLifting}{%
+  \begin{aligned}
+    \mathbf m_{t,k}^Q
+    &=h_Q(\mathbf Q_t^1)+\boldsymbol\eta,\\
+    \mathbf Y_{t,k}^Q
+    &:=h_Q^\dagger(\mathbf m_{t,k}^Q),
+    \qquad Q\in\{Z,A,X\}
+  \end{aligned}}
+
+\newcommand{\UnifiedEndpointChain}{%
+  \begin{aligned}
+    \hat{\mathbf Q}_{t,k}^{\,1}
+    &=
+    \mathbf Q_t^{\tau_k^Q}
+    +(1-\tau_k^Q)
+    v_{\theta_Q}^Q
+    \!\left(
+      \mathbf Q_t^{\tau_k^Q},\tau_k^Q;
+      \mathcal K_{t,k}^Q
+    \right),\\
+    \mathbf e_{t,k}^Q
+    &=
+    \mathbf P^Q\mathbf W_{t,k}^Q
+    \left(
+      \mathbf Y_{t,k}^Q-\hat{\mathbf Q}_{t,k}^{\,1}
+    \right),\\
+    v_{\mathrm{FBFM}}^Q
+    &=
+    v_{\theta_Q}^Q
+    +\lambda_{\tau_k^Q}^Q
+    \left(\mathbf J_{t,k}^Q\right)^{\mathsf T}
+    \mathbf e_{t,k}^Q
+  \end{aligned}}
+
+\newcommand{\GenericFlowIntegral}{%
+  \mathbf Q_t^1
+  =
+  \mathbf Q_t^0
+  +\int_0^1
+  v_{\mathrm{FBFM}}^Q
+  \!\left(
+    \mathbf Q_t^\tau,\tau
+  \right)
+  \,\mathrm d\tau,
+  \qquad Q\in\{Z,A,X\}}
+
+\newcommand{\StageStateField}{%
+  \begin{aligned}
+    \mathbf e_{t,k}^Z
+    &=
+    P_Z\mathbf W_{t,k}^Z
+    \left(
+      \mathbf Y_{t,k}^Z-\hat{\mathbf Z}_{t,k}^{\,1}
+    \right),\\
+    v_{\mathrm{FBFM}}^Z
+    &=
+    v_{\theta_Z}^Z
+    +\lambda_{\tau_k^Z}^Z
+    \left(\mathbf J_{t,k}^Z\right)^{\mathsf T}
+    \mathbf e_{t,k}^Z
+  \end{aligned}}
+
+\newcommand{\StageActionField}{%
+  \begin{aligned}
+    \mathbf e_{t,k}^A
+    &=
+    P_A\mathbf W_t^A
+    \left(
+      \mathbf Y_t^A-\hat{\mathbf A}_{t,k}^{\,1}
+    \right),\\
+    v_{\mathrm{FBFM}}^A
+    &=
+    v_{\theta_A}^A
+    +\lambda_{\tau_k^A}^A
+    \left(\mathbf J_{t,k}^A\right)^{\mathsf T}
+    \mathbf e_{t,k}^A
+  \end{aligned}}
+
+\newcommand{\RefreshedStateContext}{%
+  \begin{aligned}
+    \check{\mathbf Z}_{t,k}
+    &=
+    \left(\mathbf I_{D_Z}-\mathbf W_{t,k}^Z\right)
+    \hat{\mathbf Z}_t
+    +\mathbf W_{t,k}^Z\mathbf Y_{t,k}^Z,\\
+    \mathcal C_{t,k}^Z
+    &=
+    \Phi_Z\!\left(\check{\mathbf Z}_{t,k},\mathcal H_t\right)
+  \end{aligned}}
+
+\newcommand{\JointVariable}{%
+  \mathbf X_t
+  =
+  \begin{bmatrix}
+    \mathbf Z_t\\
+    \mathbf A_t
+  \end{bmatrix},
+  \qquad
+  v_\theta^X:\mathbf X_t^\tau\mapsto
+  \frac{\mathrm d\mathbf X_t^\tau}{\mathrm d\tau}}
+
+\newcommand{\JointTargetMask}{%
+  \begin{aligned}
+    \mathbf Y_{t,k}^X
+    &=
+    \begin{bmatrix}
+      \mathbf Y_{t,k}^Z\\
+      \mathbf Y_t^A
+    \end{bmatrix},&
+    \mathbf W_{t,k}^X
+    &=
+    \begin{bmatrix}
+      \mathbf W_{t,k}^Z&\mathbf 0\\
+      \mathbf 0&\mathbf W_t^A
+    \end{bmatrix},\\
+    \mathbf P^X
+    &=
+    \operatorname{blkdiag}
+    \!\left(
+      P_Z\mathbf I_{D_Z},
+      P_A\mathbf I_{D_A}
+    \right)
+  \end{aligned}}
+
+\newcommand{\JointGuidedField}{%
+  \begin{aligned}
+    \mathbf e_{t,k}^X
+    &=
+    \mathbf P^X\mathbf W_{t,k}^X
+    \left(
+      \mathbf Y_{t,k}^X-\hat{\mathbf X}_{t,k}^{\,1}
+    \right),\\
+    v_{\mathrm{FBFM}}^X
+    &=
+    v_\theta^X
+    +\lambda_{\tau_k^X}^X
+    \left(\mathbf J_{t,k}^X\right)^{\mathsf T}
+    \mathbf e_{t,k}^X
+  \end{aligned}}
+
+\newcommand{\CrossModalCorrection}{%
+  \mathbf e_{t,k}^A=\mathbf 0
+  \quad\Longrightarrow\quad
+  \mathbf g_{t,k}^A
+  =
+  \mathbf J_{ZA}^{\mathsf T}\mathbf e_{t,k}^Z
+  =
+  \left(
+    \frac{\partial\hat{\mathbf Z}_{t,k}^{\,1}}
+         {\partial\mathbf A_t^{\tau_k^X}}
+  \right)^{\mathsf T}
+  \mathbf e_{t,k}^Z}
+
+\newcommand{\StageFactorization}{%
+  p_\theta(\mathbf Z_t,\mathbf A_t\mid\mathcal H_t)
+  =
+  p_{\theta_Z}(\mathbf Z_t\mid\mathcal H_t)\,
+  p_{\theta_A}(\mathbf A_t\mid\mathbf Z_t,\mathcal H_t)}

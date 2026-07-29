@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,landscape,margin=15mm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+\color{black}
+\input{asset_macros.tex}
+
+\newcommand{\asset}[2]{%
+  {\large\bfseries #1}\par
+  {\Large
+    \[
+      \displaystyle #2
+    \]
+  }
+  \vspace{0.35em}
+}
+
+\begin{document}
+
+{\LARGE\bfseries Figure 1 assets: global-time slot labels}\par
+\vspace{0.5em}
+
+\asset{Predicted latent-state slots}{\StateSlotLabels}
+\asset{Predicted action slots}{\ActionSlotLabels}
+\asset{Real environment-state slots}{\RealStateSlotLabels}
+\asset{Encoded state-feedback slots}{\EncodedFeedbackSlotLabels}
+\asset{Committed actions from the preceding chunk}{\CommittedActionSlotLabels}
+\asset{Aligned cross-chunk action overlap}{\OverlapLabels}
+
+\newpage
+
+{\LARGE\bfseries Figure 1 assets: stage-wise FBFM formulas}\par
+\vspace{0.5em}
+
+\asset{Execution transition and encoded feedback}{\ExecutionTransition}
+\asset{State-flow correction}{\StageStateField}
+\asset{Action-flow correction}{\StageActionField}
+\asset{Feedback-refreshed state context}{\RefreshedStateContext}
+
+\newpage
+
+{\LARGE\bfseries Figure 3 assets: joint-generation FBFM}\par
+\vspace{0.5em}
+
+\asset{Joint state--action variable}{\JointVariable}
+\asset{Joint feedback target, mask, and preconditioner}{\JointTargetMask}
+\asset{Joint guided velocity field}{\JointGuidedField}
+\asset{Direct state-to-action correction}{\CrossModalCorrection}
+
+\newpage
+
+{\LARGE\bfseries Shared replacement formulas and compact labels}\par
+\vspace{0.5em}
+
+\asset{Generic FBFM flow integral}{\GenericFlowIntegral}
+\asset{Unified clean-endpoint and guidance chain}{\UnifiedEndpointChain}
+\asset{Measurement and generalized lifting}{\MeasurementLifting}
+\asset{Stage-wise factorization}{\StageFactorization}
+
+\newpage
+
+{\LARGE\bfseries Compact diagram labels}\par
+\vspace{0.8em}
+
+{\large\bfseries Compact text labels}\par
+\vspace{0.5em}
+{\Large
+\begin{tabular}{@{}ll@{}}
+State Flow & $v_{\mathrm{FBFM}}^Z$\\[0.7em]
+Action Flow & $v_{\mathrm{FBFM}}^A$\\[0.7em]
+Joint State--Action Flow & $v_{\mathrm{FBFM}}^X$\\[0.7em]
+Dynamic State Feedback & $\mathcal F_{t,k}$\\[0.7em]
+Committed Action Overlap & $\mathcal I_t^A$\\[0.7em]
+Frozen WAM & $\theta,\theta_Z,\theta_A\ \text{fixed}$
+\end{tabular}}
+
+\end{document}
