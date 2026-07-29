@@ -30,10 +30,17 @@ success-mediation claim.
 | --- | --- |
 | `NUMERIC_MECHANISM_EXPERIMENT.md` | Complete protocol, tables, interpretation, limitations, and paper-ready statement |
 | `aggregate/` | Strict paired state metrics, descriptive trends, action-probe rows, and structured summary |
-| `figures/` | PNG and PDF paper figures |
+| `figures/` | Original PNG and PDF analysis figures |
 | `control/` | Reproducible state extraction and offline aggregation scripts |
+| `publication_visualization/` | Paper-ready main/appendix figures, frozen source and derived tables, plotting code, manuscript analysis, and audits |
 | `artifact_manifest.json` | Original 25-artifact size and SHA-256 manifest |
 | `SHA256SUMS` | Repository-package checksums, including this README and the original manifest |
+
+The publication package is self-contained. Start with
+`publication_visualization/README.md`; its
+`docs/AUXILIARY_EXPERIMENT_RESULTS_AND_ANALYSIS.md` is the experiment-section
+handoff, and `figures/fig1_aux_mechanism_main.*` is the recommended main-text
+figure.
 
 ## Provenance
 

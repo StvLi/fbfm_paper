@@ -1,0 +1,23 @@
+metric,estimate,unit,sample_definition,interpretation
+independent_task_trial_units,4.0,count,task_x_trial,Primary independent units
+strict_next_state_rtc_mean_mse,0.6828338503837585,normalized_latent_MSE,4 units,Strict wave-0 paired start
+strict_next_state_fbfm_mean_mse,0.6751488000154495,normalized_latent_MSE,4 units,Strict wave-0 paired start
+strict_next_state_absolute_mse_reduction,0.007685050368309021,normalized_latent_MSE,4 paired units,RTC minus FBFM
+strict_next_state_relative_mse_reduction,0.011254641760934898,fraction,4 paired units,Ratio of mean reduction to RTC mean
+strict_next_state_difference_sd,0.006794747957963587,normalized_latent_MSE,4 paired units,Sample SD of paired RTC-minus-FBFM differences
+strict_next_state_difference_95pct_t_ci_low,-0.0031269098987704823,normalized_latent_MSE,4 paired units,Lower bound of two-sided 95% t interval for the mean paired difference
+strict_next_state_difference_95pct_t_ci_high,0.018497010635388524,normalized_latent_MSE,4 paired units,Upper bound of two-sided 95% t interval for the mean paired difference
+strict_next_state_fbfm_lower_units,4.0,count,4 paired units,Direction count
+paired_sign_test_two_sided_p,0.125,p_value,4 paired units,Exact sign test; descriptive small-n evidence
+cache_switch_mean_fresh_action_rms,0.0088999182917177,normalized_action_RMS,4 units; 2 probes averaged within unit,RTC versus FBFM cache branch
+same_cache_repeat_mean_fresh_action_rms,0.00120500909542895,normalized_action_RMS,4 units; 2 probes averaged within unit,Numerical repeat floor
+cache_switch_to_repeat_ratio_of_means,7.385768560153128,ratio,4 units,Not a task-success multiplier
+cache_switch_solver_curve_auc,0.8941979877417884,RMS_x_solver_step,4 units; 51 steps,Mean unit-clustered curve
+repeat_floor_solver_curve_auc,0.3547470631601726,RMS_x_solver_step,4 units; 51 steps,Mean unit-clustered curve
+solver_curve_auc_ratio,2.5206635391877708,ratio,4 units; 51 steps,Cache switch divided by repeat floor
+solver_steps_mean_signal_above_floor,51.0,count,51 solver steps,Mean curves only
+one_step_fbfm_lower_unit_waves,34.0,count,44 matched unit-waves,Only wave 0 is strict paired-start evidence
+rgb_fbfm_lower_unit_frames,6.0,count,16 unit-frames,Negative decoded-RGB sensitivity check
+state_action_spearman_rho,0.19999999999999998,rank_correlation,4 units,Exploratory only
+state_action_spearman_exact_permutation_p,0.9166666666666666,p_value,4 units; 24 permutations,Exploratory only
+action_channels_mean_signal_above_floor,16.0,count,16 normalized channels,Two probes clustered within each of 4 units

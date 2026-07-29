@@ -1,0 +1,9 @@
+unit,task,trial_id,probe_count,condition,normalized_fresh_action_rms,independent_unit
+Adjust / T20,adjust_bottle,20,2,same_cache_repeat_floor,0.000846214214107,task_x_trial
+Adjust / T21,adjust_bottle,21,2,same_cache_repeat_floor,0.0012275030603632,task_x_trial
+Pick / T20,pick_diverse_bottles,20,2,same_cache_repeat_floor,0.0014849462895654,task_x_trial
+Pick / T21,pick_diverse_bottles,21,2,same_cache_repeat_floor,0.0012613728176802,task_x_trial
+Adjust / T20,adjust_bottle,20,2,rtc_vs_fbfm_cache_switch,0.0041310421656817,task_x_trial
+Adjust / T21,adjust_bottle,21,2,rtc_vs_fbfm_cache_switch,0.0076753019820898,task_x_trial
+Pick / T20,pick_diverse_bottles,20,2,rtc_vs_fbfm_cache_switch,0.0116915903054177,task_x_trial
+Pick / T21,pick_diverse_bottles,21,2,rtc_vs_fbfm_cache_switch,0.0121017387136816,task_x_trial
