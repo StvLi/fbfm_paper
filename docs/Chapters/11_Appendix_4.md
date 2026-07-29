@@ -11,69 +11,61 @@ horizon.
 
 The selected RoboTwin evaluation contains 42 tasks under both `demo_clean` and
 `demo_randomized`. Longer tasks outside this set are excluded from the main
-evaluation. Within this selection, the CPU-render snapshot at commit `50a3cc4`
-supplies 26 Clean and 7 Randomized Base cells, together with 17 Clean and 28
-Randomized FBFM cells. The independently validated GPU-render result at commit
-`fb58706` adds 12 Clean FBFM cells, each with 20 validated episodes. To keep a
-common 10-episode denominator in this table, each of these entries is recomputed
-from the first 10 accepted episode records for that task in `trials.csv`; the
-complete 20-episode records remain in the result package. These are the
-consecutive Clean FBFM entries from `place_burger_fries` through
-`move_pillbottle_pad`.
-
-The consolidated table therefore contains 90 of 168 planned task--condition
-cells. Eleven Clean and four Randomized tasks have both Base and FBFM records
-under CPU rendering. No GPU-render Base record is currently available, and the
-CPU snapshots retain task-level counts rather than episode identities. Thus,
-populated cells with different rendering modes or unverifiable episode pairing
-must not be pooled into the main comparison.
+evaluation. The latest consolidated evaluation ledger supplies all 84 Base
+task--condition cells and 84 FBFM cells. Integer successes and trials are
+treated as the source of truth, and the displayed rates are recomputed from
+these counts. All Base evaluations and 41 of the 42 tasks for each FBFM
+condition are complete. Only the FBFM evaluation of `handover_block` remains
+ongoing, with 1/6 Clean and 0/4 Randomized trials at the time of this snapshot.
+These partial cells are retained for auditability but are not used to finalize
+the main-text aggregate.
 
 | Task | Clean Base | Clean FBFM | Randomized Base | Randomized FBFM |
 | --- | ---: | ---: | ---: | ---: |
-| `handover_block` | 0/10 (0%) | -- | 1/10 (10%) | -- |
-| `place_cans_plasticbox` | 10/10 (100%) | -- | -- | -- |
-| `stack_blocks_two` | 7/10 (70%) | -- | -- | -- |
-| `open_laptop` | 9/10 (90%) | -- | 9/10 (90%) | -- |
-| `place_bread_basket` | 9/10 (90%) | -- | -- | -- |
-| `place_can_basket` | 7/10 (70%) | -- | -- | -- |
-| `place_object_basket` | 9/10 (90%) | -- | -- | -- |
-| `put_object_cabinet` | 7/10 (70%) | -- | -- | -- |
-| `shake_bottle` | -- | -- | -- | -- |
-| `shake_bottle_horizontally` | -- | -- | -- | -- |
-| `dump_bin_bigbin` | 10/10 (100%) | -- | 10/10 (100%) | -- |
-| `handover_mic` | 7/10 (70%) | 10/10 (100%) | -- | -- |
-| `place_dual_shoes` | 0/10 (0%) | -- | -- | -- |
-| `place_bread_skillet` | 8/10 (80%) | -- | -- | -- |
-| `place_burger_fries` | 10/10 (100%) | 9/10 (90%) | -- | 10/10 (100%) |
-| `place_empty_cup` | -- | 10/10 (100%) | -- | 10/10 (100%) |
-| `place_shoe` | 5/10 (50%) | 5/10 (50%) | -- | 5/10 (50%) |
-| `scan_object` | 9/10 (90%) | 7/10 (70%) | -- | 8/10 (80%) |
-| `adjust_bottle` | -- | 10/10 (100%) | -- | 10/10 (100%) |
-| `beat_block_hammer` | 7/10 (70%) | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) |
-| `click_alarmclock` | -- | 10/10 (100%) | -- | 10/10 (100%) |
-| `click_bell` | -- | 10/10 (100%) | -- | 10/10 (100%) |
-| `grab_roller` | -- | 10/10 (100%) | -- | 10/10 (100%) |
-| `lift_pot` | -- | 10/10 (100%) | -- | 10/10 (100%) |
-| `move_can_pot` | -- | 10/10 (100%) | -- | 9/10 (90%) |
-| `move_pillbottle_pad` | -- | 10/10 (100%) | -- | 9/10 (90%) |
-| `move_playingcard_away` | -- | 10/10 (100%) | -- | 10/10 (100%) |
+| `handover_block` | 0/10 (0%) | 1/6 (16.7%) | 1/10 (10%) | 0/4 (0%) |
+| `place_cans_plasticbox` | 10/10 (100%) | 10/10 (100%) | 10/10 (100%) | 10/10 (100%) |
+| `stack_blocks_two` | 7/10 (70%) | 10/10 (100%) | 7/10 (70%) | 8/10 (80%) |
+| `open_laptop` | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) |
+| `place_bread_basket` | 9/10 (90%) | 5/10 (50%) | 8/10 (80%) | 9/10 (90%) |
+| `place_can_basket` | 7/10 (70%) | 10/10 (100%) | 7/10 (70%) | 9/10 (90%) |
+| `place_object_basket` | 9/10 (90%) | 8/10 (80%) | 7/10 (70%) | 7/10 (70%) |
+| `put_object_cabinet` | 7/10 (70%) | 6/10 (60%) | 8/10 (80%) | 7/10 (70%) |
+| `shake_bottle` | 20/20 (100%) | 10/10 (100%) | 20/20 (100%) | 10/10 (100%) |
+| `shake_bottle_horizontally` | 20/20 (100%) | 10/10 (100%) | 20/20 (100%) | 10/10 (100%) |
+| `dump_bin_bigbin` | 10/10 (100%) | 10/10 (100%) | 10/10 (100%) | 10/10 (100%) |
+| `handover_mic` | 7/10 (70%) | 10/10 (100%) | 8/10 (80%) | 8/10 (80%) |
+| `place_dual_shoes` | 0/10 (0%) | 1/10 (10%) | 1/10 (10%) | 1/10 (10%) |
+| `place_bread_skillet` | 8/10 (80%) | 7/10 (70%) | 6/10 (60%) | 7/10 (70%) |
+| `place_burger_fries` | 10/10 (100%) | 18/20 (90%) | 9/10 (90%) | 10/10 (100%) |
+| `place_empty_cup` | 20/20 (100%) | 20/20 (100%) | 20/20 (100%) | 10/10 (100%) |
+| `place_shoe` | 5/10 (50%) | 11/20 (55%) | 6/10 (60%) | 5/10 (50%) |
+| `scan_object` | 9/10 (90%) | 13/20 (65%) | 8/10 (80%) | 8/10 (80%) |
+| `adjust_bottle` | 18/20 (90%) | 20/20 (100%) | 20/20 (100%) | 10/10 (100%) |
+| `beat_block_hammer` | 7/10 (70%) | 15/20 (75%) | 9/10 (90%) | 9/10 (90%) |
+| `click_alarmclock` | 16/20 (80%) | 20/20 (100%) | 18/20 (90%) | 10/10 (100%) |
+| `click_bell` | 20/20 (100%) | 20/20 (100%) | 20/20 (100%) | 10/10 (100%) |
+| `grab_roller` | 19/20 (95%) | 20/20 (100%) | 17/20 (85%) | 10/10 (100%) |
+| `lift_pot` | 20/20 (100%) | 20/20 (100%) | 17/20 (85%) | 10/10 (100%) |
+| `move_can_pot` | 18/20 (90%) | 19/20 (95%) | 14/20 (70%) | 9/10 (90%) |
+| `move_pillbottle_pad` | 18/20 (90%) | 20/20 (100%) | 19/20 (95%) | 9/10 (90%) |
+| `move_playingcard_away` | 17/20 (85%) | 10/10 (100%) | 17/20 (85%) | 10/10 (100%) |
 | `move_stapler_pad` | 2/10 (20%) | 4/10 (40%) | 6/10 (60%) | 6/10 (60%) |
 | `pick_diverse_bottles` | 10/10 (100%) | 10/10 (100%) | 9/10 (90%) | 8/10 (80%) |
-| `pick_dual_bottles` | -- | 10/10 (100%) | -- | 8/10 (80%) |
-| `place_a2b_left` | 9/10 (90%) | 9/10 (90%) | -- | 10/10 (100%) |
+| `pick_dual_bottles` | 18/20 (90%) | 10/10 (100%) | 14/20 (70%) | 8/10 (80%) |
+| `place_a2b_left` | 9/10 (90%) | 9/10 (90%) | 10/10 (100%) | 10/10 (100%) |
 | `place_a2b_right` | 9/10 (90%) | 8/10 (80%) | 9/10 (90%) | 10/10 (100%) |
-| `place_container_plate` | -- | 10/10 (100%) | -- | 10/10 (100%) |
-| `place_fan` | 8/10 (80%) | 9/10 (90%) | -- | 9/10 (90%) |
-| `place_mouse_pad` | 5/10 (50%) | 5/10 (50%) | -- | 5/10 (50%) |
-| `place_object_scale` | 9/10 (90%) | 10/10 (100%) | -- | 7/10 (70%) |
-| `place_object_stand` | -- | 7/10 (70%) | -- | 9/10 (90%) |
-| `place_phone_stand` | 9/10 (90%) | 8/10 (80%) | -- | 8/10 (80%) |
-| `press_stapler` | -- | 9/10 (90%) | -- | 10/10 (100%) |
-| `rotate_qrcode` | 9/10 (90%) | 9/10 (90%) | -- | 9/10 (90%) |
-| `stamp_seal` | 10/10 (100%) | 10/10 (100%) | -- | 9/10 (90%) |
-| `turn_switch` | -- | 7/10 (70%) | -- | 5/10 (50%) |
-| **Available task cells** | **26/42** | **29/42** | **7/42** | **28/42** |
-| **Missing task cells** | **16/42** | **13/42** | **35/42** | **14/42** |
+| `place_container_plate` | 20/20 (100%) | 10/10 (100%) | 17/20 (85%) | 10/10 (100%) |
+| `place_fan` | 8/10 (80%) | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) |
+| `place_mouse_pad` | 5/10 (50%) | 5/10 (50%) | 5/10 (50%) | 5/10 (50%) |
+| `place_object_scale` | 9/10 (90%) | 10/10 (100%) | 8/10 (80%) | 7/10 (70%) |
+| `place_object_stand` | 12/20 (60%) | 7/10 (70%) | 14/20 (70%) | 9/10 (90%) |
+| `place_phone_stand` | 9/10 (90%) | 8/10 (80%) | 8/10 (80%) | 8/10 (80%) |
+| `press_stapler` | 20/20 (100%) | 9/10 (90%) | 18/20 (90%) | 10/10 (100%) |
+| `rotate_qrcode` | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) |
+| `stamp_seal` | 10/10 (100%) | 10/10 (100%) | 9/10 (90%) | 8/10 (80%) |
+| `turn_switch` | 12/20 (60%) | 7/10 (70%) | 13/20 (65%) | 5/10 (50%) |
+| **Completed task cells** | **42/42** | **41/42** | **42/42** | **41/42** |
+| **Ongoing task cells** | **0/42** | **1/42** | **0/42** | **1/42** |
 
 ## DreamZero on LIBERO
 
