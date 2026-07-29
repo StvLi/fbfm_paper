@@ -51,6 +51,17 @@ frozen-VAE observations update time-aligned constraints in the active video
 flow. The corrected video context then conditions action generation, while the
 same preceding suffix provides a fixed action-prefix constraint.
 
+**LingBot-VA mechanism diagnostic.** We additionally isolate the two
+computation-level links induced by this state-context refresh. The frozen
+diagnostic uses four paired task--trial units from `adjust_bottle` and
+`pick_diverse_bottles` under RoboTwin's randomized setting. First, we compare
+the wave-0 predicted next-state latent with the next realized latent under
+matched RTC and FBFM initial conditions. Second, a CacheCut intervention
+switches only the installed RTC versus FBFM cache while holding history, noise,
+constraints, and the solver schedule fixed; repeating the same RTC cache
+estimates the numerical floor. This diagnostic tests state-feedback and
+cache-to-action influence, not task-success differences.
+
 **Joint generation: DreamZero.** We retain DreamZero's joint state--action
 solver. Guidance is recomputed at all 16 UniPC updates, whereas the native DiT
 velocity and endpoint Jacobian are refreshed at eight DiT evaluations. Skipped

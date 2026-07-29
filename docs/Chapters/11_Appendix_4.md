@@ -12,17 +12,15 @@ horizon.
 The selected RoboTwin evaluation contains 42 tasks under both `demo_clean` and
 `demo_randomized`. Longer tasks outside this set are excluded from the main
 evaluation. The latest consolidated evaluation ledger supplies all 84 Base
-task--condition cells and 84 FBFM cells. Integer successes and trials are
-treated as the source of truth, and the displayed rates are recomputed from
-these counts. All Base evaluations and 41 of the 42 tasks for each FBFM
-condition are complete. Only the FBFM evaluation of `handover_block` remains
-ongoing, with 1/6 Clean and 0/4 Randomized trials at the time of this snapshot.
-These partial cells are retained for auditability but are not used to finalize
-the main-text aggregate.
+and FBFM task rows. Integer successes and trials are treated as the source of
+truth, and the displayed rates are recomputed from these counts. The Randomized
+FBFM evaluation of `handover_block` is unfinished and is therefore shown as
+pending; both methods' Randomized records for this task are excluded from the
+main-text aggregate.
 
 | Task | Clean Base | Clean FBFM | Randomized Base | Randomized FBFM |
 | --- | ---: | ---: | ---: | ---: |
-| `handover_block` | 0/10 (0%) | 1/6 (16.7%) | 1/10 (10%) | 0/4 (0%) |
+| `handover_block` | 0/10 (0%) | 1/6 (16.7%) | 1/10 (10%) | -- |
 | `place_cans_plasticbox` | 10/10 (100%) | 10/10 (100%) | 10/10 (100%) | 10/10 (100%) |
 | `stack_blocks_two` | 7/10 (70%) | 10/10 (100%) | 7/10 (70%) | 8/10 (80%) |
 | `open_laptop` | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) |

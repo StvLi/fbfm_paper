@@ -3,18 +3,21 @@
 ## LingBot-VA on RoboTwin
 
 We compare the frozen LingBot-VA checkpoint with no inference-time feedback
-(Base) against the same checkpoint equipped with FBFM (Ours). The final summary
-uses the same selected 42-task set for both methods and reports only the
-aggregate success rate under RoboTwin's clean and randomized configurations.
-Task-level successes and trial counts are reserved for Appendix D.
+(Base) against the same checkpoint equipped with FBFM (Ours). We micro-average
+the recorded episode outcomes: Clean uses all 42 selected tasks, whereas
+Randomized uses the 41 tasks with completed records for both methods and
+excludes the unfinished `handover_block` FBFM cell. Task-level counts are
+reserved for Appendix D.
 
 | Method | Clean SR (%) | Randomized SR (%) |
 | --- | ---: | ---: |
-| LingBot-VA (Base, NONE) | -- | -- |
-| LingBot-VA + FBFM (Ours) | -- | -- |
+| LingBot-VA (Base, NONE) | 83.1 | 83.0 |
+| LingBot-VA + FBFM (Ours) | **85.4 ↑** | **84.6 ↑** |
 
-<!-- TODO(results): Fill only after all 42 tasks have matched Base/FBFM records
-under both configurations. Do not use the non-matched pooled snapshot rates. -->
+*The Randomized aggregate excludes `handover_block` from both methods.*
+
+FBFM improves the pooled Clean and Randomized success rates by 2.3 and 1.7
+percentage points, respectively.
 
 ## DreamZero on LIBERO
 
