@@ -127,7 +127,7 @@ significant ($p=0.5034$). Thus this sweep shows gain sensitivity, not a
 universal optimum; Appendix~\ref{app:dreamzero-gain-search} gives the full
 search and task-level results.
 
-\subsection{Real-World Robot Observation Prediction and Codec Effects}
+\subsection{Real-World Robot Observation Prediction}
 \label{sec:discussion:real-video}
 
 Figure~\ref{fig:wan-robot-arm-ball-stop} reports the recorded physical
@@ -137,14 +137,14 @@ same image at the end of a two-second context and predict the same five-second,
 incorporates all 120 measured future RealSense frames as 30 latent feedback
 slots. Base preserves a coherent robot and tabletop but departs from the
 recorded ball evolution. FBFM moves the full-frame prediction closer to the
-reference (MAE 9.63 to 9.27 and PSNR 20.06 to 23.10~dB), confirming that the
-real observations affect the solve. However, the unscaled state-only setting
-used here ($k_p=1$) produces visible high-frequency artifacts from approximately
-0.25~s and increases temporal-gradient MAE from 2.85 to 5.48. The result is
-therefore a real-world observation-prediction diagnostic, not a closed-loop
-robot-control deployment.
+reference (MAE 9.63 to 9.27 and PSNR 20.06 to 23.10~dB), showing that FBFM can
+use observations recorded from a physical robot task to correct the active
+visual prediction. The unscaled state-only setting used here ($k_p=1$) still
+produces visible high-frequency artifacts;
+Appendix~\ref{app:wan-video-codec-diagnostic} analyzes the related video-codec
+behavior.
 
-\begin{figure}[H]
+\begin{figure*}[t]
     \centering
     \includegraphics[width=\textwidth]{../material/wan2.2/robot_arm_ball_stop_keyframes.jpg}
     \caption{Real-world robot-arm ball-stopping observation prediction. The RGB
@@ -153,26 +153,4 @@ robot-control deployment.
     reference, Wan2.2 Base without feedback, and FBFM using all 30 measured
     latent slots.}
     \label{fig:wan-robot-arm-ball-stop}
-\end{figure}
-
-On the auxiliary ball-collision sequence, extending feedback from 10 to 30
-time-aligned slots progressively covers the measured motion. With all 30 slots,
-FBFM reduces table-region MAE from 21.77 to 6.34 and reduces the mean orange-ball
-center error from 173.84 to 3.05 pixels, confirming that the real-state
-constraints affect the generated trajectory. The same outputs nevertheless
-contain colored high-frequency artifacts, particularly after a constrained
-horizon ends. We attribute this behavior primarily to an imperfect transfer of
-image-space pseudoinverse guidance to Wan2.2's temporally compressed video
-latent: its VAE and video post-training do not ensure that independently encoded
-slot measurements remain on the clean-video manifold expected by the denoiser
-and decoder. Separate image- and latent-space MSE diagnostics support this
-model-specific interpretation.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{../material/wan2.2/ball_meet_ball_fiveway.jpg}
-    \caption{Real-video state feedback on the auxiliary ball-collision
-    sequence. Columns show 0, 0.25, 0.5, 1, 2, 3, 4, and 5~s; rows show the
-    reference, Wan2.2 Base, and FBFM with 10, 20, and 30 measured latent slots.}
-    \label{fig:wan-ball-meet-ball}
-\end{figure}
+\end{figure*}
