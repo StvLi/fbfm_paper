@@ -6,7 +6,7 @@ the experiment workspace and are not committed to the paper repository.
 
 | Directory | Experiment | Included result state |
 | --- | --- | --- |
-| `lbva_fbfm/` | LingBot-VA with FBFM on RoboTwin | 45 complete 10-episode cells |
+| `lbva_fbfm/` | LingBot-VA with FBFM on RoboTwin | original 45-cell snapshot plus a seed-audited under-900 follow-up |
 | `lbva_none/` | LingBot-VA without feedback on RoboTwin | 37 complete 10-episode cells |
 
 Each experiment directory contains a human-readable record, a complete-cell

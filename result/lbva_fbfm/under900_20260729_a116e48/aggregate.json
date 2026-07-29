@@ -1,0 +1,186 @@
+{
+  "schema_version": 2,
+  "experiment": "lbva_fbfm_cpurender_under900",
+  "model": "LingBot-VA",
+  "method": "FBFM/Feedback",
+  "benchmark": "RoboTwin",
+  "renderer": "CPU",
+  "snapshot_at": "2026-07-29T18:18:52.331311+08:00",
+  "evaluation_commit": "a116e48d9c8956c7ee66360ae68007bc146abcc3",
+  "scope": {
+    "step_limit_rule": "max_steps < 900",
+    "excluded_rule": "max_steps >= 900",
+    "reported_clean_tasks": [
+      "handover_block",
+      "place_cans_plasticbox",
+      "stack_blocks_two",
+      "open_laptop",
+      "place_bread_basket",
+      "place_can_basket",
+      "place_object_basket",
+      "put_object_cabinet",
+      "shake_bottle",
+      "shake_bottle_horizontally",
+      "dump_bin_bigbin",
+      "handover_mic",
+      "place_dual_shoes",
+      "place_bread_skillet"
+    ],
+    "reported_random_tasks": [
+      "handover_block",
+      "place_cans_plasticbox",
+      "stack_blocks_two",
+      "open_laptop",
+      "place_bread_basket",
+      "place_can_basket",
+      "place_object_basket",
+      "put_object_cabinet",
+      "shake_bottle",
+      "shake_bottle_horizontally",
+      "dump_bin_bigbin",
+      "handover_mic",
+      "place_dual_shoes",
+      "place_bread_skillet",
+      "place_burger_fries",
+      "place_empty_cup",
+      "place_shoe",
+      "scan_object"
+    ]
+  },
+  "deduplication": {
+    "key": "episode.seed within (mode, config, task)",
+    "conflict_fields": [
+      "instruction",
+      "success"
+    ],
+    "selection": "ascending unique seed, first 10",
+    "promoted_shards": "canonical only; shard records are not counted again"
+  },
+  "under900_monitored_batch": {
+    "official": {
+      "complete_cells": 13,
+      "episodes": 134,
+      "successes": 107,
+      "target_cells": 15,
+      "target_episodes": 150
+    },
+    "effective_with_unpromoted_unique_shards": {
+      "complete_cells": 13,
+      "episodes": 140,
+      "successes": 108,
+      "target_cells": 15,
+      "target_episodes": 150
+    },
+    "difference": {
+      "complete_cells": 0,
+      "episodes": 6,
+      "successes": 1
+    }
+  },
+  "requested_fbfm_results": {
+    "cells": 32,
+    "complete_cells": 30,
+    "partial_cells": 2,
+    "successes": 245,
+    "effective_trials": 310,
+    "success_rate": 0.7903225806451613,
+    "groups": [
+      {
+        "config": "demo_clean",
+        "cells": 14,
+        "complete_cells": 13,
+        "partial_cells": 1,
+        "successes": 107,
+        "effective_trials": 136,
+        "success_rate": 0.7867647058823529
+      },
+      {
+        "config": "demo_randomized",
+        "cells": 18,
+        "complete_cells": 17,
+        "partial_cells": 1,
+        "successes": 138,
+        "effective_trials": 174,
+        "success_rate": 0.7931034482758621
+      }
+    ]
+  },
+  "incomplete_cells": [
+    {
+      "config": "demo_clean",
+      "missing": 4,
+      "mode": "FBFM",
+      "source": "main_plus_unpromoted_shards",
+      "successes": 1,
+      "task": "handover_block",
+      "trials": 6
+    },
+    {
+      "config": "demo_randomized",
+      "missing": 6,
+      "mode": "FBFM",
+      "source": "main_plus_unpromoted_shards",
+      "successes": 0,
+      "task": "handover_block",
+      "trials": 4
+    }
+  ],
+  "workers": {
+    "handover_block_alive": 7,
+    "handover_block_failed": 0,
+    "snapshot_file": "worker_snapshot.tsv"
+  },
+  "raw_result_files": {
+    "canonical": 72,
+    "main": 14,
+    "shards": 14
+  },
+  "raw_result_files_total": 100,
+  "promotions": [
+    {
+      "config": "demo_clean",
+      "mode": "FBFM",
+      "reason": "shard_merge",
+      "result": "8/10",
+      "task": "place_object_basket"
+    },
+    {
+      "config": "demo_randomized",
+      "mode": "FBFM",
+      "reason": "shard_merge",
+      "result": "8/10",
+      "task": "stack_blocks_two"
+    },
+    {
+      "config": "demo_randomized",
+      "mode": "FBFM",
+      "reason": "shard_merge",
+      "result": "7/10",
+      "task": "put_object_cabinet"
+    },
+    {
+      "config": "demo_clean",
+      "mode": "FBFM",
+      "reason": "shard_merge",
+      "result": "6/10",
+      "task": "put_object_cabinet"
+    },
+    {
+      "config": "demo_clean",
+      "mode": "FBFM",
+      "reason": "shard_merge",
+      "result": "5/10",
+      "task": "place_bread_basket"
+    }
+  ],
+  "source_roots": {
+    "canonical": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/feedback_multinode_80cells_clean30_random50_10_a116e48",
+    "main": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48",
+    "shards": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48"
+  },
+  "limitations": [
+    "This is a live in-progress snapshot; the two handover_block cells were still running.",
+    "Tasks with max_steps >= 900 are intentionally excluded from reported task metrics.",
+    "The raw main inventory includes both FBFM and NONE files present under the main run root; requested metrics report FBFM only."
+  ]
+}

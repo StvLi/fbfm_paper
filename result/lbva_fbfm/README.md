@@ -1,5 +1,15 @@
 # LingBot-VA FBFM CPU-Render Results
 
+## Under-900 Follow-up
+
+The read-only follow-up snapshot in
+`under900_20260729_a116e48/` records the latest `max_steps < 900` results at
+`2026-07-29T18:18:52+08:00`. It includes seed-level deduplication across
+canonical, main, and unpromoted shard results, 100 raw `res.json` records, and
+live worker provenance. In the monitored 15-cell recovery batch, the official
+view is 107/134 episodes; including unique unpromoted shard trials gives
+108/140. Only the clean and randomized `handover_block` cells remain partial.
+
 ## Result Snapshot
 
 This directory records the completed portion of the LingBot-VA FBFM RoboTwin
