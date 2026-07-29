@@ -1,0 +1,5 @@
+assets: /mnt/project_eai_hs/zrm/FastWAM/third_party/LIBERO/libero/libero/assets
+bddl_files: /mnt/project_eai_hs/zrm/FastWAM/third_party/LIBERO/libero/libero/bddl_files
+benchmark_root: /mnt/project_eai_hs/zrm/FastWAM/third_party/LIBERO/libero/libero
+datasets: /mnt/project_eai_hs/zrm/FastWAM/third_party/LIBERO/libero/datasets
+init_states: /mnt/project_eai_hs/zrm/FastWAM/third_party/LIBERO/libero/libero/init_files

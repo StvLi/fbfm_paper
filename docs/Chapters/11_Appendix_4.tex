@@ -7,15 +7,20 @@ This appendix is the source-of-record layout for the main success-rate tables.
 Each available entry is reported as \emph{successes/trials (SR)}. Dashes denote
 pending records rather than zero success. Final comparisons will use only Base
 and FBFM evaluations satisfying the same checkpoint, task configuration,
-initialization protocol, and episode horizon.
+rendering mode, initialization protocol, episode identities, and episode
+horizon.
 
 \subsection{LingBot-VA on RoboTwin}
 
 The selected RoboTwin evaluation contains 42 tasks under both
 \texttt{demo\_clean} and \texttt{demo\_randomized}. Longer tasks outside this
-set are excluded from the main evaluation. Snapshot commit \texttt{50a3cc4}
-supplies 33 completed Base cells and 45 completed FBFM cells within this
-selection; 15 cells currently have both records.
+set are excluded from the main evaluation. The latest consolidated evaluation
+ledger covers all Base and FBFM task rows. Integer successes and trials are
+treated as the source of truth, and the displayed rates are recomputed from
+these counts. The Randomized FBFM evaluation of
+\texttt{handover\_block} is unfinished and is therefore shown as pending;
+both methods' Randomized records for this task are excluded from the
+main-text aggregate.
 
 \begin{table}[H]
     \centering
@@ -27,48 +32,51 @@ selection; 15 cells currently have both records.
         \toprule
         Task & Clean Base & Clean FBFM & Randomized Base & Randomized FBFM \\
         \midrule
-        \texttt{handover\_block} & 0/10 (0\%) & -- & 1/10 (10\%) & -- \\
-        \texttt{place\_cans\_plasticbox} & 10/10 (100\%) & -- & -- & -- \\
-        \texttt{stack\_blocks\_two} & 7/10 (70\%) & -- & -- & -- \\
-        \texttt{open\_laptop} & 9/10 (90\%) & -- & 9/10 (90\%) & -- \\
-        \texttt{place\_bread\_basket} & 9/10 (90\%) & -- & -- & -- \\
-        \texttt{place\_can\_basket} & 7/10 (70\%) & -- & -- & -- \\
-        \texttt{place\_object\_basket} & 9/10 (90\%) & -- & -- & -- \\
-        \texttt{put\_object\_cabinet} & 7/10 (70\%) & -- & -- & -- \\
-        \texttt{shake\_bottle} & -- & -- & -- & -- \\
-        \texttt{shake\_bottle\_horizontally} & -- & -- & -- & -- \\
-        \texttt{dump\_bin\_bigbin} & 10/10 (100\%) & -- & 10/10 (100\%) & -- \\
-        \texttt{handover\_mic} & 7/10 (70\%) & 10/10 (100\%) & -- & -- \\
-        \texttt{place\_dual\_shoes} & 0/10 (0\%) & -- & -- & -- \\
-        \texttt{place\_bread\_skillet} & 8/10 (80\%) & -- & -- & -- \\
-        \texttt{place\_burger\_fries} & 10/10 (100\%) & -- & -- & 10/10 (100\%) \\
-        \texttt{place\_empty\_cup} & -- & -- & -- & 10/10 (100\%) \\
-        \texttt{place\_shoe} & 5/10 (50\%) & -- & -- & 5/10 (50\%) \\
-        \texttt{scan\_object} & 9/10 (90\%) & -- & -- & 8/10 (80\%) \\
-        \texttt{adjust\_bottle} & -- & -- & -- & 10/10 (100\%) \\
-        \texttt{beat\_block\_hammer} & 7/10 (70\%) & -- & 9/10 (90\%) & 9/10 (90\%) \\
-        \texttt{click\_alarmclock} & -- & -- & -- & 10/10 (100\%) \\
-        \texttt{click\_bell} & -- & -- & -- & 10/10 (100\%) \\
-        \texttt{grab\_roller} & -- & -- & -- & 10/10 (100\%) \\
-        \texttt{lift\_pot} & -- & -- & -- & 10/10 (100\%) \\
-        \texttt{move\_can\_pot} & -- & -- & -- & 9/10 (90\%) \\
-        \texttt{move\_pillbottle\_pad} & -- & -- & -- & 9/10 (90\%) \\
-        \texttt{move\_playingcard\_away} & -- & 10/10 (100\%) & -- & 10/10 (100\%) \\
+        \texttt{handover\_block} & 0/10 (0\%) & 1/6 (16.7\%) & 1/10 (10\%) & -- \\
+        \texttt{place\_cans\_plasticbox} & 10/10 (100\%) & 10/10 (100\%) & 10/10 (100\%) & 10/10 (100\%) \\
+        \texttt{stack\_blocks\_two} & 7/10 (70\%) & 10/10 (100\%) & 7/10 (70\%) & 8/10 (80\%) \\
+        \texttt{open\_laptop} & 9/10 (90\%) & 9/10 (90\%) & 9/10 (90\%) & 9/10 (90\%) \\
+        \texttt{place\_bread\_basket} & 9/10 (90\%) & 5/10 (50\%) & 8/10 (80\%) & 9/10 (90\%) \\
+        \texttt{place\_can\_basket} & 7/10 (70\%) & 10/10 (100\%) & 7/10 (70\%) & 9/10 (90\%) \\
+        \texttt{place\_object\_basket} & 9/10 (90\%) & 8/10 (80\%) & 7/10 (70\%) & 7/10 (70\%) \\
+        \texttt{put\_object\_cabinet} & 7/10 (70\%) & 6/10 (60\%) & 8/10 (80\%) & 7/10 (70\%) \\
+        \texttt{shake\_bottle} & 20/20 (100\%) & 10/10 (100\%) & 20/20 (100\%) & 10/10 (100\%) \\
+        \texttt{shake\_bottle\_horizontally} & 20/20 (100\%) & 10/10 (100\%) & 20/20 (100\%) & 10/10 (100\%) \\
+        \texttt{dump\_bin\_bigbin} & 10/10 (100\%) & 10/10 (100\%) & 10/10 (100\%) & 10/10 (100\%) \\
+        \texttt{handover\_mic} & 7/10 (70\%) & 10/10 (100\%) & 8/10 (80\%) & 8/10 (80\%) \\
+        \texttt{place\_dual\_shoes} & 0/10 (0\%) & 1/10 (10\%) & 1/10 (10\%) & 1/10 (10\%) \\
+        \texttt{place\_bread\_skillet} & 8/10 (80\%) & 7/10 (70\%) & 6/10 (60\%) & 7/10 (70\%) \\
+        \texttt{place\_burger\_fries} & 10/10 (100\%) & 18/20 (90\%) & 9/10 (90\%) & 10/10 (100\%) \\
+        \texttt{place\_empty\_cup} & 20/20 (100\%) & 20/20 (100\%) & 20/20 (100\%) & 10/10 (100\%) \\
+        \texttt{place\_shoe} & 5/10 (50\%) & 11/20 (55\%) & 6/10 (60\%) & 5/10 (50\%) \\
+        \texttt{scan\_object} & 9/10 (90\%) & 13/20 (65\%) & 8/10 (80\%) & 8/10 (80\%) \\
+        \texttt{adjust\_bottle} & 18/20 (90\%) & 20/20 (100\%) & 20/20 (100\%) & 10/10 (100\%) \\
+        \texttt{beat\_block\_hammer} & 7/10 (70\%) & 15/20 (75\%) & 9/10 (90\%) & 9/10 (90\%) \\
+        \texttt{click\_alarmclock} & 16/20 (80\%) & 20/20 (100\%) & 18/20 (90\%) & 10/10 (100\%) \\
+        \texttt{click\_bell} & 20/20 (100\%) & 20/20 (100\%) & 20/20 (100\%) & 10/10 (100\%) \\
+        \texttt{grab\_roller} & 19/20 (95\%) & 20/20 (100\%) & 17/20 (85\%) & 10/10 (100\%) \\
+        \texttt{lift\_pot} & 20/20 (100\%) & 20/20 (100\%) & 17/20 (85\%) & 10/10 (100\%) \\
+        \texttt{move\_can\_pot} & 18/20 (90\%) & 19/20 (95\%) & 14/20 (70\%) & 9/10 (90\%) \\
+        \texttt{move\_pillbottle\_pad} & 18/20 (90\%) & 20/20 (100\%) & 19/20 (95\%) & 9/10 (90\%) \\
+        \texttt{move\_playingcard\_away} & 17/20 (85\%) & 10/10 (100\%) & 17/20 (85\%) & 10/10 (100\%) \\
         \texttt{move\_stapler\_pad} & 2/10 (20\%) & 4/10 (40\%) & 6/10 (60\%) & 6/10 (60\%) \\
         \texttt{pick\_diverse\_bottles} & 10/10 (100\%) & 10/10 (100\%) & 9/10 (90\%) & 8/10 (80\%) \\
-        \texttt{pick\_dual\_bottles} & -- & 10/10 (100\%) & -- & 8/10 (80\%) \\
-        \texttt{place\_a2b\_left} & 9/10 (90\%) & 9/10 (90\%) & -- & 10/10 (100\%) \\
+        \texttt{pick\_dual\_bottles} & 18/20 (90\%) & 10/10 (100\%) & 14/20 (70\%) & 8/10 (80\%) \\
+        \texttt{place\_a2b\_left} & 9/10 (90\%) & 9/10 (90\%) & 10/10 (100\%) & 10/10 (100\%) \\
         \texttt{place\_a2b\_right} & 9/10 (90\%) & 8/10 (80\%) & 9/10 (90\%) & 10/10 (100\%) \\
-        \texttt{place\_container\_plate} & -- & 10/10 (100\%) & -- & 10/10 (100\%) \\
-        \texttt{place\_fan} & 8/10 (80\%) & 9/10 (90\%) & -- & 9/10 (90\%) \\
-        \texttt{place\_mouse\_pad} & 5/10 (50\%) & 5/10 (50\%) & -- & 5/10 (50\%) \\
-        \texttt{place\_object\_scale} & 9/10 (90\%) & 10/10 (100\%) & -- & 7/10 (70\%) \\
-        \texttt{place\_object\_stand} & -- & 7/10 (70\%) & -- & 9/10 (90\%) \\
-        \texttt{place\_phone\_stand} & 9/10 (90\%) & 8/10 (80\%) & -- & 8/10 (80\%) \\
-        \texttt{press\_stapler} & -- & 9/10 (90\%) & -- & 10/10 (100\%) \\
-        \texttt{rotate\_qrcode} & 9/10 (90\%) & 9/10 (90\%) & -- & 9/10 (90\%) \\
-        \texttt{stamp\_seal} & 10/10 (100\%) & 10/10 (100\%) & -- & 9/10 (90\%) \\
-        \texttt{turn\_switch} & -- & 7/10 (70\%) & -- & 5/10 (50\%) \\
+        \texttt{place\_container\_plate} & 20/20 (100\%) & 10/10 (100\%) & 17/20 (85\%) & 10/10 (100\%) \\
+        \texttt{place\_fan} & 8/10 (80\%) & 9/10 (90\%) & 9/10 (90\%) & 9/10 (90\%) \\
+        \texttt{place\_mouse\_pad} & 5/10 (50\%) & 5/10 (50\%) & 5/10 (50\%) & 5/10 (50\%) \\
+        \texttt{place\_object\_scale} & 9/10 (90\%) & 10/10 (100\%) & 8/10 (80\%) & 7/10 (70\%) \\
+        \texttt{place\_object\_stand} & 12/20 (60\%) & 7/10 (70\%) & 14/20 (70\%) & 9/10 (90\%) \\
+        \texttt{place\_phone\_stand} & 9/10 (90\%) & 8/10 (80\%) & 8/10 (80\%) & 8/10 (80\%) \\
+        \texttt{press\_stapler} & 20/20 (100\%) & 9/10 (90\%) & 18/20 (90\%) & 10/10 (100\%) \\
+        \texttt{rotate\_qrcode} & 9/10 (90\%) & 9/10 (90\%) & 9/10 (90\%) & 9/10 (90\%) \\
+        \texttt{stamp\_seal} & 10/10 (100\%) & 10/10 (100\%) & 9/10 (90\%) & 8/10 (80\%) \\
+        \texttt{turn\_switch} & 12/20 (60\%) & 7/10 (70\%) & 13/20 (65\%) & 5/10 (50\%) \\
+        \midrule
+        \textbf{Completed task cells} & \textbf{42/42} & \textbf{41/42} & \textbf{42/42} & \textbf{41/42} \\
+        \textbf{Ongoing task cells} & \textbf{0/42} & \textbf{1/42} & \textbf{0/42} & \textbf{1/42} \\
         \bottomrule
     \end{tabular}}
     \caption{Detailed LingBot-VA RoboTwin record. Each populated cell reports
@@ -80,7 +88,8 @@ selection; 15 cells currently have both records.
 \subsection{DreamZero on LIBERO}
 
 The detailed LIBERO record covers all ten tasks in each of LIBERO-Spatial,
-LIBERO-Object, LIBERO-Goal, and LIBERO-10. LIBERO-90 is not included.
+LIBERO-Object, LIBERO-Goal, and LIBERO-10. Each cell reports successes/20
+episodes and the corresponding success rate. LIBERO-90 is not included.
 
 \begin{table}[H]
     \centering
@@ -91,52 +100,59 @@ LIBERO-Object, LIBERO-Goal, and LIBERO-10. LIBERO-90 is not included.
         \toprule
         Suite & Task ID & Base & FBFM \\
         \midrule
-        LIBERO-Spatial & 0 & -- & -- \\
-        LIBERO-Spatial & 1 & -- & -- \\
-        LIBERO-Spatial & 2 & -- & -- \\
-        LIBERO-Spatial & 3 & -- & -- \\
-        LIBERO-Spatial & 4 & -- & -- \\
-        LIBERO-Spatial & 5 & -- & -- \\
-        LIBERO-Spatial & 6 & -- & -- \\
-        LIBERO-Spatial & 7 & -- & -- \\
-        LIBERO-Spatial & 8 & -- & -- \\
-        LIBERO-Spatial & 9 & -- & -- \\
+        LIBERO-Spatial & 0 & 19/20 (95\%) & 17/20 (85\%) \\
+        LIBERO-Spatial & 1 & 19/20 (95\%) & 18/20 (90\%) \\
+        LIBERO-Spatial & 2 & 19/20 (95\%) & 19/20 (95\%) \\
+        LIBERO-Spatial & 3 & 19/20 (95\%) & 19/20 (95\%) \\
+        LIBERO-Spatial & 4 & 10/20 (50\%) & 8/20 (40\%) \\
+        LIBERO-Spatial & 5 & 3/20 (15\%) & 2/20 (10\%) \\
+        LIBERO-Spatial & 6 & 20/20 (100\%) & 20/20 (100\%) \\
+        LIBERO-Spatial & 7 & 19/20 (95\%) & 19/20 (95\%) \\
+        LIBERO-Spatial & 8 & 14/20 (70\%) & 17/20 (85\%) \\
+        LIBERO-Spatial & 9 & 15/20 (75\%) & 15/20 (75\%) \\
+        \textbf{LIBERO-Spatial} & \textbf{Subtotal} & \textbf{157/200 (78.5\%)} & \textbf{154/200 (77\%)} \\
         \midrule
-        LIBERO-Object & 0 & -- & -- \\
-        LIBERO-Object & 1 & -- & -- \\
-        LIBERO-Object & 2 & -- & -- \\
-        LIBERO-Object & 3 & -- & -- \\
-        LIBERO-Object & 4 & -- & -- \\
-        LIBERO-Object & 5 & -- & -- \\
-        LIBERO-Object & 6 & -- & -- \\
-        LIBERO-Object & 7 & -- & -- \\
-        LIBERO-Object & 8 & -- & -- \\
-        LIBERO-Object & 9 & -- & -- \\
+        LIBERO-Object & 0 & 14/20 (70\%) & 17/20 (85\%) \\
+        LIBERO-Object & 1 & 18/20 (90\%) & 17/20 (85\%) \\
+        LIBERO-Object & 2 & 15/20 (75\%) & 12/20 (60\%) \\
+        LIBERO-Object & 3 & 16/20 (80\%) & 18/20 (90\%) \\
+        LIBERO-Object & 4 & 12/20 (60\%) & 9/20 (45\%) \\
+        LIBERO-Object & 5 & 20/20 (100\%) & 20/20 (100\%) \\
+        LIBERO-Object & 6 & 7/20 (35\%) & 9/20 (45\%) \\
+        LIBERO-Object & 7 & 9/20 (45\%) & 7/20 (35\%) \\
+        LIBERO-Object & 8 & 17/20 (85\%) & 16/20 (80\%) \\
+        LIBERO-Object & 9 & 18/20 (90\%) & 19/20 (95\%) \\
+        \textbf{LIBERO-Object} & \textbf{Subtotal} & \textbf{146/200 (73\%)} & \textbf{144/200 (72\%)} \\
         \midrule
-        LIBERO-Goal & 0 & -- & -- \\
-        LIBERO-Goal & 1 & -- & -- \\
-        LIBERO-Goal & 2 & -- & -- \\
-        LIBERO-Goal & 3 & -- & -- \\
-        LIBERO-Goal & 4 & -- & -- \\
-        LIBERO-Goal & 5 & -- & -- \\
-        LIBERO-Goal & 6 & -- & -- \\
-        LIBERO-Goal & 7 & -- & -- \\
-        LIBERO-Goal & 8 & -- & -- \\
-        LIBERO-Goal & 9 & -- & -- \\
+        LIBERO-Goal & 0 & 18/20 (90\%) & 17/20 (85\%) \\
+        LIBERO-Goal & 1 & 20/20 (100\%) & 20/20 (100\%) \\
+        LIBERO-Goal & 2 & 8/20 (40\%) & 18/20 (90\%) \\
+        LIBERO-Goal & 3 & 9/20 (45\%) & 9/20 (45\%) \\
+        LIBERO-Goal & 4 & 14/20 (70\%) & 9/20 (45\%) \\
+        LIBERO-Goal & 5 & 13/20 (65\%) & 15/20 (75\%) \\
+        LIBERO-Goal & 6 & 14/20 (70\%) & 14/20 (70\%) \\
+        LIBERO-Goal & 7 & 20/20 (100\%) & 20/20 (100\%) \\
+        LIBERO-Goal & 8 & 20/20 (100\%) & 20/20 (100\%) \\
+        LIBERO-Goal & 9 & 1/20 (5\%) & 0/20 (0\%) \\
+        \textbf{LIBERO-Goal} & \textbf{Subtotal} & \textbf{137/200 (68.5\%)} & \textbf{142/200 (71\%)} \\
         \midrule
-        LIBERO-10 & 0 & -- & -- \\
-        LIBERO-10 & 1 & -- & -- \\
-        LIBERO-10 & 2 & -- & -- \\
-        LIBERO-10 & 3 & -- & -- \\
-        LIBERO-10 & 4 & -- & -- \\
-        LIBERO-10 & 5 & -- & -- \\
-        LIBERO-10 & 6 & -- & -- \\
-        LIBERO-10 & 7 & -- & -- \\
-        LIBERO-10 & 8 & -- & -- \\
-        LIBERO-10 & 9 & -- & -- \\
+        LIBERO-10 & 0 & 13/20 (65\%) & 10/20 (50\%) \\
+        LIBERO-10 & 1 & 9/20 (45\%) & 12/20 (60\%) \\
+        LIBERO-10 & 2 & 13/20 (65\%) & 14/20 (70\%) \\
+        LIBERO-10 & 3 & 14/20 (70\%) & 12/20 (60\%) \\
+        LIBERO-10 & 4 & 16/20 (80\%) & 18/20 (90\%) \\
+        LIBERO-10 & 5 & 17/20 (85\%) & 19/20 (95\%) \\
+        LIBERO-10 & 6 & 14/20 (70\%) & 14/20 (70\%) \\
+        LIBERO-10 & 7 & 8/20 (40\%) & 13/20 (65\%) \\
+        LIBERO-10 & 8 & 10/20 (50\%) & 5/20 (25\%) \\
+        LIBERO-10 & 9 & 7/20 (35\%) & 9/20 (45\%) \\
+        \textbf{LIBERO-10} & \textbf{Subtotal} & \textbf{121/200 (60.5\%)} & \textbf{126/200 (63\%)} \\
+        \midrule
+        \textbf{All suites} & \textbf{Total} & \textbf{561/800 (70.125\%)} & \textbf{566/800 (70.75\%)} \\
+        \textbf{Coverage} & \textbf{All tasks} & \textbf{40/40 task cells} & \textbf{40/40 task cells} \\
         \bottomrule
     \end{tabular}
-    \caption{Detailed DreamZero LIBERO record. Each cell will contain
-    successes/trials and the corresponding success rate.}
+    \caption{Detailed DreamZero LIBERO results under the delayed
+    pseudo-asynchronous protocol.}
     \label{tab:dreamzero-libero-detailed}
 \end{table}

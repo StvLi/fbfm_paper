@@ -1,0 +1,21 @@
+suite,task_id,task_description,binary_successes,binary_episodes,binary_rate,rms_successes,rms_episodes,rms_rate,l1_mass_successes,l1_mass_episodes,l1_mass_rate,rms_minus_binary,l1_mass_minus_binary,l1_mass_minus_rms
+libero_spatial,0,pick up the black bowl between the plate and the ramekin and place it on the plate,0,5,0.0,4,5,0.8,4,5,0.8,0.8,0.8,0.0
+libero_spatial,1,pick up the black bowl next to the ramekin and place it on the plate,0,5,0.0,3,5,0.6,5,5,1.0,0.6,1.0,0.4
+libero_spatial,2,pick up the black bowl from table center and place it on the plate,0,5,0.0,5,5,1.0,5,5,1.0,1.0,1.0,0.0
+libero_spatial,3,pick up the black bowl on the cookie box and place it on the plate,0,5,0.0,3,5,0.6,5,5,1.0,0.6,1.0,0.4
+libero_spatial,4,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,0,5,0.0,0,5,0.0,1,5,0.2,0.0,0.2,0.2
+libero_spatial,5,pick up the black bowl on the ramekin and place it on the plate,0,5,0.0,2,5,0.4,2,5,0.4,0.4,0.4,0.0
+libero_spatial,6,pick up the black bowl next to the cookie box and place it on the plate,0,5,0.0,4,5,0.8,5,5,1.0,0.8,1.0,0.19999999999999996
+libero_spatial,7,pick up the black bowl on the stove and place it on the plate,0,5,0.0,4,5,0.8,5,5,1.0,0.8,1.0,0.19999999999999996
+libero_spatial,8,pick up the black bowl next to the plate and place it on the plate,0,5,0.0,4,5,0.8,5,5,1.0,0.8,1.0,0.19999999999999996
+libero_spatial,9,pick up the black bowl on the wooden cabinet and place it on the plate,0,5,0.0,1,5,0.2,3,5,0.6,0.2,0.6,0.39999999999999997
+libero_object,0,pick up the alphabet soup and place it in the basket,0,5,0.0,4,5,0.8,3,5,0.6,0.8,0.6,-0.20000000000000007
+libero_object,1,pick up the cream cheese and place it in the basket,0,5,0.0,4,5,0.8,5,5,1.0,0.8,1.0,0.19999999999999996
+libero_object,2,pick up the salad dressing and place it in the basket,0,5,0.0,2,5,0.4,3,5,0.6,0.4,0.6,0.19999999999999996
+libero_object,3,pick up the bbq sauce and place it in the basket,0,5,0.0,3,5,0.6,5,5,1.0,0.6,1.0,0.4
+libero_object,4,pick up the ketchup and place it in the basket,0,5,0.0,0,5,0.0,2,5,0.4,0.0,0.4,0.4
+libero_object,5,pick up the tomato sauce and place it in the basket,0,5,0.0,4,5,0.8,5,5,1.0,0.8,1.0,0.19999999999999996
+libero_object,6,pick up the butter and place it in the basket,0,5,0.0,1,5,0.2,2,5,0.4,0.2,0.4,0.2
+libero_object,7,pick up the milk and place it in the basket,0,5,0.0,2,5,0.4,0,5,0.0,0.4,0.0,-0.4
+libero_object,8,pick up the chocolate pudding and place it in the basket,0,5,0.0,4,5,0.8,4,5,0.8,0.8,0.8,0.0
+libero_object,9,pick up the orange juice and place it in the basket,0,5,0.0,5,5,1.0,4,5,0.8,1.0,0.8,-0.19999999999999996

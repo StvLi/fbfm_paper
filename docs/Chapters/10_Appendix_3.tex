@@ -153,15 +153,19 @@ or recursively propagates $\tilde{\mathbf v}_j$. We use $\tau=1-\sigma$,
 $r^2=\sigma^2/(\tau^2+\sigma^2)$, and
 $\lambda(\sigma)=\min\{\sigma/(\tau r^2),\beta\}$ with $\beta=10$.
 
-The action block uses $P_A=1$. The current experiment uses
-$P_Z=56/9600=0.0058333333$, which equalizes the L1 mass of the 56 active action
-coordinates and 9,600 state coordinates. This is an engineering
-preconditioner, not a theoretically optimal modality weight. The RMS-balanced
-value $\sqrt{56/9600}=0.0763763$ and the unbalanced value $1$ remain explicit
-ablations. Although the implementation applies $P_Z$ by scaling the stored
-state-mask tensor, $\mathbf W_j$ and $\mathbf P$ are conceptually distinct.
-Schedule scalars are evaluated in at least FP32, outputs are checked for finite
-values, and guided fields are detached after the current update.
+The action block uses $P_A=1$. For concision, the effective state block of
+$\mathbf P$ in the equations above is $k_p P_Z$: $P_Z$ balances modality scale,
+while the separate proportional gain $k_p$ tunes state-feedback loop gain. The
+current experiment uses $P_Z=56/9600=0.0058333333$, which equalizes the L1 mass
+of the 56 active action coordinates and 9,600 state coordinates. This is an
+engineering preconditioner, not a theoretically optimal modality weight. The
+RMS-balanced value $\sqrt{56/9600}=0.0763763$ and the unbalanced value $1$
+remain explicit ablations. Although the implementation applies the effective
+state coefficient by scaling the stored state-mask tensor, $\mathbf W_j$,
+$P_Z$, and $k_p$ are conceptually distinct. Schedule scalars are evaluated in
+at least FP32, outputs are checked for finite values, and guided fields are
+detached after the current update. Appendix~\ref{app:dreamzero-gain-search}
+reports the gain search.
 
 \subsubsection{Rolling Causal State Target}
 

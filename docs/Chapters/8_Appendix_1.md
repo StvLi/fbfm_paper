@@ -42,4 +42,5 @@ Method-specific extensions:
 | \(\tau_k^X,v_\theta^X,f_\theta^{X,\tau_k^X}\) | Joint flow time, vector field, and clean-endpoint predictor at solver evaluation \(k\). |
 | \(\mathbf Y_{t,k}^X,\mathbf W_{t,k}^X,\mathbf P^X\) | Joint feedback target, block support/confidence operator, and block-diagonal modality preconditioner. |
 | \(\mathbf J_{t,k}^X,\mathbf J_{QR}\) | Joint clean-endpoint Jacobian and its output-modality/input-modality block, where \(Q,R\in\{Z,A\}\). |
+| \(\mathbf P,P_Z,P_A,k_p\) | Block-diagonal modality preconditioner, its state and action blocks, and the proportional state-feedback gain used after modality-scale balancing. |
 | \(\otimes,\mathbb 1[\cdot]\) | Kronecker product and indicator function. |

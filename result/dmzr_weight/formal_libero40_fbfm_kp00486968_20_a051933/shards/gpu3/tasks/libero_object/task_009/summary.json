@@ -1,0 +1,10 @@
+{
+  "episodes": "/mnt/project_eai_hs/zrm2/eval_isolated/dreamzero_feedback_a051933_kp00486968_20260727/runs/formal_libero40_fbfm_kp00486968_20_a051933/shards/gpu3/tasks/libero_object/task_009/episodes.jsonl",
+  "mode": "FBFM",
+  "rollout_protocol": "pseudo_async_overlap",
+  "success_rate": 0.95,
+  "successes": 19,
+  "suite": "libero_object",
+  "task_id": 9,
+  "trials": 20
+}

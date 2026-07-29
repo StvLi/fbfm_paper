@@ -1,0 +1,21 @@
+suite,task_id,status,trials,target_trials,successes,failures,success_rate,wilson_low,wilson_high,mean_executed_steps,mean_elapsed_seconds,mean_inference_wave_seconds,task_description,output
+libero_spatial,0,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,148.46204391461796,2.4125766699599316,pick up the black bowl between the plate and the ramekin and place it on the plate,tasks/libero_spatial/task_000
+libero_spatial,1,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,148.58784132241271,2.41453086710764,pick up the black bowl next to the ramekin and place it on the plate,tasks/libero_spatial/task_001
+libero_spatial,2,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,148.82229955261573,2.4181116658400317,pick up the black bowl from table center and place it on the plate,tasks/libero_spatial/task_002
+libero_spatial,3,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,149.1152861162089,2.4229845557712997,pick up the black bowl on the cookie box and place it on the plate,tasks/libero_spatial/task_003
+libero_spatial,4,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,149.4137441453757,2.428040561844885,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,tasks/libero_spatial/task_004
+libero_spatial,5,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,149.1394504743861,2.4235087899101866,pick up the black bowl on the ramekin and place it on the plate,tasks/libero_spatial/task_005
+libero_spatial,6,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,148.86145423178095,2.419090699412112,pick up the black bowl next to the cookie box and place it on the plate,tasks/libero_spatial/task_006
+libero_spatial,7,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,149.0285524544306,2.421807101527687,pick up the black bowl on the stove and place it on the plate,tasks/libero_spatial/task_007
+libero_spatial,8,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,148.711658233637,2.4167892801411237,pick up the black bowl next to the plate and place it on the plate,tasks/libero_spatial/task_008
+libero_spatial,9,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,149.03870406795758,2.421954829563753,pick up the black bowl on the wooden cabinet and place it on the plate,tasks/libero_spatial/task_009
+libero_object,0,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,147.4576065690024,2.3982184776135522,pick up the alphabet soup and place it in the basket,tasks/libero_object/task_000
+libero_object,1,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,147.36851147259586,2.396725804048407,pick up the cream cheese and place it in the basket,tasks/libero_object/task_001
+libero_object,2,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,147.37180369922424,2.39684231316854,pick up the salad dressing and place it in the basket,tasks/libero_object/task_002
+libero_object,3,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,147.3229968592059,2.3961291694013616,pick up the bbq sauce and place it in the basket,tasks/libero_object/task_003
+libero_object,4,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,147.3755327597959,2.3969817766400636,pick up the ketchup and place it in the basket,tasks/libero_object/task_004
+libero_object,5,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,147.32424578899517,2.3958162912171423,pick up the tomato sauce and place it in the basket,tasks/libero_object/task_005
+libero_object,6,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,147.29832579980138,2.3955084191429137,pick up the butter and place it in the basket,tasks/libero_object/task_006
+libero_object,7,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,147.33815822261386,2.3962115938385917,pick up the milk and place it in the basket,tasks/libero_object/task_007
+libero_object,8,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,147.35905524820555,2.3966822965417944,pick up the chocolate pudding and place it in the basket,tasks/libero_object/task_008
+libero_object,9,complete,5,5,0,5,0.0,0.0,0.43448246478317476,480.0,147.40126839983276,2.3971259065216683,pick up the orange juice and place it in the basket,tasks/libero_object/task_009

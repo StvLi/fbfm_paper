@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "started_on": "2026-07-26",
+  "completed_at": "2026-07-26T22:33:28+08:00",
+  "experiment": "DreamZero FBFM three-weight auxiliary sweep",
+  "hardware": "NVIDIA RTX A6000 48 GB",
+  "task_selection": {
+    "suites": [
+      "libero_spatial",
+      "libero_object"
+    ],
+    "task_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "official_init_ids": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "episodes_per_task_weight": 5,
+    "tasks_per_weight": 20,
+    "episodes_per_weight": 100,
+    "total_episodes": 300
+  },
+  "weights_in_run_order": [
+    {
+      "label": "binary",
+      "value": 1.0,
+      "expression": "1"
+    },
+    {
+      "label": "rms",
+      "value": 0.07637626158259733,
+      "expression": "sqrt(56/9600)"
+    },
+    {
+      "label": "l1_mass",
+      "value": 0.005833333333333334,
+      "expression": "56/9600"
+    }
+  ],
+  "controlled_protocol": {
+    "checkpoint": "RLinf-DreamZero-WAN2.2-5B-LIBERO-SFT-Step26000",
+    "environment_seed": 0,
+    "model_seed_rule": "fixed",
+    "model_seed": 0,
+    "max_steps": 480,
+    "mode": "FBFM",
+    "rollout_protocol": "pseudo_async_overlap",
+    "solver_release_policy": "uniform",
+    "feedback_observation_stride": 1,
+    "feedback_vae_sample_interval": 3,
+    "feedback_encoding": "causal_rolling_past",
+    "scheduler_steps": 16,
+    "native_dit_evaluations": 8,
+    "guidance_beta": 10.0
+  },
+  "source": {
+    "branch": "fix/dreamzero-relinearized-unipc-guidance",
+    "run_revision": "a37fcf5fc05147d7b9cf6a18beb70c8f991fd52f",
+    "numerical_method_revision": "13de791f74139b165cff70ff8165b1cc4538ea64"
+  },
+  "recording": {
+    "poll_interval_minutes": 30,
+    "remote_result_root": "/home/deepcybo-lite/peize/DreamZero-FBFM-LIBERO/results/dmzr_weight_aux_5ep",
+    "large_artifacts_policy": "Keep trajectories and solver audits outside the paper repository"
+  },
+  "progress_checkpoint": {
+    "captured_at": "2026-07-26T22:12:59+08:00",
+    "sweep_status": "running:l1mass_005833",
+    "episodes": 286,
+    "expected_episodes": 300,
+    "completed_task_weight_cells": 57,
+    "purpose": "User-requested cloud checkpoint; experiment continued after commit"
+  },
+  "final_result": {
+    "episodes": 300,
+    "completed_task_weight_cells": 60,
+    "successes": {
+      "binary": 0,
+      "rms": 59,
+      "l1_mass": 73
+    },
+    "verification": "data/analysis/verification.json",
+    "analysis": "data/analysis/ANALYSIS.md",
+    "compact_artifact_root": "data/analysis"
+  }
+}
