@@ -99,3 +99,14 @@ encoding, and exact solver schedules.
 
 <!-- TODO(experiments): Leave this subsection blank until the baseline and
 ablation design has been agreed with the experiment team. -->
+
+## Real-World Observation Prediction
+
+Finally, we evaluate state feedback on an RGB sequence captured during a
+physical robot-arm ball-stopping trial. A frozen Wan2.2-TI2V-5B model receives
+the same image anchor, prompt, seed, and 50-step solver in both conditions: the
+Base performs native video prediction, whereas FBFM causally encodes the next
+120 RealSense D435i frames into 30 latent measurements released across the
+active solve. This recorded-execution diagnostic evaluates real-world
+visual-state prediction rather than task success; full-resolution videos and
+preprocessing metadata are included in the supplementary material.
