@@ -23,3 +23,7 @@ docs/preview.pdf
 *.swo
 .DS_Store
 Thumbs.db
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]

@@ -1,7 +1,17 @@
 # DreamZero FBFM LIBERO-40 Results Before `kp` Optimization
 
+> **Archive status:** superseded. This package is retained only for provenance
+> and reproducibility. It is excluded from all manuscript tables, figures,
+> aggregate statistics, and method comparisons; use the calibrated DreamZero
+> evaluation in the sibling `formal_libero40_fbfm_kp00486968_20_a051933/`
+> directory for paper-facing results.
+
 This directory records the completed DreamZero FBFM evaluation at `cb08c9e`,
 before the separate proportional state-feedback gain was introduced and tuned.
+
+- Imported from branch: `exp/dmzr_fbfm_cpurender_result_before_opt`
+- Source paper-record commit: `dde33ee`
+- FBFM route commit: `cb08c9e552730d26cc446885e79a3e270a270d0c`
 
 ## Result Snapshot
 
@@ -47,6 +57,15 @@ preflight validation, and the stride-3 live-audit contract used by this run.
 | `workers/gpu*/ready.json` | exact server mode and runtime protocol evidence |
 | `runtime/` | launch, monitor, audit validator, and provenance record used by the run |
 | `SHA256SUMS` | hashes for every packaged file except the checksum file itself |
+
+## Import Integrity Note
+
+The source branch's checksum manifest was generated from Python-produced CRLF
+CSV files, whereas Git stored those text files with normalized LF endings. On
+import, the 18 CSV checksums were regenerated against the committed byte
+representation; episode values and aggregate counts were not changed. Three
+compiled `__pycache__/*.pyc` artifacts were removed because the corresponding
+source scripts are included.
 
 ## External Artifacts
 
