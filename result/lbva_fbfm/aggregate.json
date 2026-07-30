@@ -1,56 +1,61 @@
 {
-    "schema_version":  1,
-    "experiment":  "lbva_fbfm_cpurender",
-    "model":  "LingBot-VA",
-    "method":  "FBFM",
-    "benchmark":  "RoboTwin",
-    "renderer":  "CPU",
-    "snapshot_source_last_write":  "2026-07-26T22:44:09+08:00",
-    "evaluation_commit":  "a116e48d9c8956c7ee66360ae68007bc146abcc3",
-    "checkpoint":  "/mnt/project_eai_hs/zrm/lingbot-va/checkpoints/lingbot-va-posttrain-robotwin",
-    "trials_required_per_cell":  10,
-    "inclusion_rule":  "status == complete and trials == 10",
-    "planned_cells":  80,
-    "complete_cells":  45,
-    "complete_successes":  388,
-    "complete_trials":  450,
-    "micro_success_rate":  0.86222222222222222,
-    "micro_wilson_95_low":  0.82729845785597722,
-    "micro_wilson_95_high":  0.8910140578121819,
-    "status_counts":  {
-                          "complete":  45,
-                          "partial_running":  6,
-                          "pending":  29
-                      },
-    "groups":  [
-                   {
-                       "config":  "demo_clean",
-                       "complete_cells":  17,
-                       "successes":  145,
-                       "trials":  170,
-                       "success_rate":  0.8529411764705882,
-                       "wilson_95_low":  0.79192017658414249,
-                       "wilson_95_high":  0.89836395249563006
-                   },
-                   {
-                       "config":  "demo_randomized",
-                       "complete_cells":  28,
-                       "successes":  243,
-                       "trials":  280,
-                       "success_rate":  0.86785714285714288,
-                       "wilson_95_low":  0.82316894590827472,
-                       "wilson_95_high":  0.902588316106548
-                   }
-               ],
-    "source_result_root":  "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/feedback_multinode_80cells_clean30_random50_10_a116e48",
-    "artifacts":  {
-                      "complete_task_summary":  "task_summary.csv",
-                      "full_cell_ledger":  "cell_ledger.csv",
-                      "exact_source_snapshot":  "source_snapshot.tsv"
-                  },
-    "limitations":  [
-                        "This package contains task-level summaries, not per-episode outcome records.",
-                        "Cells not satisfying the inclusion rule are retained only in the ledger and excluded from reported rates.",
-                        "Remote source paths are provenance references and may not resolve outside the evaluation host."
-                    ]
+  "schema_version": 2,
+  "experiment": "lbva_fbfm_cpurender",
+  "model": "LingBot-VA",
+  "method": "FBFM",
+  "benchmark": "RoboTwin",
+  "renderer": "CPU",
+  "snapshot_source_last_write": "2026-07-30T03:41:38+08:00",
+  "source_archive_sha256": "49bfec081cbc8f57af5a82ad728542c5870db21a0808374f9df4888187ac34d2",
+  "evaluation_commit": "a116e48d9c8956c7ee66360ae68007bc146abcc3",
+  "checkpoint": "/mnt/project_eai_hs/zrm/lingbot-va/checkpoints/lingbot-va-posttrain-robotwin",
+  "trials_required_per_cell": 10,
+  "inclusion_rule": "status == complete and trials == 10",
+  "planned_cells": 80,
+  "complete_cells": 72,
+  "complete_successes": 590,
+  "complete_trials": 720,
+  "micro_success_rate": 0.8194444444444444,
+  "micro_wilson_95_low": 0.7896763913047923,
+  "micro_wilson_95_high": 0.8458218858309866,
+  "status_counts": {
+    "complete": 72,
+    "excluded_max_steps": 7,
+    "partial_stopped": 1
+  },
+  "groups": [
+    {
+      "complete_cells": 30,
+      "successes": 242,
+      "trials": 300,
+      "success_rate": 0.8066666666666666,
+      "wilson_95_low": 0.7582162445043988,
+      "wilson_95_high": 0.8473627331445462,
+      "config": "demo_clean"
+    },
+    {
+      "complete_cells": 42,
+      "successes": 348,
+      "trials": 420,
+      "success_rate": 0.8285714285714286,
+      "wilson_95_low": 0.789590028615996,
+      "wilson_95_high": 0.8615968580277706,
+      "config": "demo_randomized"
+    }
+  ],
+  "under_900": {
+    "rule": "max_steps < 900",
+    "planned_cells": 72,
+    "complete_cells": 72,
+    "successes": 590,
+    "trials": 720,
+    "success_rate": 0.8194444444444444,
+    "wilson_95_low": 0.7896763913047923,
+    "wilson_95_high": 0.8458218858309866
+  },
+  "source_root": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/feedback_multinode_80cells_clean30_random50_10_a116e48",
+  "limitations": [
+    "Cells with max_steps >= 900 were stopped by design; completed long-horizon cells remain in the all-complete aggregate.",
+    "Pooled method totals have different task/config coverage and are descriptive, not a matched treatment comparison."
+  ]
 }

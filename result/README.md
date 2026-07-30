@@ -8,8 +8,8 @@ workspaces.
 
 | Directory | Scope | Included result state |
 | --- | --- | --- |
-| `lbva_none/` | LingBot-VA without feedback on RoboTwin, CPU rendering | 37 complete 10-episode cells |
-| `lbva_fbfm/` | LingBot-VA with FBFM on RoboTwin, CPU rendering | Original 45-cell snapshot plus a seed-audited under-900 follow-up |
+| `lbva_none/` | LingBot-VA without feedback on RoboTwin, CPU rendering | 57/66 complete cells, 411/570 successes; under-900 52/52 |
+| `lbva_fbfm/` | LingBot-VA with FBFM on RoboTwin, CPU rendering | 72/80 complete cells, 590/720 successes; under-900 72/72 |
 | `lbva_fbfm_gpu/` | LingBot-VA with FBFM on RoboTwin `demo_clean`, GPU rendering | 12 complete tasks, 216/240 successes |
 | `lbva_rtc/` | LingBot-VA with RTC on RoboTwin `demo_clean`, GPU rendering | 12 complete tasks, 223/240 successes |
 | `lbva_fbfm_auxiliary_mechanism/` | LingBot-VA FBFM state/action mechanism pilot on RoboTwin | 4 paired units and 8 cache-intervention probes; no added rollouts |
@@ -21,8 +21,10 @@ workspaces.
 
 The CPU snapshots use only cells satisfying
 `status == complete && trials == 10`. The LingBot-VA GPU packages contain
-episode-level records for 240 strictly validated trials per method; Appendix D
-currently reports only the first 10 accepted FBFM episodes per task. Coverage,
-rendering mode, and episode identities differ across packages, so pooled rates
-must not be treated as matched method comparisons without checking the package
-protocols and trial identities.
+episode-level records for 240 strictly validated trials per method. For the
+paper's task-level RoboTwin summary, CPU and GPU rendering are treated as
+equivalent evaluation backends while their provenance remains explicit. Since
+some legacy Base cells are available only as task-level counts and episode
+counts vary between 10 and 20, the manuscript reports equal-weight task-cell
+macro averages rather than interpreting a mixed-coverage micro average as a
+paired comparison.
