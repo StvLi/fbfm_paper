@@ -1,22 +1,25 @@
 # LingBot-VA NONE CPU-Render Results
 
-## Result Snapshot
+## Final Snapshot
 
-This directory records the completed portion of the LingBot-VA no-feedback
-RoboTwin CPU-render evaluation as synchronized on
-`2026-07-26T22:44:09+08:00`. A result cell is the tuple `(config, task)` and
-requires exactly 10 episodes.
+This directory records the final completed portion of the LingBot-VA without feedback
+RoboTwin CPU-render evaluation. The last canonical result was written at
+`2026-07-30T03:41:38+08:00`. A result cell is `(config, task)` and requires exactly 10
+seed-unique episodes.
 
 | Config | Complete cells | Successes / episodes | Micro success rate |
 | --- | ---: | ---: | ---: |
 | `demo_clean` | 29 | 205 / 290 | 70.69% |
-| `demo_randomized` | 8 | 58 / 80 | 72.50% |
-| **All complete cells** | **37** | **263 / 370** | **71.08%** |
+| `demo_randomized` | 28 | 206 / 280 | 73.57% |
+| **All complete cells** | **57** | **411 / 570** | **72.11%** |
 
-The aggregate Wilson 95% confidence interval is 66.26%-75.47%. At snapshot
-time, the 66 planned cells comprised 37 complete, 2 partially running, 1
-running without a recorded episode, and 26 pending cells. Only the 37 complete
-cells contribute to the table above.
+The aggregate Wilson 95% confidence interval is
+68.28%-75.63%.
+Coverage is 57/66 planned cells. Under the
+predeclared `max_steps < 900` scope, coverage is 52/52
+with 390/520 successes
+(75.00%). All remaining incomplete cells have
+`max_steps >= 900` and were stopped by design.
 
 ## Protocol and Provenance
 
@@ -27,21 +30,18 @@ cells contribute to the table above.
 - Evaluation revision: `a116e48d9c8956c7ee66360ae68007bc146abcc3`
 - Checkpoint: `/mnt/project_eai_hs/zrm/lingbot-va/checkpoints/lingbot-va-posttrain-robotwin`
 - Source root: `/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/base_none_remaining33_clean_random_10_a116e48`
+- Canonical `res.json` archive SHA-256: `49bfec081cbc8f57af5a82ad728542c5870db21a0808374f9df4888187ac34d2`
 
-The exact synchronized source table is retained without normalization in
-`source_snapshot.tsv`. Absolute `res.json` paths are provenance references and
-are not expected to resolve outside the evaluation host.
+`source_snapshot.tsv` was regenerated directly from canonical `res.json` files
+and the original planned-cell metadata. Absolute source paths are provenance
+references and are not expected to resolve outside the evaluation hosts.
 
 ## Files
 
 | File | Contents |
 | --- | --- |
-| `task_summary.csv` | complete cells, counts, rates, Wilson intervals, and source path |
-| `cell_ledger.csv` | normalized ledger for all 66 planned cells, including incomplete states |
-| `source_snapshot.tsv` | byte-preserved synchronized source table |
-| `aggregate.json` | machine-readable protocol, coverage, grouped totals, and limitations |
+| `task_summary.csv` | complete cells, counts, rates, Wilson intervals, and provenance |
+| `cell_ledger.csv` | normalized ledger for every planned cell, including stopped long-horizon cells |
+| `source_snapshot.tsv` | planned-cell snapshot regenerated from canonical results |
+| `aggregate.json` | protocol, coverage, grouped totals, under-900 totals, and limitations |
 | `SHA256SUMS` | integrity hashes for the packaged artifacts |
-
-This snapshot contains task-level counts rather than per-episode outcome
-records. It supports the reported aggregate and per-task rates, but it does not
-support seed-level pairing or episode-identity audits.

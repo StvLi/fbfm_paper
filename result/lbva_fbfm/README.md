@@ -1,30 +1,25 @@
 # LingBot-VA FBFM CPU-Render Results
 
-## Under-900 Follow-up
+## Final Snapshot
 
-The read-only follow-up snapshot in
-`under900_20260729_a116e48/` records the latest `max_steps < 900` results at
-`2026-07-29T18:18:52+08:00`. It includes seed-level deduplication across
-canonical, main, and unpromoted shard results, 100 raw `res.json` records, and
-live worker provenance. In the monitored 15-cell recovery batch, the official
-view is 107/134 episodes; including unique unpromoted shard trials gives
-108/140. Only the clean and randomized `handover_block` cells remain partial.
-
-## Result Snapshot
-
-This directory records the completed portion of the LingBot-VA FBFM RoboTwin
-CPU-render evaluation as synchronized on `2026-07-26T22:44:09+08:00`. A result
-cell is the tuple `(config, task)` and requires exactly 10 episodes.
+This directory records the final completed portion of the LingBot-VA with FBFM feedback
+RoboTwin CPU-render evaluation. The last canonical result was written at
+`2026-07-30T03:41:38+08:00`. A result cell is `(config, task)` and requires exactly 10
+seed-unique episodes.
 
 | Config | Complete cells | Successes / episodes | Micro success rate |
 | --- | ---: | ---: | ---: |
-| `demo_clean` | 17 | 145 / 170 | 85.29% |
-| `demo_randomized` | 28 | 243 / 280 | 86.79% |
-| **All complete cells** | **45** | **388 / 450** | **86.22%** |
+| `demo_clean` | 30 | 242 / 300 | 80.67% |
+| `demo_randomized` | 42 | 348 / 420 | 82.86% |
+| **All complete cells** | **72** | **590 / 720** | **81.94%** |
 
-The aggregate Wilson 95% confidence interval is 82.73%-89.10%. At snapshot
-time, the 80 planned cells comprised 45 complete, 6 partially running, and 29
-pending cells. Only the 45 complete cells contribute to the table above.
+The aggregate Wilson 95% confidence interval is
+78.97%-84.58%.
+Coverage is 72/80 planned cells. Under the
+predeclared `max_steps < 900` scope, coverage is 72/72
+with 590/720 successes
+(81.94%). All remaining incomplete cells have
+`max_steps >= 900` and were stopped by design.
 
 ## Protocol and Provenance
 
@@ -35,21 +30,20 @@ pending cells. Only the 45 complete cells contribute to the table above.
 - Evaluation revision: `a116e48d9c8956c7ee66360ae68007bc146abcc3`
 - Checkpoint: `/mnt/project_eai_hs/zrm/lingbot-va/checkpoints/lingbot-va-posttrain-robotwin`
 - Source root: `/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/feedback_multinode_80cells_clean30_random50_10_a116e48`
+- Canonical `res.json` archive SHA-256: `49bfec081cbc8f57af5a82ad728542c5870db21a0808374f9df4888187ac34d2`
 
-The exact synchronized source table is retained without normalization in
-`source_snapshot.tsv`. Absolute `res.json` paths are provenance references and
-are not expected to resolve outside the evaluation host.
+`source_snapshot.tsv` was regenerated directly from canonical `res.json` files
+and the original planned-cell metadata. Absolute source paths are provenance
+references and are not expected to resolve outside the evaluation hosts.
 
 ## Files
 
 | File | Contents |
 | --- | --- |
-| `task_summary.csv` | complete cells, counts, rates, Wilson intervals, worker assignment, and source path |
-| `cell_ledger.csv` | normalized ledger for all 80 planned cells, including incomplete states |
-| `source_snapshot.tsv` | byte-preserved synchronized source table |
-| `aggregate.json` | machine-readable protocol, coverage, grouped totals, and limitations |
+| `task_summary.csv` | complete cells, counts, rates, Wilson intervals, and provenance |
+| `cell_ledger.csv` | normalized ledger for every planned cell, including stopped long-horizon cells |
+| `source_snapshot.tsv` | planned-cell snapshot regenerated from canonical results |
+| `aggregate.json` | protocol, coverage, grouped totals, under-900 totals, and limitations |
 | `SHA256SUMS` | integrity hashes for the packaged artifacts |
 
-This snapshot contains task-level counts rather than per-episode outcome
-records. It supports the reported aggregate and per-task rates, but it does not
-support seed-level pairing or episode-identity audits.
+The seed-audited final under-900 package is in `under900_20260729_a116e48/`.
