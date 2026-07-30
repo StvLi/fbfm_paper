@@ -9,7 +9,7 @@ workspaces.
 | Directory | Scope | Included result state |
 | --- | --- | --- |
 | `lbva_none/` | LingBot-VA without feedback on RoboTwin, CPU rendering | 37 complete 10-episode cells |
-| `lbva_fbfm/` | LingBot-VA with FBFM on RoboTwin, CPU rendering | 45 complete 10-episode cells |
+| `lbva_fbfm/` | LingBot-VA with FBFM on RoboTwin, CPU rendering | Original 45-cell snapshot plus a seed-audited under-900 follow-up |
 | `lbva_fbfm_gpu/` | LingBot-VA with FBFM on RoboTwin `demo_clean`, GPU rendering | 12 complete tasks, 216/240 successes |
 | `lbva_rtc/` | LingBot-VA with RTC on RoboTwin `demo_clean`, GPU rendering | 12 complete tasks, 223/240 successes |
 | `dmzr_weight/` | DreamZero FBFM state-weight diagnosis and proportional-gain search | Includes the valid 240-episode Pro6000 `kp` comparison |

@@ -1,0 +1,16 @@
+mode,config,task,official_successes,official_trials,effective_successes,effective_trials,delta_successes,delta_trials,missing_effective_trials,effective_status,effective_source
+FBFM,demo_clean,shake_bottle_horizontally,10,10,10,10,0,0,0,complete,canonical
+FBFM,demo_clean,put_object_cabinet,6,10,6,10,0,0,0,complete,canonical_promoted
+FBFM,demo_clean,place_cans_plasticbox,10,10,10,10,0,0,0,complete,canonical
+FBFM,demo_clean,handover_block,0,2,1,6,1,4,4,partial,main_plus_unpromoted_shards
+FBFM,demo_clean,stack_blocks_two,10,10,10,10,0,0,0,complete,canonical
+FBFM,demo_clean,place_bread_basket,5,10,5,10,0,0,0,complete,canonical_promoted
+FBFM,demo_clean,place_object_basket,8,10,8,10,0,0,0,complete,canonical_promoted
+FBFM,demo_randomized,shake_bottle,10,10,10,10,0,0,0,complete,canonical
+FBFM,demo_randomized,put_object_cabinet,7,10,7,10,0,0,0,complete,canonical_promoted
+FBFM,demo_randomized,place_cans_plasticbox,10,10,10,10,0,0,0,complete,canonical
+FBFM,demo_randomized,stack_blocks_two,8,10,8,10,0,0,0,complete,canonical_promoted
+FBFM,demo_randomized,handover_block,0,2,0,4,0,2,6,partial,main_plus_unpromoted_shards
+NONE,demo_randomized,put_object_cabinet,8,10,8,10,0,0,0,complete,canonical
+NONE,demo_randomized,stack_blocks_two,7,10,7,10,0,0,0,complete,canonical
+NONE,demo_randomized,place_object_scale,8,10,8,10,0,0,0,complete,canonical

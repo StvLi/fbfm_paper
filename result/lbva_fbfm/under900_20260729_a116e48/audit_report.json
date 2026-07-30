@@ -1,0 +1,1369 @@
+{
+  "captured_at": "2026-07-29T18:18:52.331311+08:00",
+  "commit": "a116e48d9c8956c7ee66360ae68007bc146abcc3",
+  "difference_effective_minus_official": {
+    "complete_cells": 0,
+    "episodes": 6,
+    "successes": 1
+  },
+  "incomplete_effective": [
+    {
+      "config": "demo_clean",
+      "missing": 4,
+      "mode": "FBFM",
+      "source": "main_plus_unpromoted_shards",
+      "successes": 1,
+      "task": "handover_block",
+      "trials": 6
+    },
+    {
+      "config": "demo_randomized",
+      "missing": 6,
+      "mode": "FBFM",
+      "source": "main_plus_unpromoted_shards",
+      "successes": 0,
+      "task": "handover_block",
+      "trials": 4
+    }
+  ],
+  "promotions": [
+    {
+      "config": "demo_clean",
+      "mode": "FBFM",
+      "reason": "shard_merge",
+      "result": "8/10",
+      "task": "place_object_basket"
+    },
+    {
+      "config": "demo_randomized",
+      "mode": "FBFM",
+      "reason": "shard_merge",
+      "result": "8/10",
+      "task": "stack_blocks_two"
+    },
+    {
+      "config": "demo_randomized",
+      "mode": "FBFM",
+      "reason": "shard_merge",
+      "result": "7/10",
+      "task": "put_object_cabinet"
+    },
+    {
+      "config": "demo_clean",
+      "mode": "FBFM",
+      "reason": "shard_merge",
+      "result": "6/10",
+      "task": "put_object_cabinet"
+    },
+    {
+      "config": "demo_clean",
+      "mode": "FBFM",
+      "reason": "shard_merge",
+      "result": "5/10",
+      "task": "place_bread_basket"
+    }
+  ],
+  "requested_fbfm": {
+    "clean": {
+      "dump_bin_bigbin": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10003,
+          10004,
+          10005,
+          10007,
+          10008,
+          10009,
+          10010,
+          10014,
+          10015
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      },
+      "handover_block": {
+        "all_unique_seeds": [
+          10000,
+          10004,
+          20000,
+          20001,
+          30000,
+          40000
+        ],
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10004,
+          20000,
+          20001,
+          30000,
+          40000
+        ],
+        "source": "main_plus_unpromoted_shards",
+        "status": "partial",
+        "successes": 1,
+        "trials": 6
+      },
+      "handover_mic": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          10006,
+          10008,
+          10011,
+          10012,
+          10013
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      },
+      "open_laptop": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          10006,
+          10007,
+          10008,
+          10009,
+          10010
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 9,
+        "trials": 10
+      },
+      "place_bread_basket": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          20000,
+          20001,
+          20002,
+          30000,
+          30001
+        ],
+        "source": "canonical_promoted",
+        "status": "complete",
+        "successes": 5,
+        "trials": 10
+      },
+      "place_bread_skillet": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10002,
+          10005,
+          10006,
+          10007,
+          10009,
+          10011,
+          10013,
+          10015,
+          10018,
+          10019
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 7,
+        "trials": 10
+      },
+      "place_can_basket": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10001,
+          10002,
+          10003,
+          10004,
+          10005,
+          10006,
+          10008,
+          10010,
+          10011,
+          10012
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      },
+      "place_cans_plasticbox": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          10005,
+          10006,
+          10007,
+          10008,
+          10009
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      },
+      "place_dual_shoes": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10001,
+          10003,
+          10006,
+          10007,
+          10008,
+          10009,
+          10010,
+          10011,
+          10014,
+          10015
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 1,
+        "trials": 10
+      },
+      "place_object_basket": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          10005,
+          10006,
+          10008,
+          20002,
+          20004
+        ],
+        "source": "canonical_promoted",
+        "status": "complete",
+        "successes": 8,
+        "trials": 10
+      },
+      "put_object_cabinet": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10003,
+          10010,
+          10012,
+          10019,
+          10030,
+          20000,
+          20025,
+          20036,
+          30010,
+          30023
+        ],
+        "source": "canonical_promoted",
+        "status": "complete",
+        "successes": 6,
+        "trials": 10
+      },
+      "shake_bottle": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          10005,
+          10006,
+          10007,
+          10008,
+          10009
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      },
+      "shake_bottle_horizontally": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          10005,
+          10006,
+          10007,
+          10008,
+          10009
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      },
+      "stack_blocks_two": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          10005,
+          10006,
+          10007,
+          10008,
+          10009
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      }
+    },
+    "random": {
+      "dump_bin_bigbin": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10002,
+          10003,
+          10005,
+          10006,
+          10007,
+          10009,
+          10010,
+          10013,
+          10014
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      },
+      "handover_block": {
+        "all_unique_seeds": [
+          10000,
+          10001,
+          20000,
+          30000
+        ],
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          20000,
+          30000
+        ],
+        "source": "main_plus_unpromoted_shards",
+        "status": "partial",
+        "successes": 0,
+        "trials": 4
+      },
+      "handover_mic": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10002,
+          10003,
+          10004,
+          10005,
+          10006,
+          10008,
+          10010,
+          10012,
+          10014
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 8,
+        "trials": 10
+      },
+      "open_laptop": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          10005,
+          10006,
+          10010,
+          10012,
+          10013
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 9,
+        "trials": 10
+      },
+      "place_bread_basket": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10001,
+          10002,
+          10003,
+          10004,
+          10006,
+          10007,
+          10009,
+          10010,
+          10011,
+          10012
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 9,
+        "trials": 10
+      },
+      "place_bread_skillet": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10001,
+          10002,
+          10004,
+          10006,
+          10009,
+          10010,
+          10014,
+          10019,
+          10024,
+          10028
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 7,
+        "trials": 10
+      },
+      "place_burger_fries": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10002,
+          10003,
+          10004,
+          10005,
+          10006,
+          10007,
+          10009,
+          10010,
+          10011,
+          10012
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      },
+      "place_can_basket": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10005,
+          10006,
+          10007,
+          10008,
+          10009,
+          10010
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 9,
+        "trials": 10
+      },
+      "place_cans_plasticbox": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10005,
+          10006,
+          10007,
+          10009,
+          10010,
+          10011
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      },
+      "place_dual_shoes": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10003,
+          10004,
+          10007,
+          10011,
+          10012,
+          10014,
+          10016,
+          10018
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 1,
+        "trials": 10
+      },
+      "place_empty_cup": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          10005,
+          10006,
+          10008,
+          10012,
+          10013
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      },
+      "place_object_basket": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          10005,
+          10006,
+          10007,
+          10009,
+          10011
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 7,
+        "trials": 10
+      },
+      "place_shoe": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10003,
+          10004,
+          10006,
+          10007,
+          10009,
+          10010,
+          10011,
+          10012
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 5,
+        "trials": 10
+      },
+      "put_object_cabinet": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10051,
+          10057,
+          10085,
+          10104,
+          20035,
+          20045,
+          30003,
+          30005,
+          30006,
+          30009
+        ],
+        "source": "canonical_promoted",
+        "status": "complete",
+        "successes": 7,
+        "trials": 10
+      },
+      "scan_object": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10005,
+          10006,
+          10010,
+          10017,
+          10018,
+          10023,
+          10024,
+          10026,
+          10027,
+          10033
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 8,
+        "trials": 10
+      },
+      "shake_bottle": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10006,
+          10007,
+          10008,
+          10010,
+          10011,
+          10012
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      },
+      "shake_bottle_horizontally": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10006,
+          10007,
+          10008,
+          10010,
+          10011,
+          10012
+        ],
+        "source": "canonical",
+        "status": "complete",
+        "successes": 10,
+        "trials": 10
+      },
+      "stack_blocks_two": {
+        "conflicts": [],
+        "duplicate_records_removed": 0,
+        "selected_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10005,
+          10006,
+          30000,
+          30001,
+          30002,
+          30003
+        ],
+        "source": "canonical_promoted",
+        "status": "complete",
+        "successes": 8,
+        "trials": 10
+      }
+    }
+  },
+  "under900_effective": {
+    "rows": [
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "source": "canonical",
+        "successes": 10,
+        "task": "shake_bottle_horizontally",
+        "trials": 10
+      },
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "source": "canonical_promoted",
+        "successes": 6,
+        "task": "put_object_cabinet",
+        "trials": 10
+      },
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "source": "canonical",
+        "successes": 10,
+        "task": "place_cans_plasticbox",
+        "trials": 10
+      },
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "source": "main_plus_unpromoted_shards",
+        "successes": 1,
+        "task": "handover_block",
+        "trials": 6
+      },
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "source": "canonical",
+        "successes": 10,
+        "task": "stack_blocks_two",
+        "trials": 10
+      },
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "source": "canonical_promoted",
+        "successes": 5,
+        "task": "place_bread_basket",
+        "trials": 10
+      },
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "source": "canonical_promoted",
+        "successes": 8,
+        "task": "place_object_basket",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "FBFM",
+        "source": "canonical",
+        "successes": 10,
+        "task": "shake_bottle",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "FBFM",
+        "source": "canonical_promoted",
+        "successes": 7,
+        "task": "put_object_cabinet",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "FBFM",
+        "source": "canonical",
+        "successes": 10,
+        "task": "place_cans_plasticbox",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "FBFM",
+        "source": "canonical_promoted",
+        "successes": 8,
+        "task": "stack_blocks_two",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "FBFM",
+        "source": "main_plus_unpromoted_shards",
+        "successes": 0,
+        "task": "handover_block",
+        "trials": 4
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "NONE",
+        "source": "canonical",
+        "successes": 8,
+        "task": "put_object_cabinet",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "NONE",
+        "source": "canonical",
+        "successes": 7,
+        "task": "stack_blocks_two",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "NONE",
+        "source": "canonical",
+        "successes": 8,
+        "task": "place_object_scale",
+        "trials": 10
+      }
+    ],
+    "summary": {
+      "complete_cells": 13,
+      "episodes": 140,
+      "successes": 108,
+      "target_cells": 15,
+      "target_episodes": 150
+    }
+  },
+  "under900_official": {
+    "rows": [
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "successes": 10,
+        "task": "shake_bottle_horizontally",
+        "trials": 10
+      },
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "successes": 6,
+        "task": "put_object_cabinet",
+        "trials": 10
+      },
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "successes": 10,
+        "task": "place_cans_plasticbox",
+        "trials": 10
+      },
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "successes": 0,
+        "task": "handover_block",
+        "trials": 2
+      },
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "successes": 10,
+        "task": "stack_blocks_two",
+        "trials": 10
+      },
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "successes": 5,
+        "task": "place_bread_basket",
+        "trials": 10
+      },
+      {
+        "config": "demo_clean",
+        "mode": "FBFM",
+        "successes": 8,
+        "task": "place_object_basket",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "FBFM",
+        "successes": 10,
+        "task": "shake_bottle",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "FBFM",
+        "successes": 7,
+        "task": "put_object_cabinet",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "FBFM",
+        "successes": 10,
+        "task": "place_cans_plasticbox",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "FBFM",
+        "successes": 8,
+        "task": "stack_blocks_two",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "FBFM",
+        "successes": 0,
+        "task": "handover_block",
+        "trials": 2
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "NONE",
+        "successes": 8,
+        "task": "put_object_cabinet",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "NONE",
+        "successes": 7,
+        "task": "stack_blocks_two",
+        "trials": 10
+      },
+      {
+        "config": "demo_randomized",
+        "mode": "NONE",
+        "successes": 8,
+        "task": "place_object_scale",
+        "trials": 10
+      }
+    ],
+    "summary": {
+      "complete_cells": 13,
+      "episodes": 134,
+      "successes": 107,
+      "target_cells": 15,
+      "target_episodes": 150
+    }
+  },
+  "validation": {
+    "all_main_rows": [
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          10000,
+          10004
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/FBFM/demo_clean/handover_block/client/stseed-10000/metrics/handover_block/res.json",
+        "successes": 0,
+        "task": "handover_block",
+        "trials": 2
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          10005
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/FBFM/demo_clean/place_bread_basket/client/stseed-10000/metrics/place_bread_basket/res.json",
+        "successes": 2,
+        "task": "place_bread_basket",
+        "trials": 6
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10004,
+          10005,
+          10006,
+          10008,
+          10010,
+          10011
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/FBFM/demo_clean/place_object_basket/client/stseed-10000/metrics/place_object_basket/res.json",
+        "successes": 7,
+        "task": "place_object_basket",
+        "trials": 10
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          10003,
+          10010,
+          10012,
+          10019,
+          10030,
+          10034
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/FBFM/demo_clean/put_object_cabinet/client/stseed-10000/metrics/put_object_cabinet/res.json",
+        "successes": 3,
+        "task": "put_object_cabinet",
+        "trials": 6
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          10000
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/FBFM/demo_clean/shake_bottle_horizontally.interrupted.20260729_021907.dreamzero-fbfm-gpu1/client/stseed-10000/metrics/shake_bottle_horizontally/res.json",
+        "successes": 1,
+        "task": "shake_bottle_horizontally",
+        "trials": 1
+      },
+      {
+        "config": "demo_randomized",
+        "episode_seeds": [
+          10000,
+          10001
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/FBFM/demo_randomized/handover_block/client/stseed-10000/metrics/handover_block/res.json",
+        "successes": 0,
+        "task": "handover_block",
+        "trials": 2
+      },
+      {
+        "config": "demo_randomized",
+        "episode_seeds": [
+          10051,
+          10057,
+          10085,
+          10104
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/FBFM/demo_randomized/put_object_cabinet/client/stseed-10000/metrics/put_object_cabinet/res.json",
+        "successes": 1,
+        "task": "put_object_cabinet",
+        "trials": 4
+      },
+      {
+        "config": "demo_randomized",
+        "episode_seeds": [
+          10000,
+          10001,
+          10002,
+          10003,
+          10005,
+          10006,
+          10007
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/FBFM/demo_randomized/stack_blocks_two/client/stseed-10000/metrics/stack_blocks_two/res.json",
+        "successes": 5,
+        "task": "stack_blocks_two",
+        "trials": 7
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          10000
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "NONE",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/NONE/demo_clean/put_bottles_dustbin/client/stseed-10000/metrics/put_bottles_dustbin/res.json",
+        "successes": 0,
+        "task": "put_bottles_dustbin",
+        "trials": 1
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          10000,
+          10001
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "NONE",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/NONE/demo_clean/stack_blocks_three/client/stseed-10000/metrics/stack_blocks_three/res.json",
+        "successes": 1,
+        "task": "stack_blocks_three",
+        "trials": 2
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          10001,
+          10002,
+          10003
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "NONE",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/NONE/demo_clean/stack_bowls_three/client/stseed-10000/metrics/stack_bowls_three/res.json",
+        "successes": 3,
+        "task": "stack_bowls_three",
+        "trials": 3
+      },
+      {
+        "config": "demo_randomized",
+        "episode_seeds": [
+          10000
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "NONE",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/NONE/demo_randomized/open_microwave/client/stseed-10000/metrics/open_microwave/res.json",
+        "successes": 1,
+        "task": "open_microwave",
+        "trials": 1
+      },
+      {
+        "config": "demo_randomized",
+        "episode_seeds": [
+          10000
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "NONE",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/NONE/demo_randomized/put_bottles_dustbin/client/stseed-10000/metrics/put_bottles_dustbin/res.json",
+        "successes": 1,
+        "task": "put_bottles_dustbin",
+        "trials": 1
+      },
+      {
+        "config": "demo_randomized",
+        "episode_seeds": [
+          10000
+        ],
+        "initial_eval_seed": 10000,
+        "mode": "NONE",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_accel_12gpu_20260728_a116e48/runs/NONE/demo_randomized/stack_blocks_three/client/stseed-10000/metrics/stack_blocks_three/res.json",
+        "successes": 0,
+        "task": "stack_blocks_three",
+        "trials": 1
+      }
+    ],
+    "all_shard_rows": [
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          20000,
+          20001
+        ],
+        "initial_eval_seed": 20000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_clean/handover_block/eval-seed-1/client/stseed-20000/metrics/handover_block/res.json",
+        "successes": 1,
+        "task": "handover_block",
+        "trials": 2
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          30000
+        ],
+        "initial_eval_seed": 30000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_clean/handover_block/eval-seed-2/client/stseed-30000/metrics/handover_block/res.json",
+        "successes": 0,
+        "task": "handover_block",
+        "trials": 1
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          40000
+        ],
+        "initial_eval_seed": 40000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_clean/handover_block/eval-seed-3/client/stseed-40000/metrics/handover_block/res.json",
+        "successes": 0,
+        "task": "handover_block",
+        "trials": 1
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          20000,
+          20001,
+          20002
+        ],
+        "initial_eval_seed": 20000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_clean/place_bread_basket/eval-seed-1/client/stseed-20000/metrics/place_bread_basket/res.json",
+        "successes": 2,
+        "task": "place_bread_basket",
+        "trials": 3
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          30000,
+          30001,
+          30002
+        ],
+        "initial_eval_seed": 30000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_clean/place_bread_basket/eval-seed-2/client/stseed-30000/metrics/place_bread_basket/res.json",
+        "successes": 2,
+        "task": "place_bread_basket",
+        "trials": 3
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          20002,
+          20004,
+          20005
+        ],
+        "initial_eval_seed": 20000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_clean/place_object_basket/eval-seed-1/client/stseed-20000/metrics/place_object_basket/res.json",
+        "successes": 2,
+        "task": "place_object_basket",
+        "trials": 3
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          20000,
+          20025,
+          20036,
+          20042
+        ],
+        "initial_eval_seed": 20000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_clean/put_object_cabinet/eval-seed-1/client/stseed-20000/metrics/put_object_cabinet/res.json",
+        "successes": 3,
+        "task": "put_object_cabinet",
+        "trials": 4
+      },
+      {
+        "config": "demo_clean",
+        "episode_seeds": [
+          30010,
+          30023
+        ],
+        "initial_eval_seed": 30000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_clean/put_object_cabinet/eval-seed-2/client/stseed-30000/metrics/put_object_cabinet/res.json",
+        "successes": 1,
+        "task": "put_object_cabinet",
+        "trials": 2
+      },
+      {
+        "config": "demo_randomized",
+        "episode_seeds": [
+          20000
+        ],
+        "initial_eval_seed": 20000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_randomized/handover_block/eval-seed-1/client/stseed-20000/metrics/handover_block/res.json",
+        "successes": 0,
+        "task": "handover_block",
+        "trials": 1
+      },
+      {
+        "config": "demo_randomized",
+        "episode_seeds": [
+          30000
+        ],
+        "initial_eval_seed": 30000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_randomized/handover_block/eval-seed-2/client/stseed-30000/metrics/handover_block/res.json",
+        "successes": 0,
+        "task": "handover_block",
+        "trials": 1
+      },
+      {
+        "config": "demo_randomized",
+        "episode_seeds": [
+          20035,
+          20045,
+          20046,
+          20047
+        ],
+        "initial_eval_seed": 20000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_randomized/put_object_cabinet/eval-seed-1/client/stseed-20000/metrics/put_object_cabinet/res.json",
+        "successes": 3,
+        "task": "put_object_cabinet",
+        "trials": 4
+      },
+      {
+        "config": "demo_randomized",
+        "episode_seeds": [
+          30003,
+          30005,
+          30006,
+          30009
+        ],
+        "initial_eval_seed": 30000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_randomized/put_object_cabinet/eval-seed-2/client/stseed-30000/metrics/put_object_cabinet/res.json",
+        "successes": 4,
+        "task": "put_object_cabinet",
+        "trials": 4
+      },
+      {
+        "config": "demo_randomized",
+        "episode_seeds": [
+          20000,
+          20001
+        ],
+        "initial_eval_seed": 20000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_randomized/stack_blocks_two/eval-seed-1/client/stseed-20000/metrics/stack_blocks_two/res.json",
+        "successes": 1,
+        "task": "stack_blocks_two",
+        "trials": 2
+      },
+      {
+        "config": "demo_randomized",
+        "episode_seeds": [
+          30000,
+          30001,
+          30002,
+          30003
+        ],
+        "initial_eval_seed": 30000,
+        "mode": "FBFM",
+        "path": "/mnt/project_eai_hs/zrm2/FBFM/wam/lingbot-va/robotwin_outputs/formal_under900_shards_20260729_a116e48/runs/FBFM/demo_randomized/stack_blocks_two/eval-seed-2/client/stseed-30000/metrics/stack_blocks_two/res.json",
+        "successes": 4,
+        "task": "stack_blocks_two",
+        "trials": 4
+      }
+    ],
+    "main": {
+      "errors": [],
+      "file_count": 14,
+      "valid_file_count": 14
+    },
+    "shards": {
+      "errors": [],
+      "file_count": 14,
+      "valid_file_count": 14
+    }
+  }
+}

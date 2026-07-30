@@ -1,0 +1,2 @@
+node	gpu	order	mode	config	task	eval_seed	test_num	max_steps
+rebalance-lingbot	7	1	FBFM	demo_clean	put_object_cabinet	2	4	700
