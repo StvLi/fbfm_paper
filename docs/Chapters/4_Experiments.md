@@ -84,7 +84,7 @@ active solve. This recorded-execution diagnostic evaluates real-world
 visual-state prediction rather than task success; full-resolution videos and
 preprocessing metadata are included in the supplementary material.
 
-![Real-world robot-arm ball-stopping observation prediction. The RGB sequence
-was recorded from a physical robot task with a RealSense D435i. Columns show 0,
-0.25, 0.5, 1, 2, 3, 4, and 5 s; rows show the recorded reference, Wan2.2 Base
-without feedback, and FBFM using all 30 measured latent slots.](../../material/wan2.2/robot_arm_ball_stop_keyframes.jpg)
+![Real-world robot-arm ball-stopping observation prediction. The upper block
+shows 0, 0.25, 0.5, and 1 s, and the lower block shows 2, 3, 4, and 5 s. Within
+each block, rows show the recorded reference, Wan2.2 Base without feedback, and
+FBFM using all 30 measured latent slots.](../../material/wan2.2/robot_arm_ball_stop_keyframes_2row.jpg)
