@@ -11,26 +11,34 @@ reserved for Appendix D.
 
 | Method | Clean SR (%) | Randomized SR (%) |
 | --- | ---: | ---: |
-| LingBot-VA (Base, NONE) | 83.1 | 83.0 |
-| LingBot-VA + FBFM (Ours) | **85.4 ↑** | **84.6 ↑** |
+| Base | 83.1 | 83.0 |
+| FBFM | **85.4 ↑** | **84.6 ↑** |
 
 *The Randomized aggregate excludes `handover_block` from both methods.*
 
 FBFM improves the pooled Clean and Randomized success rates by 2.3 and 1.7
-percentage points, respectively.
+percentage points, respectively. Since the checkpoint, task predicates, solver
+budget, and execution protocol are held fixed, the improvement is attributable
+to the inference-time feedback mechanism itself rather than additional
+training or a stronger base policy.
 
 ## LingBot-VA Mechanism Analysis
 
 The following figure evaluates the two internal links isolated by the
 auxiliary diagnostic. Across all four paired task--trial units, FBFM reduces
 the wave-0 next-state latent MSE, lowering the mean from 0.6828 to 0.6751
-(1.13%). Switching only the installed RTC versus FBFM cache changes the
-normalized fresh action by RMS 0.00890, compared with a same-cache repeat floor
-of 0.001205, a 7.39x ratio. The cache-switch velocity also remains above the
-mean repeat floor at all 51 action-solver steps, with a 2.52x AUC ratio. These
-results support the computation-level path from encoded state feedback through
-the refreshed cache to action generation; with only four independent units,
-they are mechanism evidence rather than a task-success claim.
+(1.13%). This verifies that masked feedback changes the latent state prediction
+in the intended direction. Switching only the installed RTC versus FBFM cache
+then changes the normalized fresh action by RMS 0.00890, compared with a
+same-cache repeat floor of 0.001205, a 7.39x ratio, showing that the refreshed
+latent state context propagates to the final action prediction. The
+cache-switch velocity also remains above the mean repeat floor at all 51
+action-solver steps, with a 2.52x AUC ratio; the action difference is therefore
+introduced through the flow-matching velocity field rather than appearing only
+as a terminal decoding artifact. These results support the computation-level
+path from encoded state feedback through the refreshed cache to action
+generation; with only four independent units, they are mechanism evidence
+rather than a task-success claim.
 
 ![LingBot-VA mechanism diagnostic. Panel (a) reports paired wave-0 next-state
 latent MSE; panel (b) compares fresh-action RMS under a same-cache repeat and an
@@ -49,8 +57,8 @@ Appendix D reports every task.
 
 | Method | Spatial SR (%) | Object SR (%) | Goal SR (%) | LIBERO-10 SR (%) | Total SR (%) |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| DreamZero (Base, NONE) | 78.5 | 73.0 | 68.5 | 60.5 | 70.125 |
-| DreamZero + FBFM (Ours) | 77.0 | 72.0 | **71.0 ↑** | **63.0 ↑** | **70.750 ↑** |
+| Base | 78.5 | 73.0 | 68.5 | 60.5 | 70.1 |
+| FBFM | 77.0 | 72.0 | **71.0 ↑** | **63.0 ↑** | **70.8 ↑** |
 
 *Up-arrows mark improvements over the corresponding Base result.*
 
@@ -58,7 +66,14 @@ FBFM improves both LIBERO-Goal and LIBERO-10 by 2.5 percentage points, while
 LIBERO-Spatial and LIBERO-Object decrease by 1.5 and 1.0 points, respectively.
 Across all 800 episodes, the pooled success rate increases by 0.625 points. We
 therefore interpret the current result as a modest aggregate gain with
-heterogeneous suite-level effects rather than a uniform improvement.
+heterogeneous suite-level effects rather than a uniform improvement. A likely
+reason is DreamZero's accelerated inference design: one native model evaluation
+is reused across multiple Euler-style solver updates. Our implementation keeps
+this schedule and recomputes FBFM residuals from the newest \(\mathbf Z\) and
+\(\mathbf A\), but it must reuse the latest native velocity and endpoint
+Jacobian between refreshed DiT evaluations. This amortization preserves
+DreamZero's fast execution but can damp or delay the corrective effect of newly
+arrived feedback.
 
 ## State-Feedback Gain and Closed-Loop Stability
 
@@ -82,9 +97,10 @@ z_{t+1}
 \]
 
 The environment branch is delayed, nonlinear, and generally not the inverse of
-the opposite Jacobian block. We therefore balance the state residual before its
-VJP using a modality preconditioner \(P_Z\), and tune a separate proportional
-gain \(k_p\):
+the opposite Jacobian block; an over-large state correction can therefore make
+the physical feedback loop unstable even when the local Jacobian terms look
+scale-balanced. We therefore balance the state residual before its VJP using a
+modality preconditioner \(P_Z\), and tune a separate proportional gain \(k_p\):
 
 \[
 \mathbf e_t^Z
@@ -118,10 +134,13 @@ The Base receives no later image, whereas FBFM causally incorporates all 120
 measured future RealSense frames as 30 latent feedback slots. Base preserves a
 coherent robot and tabletop but departs from the recorded ball evolution. FBFM
 moves the full-frame prediction closer to the reference (MAE 9.63 to 9.27 and
-PSNR 20.06 to 23.10 dB), showing that FBFM can use observations recorded from a
-physical robot task to correct the active visual prediction. Appendix F
+PSNR 20.06 to 23.10 dB) and better preserves task-relevant physical information
+such as the ball position over time, even though visual artifacts remain. This
+shows that FBFM can use observations recorded from a physical robot task to
+constrain the active frame chunk beyond pure open-loop prediction. Appendix F
 separately analyzes the behavior observed when state feedback covers only a
-limited prefix of the generated video.
+limited prefix of the generated video and treats the resulting large-area
+artifacts as a Wan2.2-specific codec/backbone mismatch hypothesis.
 
 ![Real-world robot-arm ball-stopping observation prediction. The RGB sequence
 was recorded from a physical robot task with a RealSense D435i. Columns show 0,
