@@ -27,6 +27,17 @@ per task, and `561/800 = 70.125%` overall success. The directory includes all
 compact episode ledgers, per-task summaries, manifests, runtime provenance, and
 final audit records.
 
+## Archived Pre-Optimization Evaluation
+
+[`formal_libero40_fbfm_l1mass_20_cb08c9e/`](formal_libero40_fbfm_l1mass_20_cb08c9e/README.md)
+contains the complete DreamZero FBFM evaluation before separate `kp`
+optimization: 40 tasks, 20 trials per task, and `553/800 = 69.125%` overall
+success. The directory includes all compact episode ledgers, per-task summaries,
+manifests, runtime provenance, and audit records. This package is retained only
+for provenance and reproducibility. It is superseded by the calibrated formal
+evaluation above and must not be used in manuscript tables, aggregate
+statistics, or method comparisons.
+
 ## Scope
 
 ```text

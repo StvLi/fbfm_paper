@@ -15,6 +15,7 @@ workspaces.
 | `dmzr_weight/` | DreamZero FBFM state-weight diagnosis and proportional-gain search | Includes the valid 240-episode Pro6000 `kp` comparison |
 | `dmzr_weight/formal_libero40_fbfm_kp00486968_20_a051933/` | DreamZero FBFM on the four selected LIBERO suites with selected `kp` | Complete; 566/800 (70.75%) |
 | `dmzr_weight/formal_libero40_none_20_cb08c9e/` | DreamZero NONE on the same four selected LIBERO suites | Complete; 561/800 (70.125%) |
+| `dmzr_weight/formal_libero40_fbfm_l1mass_20_cb08c9e/` | DreamZero FBFM before separate `kp` optimization | **Archived/superseded; excluded from manuscript statistics**; 553/800 (69.125%) |
 | `wan2.2_real_video/` | Wan2.2 Base versus visual-only FBFM on real videos | RealSense ball-stopping package complete; includes videos, frames, audits, and runtime snapshot |
 
 The CPU snapshots use only cells satisfying

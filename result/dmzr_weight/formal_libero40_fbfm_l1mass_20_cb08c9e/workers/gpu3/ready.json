@@ -1,0 +1,19 @@
+{
+  "status": "ready",
+  "mode": "FBFM",
+  "host": "127.0.0.1",
+  "port": 18903,
+  "state_weight": 0.005833333333333334,
+  "diagnostic_vjp": false,
+  "load": {
+    "cpu_load_seconds": 231.72260483400896,
+    "parameter_count": 12624368637,
+    "parameter_bytes": 25248737274,
+    "dtype": "torch.bfloat16",
+    "device": "cuda:0",
+    "gpu_move_seconds": 14.774345824029297,
+    "gpu_name": "NVIDIA H100 80GB HBM3",
+    "gpu_allocated_bytes": 25267111936,
+    "gpu_peak_allocated_bytes": 25267111936
+  }
+}
