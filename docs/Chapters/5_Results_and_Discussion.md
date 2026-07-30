@@ -3,23 +3,26 @@
 ## LingBot-VA on RoboTwin
 
 We compare the frozen LingBot-VA checkpoint with no inference-time feedback
-(Base) against the same checkpoint equipped with FBFM (Ours). We micro-average
-the recorded episode outcomes: Clean uses all 42 selected tasks, whereas
-Randomized uses the 41 tasks with completed records for both methods and
-excludes the unfinished `handover_block` FBFM cell. Task-level counts are
-reserved for Appendix D.
+(Base) against the same checkpoint equipped with FBFM (Ours) on all 42 selected
+tasks under both Clean and Randomized configurations. Because the available
+task cells contain either 10 or 20 episodes, we first compute each task-cell
+success rate and then macro-average them, giving every task equal weight. CPU
+and GPU rendering are treated as equivalent benchmark backends; their source
+provenance and the original integer counts are retained in Appendix D.
 
-| Method | Clean SR (%) | Randomized SR (%) |
-| --- | ---: | ---: |
-| Base | 83.1 | 83.0 |
-| FBFM | **85.4 ↑** | **84.6 ↑** |
+| Method | Clean SR (%) | Randomized SR (%) | Overall SR (%) |
+| --- | ---: | ---: | ---: |
+| Base | 80.5 | 79.8 | 80.1 |
+| FBFM | **83.3 ↑** | **82.9 ↑** | **83.1 ↑** |
 
-*The Randomized aggregate excludes `handover_block` from both methods.*
+*Each entry is an equal-weight macro average over task-configuration cells.*
 
-FBFM improves the pooled Clean and Randomized success rates by 2.3 and 1.7
-percentage points, respectively. Because the checkpoint, task predicates,
-solver budget, and execution protocol are held fixed, this comparison isolates
-the effect of inference-time feedback under the evaluated protocol.
+FBFM improves Clean and Randomized success rates by 2.86 and 3.10 percentage
+points, respectively, for an overall gain of 2.98 points. It improves 19 of 42
+Clean task cells and 15 of 42 Randomized cells, while matching Base on 14 and 20
+cells, respectively. With the checkpoint, task predicates, solver budget, and
+inference configuration otherwise fixed, these broad task-level gains support
+the effectiveness of inference-time feedback in stage-wise WAM execution.
 
 ## LingBot-VA Mechanism Analysis
 

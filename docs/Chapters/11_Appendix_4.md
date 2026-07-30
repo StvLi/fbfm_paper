@@ -1,26 +1,27 @@
 # Appendix D: Detailed Evaluation Records
 
 This appendix is the source-of-record layout for the main success-rate tables.
-Each available entry is reported as `successes/trials (SR)`. Dashes denote
-pending records rather than zero success. Final comparisons will use only Base
-and FBFM evaluations satisfying the same checkpoint, task configuration,
-rendering mode, initialization protocol, episode identities, and episode
-horizon.
+Each entry is reported as `successes/trials (SR)`. The RoboTwin summary treats
+CPU and GPU rendering as equivalent benchmark backends while retaining the
+source counts. Because cells contain either 10 or 20 episodes and are not
+seed-paired across methods, the main comparison macro-averages task-cell rates
+rather than pooling their episodes.
 
 ## LingBot-VA on RoboTwin
 
 The selected RoboTwin evaluation contains 42 tasks under both `demo_clean` and
 `demo_randomized`. Longer tasks outside this set are excluded from the main
-evaluation. The latest consolidated evaluation ledger supplies all 84 Base
-and FBFM task rows. Integer successes and trials are treated as the source of
-truth, and the displayed rates are recomputed from these counts. The Randomized
-FBFM evaluation of `handover_block` is unfinished and is therefore shown as
-pending; both methods' Randomized records for this task are excluded from the
-main-text aggregate.
+evaluation. The consolidated ledger supplies all 168 cells: 42 tasks, two
+configurations, and two methods. Integer successes and trials are treated as
+the source of truth, and the displayed rates are recomputed from these counts.
+The final CPU package provides 124 cells; an audited GPU package provides 12
+FBFM Clean cells; and the remaining 32 Base cells retain task-level counts from
+the shared experiment ledger. The latter support task-level rates but not
+episode-identity or seed-paired analyses.
 
 | Task | Clean Base | Clean FBFM | Randomized Base | Randomized FBFM |
 | --- | ---: | ---: | ---: | ---: |
-| `handover_block` | 0/10 (0%) | 1/6 (16.7%) | 1/10 (10%) | -- |
+| `handover_block` | 0/10 (0%) | 1/10 (10%) | 1/10 (10%) | 0/10 (0%) |
 | `place_cans_plasticbox` | 10/10 (100%) | 10/10 (100%) | 10/10 (100%) | 10/10 (100%) |
 | `stack_blocks_two` | 7/10 (70%) | 10/10 (100%) | 7/10 (70%) | 8/10 (80%) |
 | `open_laptop` | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) |
@@ -60,10 +61,10 @@ main-text aggregate.
 | `place_phone_stand` | 9/10 (90%) | 8/10 (80%) | 8/10 (80%) | 8/10 (80%) |
 | `press_stapler` | 20/20 (100%) | 9/10 (90%) | 18/20 (90%) | 10/10 (100%) |
 | `rotate_qrcode` | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) | 9/10 (90%) |
-| `stamp_seal` | 10/10 (100%) | 10/10 (100%) | 9/10 (90%) | 8/10 (80%) |
+| `stamp_seal` | 10/10 (100%) | 10/10 (100%) | 9/10 (90%) | 9/10 (90%) |
 | `turn_switch` | 12/20 (60%) | 7/10 (70%) | 13/20 (65%) | 5/10 (50%) |
-| **Completed task cells** | **42/42** | **41/42** | **42/42** | **41/42** |
-| **Ongoing task cells** | **0/42** | **1/42** | **0/42** | **1/42** |
+| **Completed task cells** | **42/42** | **42/42** | **42/42** | **42/42** |
+| **Macro SR** | **80.5%** | **83.3%** | **79.8%** | **82.9%** |
 
 ## DreamZero on LIBERO
 

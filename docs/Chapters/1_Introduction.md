@@ -74,6 +74,6 @@ This paper makes three contributions:
 2. We introduce FBFM, a training-free masked pseudoinverse-guidance mechanism that
    combines dynamic latent-state feedback with fixed cross-chunk action
    consistency while keeping the pretrained WAM frozen.
-3. We instantiate FBFM in both stage-wise and joint-generation WAMs and evaluate
-   its effectiveness on selected LIBERO and RoboTwin tasks and in physical robot
-   deployment.
+3. We instantiate FBFM in both stage-wise and joint-generation WAMs, evaluate
+   it on selected LIBERO and RoboTwin tasks, and study state tracking on
+   observation sequences recorded from a physical robot task.

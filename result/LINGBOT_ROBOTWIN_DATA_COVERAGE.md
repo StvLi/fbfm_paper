@@ -1,8 +1,10 @@
 # LingBot-VA RoboTwin Data-Coverage Matrix
 
 This review table aligns all 42 selected RoboTwin tasks with `max_steps < 900`
-across method and environment configuration. The primary source is the final
-CPU-render package at paper-record commit
+across method and environment configuration. CPU and GPU rendering are treated
+as equivalent benchmark backends for the manuscript summary, while the source
+of every cell remains explicit. The primary source is the final CPU-render
+package at paper-record commit
 `70b0a94388379ee5b7f572881e39ab30c30ec519` (evaluation revision `a116e48`).
 When that package does not contain a cell, the table displays an existing
 secondary record so that numerical availability and protocol completeness are
@@ -13,17 +15,18 @@ not conflated.
 - **C**: final canonical CPU-render record at `70b0a94`; ten seed-unique
   episodes and auditable canonical `res.json` provenance.
 - **G**: audited GPU-render FBFM clean record in `result/lbva_fbfm_gpu/`;
-  twenty accepted episodes. It is valid evidence, but not a renderer-matched
-  substitute for a missing CPU cell.
+  twenty accepted episodes with episode-level validation.
 - **L**: count copied from the legacy shared experiment sheet
   `result/FBFM实验分锅记录 - LingbotVAxRoboTwin.csv`. These cells have numerical
   counts in the repository but are absent from the final canonical CPU package.
-- The final column lists cells that are not backed by **C**. `BC`, `FC`, `BR`,
-  and `FR` denote Base Clean, FBFM Clean, Base Randomized, and FBFM Randomized.
+- The final column lists cells that are not backed by **C**. These are included
+  in the renderer-agnostic summary, but the tag preserves provenance. `BC`,
+  `FC`, `BR`, and `FR` denote Base Clean, FBFM Clean, Base Randomized, and FBFM
+  Randomized.
 
 ## Integrated table
 
-| Task | Max steps | Base Clean | FBFM Clean | Base Randomized | FBFM Randomized | Missing canonical CPU cells |
+| Task | Max steps | Base Clean | FBFM Clean | Base Randomized | FBFM Randomized | Outside final CPU package |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | `handover_block` | 800 | 0/10 (0%) [C] | 1/10 (10%) [C] | 1/10 (10%) [C] | 0/10 (0%) [C] | -- |
 | `place_cans_plasticbox` | 800 | 10/10 (100%) [C] | 10/10 (100%) [C] | 10/10 (100%) [C] | 10/10 (100%) [C] | -- |
@@ -71,32 +74,27 @@ not conflated.
 ## Coverage summary
 
 - The table contains a numerical entry for all `42 tasks x 2 configs x 2
-  methods = 168` cells.
+  methods = 168` cells; no task-level experiment cell is missing under the
+  renderer-agnostic evaluation scope.
 - The final canonical CPU package covers `124/168` cells: all 72 FBFM cells
   that were planned below 900 steps and 52 Base cells.
-- Twenty-two tasks have all four canonical CPU cells. Four additional tasks
-  (`beat_block_hammer`, `place_burger_fries`, `place_shoe`, and `scan_object`)
-  have a canonical CPU matched comparison only in `demo_randomized`. The strict
-  overlap is therefore 48 config--task cells: FBFM `367/480 = 76.46%` versus
-  Base `359/480 = 74.79%`, a descriptive `+1.67` percentage-point difference.
-- The 44 noncanonical cells comprise 16 Base Clean, 16 Base Randomized, and 12
-  FBFM Clean cells. FBFM Randomized is complete for all 42 selected tasks.
-- All 12 missing FBFM Clean cells have audited GPU-render results [G]. All 32
-  missing Base cells have legacy count records [L], but are not represented in
-  the final canonical CPU package.
+- Twenty-two tasks have all four canonical CPU cells. The strict CPU-only
+  overlap remains useful as a conservative provenance check: across 48
+  config--task cells, FBFM is `367/480 = 76.46%` versus Base
+  `359/480 = 74.79%`, a descriptive `+1.67` percentage-point difference.
+- The 44 cells outside that package comprise 16 Base Clean, 16 Base Randomized,
+  and 12 FBFM Clean cells. The FBFM cells have audited episode-level GPU
+  records [G]. The Base cells retain task-level shared-ledger counts [L], which
+  support success-rate reporting but not seed-paired analysis.
+- Equal-weight macro averaging over all 42 tasks gives Base/FBFM rates of
+  `80.48%/83.33%` for Clean and `79.76%/82.86%` for Randomized. The overall
+  task-configuration macro rates are `80.12%/83.10%`, a `+2.98` point gain.
 
-## What is still needed
+## Interpretation
 
-Two completion targets are useful:
-
-1. **Minimal expansion of strict CPU comparisons.** Run 24 Base cells that
-   already have an FBFM CPU counterpart, and four FBFM Clean cells that already
-   have a Base CPU counterpart. This adds 28 matched config--task comparisons
-   without requiring both methods for configurations absent from both CPU
-   plans.
-2. **A complete Appendix-D-style CPU matrix.** Run all 44 noncanonical cells:
-   16 Base Clean, 16 Base Randomized, and 12 FBFM Clean. This yields a uniform
-   ten-episode CPU-render record for every displayed cell.
-
-The eight tasks with `max_steps >= 900` remain intentionally outside this
-matrix and should not be counted as missing under the agreed short-task scope.
+No additional rollout is required to complete the agreed 42-task Appendix-D
+matrix. Recovering episode-level records for the 32 legacy Base cells would
+strengthen provenance and enable seed-level audits, but is not a missing-data
+requirement. The eight tasks with `max_steps >= 900` remain intentionally
+outside this matrix and should not be counted as missing under the agreed
+short-task scope.

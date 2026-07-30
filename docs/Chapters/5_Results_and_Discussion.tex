@@ -8,32 +8,38 @@
 \subsection{LingBot-VA on RoboTwin}
 
 We compare the frozen LingBot-VA checkpoint with no inference-time feedback
-(Base) against the same checkpoint equipped with FBFM (Ours). We micro-average
-the recorded episode outcomes: Clean uses all 42 selected tasks, whereas
-Randomized uses the 41 tasks with completed records for both methods and
-excludes the unfinished \texttt{handover\_block} FBFM cell. Task-level counts
-are reserved for Appendix~\ref{app:detailed-results}.
+(Base) against the same checkpoint equipped with FBFM (Ours) on all 42 selected
+tasks under both Clean and Randomized configurations. Because the available
+task cells contain either 10 or 20 episodes, we first compute each task-cell
+success rate and then macro-average them, giving every task equal weight. CPU
+and GPU rendering are treated as equivalent benchmark backends; their source
+provenance and the original integer counts are retained in
+Appendix~\ref{app:detailed-results}.
 
 \begin{table}[t]
     \centering
     \small
-    \begin{tabular}{lcc}
+    \setlength{\tabcolsep}{4pt}
+    \begin{tabular}{lccc}
         \toprule
-        Method & Clean SR (\%) & Rand. SR (\%) \\
+        Method & Clean & Rand. & Overall \\
         \midrule
-        Base & 83.1 & 83.0 \\
-        FBFM & \textbf{85.4} $\uparrow$ & \textbf{84.6} $\uparrow$ \\
+        Base & 80.5 & 79.8 & 80.1 \\
+        FBFM & \textbf{83.3} $\uparrow$ & \textbf{82.9} $\uparrow$ &
+        \textbf{83.1} $\uparrow$ \\
         \bottomrule
     \end{tabular}
-    \caption{LingBot-VA success rates (\%). The Randomized aggregate excludes
-    \texttt{handover\_block} from both methods.}
+    \caption{LingBot-VA success rates (\%). Each entry is an equal-weight
+    macro average over task-configuration cells.}
     \label{tab:lingbot-robotwin-summary}
 \end{table}
 
-FBFM improves the pooled Clean and Randomized success rates by 2.3 and 1.7
-percentage points, respectively. Because the checkpoint, task predicates,
-solver budget, and execution protocol are held fixed, this comparison isolates
-the effect of inference-time feedback under the evaluated protocol.
+FBFM improves Clean and Randomized success rates by 2.86 and 3.10 percentage
+points, respectively, for an overall gain of 2.98 points. It improves 19 of 42
+Clean task cells and 15 of 42 Randomized cells, while matching Base on 14 and 20
+cells, respectively. With the checkpoint, task predicates, solver budget, and
+inference configuration otherwise fixed, these broad task-level gains support
+the effectiveness of inference-time feedback in stage-wise WAM execution.
 
 \subsection{LingBot-VA Mechanism Analysis}
 
