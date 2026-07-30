@@ -91,8 +91,3 @@ constrain the active frame chunk beyond pure open-loop prediction. Appendix F
 separately analyzes the behavior observed when state feedback covers only a
 limited prefix of the generated video and treats the resulting large-area
 artifacts as a Wan2.2-specific codec/backbone mismatch hypothesis.
-
-![Real-world robot-arm ball-stopping observation prediction. The RGB sequence
-was recorded from a physical robot task with a RealSense D435i. Columns show 0,
-0.25, 0.5, 1, 2, 3, 4, and 5 s; rows show the recorded reference, Wan2.2 Base
-without feedback, and FBFM using all 30 measured latent slots.](../../material/wan2.2/robot_arm_ball_stop_keyframes.jpg)
