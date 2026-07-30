@@ -8,3 +8,5 @@ result/lbva_fbfm_auxiliary_mechanism/aggregate/*.json text eol=lf
 result/lbva_fbfm_auxiliary_mechanism/control/*.py text eol=lf
 result/lbva_fbfm_auxiliary_mechanism/figures/*.png binary
 result/lbva_fbfm_auxiliary_mechanism/figures/*.pdf binary
+result/lbva_fbfm_auxiliary_mechanism/publication_visualization/data/derived/*.csv -text whitespace=cr-at-eol
+result/lbva_fbfm_auxiliary_mechanism/publication_visualization/data/source/*.csv -text whitespace=cr-at-eol
