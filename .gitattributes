@@ -1,0 +1,10 @@
+.gitattributes text eol=lf
+result/README.md text eol=lf
+result/lbva_fbfm_auxiliary_mechanism/*.md text eol=lf
+result/lbva_fbfm_auxiliary_mechanism/*.json text eol=lf
+result/lbva_fbfm_auxiliary_mechanism/SHA256SUMS text eol=lf
+result/lbva_fbfm_auxiliary_mechanism/aggregate/*.csv -text whitespace=cr-at-eol
+result/lbva_fbfm_auxiliary_mechanism/aggregate/*.json text eol=lf
+result/lbva_fbfm_auxiliary_mechanism/control/*.py text eol=lf
+result/lbva_fbfm_auxiliary_mechanism/figures/*.png binary
+result/lbva_fbfm_auxiliary_mechanism/figures/*.pdf binary

@@ -12,6 +12,7 @@ workspaces.
 | `lbva_fbfm/` | LingBot-VA with FBFM on RoboTwin, CPU rendering | Original 45-cell snapshot plus a seed-audited under-900 follow-up |
 | `lbva_fbfm_gpu/` | LingBot-VA with FBFM on RoboTwin `demo_clean`, GPU rendering | 12 complete tasks, 216/240 successes |
 | `lbva_rtc/` | LingBot-VA with RTC on RoboTwin `demo_clean`, GPU rendering | 12 complete tasks, 223/240 successes |
+| `lbva_fbfm_auxiliary_mechanism/` | LingBot-VA FBFM state/action mechanism pilot on RoboTwin | 4 paired units and 8 cache-intervention probes; no added rollouts |
 | `dmzr_weight/` | DreamZero FBFM state-weight diagnosis and proportional-gain search | Includes the valid 240-episode Pro6000 `kp` comparison |
 | `dmzr_weight/formal_libero40_fbfm_kp00486968_20_a051933/` | DreamZero FBFM on the four selected LIBERO suites with selected `kp` | Complete; 566/800 (70.75%) |
 | `dmzr_weight/formal_libero40_none_20_cb08c9e/` | DreamZero NONE on the same four selected LIBERO suites | Complete; 561/800 (70.125%) |

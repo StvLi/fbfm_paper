@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "paired_probe_count": 4,
+  "independent_task_trial_units": 4,
+  "wave0_frame_units": 4,
+  "state_integrity_passed": true
+}

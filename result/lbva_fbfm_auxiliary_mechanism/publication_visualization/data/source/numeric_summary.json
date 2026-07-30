@@ -1,0 +1,76 @@
+{
+  "action": {
+    "cache_branch_velocity_curve_auc": 0.8941979877417907,
+    "denoising_solver_steps": 51,
+    "final_action_signal_to_repeat_ratio_of_means": 7.385768560153019,
+    "fresh_action_values_per_probe": 256,
+    "independent_task_trial_units": 4,
+    "mean_cache_branch_final_action_rms": 0.008899918291717768,
+    "mean_repeat_floor_final_action_rms": 0.0012050090954289772,
+    "mean_signal_above_mean_floor_steps": 51,
+    "peak_mean_cache_branch_velocity_rms": 0.10244380217045546,
+    "peak_mean_cache_branch_velocity_step": 49,
+    "probes_per_unit": 2,
+    "repeat_floor_velocity_curve_auc": 0.35474706316017546,
+    "repeated_probes": 8,
+    "unit_ratio_range": [
+      4.8817924549294585,
+      9.594101398139935
+    ],
+    "velocity_curve_auc_ratio": 2.5206635391877574
+  },
+  "claim_limit": "Four independent task-by-trial units; wave-0 state comparison is strict. Later-wave trends are descriptive and RGB is a sensitivity check.",
+  "input_sha256": {
+    "formal/fbfm/adjust_bottle/client/stseed-10000/metrics/adjust_bottle/res.json": "0884dcfd53e3f40d9f0a56506214c0a45a4e200826cb0ccc397e90ef24338aeb",
+    "formal/fbfm/pick_diverse_bottles/client/stseed-10000/metrics/pick_diverse_bottles/res.json": "0c02335ebe88b67e1b1fbab5c89e52dcba299002a1dcbce487723b615c8bf890",
+    "formal/fbfm_cachecut/adjust_bottle/client/stseed-10000/metrics/adjust_bottle/res.json": "710139dbcd2210db045d63903ac039c0ed458401ea3d8b6a897f2bdde3dd22ef",
+    "formal/fbfm_cachecut/pick_diverse_bottles/client/stseed-10000/metrics/pick_diverse_bottles/res.json": "7e90552a2a5e24ab6b8a6cfbafc544d20ffaefd6512f21e49631ce88e179c19d",
+    "numeric_mechanism_v1/aggregate/paired_next_slot_latent_mse.csv": "f0fc2e81f1003ea8c78c92f57d20231f38aff7c60f71819d967204e3100451e7",
+    "numeric_mechanism_v1/aggregate/state_integrity.csv": "f43f01d4ce79cc833998d7dcff35ddf8043541c9190ca89651a7ee401684fcf1",
+    "numeric_mechanism_v1/aggregate/wave0_future_frame_mse.csv": "c28ff0669252bd76c0fc8023006a3d0e9155babe8aed45b43ce2e282cb598019",
+    "rtc_rerun_paired_v1/adjust_bottle/client/stseed-10000/metrics/adjust_bottle/res.json": "e0f593a993e0a3a8924060b11947a17875863b3ef1fa6e845053574bbf3815a7",
+    "rtc_rerun_paired_v1/pick_diverse_bottles/client/stseed-10000/metrics/pick_diverse_bottles/res.json": "26372fd63833d35684cc5bdc63f1e3688b33e40b3e03ad5a101105e899dd0bdf"
+  },
+  "one_step_trend": {
+    "fbfm_lower_mse_unit_waves": 34,
+    "mean_rtc_minus_fbfm_mse_all_unit_waves": 0.001234024085781791,
+    "paired_unit_waves": 44,
+    "post_wave0_scope": "descriptive own-trajectory one-step prediction; histories have diverged",
+    "rtc_lower_mse_unit_waves": 10,
+    "source_wave_range": [
+      0,
+      23
+    ],
+    "strictly_paired_wave0_units": 4
+  },
+  "rgb_sensitivity": {
+    "cameras_per_frame": 3,
+    "fbfm_higher_or_equal_rgb_mse_unit_horizons": 10,
+    "fbfm_lower_rgb_mse_unit_horizons": 6,
+    "frames_per_next_state_slot": 4,
+    "independent_units": 4,
+    "interpretation": "decoded RGB sensitivity check; not the cache representation metric",
+    "unit_horizons": 16
+  },
+  "schema_version": 1,
+  "state": {
+    "absolute_mean_mse_reduction": 0.007685050368309021,
+    "enumerated_unit_bootstrap_95pct_interval": [
+      0.002579227089881897,
+      0.013867765665054321
+    ],
+    "fbfm_higher_cosine_units": 4,
+    "fbfm_higher_mse_units": 0,
+    "fbfm_lower_mse_units": 4,
+    "fbfm_mean_cosine_similarity": 0.5301253348588943,
+    "fbfm_mean_normalized_latent_mse": 0.6751488000154495,
+    "independent_units": 4,
+    "mean_cosine_improvement": 0.005259692668914795,
+    "mean_paired_mse_reduction": 0.007685050368309021,
+    "paired_sign_test_two_sided_p": 0.125,
+    "relative_mean_mse_reduction": 0.011254641760934898,
+    "rtc_mean_cosine_similarity": 0.5248656421899796,
+    "rtc_mean_normalized_latent_mse": 0.6828338503837585,
+    "selected_latent_values_per_record": 23040
+  }
+}

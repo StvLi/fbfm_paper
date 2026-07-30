@@ -1,0 +1,17 @@
+{
+  "audit_date": "2026-07-29",
+  "repository": "C:\\Users\\zhang\\Documents\\GitHub\\fbfm_paper",
+  "initial": {
+    "head": "c1eb1342afeda715fe89f6f545949b6f850bc07d",
+    "porcelain_status": "clean",
+    "target_commit_present": false
+  },
+  "final": {
+    "head": "c1eb1342afeda715fe89f6f545949b6f850bc07d",
+    "porcelain_status": "clean",
+    "target_commit_present": false
+  },
+  "target_commit": "ebba5a7e456f58036e3715115f20d5d7b8fb166a",
+  "target_retrieval": "isolated mirror under the deliverable input directory",
+  "repository_writes_performed": false
+}
