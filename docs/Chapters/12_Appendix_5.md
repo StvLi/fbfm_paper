@@ -20,7 +20,22 @@ loop gain. Neither \(P_Z\) nor \(k_p\) changes the action-overlap residual.
 The off-diagonal blocks of the local joint endpoint Jacobian can transmit
 corrections in both directions and may partially compensate dimensional scale
 differences. They do not include the generally nonlinear physical transition
-\(P(s_{t+1}\mid s_t,a_t)\). Consequently, reciprocal scaling inside one solver
+\(P(s_{t+1}\mid s_t,a_t)\). The relevant closed loop is
+
+\[
+\mathbf e_t^Z
+\xrightarrow{\mathbf J_{ZA}^{\mathsf T}}
+\Delta\mathbf A_t
+\longrightarrow a_t
+\xrightarrow{P(\cdot\mid s_t,a_t)}
+s_{t+1}
+\xrightarrow{\mathcal O,E}
+z_{t+1}
+\longrightarrow \mathbf e_{t+1}^Z.
+\]
+
+The environment branch is delayed, nonlinear, and generally not the inverse of
+the opposite Jacobian block. Consequently, reciprocal scaling inside one solver
 linearization does not guarantee stability after actions are executed and their
 consequences return as later state measurements.
 

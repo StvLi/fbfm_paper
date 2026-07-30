@@ -17,28 +17,22 @@ reserved for Appendix D.
 *The Randomized aggregate excludes `handover_block` from both methods.*
 
 FBFM improves the pooled Clean and Randomized success rates by 2.3 and 1.7
-percentage points, respectively. Since the checkpoint, task predicates, solver
-budget, and execution protocol are held fixed, the improvement is attributable
-to the inference-time feedback mechanism itself rather than additional
-training or a stronger base policy.
+percentage points, respectively. Because the checkpoint, task predicates,
+solver budget, and execution protocol are held fixed, this comparison isolates
+the effect of inference-time feedback under the evaluated protocol.
 
 ## LingBot-VA Mechanism Analysis
 
-The following figure evaluates the two internal links isolated by the
-auxiliary diagnostic. Across all four paired task--trial units, FBFM reduces
-the wave-0 next-state latent MSE, lowering the mean from 0.6828 to 0.6751
-(1.13%). This verifies that masked feedback changes the latent state prediction
-in the intended direction. Switching only the installed RTC versus FBFM cache
-then changes the normalized fresh action by RMS 0.00890, compared with a
-same-cache repeat floor of 0.001205, a 7.39x ratio, showing that the refreshed
-latent state context propagates to the final action prediction. The
-cache-switch velocity also remains above the mean repeat floor at all 51
-action-solver steps, with a 2.52x AUC ratio; the action difference is therefore
-introduced through the flow-matching velocity field rather than appearing only
-as a terminal decoding artifact. These results support the computation-level
-path from encoded state feedback through the refreshed cache to action
-generation; with only four independent units, they are mechanism evidence
-rather than a task-success claim.
+The following figure evaluates the two internal links isolated by the auxiliary
+diagnostic. Across four paired task--trial units, FBFM lowers the wave-0
+next-state latent MSE from 0.6828 to 0.6751 (1.13%). Switching only the
+installed RTC versus FBFM cache changes the normalized fresh action by RMS
+0.00890, 7.39x the same-cache repeat floor. The corresponding velocity
+difference remains above that floor throughout all 51 action-solver steps and
+has a 2.52x AUC ratio. Together, these observations trace the intended path
+from state feedback to latent prediction, flow velocity, and final action.
+Because the diagnostic contains four independent units, it is mechanism
+evidence rather than a task-success claim.
 
 ![LingBot-VA mechanism diagnostic. Panel (a) reports paired wave-0 next-state
 latent MSE; panel (b) compares fresh-action RMS under a same-cache repeat and an
@@ -68,62 +62,15 @@ Across all 800 episodes, the pooled success rate increases by 0.625 points. We
 therefore interpret the current result as a modest aggregate gain with
 heterogeneous suite-level effects rather than a uniform improvement. A likely
 reason is DreamZero's accelerated inference design: one native model evaluation
-is reused across multiple Euler-style solver updates. Our implementation keeps
-this schedule and recomputes FBFM residuals from the newest \(\mathbf Z\) and
-\(\mathbf A\), but it must reuse the latest native velocity and endpoint
-Jacobian between refreshed DiT evaluations. This amortization preserves
-DreamZero's fast execution but can damp or delay the corrective effect of newly
-arrived feedback.
-
-## State-Feedback Gain and Closed-Loop Stability
-
-For a joint WAM, the two off-diagonal endpoint-Jacobian blocks couple state and
-action coordinates in opposite directions. Within one local linearization, the
-dimension-induced gains of these two paths may partially offset. This algebraic
-possibility does not imply stable closed-loop execution, because an action also
-changes the next state through the physical Markov transition rather than only
-through the WAM Jacobian:
-
-\[
-\mathbf e_t^Z
-\xrightarrow{\mathbf J_{ZA}^{\mathsf T}}
-\Delta\mathbf A_t
-\longrightarrow a_t
-\xrightarrow{P(\cdot\mid s_t,a_t)}
-s_{t+1}
-\xrightarrow{\mathcal O,E}
-z_{t+1}
-\longrightarrow \mathbf e_{t+1}^Z.
-\]
-
-The environment branch is delayed, nonlinear, and generally not the inverse of
-the opposite Jacobian block; an over-large state correction can therefore make
-the physical feedback loop unstable even when the local Jacobian terms look
-scale-balanced. We therefore balance the state residual before its VJP using a
-modality preconditioner \(P_Z\), and tune a separate proportional gain \(k_p\):
-
-\[
-\mathbf e_t^Z
-=k_p P_Z\mathbf W_t^Z
-(\mathbf Y_t^Z-\hat{\mathbf Z}_t^1),
-\qquad P_Z=56/9600.
-\]
-
-With \(P_Z\) fixed, the final three candidates were evaluated on the same eight
-LIBERO tasks and ten initial states per task. LIBERO-90 is excluded because the
-checkpoint was not trained on that suite.
-
-| \(k_p\) | Effective state weight \(k_p P_Z\) | Success | SR (%) |
-| ---: | ---: | ---: | ---: |
-| 0.0316 | \(1.84\times10^{-4}\) | 56/80 | 70 |
-| **0.0487** | **\(2.84\times10^{-4}\)** | **64/80** | **80** |
-| 0.0750 | \(4.37\times10^{-4}\) | 60/80 | 75 |
-
-We retain the middle value, which attained the highest tested success rate
-(80%). Its 10-point gain over the lower value was marginal (\(p=0.0768\), exact
-two-sided McNemar), and its five-point gain over the upper value was not
-significant (\(p=0.5034\)). Thus this sweep shows gain sensitivity, not a
-universal optimum; Appendix E gives the full search and task-level results.
+is reused across multiple solver updates. FBFM recomputes its residual from the
+current \(\mathbf Z\) and \(\mathbf A\), but reuses the latest native velocity
+and endpoint Jacobian between DiT evaluations; this amortization can damp or
+delay new corrections. Joint feedback is also sensitive to the relative scale
+of its state and action residuals. We therefore use modality preconditioning
+and a separately calibrated proportional gain. Appendix E contains the
+closed-loop motivation, configuration search, and task-level sensitivity
+analysis; the selected value is an operational setting rather than a universal
+optimum.
 
 ## Real-World Robot Observation Prediction
 

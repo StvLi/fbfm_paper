@@ -52,11 +52,12 @@ Rather than selecting only a single action, a WAM predicts future latent states 
 actions over a horizon $H$. Starting at time $t$, we denote its predicted latent
 and action chunks by
 \begin{equation}
+    \begin{aligned}
     \hat{\mathbf{Z}}_{t,H}
-    = (\hat z_{t+1},\ldots,\hat z_{t+H}),
-    \qquad
+    &= (\hat z_{t+1},\ldots,\hat z_{t+H}),\\
     \hat{\mathbf{A}}_{t,H}
-    = (\hat a_t,\ldots,\hat a_{t+H-1}),
+    &= (\hat a_t,\ldots,\hat a_{t+H-1}),
+    \end{aligned}
     \label{eq:wam-prediction-chunks}
 \end{equation}
 with the generic predictive model
@@ -83,6 +84,8 @@ We distinguish an individual variable at one environment step from a chunk spann
 multiple steps. An action
 $a_t\in\mathbb{R}^{d_a}$ is a single control command at environment time $t$,
 whereas
+\begingroup
+\small
 \begin{equation}
     \mathbf{A}_t
     = [a_t^{\mathsf T},a_{t+1}^{\mathsf T},\ldots,
@@ -91,9 +94,12 @@ whereas
     \qquad D_A=H d_a,
     \label{eq:action-chunk}
 \end{equation}
+\endgroup
 is the time-stacked action vector of horizon $H$. Similarly,
 $z_t\in\mathcal{Z}\subseteq\mathbb R^{d_z}$ denotes the single-step latent state
 defined above, while
+\begingroup
+\small
 \begin{equation}
     \mathbf{Z}_t
     = [z_{t+1}^{\mathsf T},z_{t+2}^{\mathsf T},\ldots,
@@ -102,6 +108,7 @@ defined above, while
     \qquad D_Z=H d_z,
     \label{eq:latent-chunk}
 \end{equation}
+\endgroup
 denotes the time-stacked future latent-state vector aligned with the action horizon.
 Bold uppercase symbols therefore denote chunk-level vectors throughout the paper.
 We use
@@ -165,10 +172,7 @@ velocity with the same dimension as $\mathbf{X}_t$. It is trained using
 \begin{equation}
     \mathcal{L}_{\mathrm{FM}}(\theta)
     =
-    \mathbb{E}_{\substack{
-        (\mathcal{H}_t,\mathbf{X}_t)\sim\mathcal{D},\,
-        \boldsymbol{\epsilon}\sim\mathcal{N}(\mathbf{0},\mathbf{I}),\,
-        \tau\sim p(\tau)}}
+    \mathbb{E}
     \left[
         \left\|
         v_\theta(\mathbf{X}_t^\tau,\tau;\mathcal{H}_t)
@@ -178,24 +182,30 @@ velocity with the same dimension as $\mathbf{X}_t$. It is trained using
     \right],
     \label{eq:flow-matching-objective}
 \end{equation}
-where $p(\tau)$ is a chosen flow-time sampling distribution. Uniform sampling is
-the standard choice, while non-uniform schedules may emphasize particular noise
-levels.
+where the expectation is over
+$(\mathcal H_t,\mathbf X_t)\sim\mathcal D$,
+$\boldsymbol\epsilon\sim\mathcal N(\mathbf 0,\mathbf I)$, and
+$\tau\sim p(\tau)$. Uniform sampling is the standard choice, while non-uniform
+schedules may emphasize particular noise levels.
 
 At inference time, generation starts from
 $\mathbf{X}_t^0\sim\mathcal{N}(\mathbf{0},\mathbf{I})$ and solves the conditional
 ordinary differential equation
+\begingroup
+\small
 \begin{equation}
+    \begin{aligned}
     \frac{\mathrm{d}\mathbf{X}_t^\tau}{\mathrm{d}\tau}
-    = v_\theta(\mathbf{X}_t^\tau,\tau;\mathcal{H}_t),
-    \qquad
+    &= v_\theta(\mathbf{X}_t^\tau,\tau;\mathcal{H}_t),\\
     \hat{\mathbf{X}}_t
-    = \mathbf{X}_t^0
+    &= \mathbf{X}_t^0
     + \int_0^1
     v_\theta(\mathbf{X}_t^\tau,\tau;\mathcal{H}_t)\,
     \mathrm{d}\tau.
+    \end{aligned}
     \label{eq:flow-matching-ode}
 \end{equation}
+\endgroup
 For example, a forward Euler solver uses
 \begin{equation}
     \mathbf{X}_t^{\tau_{k+1}}

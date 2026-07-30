@@ -16,22 +16,23 @@ confirming that the state constraints affect the generated trajectory. The
 principal failure mode is instead the large-area corruption that develops after
 the finite feedback horizon in the 10- and 20-slot settings. Its onset moves
 later as the measured prefix is extended, while full 30-slot coverage largely
-preserves the scene structure over the evaluated horizon.
-
-\begin{figure*}[t]
-    \centering
-    \includegraphics[width=0.9\textwidth]{../material/wan2.2/slot_ablation_mae_curve.png}
-    \caption{Image-space error under finite feedback coverage. Curves report
-    the frame-wise table-region MAE, and vertical lines mark the ends of the
-    measured prefixes for the 10- and 20-slot settings.}
-    \label{fig:wan-slot-ablation-mae}
-\end{figure*}
+preserves the scene structure over the evaluated horizon. Figure~\ref{fig:wan-slot-ablation-mae}
+summarizes this image-space diagnostic.
 
 The error rise aligns closely with the end of each measured prefix: the 10-slot
 curve increases after approximately 1.67~s, the 20-slot curve after
 approximately 3.33~s, and the 30-slot curve remains low when feedback spans the
 full evaluated horizon. This curve documents a temporal association between
 feedback coverage and the failure onset, but does not identify its mechanism.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\columnwidth]{../material/wan2.2/slot_ablation_mae_curve.png}
+    \caption{Image-space error under finite feedback coverage. Curves report
+    frame-wise table-region MAE; vertical lines mark the ends of the measured
+    prefixes for the 10- and 20-slot settings.}
+    \label{fig:wan-slot-ablation-mae}
+\end{figure}
 
 One possible explanation is a Wan2.2-specific mismatch between the codec and
 the generative backbone. Pseudoinverse guidance assumes that a measurement
@@ -46,11 +47,11 @@ hypothesis: establishing the causal mechanism would require controlled
 image-/latent-space diagnostics and codec retraining experiments beyond the
 scope of this paper.
 
-\begin{figure*}[p]
+\begin{figure}[p]
     \centering
     \includegraphics[width=\textwidth]{../material/wan2.2/ball_meet_ball_fiveway_vertical.jpg}
     \caption{State-feedback coverage on the auxiliary ball-collision sequence.
     Rows show 0, 0.25, 0.5, 1, 2, 3, 4, and 5~s; columns show the reference,
     Wan2.2 Base, and FBFM with 10, 20, and 30 measured latent slots.}
     \label{fig:wan-ball-meet-ball}
-\end{figure*}
+\end{figure}

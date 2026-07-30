@@ -128,17 +128,22 @@ Define the masked encoder--decoder reconstruction error
     \right].
 \end{equation}
 The two discrepancies satisfy
+\begingroup
+\small
 \begin{equation}
+    \begin{aligned}
     \mathbf e_{\mathrm{exact}}
-    =
+    &=
     \mathbf e_{\mathrm{approx}}-\boldsymbol\delta_t,
-    \qquad
+    &
     \left\|
         \mathbf e_{\mathrm{exact}}-\mathbf e_{\mathrm{approx}}
     \right\|_2
-    =
+    &=
     \|\boldsymbol\delta_t\|_2.
+    \end{aligned}
 \end{equation}
+\endgroup
 The approximation is therefore exact whenever $h^\dagger\circ h$ is the identity
 on the mask-selected coordinates, and its discrepancy is controlled directly by the
 masked reconstruction error otherwise. This condition is plausible when feedback

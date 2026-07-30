@@ -32,6 +32,35 @@ makes them numerically inactive. This keeps the model, normalization, random
 initialization, solver budget, and pseudo-asynchronous schedule fixed within
 each architecture.
 
+Table~\ref{tab:fbfm-instantiation-settings} consolidates the principal runtime
+settings. Subsequent sections define their tensor alignment and scheduling
+semantics in detail.
+
+\begin{table}[H]
+    \centering
+    \small
+    \setlength{\tabcolsep}{6pt}
+    \begin{tabular}{lcc}
+        \toprule
+        Setting & LingBot-VA & DreamZero \\
+        \midrule
+        Generation & Stage-wise & Joint \\
+        $(H,d,s)$ & $(32,16,16)$ & $(16,8,8)$ \\
+        Predicted state slots & 2 & 2 \\
+        Guided / $J$ refreshes & $25_Z/50_A$ & 16 UniPC / 8 DiT--$J$ \\
+        Pseudo-clock release & 26 calls / 16 actions & 8 blocks / 8 actions \\
+        State-target refresh & 4 observations / latent & Every 3 actions \\
+        State preconditioner & 1 & $P_Z=56/9600$ \\
+        Proportional state gain & n/a & $k_p=0.0486968$ \\
+        Guidance clip $\beta$ & 10 & 10 \\
+        Precision & BF16 & BF16 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Runtime settings for the two FBFM instantiations. The LingBot-VA
+    pseudo-clock count includes its final cache-only video call.}
+    \label{tab:fbfm-instantiation-settings}
+\end{table}
+
 \subsection{LingBot-VA on RoboTwin}
 
 \subsubsection{Tensor and Constraint Alignment}
@@ -156,16 +185,13 @@ $\lambda(\sigma)=\min\{\sigma/(\tau r^2),\beta\}$ with $\beta=10$.
 The action block uses $P_A=1$. For concision, the effective state block of
 $\mathbf P$ in the equations above is $k_p P_Z$: $P_Z$ balances modality scale,
 while the separate proportional gain $k_p$ tunes state-feedback loop gain. The
-current experiment uses $P_Z=56/9600=0.0058333333$, which equalizes the L1 mass
-of the 56 active action coordinates and 9,600 state coordinates. This is an
-engineering preconditioner, not a theoretically optimal modality weight. The
-RMS-balanced value $\sqrt{56/9600}=0.0763763$ and the unbalanced value $1$
-remain explicit ablations. Although the implementation applies the effective
-state coefficient by scaling the stored state-mask tensor, $\mathbf W_j$,
-$P_Z$, and $k_p$ are conceptually distinct. Schedule scalars are evaluated in
-at least FP32, outputs are checked for finite values, and guided fields are
-detached after the current update. Appendix~\ref{app:dreamzero-gain-search}
-reports the gain search.
+evaluated configuration uses $P_Z=56/9600$ and $k_p=0.0486968$. Although the
+implementation applies their product by scaling the stored state-mask tensor,
+$\mathbf W_j$, $P_Z$, and $k_p$ remain conceptually distinct. Schedule scalars
+are evaluated in at least FP32, outputs are checked for finite values, and
+guided fields are detached after the current update.
+Appendix~\ref{app:dreamzero-gain-search} provides the stability motivation and
+complete parameter search.
 
 \subsubsection{Rolling Causal State Target}
 

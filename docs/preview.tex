@@ -1,6 +1,6 @@
-\documentclass[10pt]{article}
+\documentclass[10pt,twocolumn,letterpaper]{article}
 
-\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[letterpaper,margin=0.75in]{geometry}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{bm}
@@ -17,8 +17,16 @@ World-Action Models Execution}
 
 \begin{document}
 
+\makeatletter
+\twocolumn[{%
+\begin{@twocolumnfalse}
 \maketitle
 \input{Chapters/0_Abstract}
+\vspace{1.0em}
+\end{@twocolumnfalse}
+}]
+\makeatother
+
 \input{Chapters/1_Introduction}
 \input{Chapters/2_Preliminaries_and_Notations}
 \input{Chapters/3_Method}
@@ -27,6 +35,7 @@ World-Action Models Execution}
 \input{Chapters/6_Related_Works}
 \input{Chapters/7_Conclusion}
 
+\clearpage
 \begin{thebibliography}{99}
 
 \bibitem{sohl2015deep}
@@ -376,6 +385,8 @@ Team Wan et al.
 \end{thebibliography}
 
 \clearpage
+\onecolumn
+\raggedbottom
 \appendix
 \input{Chapters/8_Appendix_1}
 \clearpage

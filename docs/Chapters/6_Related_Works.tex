@@ -5,149 +5,70 @@
 
 % This file mirrors 6_Related_Works.md. Keep both versions aligned.
 % Theme 1: Generative modeling and world models.
-Diffusion and Flow Matching established iterative transport as a general interface
-for structured generation. Diffusion models learn to reverse progressive data
-corruption; DDIM and score-SDE formulations subsequently connected their samplers
-to deterministic and continuous-time probability dynamics
-\cite{sohl2015deep,ho2020denoising,song2021ddim,song2021score}. Latent diffusion
-made this process practical in a learned perceptual space
-\cite{rombach2022latent}. Flow Matching instead learns a velocity field along a
-chosen probability path, with Rectified Flow favoring straighter trajectories for
-coarser integration \cite{lipman2023flow,liu2023rectified}. Despite their
-different objectives, these methods expose intermediate generative states at which
-inference-time constraints can be introduced.
+Diffusion and Flow Matching established iterative transport as a general
+interface for structured generation
+\cite{sohl2015deep,ho2020denoising,song2021ddim,song2021score,rombach2022latent,
+lipman2023flow,liu2023rectified}. Their intermediate sampling states also admit
+inference-time constraints. RePaint conditions diffusion on known pixels, while
+$\Pi$GDM and its continuous-flow extensions propagate measurement residuals
+through a frozen generator by vector--Jacobian products
+\cite{lugmayr2022repaint,song2023pseudoinverse,pokle2024training}. This
+pseudoinverse-guided interface is the generative foundation of FBFM.
 
-The iterative sampling interface also permits partial observations to constrain
-generation at inference time. RePaint injects known pixels by modifying the
-reverse diffusion schedule without mask-specific training
-\cite{lugmayr2022repaint}. More generally, Pseudoinverse-Guided Diffusion Models
-($\Pi$GDM) use a known measurement map and its pseudoinverse to approximate a
-conditional score, then propagate the lifted measurement residual through the
-denoiser with a vector--Jacobian product \cite{song2023pseudoinverse}. This
-construction replaces a task-specific conditional generator with a measurement
-correction applied to a frozen generative prior. Pokle et al. transfer the same
-principle to pretrained continuous flows by correcting the velocity field during
-sampling, again without retraining the generator \cite{pokle2024training}. These
-two works provide the direct generative mechanism that FBFM adapts from static
-inverse problems to time-aligned state and action coordinates.
-
-Classical world models developed a complementary line based on latent dynamics and
-imagined control. Early systems compressed observations or learned visual rollouts,
-while recurrent state-space models made stochastic latent trajectories usable for
-planning and policy optimization
-\cite{ha2018world,kaiser2020simple,hafner2019planet,hafner2020dreamer}. Later work
-moved from reconstructive continuous latents toward discrete stochastic or
-task-oriented representations that retain quantities needed for planning and
-control
-\cite{hafner2021dreamerv2,schrittwieser2020muzero,hansen2022tdmpc,hafner2025dreamerv3}.
-This progression establishes the latent state as an interface among perception,
-predicted dynamics, and action. FBFM accordingly introduces real observations
-through the WAM's encoded state space rather than directly through raw pixels.
-
-In parallel, diffusion video prediction, action-conditioned simulation, and
-interactive environment generation made explicit visual futures increasingly
-controllable
+World models developed in parallel from learned visual rollouts and recurrent
+latent dynamics toward task-oriented representations for imagined control
+\cite{ha2018world,kaiser2020simple,hafner2019planet,hafner2020dreamer,
+hafner2021dreamerv2,schrittwieser2020muzero,hansen2022tdmpc,hafner2025dreamerv3}.
+Video diffusion, action-conditioned simulation, and interactive generation then
+made explicit visual futures increasingly controllable
 \cite{voleti2022mcvd,yang2024unisim,bruce2024genie,alonso2024diamond,zhu2025irasim}.
-WAMs emerge where this visual-generation line meets action prediction: GR-1 and GR-2
-transfer video pretraining to future-image and robot-action prediction, LingBot-VA
-formulates autoregressive video--action modeling with observation refresh, and
-DreamZero jointly generates future video and actions
-\cite{wu2023gr1,cheang2024gr2,li2026lingbot,ye2026dreamzero}. Fast-WAM shows that
-video co-training can remain useful when explicit future generation is removed at
-inference time \cite{yuan2026fastwam}. FBFM addresses the complementary regime in
-which that future-state stream is retained and must be re-grounded by observations
-arriving during execution.
+At their intersection, GR-1/GR-2 predict future images and actions, LingBot-VA
+models video and action with observation refresh, and DreamZero jointly generates
+both modalities \cite{wu2023gr1,cheang2024gr2,li2026lingbot,ye2026dreamzero}.
+Fast-WAM instead removes explicit future imagination at inference
+\cite{yuan2026fastwam}; FBFM addresses WAMs that retain this latent future and
+must re-ground it during execution.
 
 % Theme 2: Diffusion and Flow-Matching robot policies.
-Generative decision methods model trajectories or action chunks as structured
-samples rather than pointwise regressions. Diffuser and Decision Diffuser brought
-diffusion, guidance, and inpainting into trajectory-level planning, while ACT and
-Diffusion Policy made temporally correlated action chunks a practical visuomotor
-output
-\cite{janner2022diffuser,ajay2023decisiondiffuser,zhao2023act,chi2023diffusionpolicy}.
-Extensions to compact 3D observations and billion-parameter,
-cross-embodiment diffusion Transformers further established chunk-level generation
-as a scalable interface for multimodal continuous actions
-\cite{ze2024dp3,liu2025rdt}.
-
-In parallel, generalist policies scaled robot learning through larger datasets,
-cross-embodiment training, and pretrained vision--language representations, often
-using autoregressive or discrete action readouts
-\cite{brohan2023rt1,brohan2023rt2,octo2024,kim2024openvla}. This scaling route
-motivated continuous generative heads that preserve VLM semantics while retaining
-the multimodality and temporal structure of high-frequency action chunks.
-
-Flow Matching likewise progressed from specialized motion generation on structured
-robot state spaces to generalist VLA action modeling
-\cite{braun2024rfmp,rouxel2024multisupport,zhang2025affordance}. $\pi_0$ made this
-route broadly visible by coupling a pretrained VLM with a Flow-Matching action
-expert and demonstrating scalable, high-frequency continuous control; $\pi_{0.5}$
-retained the same action interface while extending co-training and long-horizon
-generalization \cite{black2024pi0,pi2025pi05}. Crucially for the present work, the
-resulting iterative velocity field permits an action prefix to constrain a chunk
-during generation. The two RTC formulations exploit this interface through
-training-free pseudoinverse-guided inpainting and training-time prefix conditioning,
-respectively \cite{black2025realtime,black2025training}, motivating the following
-discussion of asynchronous feedback.
+Generative decision models brought diffusion and inpainting from trajectory
+planning to temporally correlated action chunks
+\cite{janner2022diffuser,ajay2023decisiondiffuser,zhao2023act,
+chi2023diffusionpolicy,ze2024dp3,liu2025rdt}. In parallel, RT-1/RT-2, Octo, and
+OpenVLA scaled generalist robot policies through larger data and pretrained
+vision--language representations
+\cite{brohan2023rt1,brohan2023rt2,octo2024,kim2024openvla}. Flow-Matching
+policies progressed from structured robot motion to generalist VLA control
+\cite{braun2024rfmp,rouxel2024multisupport,zhang2025affordance}. The broad
+empirical adoption of the Flow-Matching action expert in $\pi_0$ and
+$\pi_{0.5}$ \cite{black2024pi0,pi2025pi05} is especially relevant: their
+iterative velocity field enables RTC to impose a committed action prefix through
+training-free inpainting or learned prefix conditioning
+\cite{black2025realtime,black2025training}.
 
 % Theme 3: Inference-time guidance, asynchronous execution, and feedback.
-Action chunking creates two coupled deployment problems: computation must overlap
-with execution, while independently generated chunks must remain temporally
-coherent. Bidirectional Decoding addresses this trade-off by sampling multiple
-candidate chunks and selecting among them using backward coherence with previous
-decisions and forward contrast between policy checkpoints \cite{liu2025bid}.
-Inference-time RTC instead acts inside a single Flow-Matching trajectory: it
-represents actions already committed by the executing chunk as a frozen prefix,
-uses a soft mask over later overlap, and applies pseudoinverse-guided inpainting to
-a frozen policy \cite{black2025realtime}. Its training-time counterpart learns
-prefix-conditioned postfix generation under simulated inference delays, removing
-the sampling-time vector--Jacobian products at the cost of modifying training
-\cite{black2025training}. Later approaches place the same continuity prior
-elsewhere, including policy-native continuation learned by Legato and initial-noise
-selection in PAINT \cite{liu2026legato,ho2026paint}. These methods establish a rich
-design space for cross-chunk action consistency; their constrained variables
-nevertheless remain actions inherited from an earlier plan.
+Asynchronous action-chunk execution must overlap inference with control while
+maintaining cross-chunk continuity. Bidirectional Decoding selects coherent
+candidate chunks; inference-time RTC directly constrains the active
+Flow-Matching trajectory; its training-time counterpart, Legato, and PAINT
+instead learn continuation or modify initialization
+\cite{liu2025bid,black2025realtime,black2025training,liu2026legato,ho2026paint}.
+These methods mainly constrain actions inherited from an earlier plan.
 
-Other work targets responsiveness to information that becomes available during
-execution. RA-DP interleaves one denoising update with dequeueing an executable
-action and appending a noisy action, while admitting differentiable guidance from
-dynamic signals \cite{ye2025radp}. Although new guidance objectives can be added
-without retraining, its heterogeneous-noise action queue is itself learned with a
-specialized training schedule. VLASH rolls the robot state forward under committed
-actions and fine-tunes the policy with temporal offsets so that actions are
-conditioned on an estimated execution-time proprioceptive state
-\cite{tang2025vlash}. A2C2 and DCDP instead use the latest observations to correct
-stale actions through separately trained residual or dynamics-aware modules while
-keeping the large base policy frozen \cite{sendai2025a2c2,wu2026dcdp}. AsyncVLA
-refines low-confidence action tokens before execution through a jointly trained
-synchronous/asynchronous Flow-Matching model, whereas TIDAL combines stale semantic
-intent with current proprioception in a trained micro-controller that interleaves
-single-step flow integration and short action execution
-\cite{jiang2026asyncvla,sun2026tidal}. These approaches provide complementary
-choices among online computation, specialized training, and action-space
-reactivity.
+Other approaches react to information arriving during execution. RA-DP
+interleaves denoising and action dequeueing, VLASH compensates inference delay
+with predicted execution-time state, and A2C2/DCDP correct stale actions using
+additional learned modules \cite{ye2025radp,tang2025vlash,sendai2025a2c2,
+wu2026dcdp}. AsyncVLA and TIDAL likewise trade specialized training or a
+lightweight controller for online action refinement
+\cite{jiang2026asyncvla,sun2026tidal}. These methods complement FBFM but operate
+primarily in action space.
 
-Dynamics-based guidance extends this discussion beyond action continuity.
-DynaGuide backpropagates desired- or undesired-outcome objectives through a
-separately trained latent dynamics model to steer the denoising of an off-the-shelf
-diffusion policy \cite{du2025dynaguide}. More closely related to our motivation,
-Feedback World Model independently closes the prediction--observation loop at
-inference time: it maintains an auxiliary latent belief, uses the residual to the
-observed state to correct one-step predictions, and converts those predictions
-into action-aware guidance for a separate diffusion policy \cite{an2026feedback}.
-Its analysis bounds the latent observer error; it does not analyze pseudoinverse
-guidance of a multi-step WAM flow. AHA-WAM learns a different WAM-specific solution,
-routing each current observation into reusable context from a low-frequency video
-planner for a high-frequency action DiT \cite{cai2026ahawam}. WA-LQR preserves WAM
-weights but steers robustness-related hidden activations toward setpoints identified
-from contrastive rollouts and locally linearized block dynamics
-\cite{hong2026walqr}. These studies demonstrate several useful forms of world or
-dynamics feedback, but they differ in whether the reference is a task objective,
-an observer residual, a routed context, or a learned activation feature.
-
-Taken together, action-centric asynchronous methods primarily address cross-chunk
-continuity or action-space responsiveness, whereas recent world- and
-dynamics-feedback methods operate through one-step observers, learned context
-routing, or activation-space control. FBFM studies the intersection of these
-directions by imposing training-free, time-aligned state and action constraints
-during the active generation of a frozen WAM.
+Dynamics- and world-feedback methods provide the closest second line of work.
+DynaGuide steers a diffusion policy through a separately trained latent dynamics
+model \cite{du2025dynaguide}. Feedback World Model independently closes a
+prediction--observation loop with a latent observer and action-aware guidance,
+and provides an observer-error analysis \cite{an2026feedback}. AHA-WAM routes
+current observations into reusable WAM context, while WA-LQR controls internal
+WAM activations \cite{cai2026ahawam,hong2026walqr}. FBFM instead uses the frozen
+WAM's own differentiable flow to impose time-aligned latent-state measurements
+and committed actions within the actively generated multi-step chunk.

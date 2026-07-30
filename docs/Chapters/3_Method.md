@@ -12,41 +12,30 @@ After both chunks are aligned to global environment time, let
 \[
 \mathcal I_t^A
 =
-\left\{
-i\in\{0,\ldots,H-1\}:
-a_{t+i}\text{ is covered by both chunks}
-\right\}
+\{\,i:a_{t+i}\in\mathrm{overlap}\,\}
 \]
 
 denote their overlap. For every \(i\in\mathcal I_t^A\), the action inherited from
-the preceding chunk is denoted by \(a_{t+i}^{\mathrm{prev}}\). It is a committed
-action target for the corresponding slot of the new chunk. The committed set
-includes both actions that have already been sent to the environment and actions
-that remain scheduled for execution from the preceding chunk. Because the robot
-continues to execute that chunk in order, the position reached by the execution
-pointer does not alter the overlap constraint: the two chunks must agree over the
-entire aligned overlap.
+the preceding chunk, \(a_{t+i}^{\mathrm{prev}}\), is a committed target for the
+corresponding slot of the new chunk. The target covers the full aligned overlap,
+independently of the current execution pointer.
 
-Execution and generation proceed concurrently at the level of the method. Executing
+Execution and generation proceed concurrently. Executing
 \(a_{t+i-1}^{\mathrm{prev}}\) produces a real transition whose observation is encoded
-as \(z_{t+i}\). At the \(k\)-th solver evaluation, we collect all state feedback that
-has arrived by then in
+as \(z_{t+i}\). At solver evaluation \(k\), the available feedback is
 
 \[
 \mathcal F_{t,k}
 =
 \left\{
-(i,z_{t+i}):i\in\{1,\ldots,H\},
-z_{t+i}\text{ is available before solver evaluation }k
+(i,z_{t+i}): z_{t+i}\text{ arrives before }k
 \right\}.
 \]
 
-The interaction history \(\mathcal H_t\) remains the condition available when the
-solver is launched. In particular, newly arriving \(z_{t+i}\) is not absorbed into
-or hidden by a redefinition of \(\mathcal H_t\); it is exposed explicitly through the
-dynamic feedback set \(\mathcal F_{t,k}\) and its corresponding mask. This separation
-is central to FBFM: the pretrained conditional model remains fixed, while real
-transitions progressively constrain the chunk that is still being generated.
+The solver-start history \(\mathcal H_t\) remains fixed; newly arriving states are
+represented explicitly by \(\mathcal F_{t,k}\) and its dynamic mask. Thus real
+transitions progressively constrain the active chunk without redefining the
+pretrained model's native condition.
 
 ![FBFM for a stage-wise WAM.](../../material/serial.png)
 
@@ -89,27 +78,22 @@ corresponding consistency assumptions.
 
 Let \(\mathbf W_{t,k}^Q\) select or confidence-weight the constrained
 coordinates, and let the separate operator \(\mathbf P^Q\) balance their scale.
-At every solver evaluation, all FBFM instantiations use the same correction
-chain:
+For compactness, write
+\(\bar v_{t,k}^Q=v_{\theta_Q}^Q(\mathbf Q_t^{\tau_k^Q},
+\tau_k^Q;\mathcal K_{t,k}^Q)\). At every solver evaluation, all FBFM
+instantiations use the same guided field:
 
 \[
 \begin{aligned}
-\hat{\mathbf Q}_{t,k}^1
-&=f_{\theta_Q}^{Q,\tau_k^Q}(\mathbf Q_t^{\tau_k^Q})
-:=\mathbf Q_t^{\tau_k^Q}
-+(1-\tau_k^Q)v_{\theta_Q}^Q
-  (\mathbf Q_t^{\tau_k^Q},\tau_k^Q;\mathcal K_{t,k}^Q),\\
-\mathbf e_{t,k}^Q
-&=\mathbf P^Q\mathbf W_{t,k}^Q
-  (\mathbf Y_{t,k}^Q-\hat{\mathbf Q}_{t,k}^1),\\
-\mathbf J_{t,k}^Q
-&:=\frac{\partial\hat{\mathbf Q}_{t,k}^1}
-         {\partial\mathbf Q_t^{\tau_k^Q}},
-\qquad
-\mathbf g_{t,k}^Q=(\mathbf J_{t,k}^Q)^{\mathsf T}\mathbf e_{t,k}^Q,
-\qquad
 v_{\mathrm{FBFM}}^Q
-=v_{\theta_Q}^Q+\lambda_{\tau_k^Q}^Q\mathbf g_{t,k}^Q.
+&=\bar v_{t,k}^Q+\lambda_{\tau_k^Q}^Q
+(\mathbf J_{t,k}^Q)^{\mathsf T}\mathbf P^Q\mathbf W_{t,k}^Q
+(\mathbf Y_{t,k}^Q-\hat{\mathbf Q}_{t,k}^1),\\
+\hat{\mathbf Q}_{t,k}^1
+&=\mathbf Q_t^{\tau_k^Q}+(1-\tau_k^Q)\bar v_{t,k}^Q,
+\qquad
+\mathbf J_{t,k}^Q=\frac{\partial\hat{\mathbf Q}_{t,k}^1}
+{\partial\mathbf Q_t^{\tau_k^Q}}.
 \end{aligned}
 \]
 
@@ -135,14 +119,12 @@ and realizes the two factors with separate vector fields \(v_{\theta_Z}^Z\) and
 \(v_{\theta_A}^A\). FBFM therefore applies separate state and action corrections,
 while passing the corrected state representation to the action stage.
 
-The stage-wise procedure follows the same state-first, action-second order as the
-underlying WAM. While the preceding action chunk is being executed, generation of
-the new chunk proceeds in two stages. First, as the robot executes the remaining
-actions of the preceding chunk within the overlap, each action
+The stage-wise procedure preserves the WAM's state-first, action-second order.
+While the preceding chunk is executed, each overlap action
 \(a_{t+i-1}^{\mathrm{prev}}\) induces a transition in the physical or simulated
 environment according to \(P(\cdot\mid s_{t+i-1},a_{t+i-1}^{\mathrm{prev}})\). The
 resulting state is sensed and encoded as \(z_{t+i}\), which activates the
-corresponding state mask and constrains the ongoing state flow. Second, the action
+corresponding mask and constrains the ongoing state flow. The subsequent action
 flow is conditioned on the latest corrected state context and is directly
 constrained by the committed actions in the cross-chunk overlap. State feedback
 that arrives after the state flow has terminated refreshes the context used by the
@@ -188,14 +170,9 @@ w_{t,i}^{Z,k}>0
 For an observed slot, the corresponding block of \(\mathbf Y_{t,k}^Z\) is
 \(z_{t+i}\); unobserved blocks may be filled arbitrarily because their weights are
 zero. Binary weights impose hard state inpainting, while weights in \([0,1]\)
-permit confidence-weighted feedback. These assignments are substituted directly
-into the unified correction chain above; no separate state-specific guidance rule
-is required.
-
-Before every state-solver evaluation, \(\mathcal F_{t,k}\),
-\(\mathbf Y_{t,k}^Z\), and \(\mathbf W_{t,k}^Z\) are refreshed. Consequently, a
-latent state that becomes available during generation affects the remaining solver
-steps of the same active chunk rather than waiting for the next inference call.
+permit confidence weighting. Refreshing \((\mathcal F_{t,k},\mathbf Y_{t,k}^Z,
+\mathbf W_{t,k}^Z)\) before each solver evaluation makes newly available states
+affect the remaining steps of the same active chunk through the unified field.
 
 ### Action Flow: State-Context Refresh and Previous-Action Consistency
 
@@ -208,29 +185,18 @@ action-solver evaluation \(k\), we reuse \(\mathbf Y_{t,k}^Z\) and
 and form the corrected state representation by
 
 \[
+\begin{aligned}
 \check{\mathbf Z}_{t,k}
-=
-\left(\mathbf I_{D_Z}-\mathbf W_{t,k}^Z\right)
-\hat{\mathbf Z}_t
-+
-\mathbf W_{t,k}^Z
-\mathbf Y_{t,k}^Z,
-\]
-
-and expose it to the action generator through an abstract state context
-
-\[
+&=\left(\mathbf I_{D_Z}-\mathbf W_{t,k}^Z\right)\hat{\mathbf Z}_t
++\mathbf W_{t,k}^Z\mathbf Y_{t,k}^Z,\\
 \mathcal C_{t,k}^Z
-=
-\Phi_Z(\check{\mathbf Z}_{t,k},\mathcal H_t).
+&=\Phi_Z(\check{\mathbf Z}_{t,k},\mathcal H_t).
+\end{aligned}
 \]
 
 Here, \(\Phi_Z\) denotes the native context-construction interface of the stage-wise
 WAM. It may be realized by latent tokens, intermediate features, or an updated
-attention memory; FBFM does not require a particular storage mechanism. This
-context-refresh condition only specifies how a stage-wise generator consumes late
-state feedback. It is not an additional guidance objective or a model-specific part
-of FBFM.
+attention memory; FBFM does not prescribe its storage mechanism.
 
 #### Previous-Action Consistency
 
@@ -269,15 +235,10 @@ For the action stage, the unified correction uses
 \(\mathbf Y_{t,k}^A=\mathbf Y_t^A\) and
 \(\mathbf W_{t,k}^A=\mathbf W_t^A\). Substituting them into the unified
 correction chain makes the latest refreshed state context condition the endpoint
-predictor while the overlap target directly constrains the action flow; no separate
-action-specific guidance rule is required.
+predictor while the overlap target directly constrains the action flow.
 
-State feedback and previous-action consistency thus have distinct roles in a
-stage-wise WAM. State feedback is asynchronous and progressively updates both the
-state flow and the context consumed by the action flow. The previous-action target
-is fixed by the temporal overlap and directly constrains the action flow. Their
-combination closes the loop within chunk generation while preserving the original
-state-first, action-second factorization.
+Thus, asynchronous state feedback updates the state flow and action context,
+whereas the overlap target remains fixed and directly constrains the action flow.
 
 ## FBFM for Joint-Generation World-Action Models
 
@@ -350,10 +311,8 @@ The state block of \(\mathbf W_{t,k}^X\) is refreshed whenever a new
 cross-chunk overlap. For joint generation, the remaining unified assignments are
 \(Q=X\), \(\theta_Q=\theta\), and
 \(\mathcal K_{t,k}^X=\mathcal H_t\). Substituting these quantities into the
-unified correction chain gives the complete joint update; no separate joint-specific
-guidance rule is required.
-
-Thus, one guidance evaluation simultaneously enforces the observed state slots and
+unified correction gives the complete joint update. One guidance evaluation
+simultaneously enforces the observed state slots and
 the committed action overlap while leaving all unobserved and unconstrained
 coordinates to the pretrained joint model.
 
@@ -375,60 +334,28 @@ action-overlap mask remains fixed.*
 
 ### Direct State-to-Action Correction
 
-The direct coupling becomes explicit by partitioning the clean-endpoint Jacobian
-\(\mathbf J_{t,k}^X\) defined in the unified correction:
-
-\[
-\mathbf J_{t,k}^X
-=
-\begin{bmatrix}
-\mathbf J_{ZZ} & \mathbf J_{ZA}\\
-\mathbf J_{AZ} & \mathbf J_{AA}
-\end{bmatrix},
-\]
-
-where, for \(Q,R\in\{Z,A\}\),
-
-\[
-\mathbf J_{QR}
-=
-\frac{\partial\hat{\mathbf Q}_{t,k}^1}
-     {\partial\mathbf R_t^{\tau_k^X}}.
-\]
-
-Partitioning
+For \(Q,R\in\{Z,A\}\), define the endpoint-Jacobian block
+\(\mathbf J_{QR}:=\partial\hat{\mathbf Q}_{t,k}^1/
+\partial\mathbf R_t^{\tau_k^X}\). Partitioning
 \(\mathbf e_{t,k}^X=[\mathbf e_{t,k}^Z;\mathbf e_{t,k}^A]\) and
-\(\mathbf g_{t,k}^X=[\mathbf g_{t,k}^Z;\mathbf g_{t,k}^A]\), the VJP gives
+\(\mathbf g_{t,k}^X=[\mathbf g_{t,k}^Z;\mathbf g_{t,k}^A]\) gives
 
 \[
-\begin{bmatrix}
-\mathbf g_{t,k}^Z\\
+\begin{aligned}
+\mathbf g_{t,k}^Z
+&=\mathbf J_{ZZ}^{\mathsf T}\mathbf e_{t,k}^Z
++\mathbf J_{AZ}^{\mathsf T}\mathbf e_{t,k}^A,\\
 \mathbf g_{t,k}^A
-\end{bmatrix}
-=
-\begin{bmatrix}
-\mathbf J_{ZZ}^{\mathsf T} & \mathbf J_{AZ}^{\mathsf T}\\
-\mathbf J_{ZA}^{\mathsf T} & \mathbf J_{AA}^{\mathsf T}
-\end{bmatrix}
-\begin{bmatrix}
-\mathbf e_{t,k}^Z\\
-\mathbf e_{t,k}^A
-\end{bmatrix}.
-\]
-
-In particular, consider state feedback alone, for which
-\(\mathbf e_{t,k}^A=\mathbf 0\). The action component of the correction becomes
-
-\[
+&=\mathbf J_{ZA}^{\mathsf T}\mathbf e_{t,k}^Z
++\mathbf J_{AA}^{\mathsf T}\mathbf e_{t,k}^A,\\
+\mathbf e_{t,k}^A=\mathbf 0
+\quad\Longrightarrow\quad
 \mathbf g_{t,k}^A
-=
-\mathbf J_{ZA}^{\mathsf T}\mathbf e_{t,k}^Z
-=
-\left(
-\frac{\partial\hat{\mathbf Z}_{t,k}^1}
-     {\partial\mathbf A_t^{\tau_k^X}}
-\right)^{\mathsf T}
+&=\mathbf J_{ZA}^{\mathsf T}\mathbf e_{t,k}^Z
+=\left(\frac{\partial\hat{\mathbf Z}_{t,k}^1}
+{\partial\mathbf A_t^{\tau_k^X}}\right)^{\mathsf T}
 \mathbf e_{t,k}^Z.
+\end{aligned}
 \]
 
 Whenever the learned joint endpoint predictor couples states and actions,
